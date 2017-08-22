@@ -1,0 +1,23 @@
+---
+bootstrapVersion: 4
+extractStyles: true
+preBootstrapCustomizations: node_modules/bootstrap-theme/src/pre-bootstrap.scss
+appStyles: node_modules/bootstrap-theme/src/post-bootstrap.scss
+
+styleLoaders:
+  - style
+  - css
+  - sass
+
+styles:
+  buttons: true
+  card: true
+  forms: true
+  grid: true
+  mixins: true
+  print: true
+  progress: true
+  reboot: true
+  tables: true
+  type: true
+  utilities: true

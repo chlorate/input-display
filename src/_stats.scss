@@ -1,0 +1,15 @@
+.id-table-stats-buttons {
+	width: auto;
+
+	th:first-child {
+		width: 3em;
+	}
+
+	th:nth-child(2) {
+		width: 1px;
+	}
+
+	th {
+		width: 7em;
+	}
+}

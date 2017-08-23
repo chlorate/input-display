@@ -20,5 +20,6 @@ styles:
   mixins: true
   print: true
   reboot: true
+  tables: true
   type: true
   utilities: true

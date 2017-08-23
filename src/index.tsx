@@ -5,6 +5,7 @@ import {GamepadComponent} from "./gamepad.component";
 import {MenuComponent} from "./menu.component";
 
 let gamepad = new Gamepad();
+gamepad.poll();
 
 const IndexComponent = () => {
 	if (!navigator.getGamepads) {

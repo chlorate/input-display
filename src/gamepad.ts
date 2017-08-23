@@ -23,6 +23,15 @@ export class Gamepad {
 		this.presses = [];
 	}
 
+	reset() {
+		this.buttons.forEach(button => {
+			button.presses = 0;
+			button.mashSpeed = 0;
+			button.bestMashSpeed = 0;
+		});
+		this.presses = [];
+	}
+
 	poll() {
 		this.update();
 		setTimeout(() => this.poll(), secondToMilliseconds / 60);

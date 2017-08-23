@@ -1,3 +1,4 @@
+import {linkEvent} from "inferno";
 import {connect} from "inferno-mobx";
 import {Gamepad} from "./gamepad";
 
@@ -24,6 +25,10 @@ export const StatsComponent = connect(["gamepad"], ({gamepad}: {gamepad: Gamepad
 
 	return (
 		<section>
+			<button class="btn btn-default mb-4" onClick={linkEvent(gamepad, reset)}>
+				Reset
+			</button>
+
 			<h2 class="h5">
 				Buttons
 			</h2>
@@ -44,3 +49,7 @@ export const StatsComponent = connect(["gamepad"], ({gamepad}: {gamepad: Gamepad
 		</section>
 	);
 });
+
+function reset(gamepad: Gamepad) {
+	gamepad.reset();
+}

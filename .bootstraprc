@@ -10,14 +10,13 @@ styleLoaders:
   - sass
 
 styles:
+  alert: true
   buttons: true
   card: true
   forms: true
   grid: true
   mixins: true
   print: true
-  progress: true
   reboot: true
-  tables: true
   type: true
   utilities: true

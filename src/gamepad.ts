@@ -9,6 +9,10 @@ interface Button {
 	bestMashSpeed: number;
 }
 
+interface Axis {
+	value: number;
+}
+
 interface Press {
 	button: number;
 	time: number;
@@ -16,10 +20,12 @@ interface Press {
 
 export class Gamepad {
 	@observable buttons: Button[];
+	@observable axes: Axis[];
 	private presses: Press[];
 
 	constructor() {
 		this.buttons = [];
+		this.axes = [];
 		this.presses = [];
 	}
 
@@ -47,11 +53,12 @@ export class Gamepad {
 		if (!gamepad) {
 			return;
 		}
-		this.updatePresses(gamepad);
+		this.updateButtons(gamepad);
+		this.updateAxes(gamepad);
 		this.updateMashSpeeds(gamepad);
 	}
 
-	private updatePresses(gamepad) {
+	private updateButtons(gamepad) {
 		gamepad.buttons.forEach((button, i) => {
 			if (this.buttons.length <= i) {
 				this.buttons.push({
@@ -70,6 +77,18 @@ export class Gamepad {
 				this.buttons[i].presses++;
 			}
 			this.buttons[i].pressed = button.pressed;
+		});
+	}
+
+	private updateAxes(gamepad) {
+		gamepad.axes.forEach((value, i) => {
+			if (this.axes.length <= i) {
+				this.axes.push({
+					value: 0,
+				});
+			}
+
+			this.axes[i].value = value;
 		});
 	}
 

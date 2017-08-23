@@ -3,7 +3,7 @@ import {connect} from "inferno-mobx";
 import {Gamepad} from "./gamepad";
 
 export const StatsComponent = connect(["gamepad"], ({gamepad}: {gamepad: Gamepad}) => {
-	let rows = gamepad.buttons.map((button, i) => (
+	let buttonRows = gamepad.buttons.map((button, i) => (
 		<tr>
 			<td class="text-center">
 				{i}
@@ -22,6 +22,16 @@ export const StatsComponent = connect(["gamepad"], ({gamepad}: {gamepad: Gamepad
 			</td>
 		</tr>
 	));
+	let axisRows = gamepad.axes.map((axis, i) => (
+		<tr>
+			<td class="text-center">
+				{i}
+			</td>
+			<td class="text-right">
+				{axis.value.toFixed(3)}
+			</td>
+		</tr>
+	));
 
 	return (
 		<section>
@@ -32,7 +42,7 @@ export const StatsComponent = connect(["gamepad"], ({gamepad}: {gamepad: Gamepad
 			<h2 class="h5">
 				Buttons
 			</h2>
-			<table class="table table-bordered table-hover table-sm m-0 id-table-stats-buttons">
+			<table class="table table-bordered table-sm mb-4 id-table-stats-buttons">
 				<thead>
 					<tr class="text-center">
 						<th>#</th>
@@ -43,7 +53,22 @@ export const StatsComponent = connect(["gamepad"], ({gamepad}: {gamepad: Gamepad
 					</tr>
 				</thead>
 				<tbody>
-					{rows}
+					{buttonRows}
+				</tbody>
+			</table>
+
+			<h2 class="h5">
+				Axes
+			</h2>
+			<table class="table table-bordered table-sm m-0 id-table-stats-axes">
+				<thead>
+					<tr class="text-center">
+						<th>#</th>
+						<th>Value</th>
+					</tr>
+				</thead>
+				<tbody>
+					{axisRows}
 				</tbody>
 			</table>
 		</section>

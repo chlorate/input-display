@@ -1,4 +1,10 @@
 import {render} from "inferno";
+import {Provider} from "inferno-mobx";
+import {Gamepad} from "./gamepad";
+import {GamepadComponent} from "./gamepad.component";
+import {MenuComponent} from "./menu.component";
+
+let gamepad = new Gamepad();
 
 const IndexComponent = () => {
 	if (!navigator.getGamepads) {
@@ -9,10 +15,21 @@ const IndexComponent = () => {
 		);
 	}
 
-	return <div>Input Display</div>;
+	return (
+		<section class="d-flex justify-content-between h-100">
+			<div class="id-gamepads p-3">
+				<GamepadComponent />
+			</div>
+			<div class="id-menu p-3">
+				<MenuComponent />
+			</div>
+		</section>
+	);
 };
 
 render(
-	<IndexComponent />,
+	<Provider gamepad={gamepad}>
+		<IndexComponent />
+	</Provider>,
 	document.getElementsByTagName("main")[0]
 );

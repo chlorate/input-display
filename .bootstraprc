@@ -2,7 +2,7 @@
 bootstrapVersion: 4
 extractStyles: true
 preBootstrapCustomizations: node_modules/bootstrap-theme/src/pre-bootstrap.scss
-appStyles: node_modules/bootstrap-theme/src/post-bootstrap.scss
+appStyles: src/index.scss
 
 styleLoaders:
   - style
@@ -10,6 +10,8 @@ styleLoaders:
   - sass
 
 styles:
+  nav: true
+
   alert: true
   buttons: true
   card: true

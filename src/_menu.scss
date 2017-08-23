@@ -1,0 +1,16 @@
+.id-gamepads {
+	flex-shrink: 0;
+}
+
+.id-menu {
+	flex-grow: 1;
+	max-width: 40em;
+
+	.card {
+		max-height: 100%;
+	}
+
+	.card-body {
+		overflow: auto;
+	}
+}

@@ -6,7 +6,7 @@ export const StatsComponent = connect(["gamepad"], ({gamepad}: {gamepad: Gamepad
 	let buttonRows = gamepad.buttons.map((button, i) => (
 		<tr>
 			<td class="text-center">
-				{i}
+				{button.name}
 			</td>
 			<td class={`table-${button.pressed ? "success" : "danger"} text-center`}>
 				{button.pressed ? "Yes" : "No"}
@@ -45,7 +45,7 @@ export const StatsComponent = connect(["gamepad"], ({gamepad}: {gamepad: Gamepad
 			<table class="table table-bordered table-sm mb-4 id-table-stats-buttons">
 				<thead>
 					<tr class="text-center">
-						<th>#</th>
+						<th>Name</th>
 						<th>Pressed</th>
 						<th>Total presses</th>
 						<th>Mash speed</th>

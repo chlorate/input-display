@@ -1,41 +1,22 @@
 import {observable} from "mobx";
-
-const secondToMilliseconds = 1000;
-
-interface Button {
-	pressed: boolean;
-	presses: number;
-	mashSpeed: number;
-	bestMashSpeed: number;
-}
+import {Button, Type, directions, orderedDirections} from "./button";
+import {secondToMilliseconds} from "./time";
 
 interface Axis {
 	value: number;
 }
 
-interface Press {
-	button: number;
-	time: number;
-}
-
 export class Gamepad {
 	@observable buttons: Button[];
 	@observable axes: Axis[];
-	private presses: Press[];
 
 	constructor() {
 		this.buttons = [];
 		this.axes = [];
-		this.presses = [];
 	}
 
 	reset() {
-		this.buttons.forEach(button => {
-			button.presses = 0;
-			button.mashSpeed = 0;
-			button.bestMashSpeed = 0;
-		});
-		this.presses = [];
+		this.buttons.forEach(button => button.reset());
 	}
 
 	poll() {
@@ -55,28 +36,21 @@ export class Gamepad {
 		}
 		this.updateButtons(gamepad);
 		this.updateAxes(gamepad);
-		this.updateMashSpeeds(gamepad);
+		this.updateHat(gamepad);
+
+		this.buttons.forEach(button => button.update());
 	}
 
 	private updateButtons(gamepad) {
-		gamepad.buttons.forEach((button, i) => {
-			if (this.buttons.length <= i) {
-				this.buttons.push({
-					pressed: false,
-					presses: 0,
-					mashSpeed: 0,
-					bestMashSpeed: 0,
-				});
+		gamepad.buttons.forEach((domButton, i) => {
+			let button = this.buttons.find(button => (
+				button.type === Type.Button && button.id === i
+			));
+			if (!button) {
+				button = new Button(Type.Button, i);
+				this.buttons.push(button);
 			}
-
-			if (button.pressed && !this.buttons[i].pressed) {
-				this.presses.push({
-					button: i,
-					time: window.performance.now(),
-				});
-				this.buttons[i].presses++;
-			}
-			this.buttons[i].pressed = button.pressed;
+			button.pressed = domButton.pressed;
 		});
 	}
 
@@ -87,23 +61,23 @@ export class Gamepad {
 					value: 0,
 				});
 			}
-
 			this.axes[i].value = value;
 		});
 	}
 
-	private updateMashSpeeds(gamepad) {
-		this.buttons.forEach(button => button.mashSpeed = 0);
-
-		let endTime = window.performance.now() - secondToMilliseconds;
-		this.presses = this.presses.filter(press => {
-			if (press.time <= endTime) {
-				return false;
+	private updateHat(gamepad) {
+		let axis = gamepad.axes[9];
+		orderedDirections.forEach((key) => {
+			let button = this.buttons.find(
+				button => button.type === Type.Hat && button.id === key
+			);
+			if (!button) {
+				button = new Button(Type.Hat, key);
+				this.buttons.push(button);
 			}
-			this.buttons[press.button].mashSpeed++;
-			return true;
+			button.pressed = directions[key].hatAxisValues.some(
+				value => value.toFixed(3) === axis.toFixed(3)
+			);
 		});
-
-		this.buttons.forEach(button => button.bestMashSpeed = Math.max(button.mashSpeed, button.bestMashSpeed));
 	}
 }

@@ -1,10 +1,13 @@
 import {render} from "inferno";
 import {Provider} from "inferno-mobx";
+import {Config} from "./config";
 import {Gamepad} from "./gamepad";
 import {GamepadComponent} from "./gamepad.component";
 import {MenuComponent} from "./menu.component";
 
-let gamepad = new Gamepad();
+let config = new Config();
+
+let gamepad = new Gamepad(config);
 gamepad.poll();
 
 const IndexComponent = () => {
@@ -29,7 +32,7 @@ const IndexComponent = () => {
 };
 
 render(
-	<Provider gamepad={gamepad}>
+	<Provider config={config} gamepad={gamepad}>
 		<IndexComponent />
 	</Provider>,
 	document.getElementsByTagName("main")[0]

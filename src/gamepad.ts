@@ -1,5 +1,6 @@
 import {observable} from "mobx";
 import {Button, Type, directions, orderedDirections} from "./button";
+import {Config} from "./config";
 import {secondToMilliseconds} from "./time";
 
 interface Axis {
@@ -9,6 +10,11 @@ interface Axis {
 export class Gamepad {
 	@observable buttons: Button[] = [];
 	@observable axes: Axis[] = [];
+	private config: Config;
+
+	constructor(config: Config) {
+		this.config = config;
+	}
 
 	reset() {
 		this.buttons = [];
@@ -63,7 +69,12 @@ export class Gamepad {
 	}
 
 	private updateHat(gamepad) {
-		let axis = gamepad.axes[9];
+		let i = this.config.hatAxis;
+		if (i === null || i >= gamepad.axes.length) {
+			return;
+		}
+
+		let axis = gamepad.axes[i];
 		orderedDirections.forEach((key) => {
 			let button = this.buttons.find(
 				button => button.type === Type.Hat && button.id === key

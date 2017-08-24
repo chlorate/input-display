@@ -79,7 +79,7 @@ export const StatsComponent = connect(["gamepad"], ({gamepad}: {gamepad: Gamepad
 
 	return (
 		<section>
-			<button class="btn btn-default mb-4" onClick={linkEvent(gamepad, reset)}>
+			<button class="btn btn-danger mb-4" onClick={linkEvent(gamepad, reset)}>
 				Reset
 			</button>
 

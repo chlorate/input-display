@@ -1,13 +1,17 @@
+import {linkEvent} from "inferno";
+import {connect} from "inferno-mobx";
+import {Config} from "./config";
+import {AxisInputComponent} from "./form/axis-input.component";
 
-export const ConfigComponent = () => {
+export const ConfigComponent = connect(["config"], ({config}: {config: Config}) => {
 	return (
 		<form>
 			<div class="mb-4">
-				<button type="button" class="btn btn-default mr-1">
-					Export
-				</button>
-				<button type="button" class="btn btn-default">
+				<button type="button" class="btn btn-secondary mr-1">
 					Import
+				</button>
+				<button type="button" class="btn btn-secondary">
+					Export
 				</button>
 			</div>
 

@@ -44,12 +44,13 @@ export class MenuComponent extends Component<{}, {tab: Tab}> {
 						{tabLinks.map(link => {
 							return (
 								<li class="nav-item">
-									<span
+									<a
 										class={this.linkClass(link.tab)}
+										href="#"
 										onClick={linkEvent(this, link.handler)}
 									>
 										{link.tab}
-									</span>
+									</a>
 								</li>
 							);
 						})}

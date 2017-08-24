@@ -6,7 +6,7 @@
 		"babel-preset-env": "1.6.0",
 		"bootstrap": "4.0.0-beta",
 		"bootstrap-loader": "2.2.0",
-		"bootstrap-theme": "chlorate/bootstrap-theme#c1e32645237dd94c29041a9b1c461f08bad37691",
+		"bootstrap-theme": "chlorate/bootstrap-theme#9926e1e0a16b5d257596d4d569d6d5ee58e1e522",
 		"css-loader": "0.28.5",
 		"extract-text-webpack-plugin": "3.0.0",
 		"file-loader": "0.11.2",

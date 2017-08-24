@@ -7,16 +7,13 @@ interface Axis {
 }
 
 export class Gamepad {
-	@observable buttons: Button[];
-	@observable axes: Axis[];
-
-	constructor() {
-		this.buttons = [];
-		this.axes = [];
-	}
+	@observable buttons: Button[] = [];
+	@observable axes: Axis[] = [];
 
 	reset() {
-		this.buttons.forEach(button => button.reset());
+		this.buttons = [];
+		this.axes = [];
+		this.update();
 	}
 
 	poll() {

@@ -5,7 +5,7 @@ import {Gamepad} from "./gamepad";
 export const StatsComponent = connect(["gamepad"], ({gamepad}: {gamepad: Gamepad}) => {
 	let buttonTable = (
 		<p class="mb-4">
-			No buttons found.
+			No buttons detected.
 		</p>
 	);
 	if (gamepad.buttons.length) {
@@ -48,7 +48,7 @@ export const StatsComponent = connect(["gamepad"], ({gamepad}: {gamepad: Gamepad
 
 	let axesTable = (
 		<p class="m-0">
-			No axes found.
+			No axes detected.
 		</p>
 	);
 	if (gamepad.axes.length) {

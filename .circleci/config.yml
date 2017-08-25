@@ -1,0 +1,13 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: circleci/node:8.4.0
+    steps:
+      - checkout
+      - run:
+          name: Install Node dependencies
+          command: make node_modules
+      - run:
+          name: Build
+          command: make build

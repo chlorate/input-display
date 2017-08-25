@@ -50,16 +50,16 @@ export const orderedDirections: DirectionKey[] = [
 ];
 
 export class Button {
-	type: Type;
-	id: number | DirectionKey;
+	public type: Type;
+	public id: number | DirectionKey;
+	@observable public presses: number = 0;
+	@observable public times: number[] = [];
+	@observable public mashSpeed: number = 0;
+	@observable public bestMashSpeed: number = 0;
 	@observable private _pressed: boolean = false;
-	@observable presses: number = 0;
-	@observable times: number[] = [];
-	@observable mashSpeed: number = 0;
-	@observable bestMashSpeed: number = 0;
 
 	get name(): string {
-		var id = `${this.id}`;
+		let id = `${this.id}`;
 		if (this.type === Type.Hat) {
 			id = directions[this.id].name;
 		}
@@ -80,18 +80,18 @@ export class Button {
 		this.id = id;
 	}
 
-	reset() {
+	public reset() {
 		this.presses = 0;
 		this.times = [];
 		this.mashSpeed = 0;
 		this.bestMashSpeed = 0;
 	}
 
-	update() {
+	public update() {
 		this.mashSpeed = 0;
 
-		let endTime = window.performance.now() - secondToMilliseconds;
-		this.times = this.times.filter(time => {
+		const endTime = window.performance.now() - secondToMilliseconds;
+		this.times = this.times.filter((time) => {
 			if (time <= endTime) {
 				return false;
 			}

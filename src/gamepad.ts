@@ -1,5 +1,5 @@
 import {observable} from "mobx";
-import {Button, Type, directions, orderedDirections} from "./button";
+import {Button, directions, orderedDirections, Type} from "./button";
 import {Config} from "./config";
 import {secondToMilliseconds} from "./time";
 
@@ -8,32 +8,32 @@ interface Axis {
 }
 
 export class Gamepad {
-	@observable buttons: Button[] = [];
-	@observable axes: Axis[] = [];
+	@observable public buttons: Button[] = [];
+	@observable public axes: Axis[] = [];
 	private config: Config;
 
 	constructor(config: Config) {
 		this.config = config;
 	}
 
-	reset() {
+	public reset() {
 		this.buttons = [];
 		this.axes = [];
 		this.update();
 	}
 
-	poll() {
+	public poll() {
 		this.update();
 		setTimeout(() => this.poll(), secondToMilliseconds / 60);
 	}
 
 	private update() {
-		let gamepads = navigator.getGamepads();
+		const gamepads = navigator.getGamepads();
 		if (!gamepads.length) {
 			return;
 		}
 
-		let gamepad = gamepads[0];
+		const gamepad = gamepads[0];
 		if (!gamepad) {
 			return;
 		}
@@ -41,14 +41,12 @@ export class Gamepad {
 		this.updateAxes(gamepad);
 		this.updateHat(gamepad);
 
-		this.buttons.forEach(button => button.update());
+		this.buttons.forEach((button) => button.update());
 	}
 
 	private updateButtons(gamepad) {
 		gamepad.buttons.forEach((domButton, i) => {
-			let button = this.buttons.find(button => (
-				button.type === Type.Button && button.id === i
-			));
+			let button = this.buttons.find((b) => b.type === Type.Button && b.id === i);
 			if (!button) {
 				button = new Button(Type.Button, i);
 				this.buttons.push(button);
@@ -69,23 +67,19 @@ export class Gamepad {
 	}
 
 	private updateHat(gamepad) {
-		let i = this.config.hatAxis;
+		const i = this.config.hatAxis;
 		if (i === null || i >= gamepad.axes.length) {
 			return;
 		}
 
-		let axis = gamepad.axes[i];
+		const axis = gamepad.axes[i];
 		orderedDirections.forEach((key) => {
-			let button = this.buttons.find(
-				button => button.type === Type.Hat && button.id === key
-			);
+			let button = this.buttons.find((b) => b.type === Type.Hat && b.id === key);
 			if (!button) {
 				button = new Button(Type.Hat, key);
 				this.buttons.push(button);
 			}
-			button.pressed = directions[key].hatAxisValues.some(
-				value => value.toFixed(3) === axis.toFixed(3)
-			);
+			button.pressed = directions[key].hatAxisValues.some((value) => value.toFixed(3) === axis.toFixed(3));
 		});
 	}
 }

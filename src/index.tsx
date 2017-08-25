@@ -5,9 +5,9 @@ import {Gamepad} from "./gamepad";
 import {GamepadComponent} from "./gamepad.component";
 import {MenuComponent} from "./menu.component";
 
-let config = new Config();
+const config = new Config();
 
-let gamepad = new Gamepad(config);
+const gamepad = new Gamepad(config);
 gamepad.poll();
 
 const IndexComponent = () => {
@@ -35,5 +35,5 @@ render(
 	<Provider config={config} gamepad={gamepad}>
 		<IndexComponent />
 	</Provider>,
-	document.getElementsByTagName("main")[0]
+	document.getElementsByTagName("main")[0],
 );

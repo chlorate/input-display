@@ -3,7 +3,7 @@ export function clampIntOrNull(n: any, min?: number, max?: number): number | nul
 		return n;
 	}
 
-	n = parseInt(n);
+	n = parseInt(n, 10);
 	if (min !== undefined && n < min) {
 		n = min;
 	}

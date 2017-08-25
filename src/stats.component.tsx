@@ -9,7 +9,7 @@ export const StatsComponent = connect(["gamepad"], ({gamepad}: {gamepad: Gamepad
 		</p>
 	);
 	if (gamepad.buttons.length) {
-		let rows = gamepad.buttons.map((button, i) => (
+		const rows = gamepad.buttons.map((button, i) => (
 			<tr>
 				<td class="text-center">
 					{button.name}
@@ -52,7 +52,7 @@ export const StatsComponent = connect(["gamepad"], ({gamepad}: {gamepad: Gamepad
 		</p>
 	);
 	if (gamepad.axes.length) {
-		let rows = gamepad.axes.map((axis, i) => (
+		const rows = gamepad.axes.map((axis, i) => (
 			<tr>
 				<td class="text-center">
 					{i}

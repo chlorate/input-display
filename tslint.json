@@ -3,6 +3,9 @@
 		"tslint:recommended"
 	],
 	"rules": {
-		"indent": [true, "tabs", 4]
+		"indent": [true, "tabs", 4],
+		"interface-name": [false],
+		"object-literal-sort-keys": [false],
+		"variable-name": [true, "ban-keywords", "check-format", "allow-leading-underscore", "allow-pascal-case"]
 	}
 }

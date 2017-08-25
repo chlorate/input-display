@@ -27,11 +27,15 @@ export const ConfigComponent = connect(["config"], ({config}: {config: Config}) 
 					onChange={linkEvent(config, handleChangeHatAxis)}
 				/>
 				<small class="form-text text-muted" id="hat-axis-help">
-					Your controller's <nobr>d-pad</nobr> might be mapped to a "Point of View Hat" under Windows Game Controller properties.
-					If it is, then you need to configure this setting in order to map your <nobr>d-pad</nobr> to the input display.
-					Browsers map the POV Hat to an axis.
-					Under the Stats tab, move your <nobr>d-pad</nobr> and identify which axis represents your <nobr>d-pad</nobr>.
-					Select the axis here and then you can map POV Hat directions to the input display.
+					Your controller's <nobr>d-pad</nobr> might be mapped to
+					a "Point of View Hat" under Windows Game Controller
+					properties. If it is, then you need to configure this
+					setting in order to map your <nobr>d-pad</nobr> to the input
+					display. Browsers map the POV Hat to an axis. Under the
+					Stats tab, move your <nobr>d-pad</nobr> and identify which
+					axis represents your <nobr>d-pad</nobr>. Select the axis
+					here and then you can map POV Hat directions to the input
+					display.
 				</small>
 			</div>
 

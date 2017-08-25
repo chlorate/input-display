@@ -6,7 +6,7 @@ import {StatsComponent} from "./stats.component";
 enum Tab {
 	Config = "Config",
 	Stats = "Stats",
-};
+}
 
 const tabLinks = [
 	{
@@ -24,24 +24,16 @@ export class MenuComponent extends Component<{}, {tab: Tab}> {
 		tab: Tab.Config,
 	};
 
-	setTab(tab: Tab) {
-		this.setState({tab: tab});
+	public setTab(tab: Tab) {
+		this.setState({tab});
 	}
 
-	linkClass(tab): string {
-		let classes = ["nav-link"];
-		if (this.state.tab === tab) {
-			classes.push("active");
-		}
-		return classes.join(" ");
-	}
-
-	render() {
+	public render() {
 		return (
 			<div class="card">
 				<div class="card-header">
 					<ul class="nav nav-tabs card-header-tabs">
-						{tabLinks.map(link => {
+						{tabLinks.map((link) => {
 							return (
 								<li class="nav-item">
 									<a
@@ -67,7 +59,15 @@ export class MenuComponent extends Component<{}, {tab: Tab}> {
 			</div>
 		);
 	}
-};
+
+	private linkClass(tab): string {
+		const classes = ["nav-link"];
+		if (this.state.tab === tab) {
+			classes.push("active");
+		}
+		return classes.join(" ");
+	}
+}
 
 function setConfigTab(instance: MenuComponent) {
 	instance.setTab(Tab.Config);

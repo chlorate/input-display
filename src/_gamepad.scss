@@ -1,4 +1,3 @@
-
 .gamepad {
 	line-height: 0;
 }
@@ -24,10 +23,10 @@
 .gamepad-dpad-left,
 .gamepad-dpad-right,
 .gamepad-dpad-bottom {
-	border: 1px solid yellow;
+	border: 1px solid $yellow;
+	background: $red;
 	width: 20px;
 	height: 20px;
-	background: red;
 }
 
 .gamepad-dpad-top {
@@ -47,11 +46,11 @@
 }
 
 .gamepad-button-face {
-	border: 1px solid yellow;
+	border: 1px solid $yellow;
+	border-radius: 100%;
+	background: $red;
 	width: 20px;
 	height: 20px;
-	background: red;
-	border-radius: 100%;
 }
 
 .gamepad-middle {

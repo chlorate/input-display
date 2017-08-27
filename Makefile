@@ -7,6 +7,10 @@ build: node_modules
 	$(WEBPACK) -p
 	rm dist/styles.*.js
 
+.PHONY: test
+test: node_modules
+	$(KARMA) start --browsers PhantomJS --single-run
+
 .PHONY: watch
 watch: node_modules
 	$(WEBPACK_DEV_SERVER) & $(KARMA) start

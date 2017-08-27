@@ -1,3 +1,4 @@
+KARMA=node_modules/.bin/karma
 WEBPACK=node_modules/.bin/webpack
 WEBPACK_DEV_SERVER=node_modules/.bin/webpack-dev-server
 
@@ -8,7 +9,7 @@ build: node_modules
 
 .PHONY: watch
 watch: node_modules
-	$(WEBPACK_DEV_SERVER)
+	$(WEBPACK_DEV_SERVER) & $(KARMA) start
 
 .PHONY: clean
 clean: 

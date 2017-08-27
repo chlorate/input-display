@@ -8,8 +8,7 @@
 		"noImplicitThis": true,
 		"noUnusedLocals": true,
 		"strictNullChecks": true,
-		"target": "es6",
-		"types": ["inferno"]
+		"target": "es6"
 	},
 	"exclude": ["node_modules"]
 }

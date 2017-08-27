@@ -1,5 +1,6 @@
 {
 	"devDependencies": {
+		"@types/jasmine": "2.5.54",
 		"babel-core": "6.26.0",
 		"babel-loader": "7.1.2",
 		"babel-plugin-inferno": "3.2.0",
@@ -14,6 +15,11 @@
 		"inferno": "3.7.1",
 		"inferno-component": "3.7.1",
 		"inferno-mobx": "3.7.1",
+		"jasmine": "2.8.0",
+		"karma": "1.7.0",
+		"karma-jasmine": "1.1.0",
+		"karma-phantomjs-launcher": "1.0.4",
+		"karma-webpack": "2.0.4",
 		"node-sass": "4.5.3",
 		"npm-check-updates": "2.12.1",
 		"resolve-url-loader": "2.1.0",

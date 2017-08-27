@@ -1,6 +1,6 @@
 module.exports = function(config) {
 	config.set({
-		frameworks: ["jasmine"],
+		frameworks: ["es6-shim", "jasmine"],
 		reporters: ["progress"],
 		files: ["src/**/*.spec.ts"],
 		mime: {

@@ -1,4 +1,5 @@
 KARMA=node_modules/.bin/karma
+NCU=node_modules/.bin/ncu
 WEBPACK=node_modules/.bin/webpack
 WEBPACK_DEV_SERVER=node_modules/.bin/webpack-dev-server
 
@@ -22,6 +23,10 @@ clean:
 .PHONY: clean-deps
 clean-deps:
 	rm --recursive --force node_modules
+
+.PHONY: upgrade
+upgrade:
+	$(NCU) --upgrade
 
 node_modules: package.json
 	npm install

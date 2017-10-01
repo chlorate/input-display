@@ -1,10 +1,15 @@
 const webpack = require("webpack");
 
+// mobx fix: Fix "there are multiple mobx instances active" error:
+// https://github.com/mobxjs/mobx/issues/1097#issuecomment-323698853
 module.exports = function(config) {
 	config.set({
 		frameworks: ["es6-shim", "jasmine"],
 		reporters: ["progress"],
-		files: ["src/**/*.spec.ts"],
+		files: [
+			"node_modules/mobx/lib/mobx.umd.js", // mobx fix
+			"src/**/*.spec.ts",
+		],
 		mime: {
 			"text/x-typescript": ["ts", "tsx"],
 		},
@@ -12,6 +17,7 @@ module.exports = function(config) {
 			"**/*.spec.ts": ["webpack", "sourcemap"],
 		},
 		webpack: {
+			externals: ["mobx"], // mobx fix
 			resolve: {
 				extensions: [".tsx", ".ts", ".js"],
 			},

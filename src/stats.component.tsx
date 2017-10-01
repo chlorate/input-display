@@ -60,6 +60,18 @@ export const StatsComponent = connect(["gamepad"], ({gamepad}: {gamepad: Gamepad
 				<td class="text-right">
 					{axis.value.toFixed(3)}
 				</td>
+				<td class="text-right">
+					{axis.neutralValue === undefined ? "?" : axis.neutralValue.toFixed(3)}
+				</td>
+				<td class="text-right">
+					{axis.minValue === undefined ? "?" : axis.minValue.toFixed(3)}
+				</td>
+				<td class="text-right">
+					{axis.maxValue === undefined ? "?" : axis.maxValue.toFixed(3)}
+				</td>
+				<td class={`table-${axis.dpad ? "success" : "danger"} text-center`}>
+					{axis.dpad ? "Yes" : "No"}
+				</td>
 			</tr>
 		));
 		axesTable = (
@@ -68,6 +80,10 @@ export const StatsComponent = connect(["gamepad"], ({gamepad}: {gamepad: Gamepad
 					<tr class="text-center">
 						<th>#</th>
 						<th>Value</th>
+						<th>Neutral value</th>
+						<th>Minimum value</th>
+						<th>Maximum value</th>
+						<th>D-pad</th>
 					</tr>
 				</thead>
 				<tbody>

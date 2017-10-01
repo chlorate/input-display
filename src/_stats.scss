@@ -22,6 +22,10 @@
 	}
 
 	th {
-		width: 4.5em;
+		width: 5em;
+	}
+
+	th:last-child {
+		width: 4em;
 	}
 }

@@ -1,4 +1,7 @@
 {
+	"name": "input-display",
+	"private": true,
+	"version": "0.0.0",
 	"devDependencies": {
 		"@types/jasmine": "2.6.0",
 		"babel-core": "6.26.0",

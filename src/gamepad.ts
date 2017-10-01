@@ -1,13 +1,10 @@
 import {observable} from "mobx";
 import {Config} from "./config";
+import {Axis} from "./controller/axis";
 import {Button} from "./controller/button";
 import {directionAxisValues, orderedDirections} from "./controller/direction";
 import {DpadButton} from "./controller/dpad-button";
 import {secondToMilliseconds} from "./time";
-
-interface Axis {
-	value: number;
-}
 
 export class Gamepad {
 	@observable public buttons: Button[] = [];
@@ -58,28 +55,25 @@ export class Gamepad {
 	private updateAxes(gamepad) {
 		gamepad.axes.forEach((value, i) => {
 			if (this.axes.length <= i) {
-				this.axes.push({
-					value: 0,
-				});
+				this.axes.push(new Axis());
 			}
 			this.axes[i].value = value;
 		});
 	}
 
 	private updateHat(gamepad) {
-		const i = this.config.hatAxis;
-		if (i === null || i >= gamepad.axes.length) {
-			return;
-		}
-
-		const axis = gamepad.axes[i];
-		orderedDirections.forEach((key) => {
-			let button = this.buttons.find((b) => b instanceof DpadButton && b.index === i && b.direction === key);
-			if (!button) {
-				button = new DpadButton(i, key);
-				this.buttons.push(button);
+		this.axes.forEach((axis, i) => {
+			if (!axis.dpad) {
+				return;
 			}
-			button.pressed = directionAxisValues[key].some((value) => value.toFixed(3) === axis.toFixed(3));
+			orderedDirections.forEach((key) => {
+				let button = this.buttons.find((b) => b instanceof DpadButton && b.index === i && b.direction === key);
+				if (!button) {
+					button = new DpadButton(i, key);
+					this.buttons.push(button);
+				}
+				button.pressed = directionAxisValues[key].some((value) => value.toFixed(3) === axis.value.toFixed(3));
+			});
 		});
 	}
 }

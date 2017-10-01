@@ -1,3 +1,5 @@
+export const dpadNeutralValue = -1.286;
+
 export enum Direction {
 	Up = "up",
 	Right = "right",

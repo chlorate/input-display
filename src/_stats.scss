@@ -9,8 +9,12 @@
 		width: 1px;
 	}
 
+	th:nth-child(3) {
+		width: 6em;
+	}
+
 	th {
-		width: 7em;
+		width: 3.5em;
 	}
 }
 
@@ -18,11 +22,11 @@
 	width: auto;
 
 	th:first-child {
-		width: 3em;
+		width: 2em;
 	}
 
 	th {
-		width: 5em;
+		width: 4.2em;
 	}
 
 	th:last-child {

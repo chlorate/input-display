@@ -11,32 +11,22 @@ export const StatsComponent = connect(["gamepad"], ({gamepad}: {gamepad: Gamepad
 	if (gamepad.buttons.length) {
 		const rows = gamepad.buttons.map((button, i) => (
 			<tr>
-				<td class="text-center">
-					{button.name}
-				</td>
-				<td class={`table-${button.pressed ? "success" : "danger"} text-center`}>
-					{button.pressed ? "Yes" : "No"}
-				</td>
-				<td class="text-right">
-					{button.presses}
-				</td>
-				<td class="text-right">
-					{button.mashSpeed}
-				</td>
-				<td class="text-right">
-					{button.bestMashSpeed}
-				</td>
+				<td>{button.name}</td>
+				{booleanCell(button.pressed)}
+				{integerCell(button.presses)}
+				{integerCell(button.mashSpeed)}
+				{integerCell(button.bestMashSpeed)}
 			</tr>
 		));
 		buttonTable = (
 			<table class="table table-bordered table-sm mb-4 id-table-stats-buttons">
 				<thead>
-					<tr class="text-center">
+					<tr>
 						<th>Name</th>
-						<th>Pressed</th>
-						<th>Total presses</th>
-						<th>Mash speed</th>
-						<th>Best<br />mash speed</th>
+						<th class="text-center">Pressed</th>
+						<th class="text-right"># presses</th>
+						<th class="text-right">Mash speed</th>
+						<th class="text-right">Mash best</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -54,36 +44,24 @@ export const StatsComponent = connect(["gamepad"], ({gamepad}: {gamepad: Gamepad
 	if (gamepad.axes.length) {
 		const rows = gamepad.axes.map((axis, i) => (
 			<tr>
-				<td class="text-center">
-					{i}
-				</td>
-				<td class="text-right">
-					{axis.value.toFixed(3)}
-				</td>
-				<td class="text-right">
-					{axis.neutralValue === undefined ? "?" : axis.neutralValue.toFixed(3)}
-				</td>
-				<td class="text-right">
-					{axis.minValue === undefined ? "?" : axis.minValue.toFixed(3)}
-				</td>
-				<td class="text-right">
-					{axis.maxValue === undefined ? "?" : axis.maxValue.toFixed(3)}
-				</td>
-				<td class={`table-${axis.dpad ? "success" : "danger"} text-center`}>
-					{axis.dpad ? "Yes" : "No"}
-				</td>
+				<td>{i}</td>
+				{floatCell(axis.value)}
+				{floatCell(axis.neutralValue)}
+				{floatCell(axis.minValue)}
+				{floatCell(axis.maxValue)}
+				{booleanCell(axis.dpad)}
 			</tr>
 		));
 		axesTable = (
 			<table class="table table-bordered table-sm m-0 id-table-stats-axes">
 				<thead>
-					<tr class="text-center">
+					<tr>
 						<th>#</th>
-						<th>Value</th>
-						<th>Neutral value</th>
-						<th>Minimum value</th>
-						<th>Maximum value</th>
-						<th>D-pad</th>
+						<th class="text-right">Value</th>
+						<th class="text-right">Neutral</th>
+						<th class="text-right">Min</th>
+						<th class="text-right">Max</th>
+						<th class="text-center">D-pad</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -111,6 +89,30 @@ export const StatsComponent = connect(["gamepad"], ({gamepad}: {gamepad: Gamepad
 		</section>
 	);
 });
+
+function booleanCell(value: boolean): any {
+	return (
+		<td class={`table-${value ? "success" : "danger"} text-center`}>
+			{value ? "Yes" : "No"}
+		</td>
+	);
+}
+
+function floatCell(value: number | undefined): any {
+	return (
+		<td class="text-right">
+			{value === undefined ? <span class="text-muted">None</span> : value.toFixed(3)}
+		</td>
+	);
+}
+
+function integerCell(value: number): any {
+	return (
+		<td class="text-right">
+			{value}
+		</td>
+	);
+}
 
 function reset(gamepad: Gamepad) {
 	gamepad.reset();

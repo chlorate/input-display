@@ -1,3 +1,5 @@
+const webpack = require("webpack");
+
 module.exports = function(config) {
 	config.set({
 		frameworks: ["es6-shim", "jasmine"],
@@ -7,7 +9,7 @@ module.exports = function(config) {
 			"text/x-typescript": ["ts", "tsx"],
 		},
 		preprocessors: {
-			"**/*.spec.ts": ["webpack"],
+			"**/*.spec.ts": ["webpack", "sourcemap"],
 		},
 		webpack: {
 			resolve: {
@@ -21,6 +23,14 @@ module.exports = function(config) {
 					},
 				],
 			},
+			plugins: [
+				// Partially fix source maps with Typescript:
+				// https://github.com/webpack-contrib/karma-webpack/issues/109#issuecomment-224961264
+				new webpack.SourceMapDevToolPlugin({
+					filename: null,
+					test: /\.[jt]sx?($|\?)/i,
+				}),
+			]
 		},
 	});
 };

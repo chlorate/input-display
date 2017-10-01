@@ -20,6 +20,7 @@
 		"karma-es6-shim": "1.0.0",
 		"karma-jasmine": "1.1.0",
 		"karma-phantomjs-launcher": "1.0.4",
+		"karma-sourcemap-loader": "0.3.7",
 		"karma-webpack": "2.0.4",
 		"node-sass": "4.5.3",
 		"npm-check-updates": "2.12.1",

@@ -14,7 +14,7 @@ export class Button {
 	}
 
 	get name(): string {
-		return `Button ${this.index}`;
+		return `Button ${this.index + 1}`;
 	}
 
 	get index(): number {

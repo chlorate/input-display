@@ -44,7 +44,7 @@ export const StatsComponent = connect(["gamepad"], ({gamepad}: {gamepad: Gamepad
 	if (gamepad.axes.length) {
 		const rows = gamepad.axes.map((axis, i) => (
 			<tr>
-				<td>{i}</td>
+				<td>Axis {i + 1}</td>
 				{floatCell(axis.value)}
 				{floatCell(axis.neutralValue)}
 				{floatCell(axis.minValue)}
@@ -56,7 +56,7 @@ export const StatsComponent = connect(["gamepad"], ({gamepad}: {gamepad: Gamepad
 			<table class="table table-bordered table-sm m-0 id-table-stats-axes">
 				<thead>
 					<tr>
-						<th>#</th>
+						<th>Name</th>
 						<th class="text-right">Value</th>
 						<th class="text-right">Neutral</th>
 						<th class="text-right">Min</th>

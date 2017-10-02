@@ -27,7 +27,7 @@ describe("Button", () => {
 	});
 
 	it("should have a name", () => {
-		expect(button.name).toBe("Button 123");
+		expect(button.name).toBe("Button 124");
 	});
 
 	describe("presses", () => {

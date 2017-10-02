@@ -24,7 +24,7 @@ export const AxisInputComponent = connect(["gamepad"], (props: Props) => (
 		>
 			<option value="">None</option>
 			{props.gamepad.axes.map((axis, i) => (
-				<option value={i}>Axis {i}</option>
+				<option value={i}>Axis {i + 1}</option>
 			))}
 			{props.value !== null && props.value >= props.gamepad.axes.length &&
 				<option value={props.value}>Axis {props.value}</option>

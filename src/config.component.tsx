@@ -2,6 +2,7 @@ import {linkEvent} from "inferno";
 import {connect} from "inferno-mobx";
 import {Config} from "./config";
 import {AxisInputComponent} from "./form/axis-input.component";
+import {ControllerSelectComponent} from "./form/controller-select.component";
 
 export const ConfigComponent = connect(["config"], ({config}: {config: Config}) => {
 	return (
@@ -16,8 +17,11 @@ export const ConfigComponent = connect(["config"], ({config}: {config: Config}) 
 			</div>
 
 			<h2 class="h5">
-				Compatibility
+				General
 			</h2>
+			<div class="form-group">
+				<ControllerSelectComponent />
+			</div>
 			<div class="form-group mb-4">
 				<AxisInputComponent
 					id="hat-axis"

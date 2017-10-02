@@ -32,7 +32,7 @@ export class Gamepad {
 			return;
 		}
 
-		const gamepad = gamepads[0];
+		const gamepad = gamepads[this.config.gamepadIndex];
 		if (!gamepad) {
 			return;
 		}

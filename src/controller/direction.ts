@@ -1,4 +1,4 @@
-export const dpadNeutralValue = -1.286;
+export const dpadNeutralValue = -9 / 7;
 
 export enum Direction {
 	Up = "up",
@@ -15,8 +15,8 @@ export const orderedDirections: Direction[] = [
 ];
 
 export const directionAxisValues: {[id: string]: number[]} = {
-	[Direction.Up]: [1, -1, -0.714],
-	[Direction.Right]: [-0.714, -0.429, -0.143],
-	[Direction.Down]: [-0.143, 0.143, 0.429],
-	[Direction.Left]: [0.429, 0.714, 1],
+	[Direction.Up]: [1, -1, -5 / 7],
+	[Direction.Right]: [-5 / 7, -3 / 7, -1 / 7],
+	[Direction.Down]: [-1 / 7, 1 / 7, 3 / 7],
+	[Direction.Left]: [3 / 7, 5 / 7, 1],
 };

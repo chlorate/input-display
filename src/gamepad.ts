@@ -23,7 +23,7 @@ export class Gamepad {
 
 	public poll() {
 		this.update();
-		setTimeout(() => this.poll(), secondToMilliseconds / 60);
+		setTimeout(() => this.poll(), secondToMilliseconds / this.config.pollRate);
 	}
 
 	private update() {

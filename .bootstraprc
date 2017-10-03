@@ -17,6 +17,7 @@ styles:
   card: true
   forms: true
   grid: true
+  input-group: true
   mixins: true
   print: true
   reboot: true

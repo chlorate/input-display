@@ -14,6 +14,6 @@ export class DpadButton extends Button {
 	}
 
 	get name(): string {
-		return `D-pad ${this.index + 1} ${this.direction}`;
+		return `D-pad ${this.direction}`;
 	}
 }

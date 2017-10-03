@@ -1,8 +1,8 @@
 import {linkEvent} from "inferno";
 import {connect} from "inferno-mobx";
-import {Gamepad} from "./gamepad";
+import {Gamepad} from "../gamepad";
 
-export const StatsComponent = connect(["gamepad"], ({gamepad}: {gamepad: Gamepad}) => {
+export const ControllerComponent = connect(["gamepad"], ({gamepad}: {gamepad: Gamepad}) => {
 	let buttonTable = (
 		<p class="mb-4">
 			No buttons detected.

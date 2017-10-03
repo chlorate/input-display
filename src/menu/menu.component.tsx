@@ -1,11 +1,11 @@
 import {linkEvent} from "inferno";
 import Component from "inferno-component";
 import {ConfigComponent} from "../config/config.component";
-import {StatsComponent} from "../stats.component";
+import {ControllerComponent} from "../controller/controller.component";
 
 enum Tab {
 	Config = "Config",
-	Stats = "Stats",
+	Controller = "Controller",
 }
 
 const tabLinks = [
@@ -14,8 +14,8 @@ const tabLinks = [
 		handler: setConfigTab,
 	},
 	{
-		tab: Tab.Stats,
-		handler: setStatsTab,
+		tab: Tab.Controller,
+		handler: setControllerTab,
 	},
 ];
 
@@ -52,8 +52,8 @@ export class MenuComponent extends Component<{}, {tab: Tab}> {
 					{this.state.tab === Tab.Config &&
 						<ConfigComponent />
 					}
-					{this.state.tab === Tab.Stats &&
-						<StatsComponent />
+					{this.state.tab === Tab.Controller &&
+						<ControllerComponent />
 					}
 				</div>
 			</div>
@@ -73,6 +73,6 @@ function setConfigTab(instance: MenuComponent) {
 	instance.setTab(Tab.Config);
 }
 
-function setStatsTab(instance: MenuComponent) {
-	instance.setTab(Tab.Stats);
+function setControllerTab(instance: MenuComponent) {
+	instance.setTab(Tab.Controller);
 }

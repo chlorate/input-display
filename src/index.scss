@@ -1,5 +1,6 @@
 @import '../node_modules/bootstrap-theme/src/post-bootstrap';
+
+@import 'config/config';
+@import 'controller/controller';
 @import 'gamepad';
 @import 'menu/menu';
-@import 'stats';
-@import 'config/config';

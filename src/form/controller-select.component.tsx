@@ -47,6 +47,7 @@ export class ControllerSelectComponent extends Component<Props, State> {
 					class="form-control"
 					id="id-config-controller"
 					value={this.props.config.gamepadIndex}
+					required
 					onChange={linkEvent(this.props.config, handleChange)}
 				>
 					{this.options()}

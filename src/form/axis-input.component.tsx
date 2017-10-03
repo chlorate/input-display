@@ -20,6 +20,7 @@ export const AxisInputComponent = connect(["gamepad"], (props: Props) => (
 			id={props.id}
 			aria-describedby={props.help ? `${props.id}-help` : null}
 			value={props.value === null ? "" : props.value}
+			required
 			onChange={props.onChange}
 		>
 			<option value="">None</option>

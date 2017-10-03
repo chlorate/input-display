@@ -2,8 +2,8 @@ import {linkEvent} from "inferno";
 import Component from "inferno-component";
 import {connect} from "inferno-mobx";
 import {arraysEqual} from "../array";
-import {Config} from "../config";
 import {secondToMilliseconds} from "../time";
+import {Config} from "./config";
 
 interface Props {
 	config: Config;

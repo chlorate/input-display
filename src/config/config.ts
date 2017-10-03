@@ -1,5 +1,5 @@
 import {observable} from "mobx";
-import {clampInt} from "./math";
+import {clampInt} from "../math";
 
 // 4 ms is the smallest delay:
 // https://developer.mozilla.org/en-US/docs/Web/API/WindowOrWorkerGlobalScope/setTimeout#Timeouts_throttled_to_>4ms

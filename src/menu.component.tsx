@@ -1,6 +1,6 @@
 import {linkEvent} from "inferno";
 import Component from "inferno-component";
-import {ConfigComponent} from "./config.component";
+import {ConfigComponent} from "./config/config.component";
 import {StatsComponent} from "./stats.component";
 
 enum Tab {

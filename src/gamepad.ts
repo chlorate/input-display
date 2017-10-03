@@ -1,5 +1,5 @@
 import {observable} from "mobx";
-import {Config} from "./config";
+import {Config} from "./config/config";
 import {Axis} from "./controller/axis";
 import {Button} from "./controller/button";
 import {directionAxisValues, orderedDirections} from "./controller/direction";

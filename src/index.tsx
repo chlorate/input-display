@@ -1,6 +1,6 @@
 import {render} from "inferno";
 import {Provider} from "inferno-mobx";
-import {Config} from "./config";
+import {Config} from "./config/config";
 import {Gamepad} from "./gamepad";
 import {GamepadComponent} from "./gamepad.component";
 import {MenuComponent} from "./menu.component";

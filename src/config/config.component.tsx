@@ -1,8 +1,8 @@
 import {linkEvent} from "inferno";
 import {connect} from "inferno-mobx";
 import {Config} from "./config";
-import {ControllerSelectComponent} from "./form/controller-select.component";
-import {PollRateInputComponent} from "./form/poll-rate-input.component";
+import {ControllerSelectComponent} from "./controller-select.component";
+import {PollRateInputComponent} from "./poll-rate-input.component";
 
 export const ConfigComponent = connect(["config"], ({config}: {config: Config}) => {
 	return (

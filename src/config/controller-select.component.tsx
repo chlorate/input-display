@@ -5,6 +5,8 @@ import {arraysEqual} from "../array";
 import {secondToMilliseconds} from "../time";
 import {Config} from "./config";
 
+const notConnected = "No controller connected";
+
 interface Props {
 	config: Config;
 }
@@ -58,8 +60,11 @@ export class ControllerSelectComponent extends Component<Props, State> {
 
 	private updateNames() {
 		const names: string[] = [];
-		for (const gamepad of navigator.getGamepads()) {
-			names.push(gamepad ? gamepad.id : "None");
+		const gamepads = navigator.getGamepads();
+		for (let i = 0; i < gamepads.length; i++) {
+			if (gamepads[i]) {
+				names[i] = gamepads[i].id;
+			}
 		}
 		this.setState({names});
 	}
@@ -71,7 +76,7 @@ export class ControllerSelectComponent extends Component<Props, State> {
 
 		const index = this.props.config.gamepadIndex;
 		if (!this.state.names[index]) {
-			out.push(<option value={index}>{index + 1} - None</option>);
+			out.push(<option value={index}>{index + 1} - {notConnected}</option>);
 		}
 
 		return out;

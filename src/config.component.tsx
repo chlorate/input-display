@@ -1,3 +1,4 @@
+import {linkEvent} from "inferno";
 import {connect} from "inferno-mobx";
 import {Config} from "./config";
 import {ControllerSelectComponent} from "./form/controller-select.component";
@@ -5,7 +6,7 @@ import {PollRateInputComponent} from "./form/poll-rate-input.component";
 
 export const ConfigComponent = connect(["config"], ({config}: {config: Config}) => {
 	return (
-		<form>
+		<form onSubmit={linkEvent(undefined, handleSubmit)}>
 			<div class="mb-4">
 				<button type="button" class="btn btn-secondary mr-1">
 					Import
@@ -27,3 +28,7 @@ export const ConfigComponent = connect(["config"], ({config}: {config: Config}) 
 		</form>
 	);
 });
+
+function handleSubmit(_: undefined, event: any) {
+	event.preventDefault();
+}

@@ -7,7 +7,7 @@ interface Props {
 }
 
 export const PollRateInputComponent = connect(["config"], ({config}: Props) => (
-	<div>
+	<div class="form-group mb-0">
 		<label for="id-config-poll-rate">
 			Poll rate
 		</label>

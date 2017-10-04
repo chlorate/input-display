@@ -1,7 +1,7 @@
 import {linkEvent} from "inferno";
 import {connect} from "inferno-mobx";
 import {Config} from "./config";
-import {ControllerSelectComponent} from "./controller-select.component";
+import {DeviceSelectComponent} from "./device-select.component";
 import {DpadMappingFieldsetComponent} from "./dpad-mapping-fieldset.component";
 import {PollRateInputComponent} from "./poll-rate-input.component";
 
@@ -23,13 +23,9 @@ export const ConfigComponent = connect(["config"], ({config}: Props) => (
 		<h2 class="h5">
 			Controller
 		</h2>
-		<div class="form-group">
-			<ControllerSelectComponent />
-		</div>
+		<DeviceSelectComponent />
 		<DpadMappingFieldsetComponent />
-		<div class="form-group mb-0">
-			<PollRateInputComponent />
-		</div>
+		<PollRateInputComponent />
 	</form>
 ));
 

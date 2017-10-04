@@ -16,7 +16,7 @@ interface State {
 }
 
 @connect(["config"])
-export class ControllerSelectComponent extends Component<Props, State> {
+export class DeviceSelectComponent extends Component<Props, State> {
 	public state = {names: []};
 	private interval?: number;
 
@@ -41,9 +41,9 @@ export class ControllerSelectComponent extends Component<Props, State> {
 
 	public render() {
 		return (
-			<div>
+			<div class="form-group">
 				<label for="id-config-controller">
-					Controller
+					Device
 				</label>
 				<select
 					class="form-control"

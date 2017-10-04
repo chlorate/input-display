@@ -2,32 +2,36 @@ import {linkEvent} from "inferno";
 import {connect} from "inferno-mobx";
 import {Config} from "./config";
 import {ControllerSelectComponent} from "./controller-select.component";
+import {DpadMappingFieldsetComponent} from "./dpad-mapping-fieldset.component";
 import {PollRateInputComponent} from "./poll-rate-input.component";
 
-export const ConfigComponent = connect(["config"], ({config}: {config: Config}) => {
-	return (
-		<form onSubmit={linkEvent(undefined, handleSubmit)}>
-			<div class="mb-4">
-				<button type="button" class="btn btn-secondary mr-1">
-					Import
-				</button>
-				<button type="button" class="btn btn-secondary">
-					Export
-				</button>
-			</div>
+interface Props {
+	config: Config;
+}
 
-			<h2 class="h5">
-				General
-			</h2>
-			<div class="form-group">
-				<ControllerSelectComponent />
-			</div>
-			<div class="form-group mb-0">
-				<PollRateInputComponent />
-			</div>
-		</form>
-	);
-});
+export const ConfigComponent = connect(["config"], ({config}: Props) => (
+	<form onSubmit={linkEvent(undefined, handleSubmit)}>
+		<div class="mb-4">
+			<button type="button" class="btn btn-secondary mr-1">
+				Import
+			</button>
+			<button type="button" class="btn btn-secondary">
+				Export
+			</button>
+		</div>
+
+		<h2 class="h5">
+			Controller
+		</h2>
+		<div class="form-group">
+			<ControllerSelectComponent />
+		</div>
+		<DpadMappingFieldsetComponent />
+		<div class="form-group mb-0">
+			<PollRateInputComponent />
+		</div>
+	</form>
+));
 
 function handleSubmit(_: undefined, event: any) {
 	event.preventDefault();

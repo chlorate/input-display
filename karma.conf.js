@@ -17,7 +17,7 @@ module.exports = function(config) {
 			"**/*.spec.ts": ["webpack", "sourcemap"],
 		},
 		junitReporter: {
-			outputDir: "junit",
+			outputDir: "junit/karma",
 			outputFile: "results.xml",
 			useBrowserName: false,
 		},

@@ -18,7 +18,7 @@ watch: node_modules
 
 .PHONY: clean
 clean: 
-	rm --recursive --force dist
+	rm --recursive --force dist junit
 
 .PHONY: clean-deps
 clean-deps:

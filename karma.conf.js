@@ -5,7 +5,7 @@ const webpack = require("webpack");
 module.exports = function(config) {
 	config.set({
 		frameworks: ["es6-shim", "jasmine"],
-		reporters: ["progress"],
+		reporters: ["junit", "progress"],
 		files: [
 			"node_modules/mobx/lib/mobx.umd.js", // mobx fix
 			"src/**/*.spec.ts",
@@ -15,6 +15,11 @@ module.exports = function(config) {
 		},
 		preprocessors: {
 			"**/*.spec.ts": ["webpack", "sourcemap"],
+		},
+		junitReporter: {
+			outputDir: "junit",
+			outputFile: "results.xml",
+			useBrowserName: false,
 		},
 		webpack: {
 			externals: ["mobx"], // mobx fix

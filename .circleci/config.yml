@@ -11,6 +11,8 @@ jobs:
       - run:
           name: Test
           command: make test
+      - store_test_results:
+          path: junit
       - run:
           name: Build
           command: make build

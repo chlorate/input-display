@@ -8,27 +8,27 @@ interface Props {
 
 export const PollRateInputComponent = connect(["config"], ({config}: Props) => (
 	<div class="form-group mb-0">
-		<label for="id-config-poll-rate">
+		<label for="config-poll-rate">
 			Poll rate
 		</label>
-		<div class="input-group id-input-group-poll-rate">
+		<div class="input-group input-group-poll-rate">
 			<input
 				type="number"
 				class="form-control"
-				id="id-config-poll-rate"
+				id="config-poll-rate"
 				value={config.pollRate}
 				min={minPollRate}
 				max={maxPollRate}
 				placeholder={minPollRate}
 				required
-				aria-describedby="id-config-poll-rate-addon id-config-poll-rate-help"
+				aria-describedby="config-poll-rate-addon config-poll-rate-help"
 				onChange={linkEvent(config, handleChange)}
 			/>
-			<span class="input-group-addon" id="id-config-poll-rate-addon">
+			<span class="input-group-addon" id="config-poll-rate-addon">
 				Hz
 			</span>
 		</div>
-		<small class="form-text text-muted" id="id-config-poll-rate-help">
+		<small class="form-text text-muted" id="config-poll-rate-help">
 			How often the controller's state is read.
 		</small>
 	</div>

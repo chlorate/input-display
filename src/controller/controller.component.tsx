@@ -19,7 +19,7 @@ export const ControllerComponent = connect(["gamepad"], ({gamepad}: {gamepad: Ga
 			</tr>
 		));
 		buttonTable = (
-			<table class="table table-bordered table-sm mb-4 id-table-stats-buttons">
+			<table class="table table-bordered table-sm table-stats-buttons mb-4">
 				<thead>
 					<tr>
 						<th>Name</th>
@@ -53,7 +53,7 @@ export const ControllerComponent = connect(["gamepad"], ({gamepad}: {gamepad: Ga
 			</tr>
 		));
 		axesTable = (
-			<table class="table table-bordered table-sm m-0 id-table-stats-axes">
+			<table class="table table-bordered table-sm table-stats-axes m-0">
 				<thead>
 					<tr>
 						<th>Name</th>

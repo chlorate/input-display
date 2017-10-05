@@ -1,7 +1,5 @@
-.id-table-stats-buttons {
-	width: auto;
-
-	th:first-child {
+.table-stats-buttons {
+	th:not(:first-child) {
 		width: 7em;
 	}
 
@@ -9,27 +7,17 @@
 		width: 1px;
 	}
 
-	th:nth-child(3) {
-		width: 6em;
-	}
-
-	th {
-		width: 3.5em;
+	td {
+		white-space: nowrap;
 	}
 }
 
-.id-table-stats-axes {
-	width: auto;
-
-	th:first-child {
+.table-stats-axes {
+	th:not(:first-child) {
 		width: 5em;
 	}
 
-	th {
-		width: 4.2em;
-	}
-
-	th:last-child {
-		width: 4em;
+	td {
+		white-space: nowrap;
 	}
 }

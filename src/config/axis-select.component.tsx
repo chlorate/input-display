@@ -10,7 +10,7 @@ interface Props {
 
 export const AxisSelectComponent = connect(["gamepad"], (props: Props) => (
 	<select
-		class="form-control form-control-axis"
+		class="form-control"
 		id={props.id}
 		value={props.value}
 		required

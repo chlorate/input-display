@@ -4,3 +4,8 @@
 @import 'controller/controller';
 @import 'gamepad';
 @import 'menu/menu';
+
+main {
+	height: 100%;
+	overflow: hidden;
+}

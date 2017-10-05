@@ -30,53 +30,52 @@ export const DpadMappingFieldsetComponent = connect(["config", "gamepad"], (prop
 	}
 
 	return (
-		<fieldset class="mb-3">
-			<div class="form-row">
-				<div class="form-group col-auto mb-0">
-					<label for="config-dpad-mapping">
-						D-pad mapping
-					</label>
-					<select
-						class="form-control"
-						id="config-dpad-mapping"
-						value={value}
-						onChange={linkEvent(props, handleMappingChange)}
-					>
-						<option value={Mapping.Buttons}>Buttons</option>
-						<option value={Mapping.SingleAxis}>Single axis</option>
-						<option value={Mapping.DualAxes}>Dual axes</option>
-					</select>
-				</div>
-				{value === Mapping.SingleAxis &&
-					<AxisIndexSelectComponent
-						class="col-auto mb-0"
-						id="config-dpad-axis-index"
-						label="D-pad axis"
-						value={props.config.dpadAxisIndex}
-						onChange={linkEvent(props.config, handleIndexChange)}
-					/>
-				}
+		<fieldset>
+			<div class="form-group">
+				<label for="config-dpad-mapping">
+					D-pad mapping
+				</label>
+				<select
+					class="form-control"
+					id="config-dpad-mapping"
+					value={value}
+					onChange={linkEvent(props, handleMappingChange)}
+				>
+					<option value={Mapping.Buttons}>Buttons</option>
+					<option value={Mapping.SingleAxis}>Single axis</option>
+					<option value={Mapping.DualAxes}>Dual axes</option>
+				</select>
+				<small class="form-text text-muted">
+					Controllers vary in how d-pad inputs are mapped. Directions
+					could be mapped to buttons, to values on a single axis, or to
+					separate X and Y axes. Go to the Controller tab and move the
+					d-pad to determine which mapping fits your controller.
+				</small>
+			</div>
+			{value === Mapping.SingleAxis &&
+				<AxisIndexSelectComponent
+					id="config-dpad-axis-index"
+					label="D-pad axis"
+					value={props.config.dpadAxisIndex}
+					onChange={linkEvent(props.config, handleIndexChange)}
+				/>
+			}
+			<div class="form-row form-row-dpad-dual-axes">
 				{value === Mapping.DualAxes && [
 					<AxisReferenceSelectComponent
-						class="col-auto mb-0"
+						class="col-6"
 						id="config-dpad-x-axis"
 						label="D-pad X axis"
 						reference={props.config.dpadXAxis}
 					/>,
 					<AxisReferenceSelectComponent
-						class="col-auto mb-0"
+						class="col-6"
 						id="config-dpad-y-axis"
 						label="D-pad Y axis"
 						reference={props.config.dpadYAxis}
 					/>,
 				]}
 			</div>
-			<small class="form-text text-muted">
-				Controllers vary in how d-pad inputs are mapped. Directions
-				could be mapped to buttons, to values on a single axis, or to
-				separate X and Y axes. Go to the Controller tab and move the
-				d-pad to determine which mapping fits your controller.
-			</small>
 		</fieldset>
 	);
 });

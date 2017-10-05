@@ -21,10 +21,10 @@ const IndexComponent = () => {
 
 	return (
 		<section class="d-flex justify-content-between h-100">
-			<div class="id-gamepads p-3">
+			<div class="gamepads p-3">
 				<GamepadComponent />
 			</div>
-			<div class="id-menu p-3">
+			<div class="menu p-3">
 				<MenuComponent />
 			</div>
 		</section>

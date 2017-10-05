@@ -42,12 +42,12 @@ export class DeviceSelectComponent extends Component<Props, State> {
 	public render() {
 		return (
 			<div class="form-group">
-				<label for="id-config-controller">
+				<label for="config-controller">
 					Device
 				</label>
 				<select
 					class="form-control"
-					id="id-config-controller"
+					id="config-controller"
 					value={this.props.config.gamepadIndex}
 					required
 					onChange={linkEvent(this.props.config, handleChange)}

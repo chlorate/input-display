@@ -1,8 +1,8 @@
 import {linkEvent} from "inferno";
 import {connect} from "inferno-mobx";
-import {Gamepad} from "../gamepad";
+import {Controller} from "./controller";
 
-export const ControllerComponent = connect(["gamepad"], ({gamepad}: {gamepad: Gamepad}) => {
+export const ControllerComponent = connect(["gamepad"], ({gamepad}: {gamepad: Controller}) => {
 	let buttonTable = (
 		<p class="mb-4">
 			No buttons detected.
@@ -114,6 +114,7 @@ function integerCell(value: number): any {
 	);
 }
 
-function reset(gamepad: Gamepad) {
-	gamepad.reset();
+function reset(controller: Controller) {
+	controller.resetButtons();
+	controller.resetAxes();
 }

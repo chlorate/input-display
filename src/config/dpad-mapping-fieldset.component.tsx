@@ -1,6 +1,6 @@
 import {linkEvent} from "inferno";
 import {connect} from "inferno-mobx";
-import {Gamepad} from "../gamepad";
+import {Controller} from "../controller/controller";
 import {AxisIndexSelectComponent} from "./axis-index-select.component";
 import {AxisReference} from "./axis-reference";
 import {AxisReferenceSelectComponent} from "./axis-reference-select.component";
@@ -17,7 +17,7 @@ enum Mapping {
 
 interface Props {
 	config: Config;
-	gamepad: Gamepad;
+	gamepad: Controller;
 }
 
 export const DpadMappingFieldsetComponent = connect(["config", "gamepad"], (props: Props) => {

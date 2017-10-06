@@ -1,8 +1,8 @@
 import {connect} from "inferno-mobx";
-import {Gamepad} from "../gamepad";
+import {Controller} from "../controller/controller";
 
 interface Props {
-	gamepad: Gamepad;
+	gamepad: Controller;
 	id: string;
 	value: number;
 	onChange: any;

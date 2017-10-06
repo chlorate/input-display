@@ -4,7 +4,7 @@ describe("gamepad/service", () => {
 	beforeEach(() => {
 		// PhantomJS shim:
 		if (!navigator.getGamepads) {
-			navigator.getGamepads = () => {};
+			navigator.getGamepads = () => [];
 		}
 
 		spyOn(navigator, "getGamepads").and.returnValue([

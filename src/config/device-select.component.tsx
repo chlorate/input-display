@@ -2,6 +2,7 @@ import {linkEvent} from "inferno";
 import Component from "inferno-component";
 import {connect} from "inferno-mobx";
 import {arraysEqual} from "../array";
+import {getGamepadIds} from "../gamepad/service";
 import {secondToMilliseconds} from "../time";
 import {Config} from "./config";
 
@@ -12,12 +13,12 @@ interface Props {
 }
 
 interface State {
-	names: string[];
+	ids: Array<string | undefined>;
 }
 
 @connect(["config"])
 export class DeviceSelectComponent extends Component<Props, State> {
-	public state = {names: []};
+	public state = {ids: []};
 	private interval?: number;
 
 	public componentDidMount() {
@@ -36,7 +37,7 @@ export class DeviceSelectComponent extends Component<Props, State> {
 	}
 
 	public shouldComponentUpdate(nextProps: Props, nextState: State) {
-		return !arraysEqual(this.state.names, nextState.names);
+		return !arraysEqual(this.state.ids, nextState.ids);
 	}
 
 	public render() {
@@ -59,23 +60,16 @@ export class DeviceSelectComponent extends Component<Props, State> {
 	}
 
 	private updateNames() {
-		const names: string[] = [];
-		const gamepads = navigator.getGamepads();
-		for (let i = 0; i < gamepads.length; i++) {
-			if (gamepads[i]) {
-				names[i] = gamepads[i].id;
-			}
-		}
-		this.setState({names});
+		this.setState({ids: getGamepadIds()});
 	}
 
 	private options(): any[] {
-		const out: any[] = this.state.names.map((name, i) => (
-			<option value={i}>{i + 1} - {name}</option>
+		const out: any[] = this.state.ids.map((id, i) => (
+			<option value={i}>{i + 1} - {id}</option>
 		));
 
 		const index = this.props.config.gamepadIndex;
-		if (!this.state.names[index]) {
+		if (!this.state.ids[index]) {
 			out.push(<option value={index}>{index + 1} - {notConnected}</option>);
 		}
 

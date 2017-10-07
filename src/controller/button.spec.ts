@@ -58,12 +58,4 @@ describe("Button", () => {
 		}
 		expect(button.bestMashSpeed).toBe(5);
 	});
-
-	it("can be reset", () => {
-		mash();
-		button.reset();
-		expect(button.presses).toBe(0);
-		expect(button.mashSpeed).toBe(0);
-		expect(button.bestMashSpeed).toBe(0);
-	});
 });

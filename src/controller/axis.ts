@@ -40,10 +40,4 @@ export class Axis {
 	get maxValue(): number | undefined {
 		return this._maxValue;
 	}
-
-	public calibrate() {
-		this._minValue = undefined;
-		this._neutralValue = undefined;
-		this._maxValue = undefined;
-	}
 }

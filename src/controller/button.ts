@@ -40,12 +40,6 @@ export abstract class Button {
 		return this._bestMashSpeed;
 	}
 
-	public reset() {
-		this._presses = 0;
-		this.pressTimes = [];
-		this._bestMashSpeed = 0;
-	}
-
 	/**
 	 * Remove all press timestamps that are older than a certain time.
 	 */

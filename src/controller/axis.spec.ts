@@ -34,13 +34,4 @@ describe("Axis", () => {
 		rotate();
 		expect(axis.maxValue).toBe(1);
 	});
-
-	it("can be calibrated", () => {
-		axis.value = 0.123;
-		rotate();
-		axis.calibrate();
-		expect(axis.minValue).toBeUndefined();
-		expect(axis.neutralValue).toBeUndefined();
-		expect(axis.maxValue).toBeUndefined();
-	});
 });

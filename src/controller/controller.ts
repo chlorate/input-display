@@ -1,6 +1,6 @@
 import {observable} from "mobx";
 import {Config} from "../config/config";
-import {getGamepads} from "../gamepad/service";
+import {aliases, getGamepads} from "../gamepad/service";
 import {almostEqual} from "../math/math";
 import {secondToMilliseconds} from "../time";
 import {Axis} from "./axis";
@@ -32,11 +32,30 @@ const dpadAxisThreshold = 0.3;
  */
 export class Controller {
 	private config: Config;
+	@observable private _id?: string;
+	@observable private _mapping?: string;
+	@observable private _timestamp?: number;
 	@observable private _axes: Axis[] = [];
 	@observable private _buttons: Button[] = [];
 
 	constructor(config: Config) {
 		this.config = config;
+	}
+
+	get id(): string | undefined {
+		return this._id;
+	}
+
+	get alias(): string | undefined {
+		return this.id !== undefined ? aliases[this.id] : undefined;
+	}
+
+	get mapping(): string | undefined {
+		return this._mapping;
+	}
+
+	get timestamp(): number | undefined {
+		return this._timestamp;
 	}
 
 	get axes(): Axis[] {
@@ -65,18 +84,33 @@ export class Controller {
 	private update() {
 		const gamepads = getGamepads();
 		if (gamepads.length <= this.config.gamepadIndex) {
+			this.clearGamepad();
 			return;
 		}
 
 		const gamepad = gamepads[this.config.gamepadIndex];
 		if (!gamepad) {
+			this.clearGamepad();
 			return;
 		}
 
+		this.updateGamepad(gamepad);
 		this.updateAxes(gamepad);
 		this.updateButtons(gamepad);
 		this.updateDpadSingleAxis(gamepad);
 		this.updateDpadDualAxes(gamepad);
+	}
+
+	private clearGamepad() {
+		this._id = undefined;
+		this._mapping = undefined;
+		this._timestamp = undefined;
+	}
+
+	private updateGamepad(gamepad: Gamepad) {
+		this._id = gamepad.id;
+		this._mapping = gamepad.mapping;
+		this._timestamp = gamepad.timestamp;
 	}
 
 	private updateAxes(gamepad: Gamepad) {

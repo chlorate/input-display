@@ -1,4 +1,7 @@
-const aliases: {[id: string]: string} = {
+/**
+ * Aliases for cryptic gamepad IDs.
+ */
+export const aliases: {[id: string]: string} = {
 	"Unknown Gamepad (Vendor: 057e Product: 0306)": "Wii Remote",
 };
 
@@ -18,8 +21,7 @@ export function getGamepads(): Array<Gamepad | undefined> {
 }
 
 /**
- * Returns an array of gamepad IDs (possibly aliased to friendlier names) for
- * all connected gamepads.
+ * Returns an array of gamepad IDs (or aliases) for all connected gamepads.
  */
 export function getGamepadIds(): Array<string | undefined> {
 	const ids: string[] = [];

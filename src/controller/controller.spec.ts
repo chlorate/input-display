@@ -13,6 +13,9 @@ describe("Controller", () => {
 		config = new Config();
 		controller = new Controller(config);
 		gamepad = {
+			id: "Test Gamepad",
+			mapping: "standard",
+			timestamp: 123,
 			axes: [0.1, 0.2],
 			buttons: [{pressed: false}, {pressed: true}],
 		};
@@ -24,14 +27,20 @@ describe("Controller", () => {
 		jasmine.clock().uninstall();
 	});
 
-	function spyOnGetGamepads(value: Gamepad | null) {
-		spyOn(service, "getGamepads").and.returnValue([value]);
-	}
+	it("can return the gamepad's alias", () => {
+		expect(controller.alias).toBeUndefined();
+		spyOn(service, "getGamepads").and.returnValue([gamepad]);
+		controller.poll();
+		expect(controller.alias).toBeUndefined();
+		gamepad.id = "Unknown Gamepad (Vendor: 057e Product: 0306)";
+		jasmine.clock().tick(20);
+		expect(controller.alias).toBe("Wii Remote");
+	});
 
 	describe("poll", () => {
 		it("should update according to the poll rate", () => {
 			config.pollRate = 1;
-			spyOnGetGamepads(gamepad);
+			spyOn(service, "getGamepads").and.returnValue([gamepad]);
 			controller.poll();
 			expect(service.getGamepads).toHaveBeenCalledTimes(1);
 			jasmine.clock().tick(900);
@@ -41,14 +50,33 @@ describe("Controller", () => {
 		});
 
 		it("should do nothing if no gamepad is found", () => {
-			spyOnGetGamepads(null);
+			spyOn(service, "getGamepads").and.returnValue([]);
 			controller.poll();
 			expect(controller.axes.length).toBe(0);
 			expect(controller.buttons.length).toBe(0);
 		});
 
+		it("should store gamepad data", () => {
+			spyOn(service, "getGamepads").and.returnValue([gamepad]);
+			controller.poll();
+			expect(controller.id).toBe("Test Gamepad");
+			expect(controller.alias).toBeUndefined();
+			expect(controller.mapping).toBe("standard");
+			expect(controller.timestamp).toBe(123);
+		});
+
+		it("should clear gamepad data if controller is disconnected", () => {
+			spyOn(service, "getGamepads").and.returnValues([gamepad], []);
+			controller.poll();
+			jasmine.clock().tick(20);
+			expect(controller.id).toBeUndefined();
+			expect(controller.alias).toBeUndefined();
+			expect(controller.mapping).toBeUndefined();
+			expect(controller.timestamp).toBeUndefined();
+		});
+
 		it("should update axes", () => {
-			spyOnGetGamepads(gamepad);
+			spyOn(service, "getGamepads").and.returnValue([gamepad]);
 			controller.poll();
 			expect(controller.axes.length).toBe(2);
 			[0.1, 0.2].forEach((value, i) => {
@@ -61,7 +89,7 @@ describe("Controller", () => {
 		});
 
 		it("should update buttons", () => {
-			spyOnGetGamepads(gamepad);
+			spyOn(service, "getGamepads").and.returnValue([gamepad]);
 			controller.poll();
 			expect(controller.buttons.length).toBe(2);
 			[false, true].forEach((pressed, i) => {
@@ -76,7 +104,7 @@ describe("Controller", () => {
 
 		it("should update d-pad buttons if single axis mapping is set", () => {
 			config.dpadAxisIndex = 1;
-			spyOnGetGamepads(gamepad);
+			spyOn(service, "getGamepads").and.returnValue([gamepad]);
 			controller.poll();
 			checkDpadButtonsExist();
 
@@ -127,14 +155,14 @@ describe("Controller", () => {
 
 		it("should not fail if single axis mapping points to missing axis", () => {
 			controller.dpadAxisIndex = 123;
-			spyOnGetGamepads(gamepad);
+			spyOn(service, "getGamepads").and.returnValue([gamepad]);
 			controller.poll();
 			expect(controller.buttons.length).toBe(2);
 		});
 
 		it("should update d-pad buttons if dual axes mapping is set", () => {
 			config.setDpadDualAxes(new AxisReference(0, false), new AxisReference(1, false));
-			spyOnGetGamepads(gamepad);
+			spyOn(service, "getGamepads").and.returnValue([gamepad]);
 			controller.poll();
 			checkDpadButtonsExist();
 
@@ -170,7 +198,7 @@ describe("Controller", () => {
 
 		it("should not fail if dual axes mapping points to missing axes", () => {
 			config.setDpadDualAxes(new AxisReference(8, false), new AxisReference(9, false));
-			spyOnGetGamepads(gamepad);
+			spyOn(service, "getGamepads").and.returnValue([gamepad]);
 			controller.poll();
 			expect(controller.buttons.length).toBe(2);
 		});

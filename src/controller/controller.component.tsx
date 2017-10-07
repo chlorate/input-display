@@ -75,6 +75,36 @@ export const ControllerComponent = connect(["gamepad"], ({gamepad}: {gamepad: Co
 
 	return (
 		<section>
+			{gamepad.id !== undefined && [
+				<h2 class="h4">
+					General
+				</h2>,
+				<table class="table table-sm table-controller-general">
+					<tr>
+						<th>ID</th>
+						<td>{gamepad.id}</td>
+					</tr>
+					{gamepad.alias !== undefined &&
+						<tr>
+							<th>Alias</th>
+							<td>{gamepad.alias}</td>
+						</tr>
+					}
+					{gamepad.mapping !== undefined &&
+						<tr>
+							<th>Mapping</th>
+							<td>{gamepad.mapping === "" ? <span class="text-muted">None</span> : gamepad.mapping}</td>
+						</tr>
+					}
+					{gamepad.timestamp !== undefined &&
+						<tr>
+							<th>Timestamp</th>
+							<td>{gamepad.timestamp}</td>
+						</tr>
+					}
+				</table>,
+			]}
+
 			<h2 class="h4">
 				Buttons
 				{gamepad.buttons.length > 0 &&

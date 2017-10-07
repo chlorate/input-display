@@ -49,7 +49,6 @@ export const ControllerComponent = connect(["gamepad"], ({gamepad}: {gamepad: Co
 				{floatCell(axis.neutralValue)}
 				{floatCell(axis.minValue)}
 				{floatCell(axis.maxValue)}
-				{booleanCell(axis.dpad)}
 			</tr>
 		));
 		axesTable = (
@@ -61,7 +60,6 @@ export const ControllerComponent = connect(["gamepad"], ({gamepad}: {gamepad: Co
 						<th class="text-right">Neutral</th>
 						<th class="text-right">Min</th>
 						<th class="text-right">Max</th>
-						<th class="text-center">D-pad</th>
 					</tr>
 				</thead>
 				<tbody>

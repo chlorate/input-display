@@ -1,5 +1,3 @@
-export const dpadNeutralValue = -9 / 7;
-
 /**
  * When an axis is mapped to the d-pad and the absolute value is at least this,
  * then it is considered a button press.

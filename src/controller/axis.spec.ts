@@ -1,5 +1,4 @@
 import {Axis} from "./axis";
-import {dpadNeutralValue} from "./direction";
 
 describe("Axis", () => {
 	let axis;
@@ -36,25 +35,12 @@ describe("Axis", () => {
 		expect(axis.maxValue).toBe(1);
 	});
 
-	describe("dpad", () => {
-		it("should be true if axis has d-pad neutral value", () => {
-			axis.value = dpadNeutralValue;
-			expect(axis.dpad).toBe(true);
-		});
-
-		it("should be false for all other neutral values", () => {
-			axis.value = 0;
-			expect(axis.dpad).toBe(false);
-		});
-	});
-
 	it("can be calibrated", () => {
-		axis.value = dpadNeutralValue;
+		axis.value = 0.123;
 		rotate();
 		axis.calibrate();
 		expect(axis.minValue).toBeUndefined();
 		expect(axis.neutralValue).toBeUndefined();
 		expect(axis.maxValue).toBeUndefined();
-		expect(axis.dpad).toBe(false);
 	});
 });

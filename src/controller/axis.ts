@@ -1,12 +1,10 @@
 import {observable} from "mobx";
-import {dpadNeutralValue} from "./direction";
 
 export class Axis {
 	@observable private _value: number = 0;
 	@observable private _neutralValue?: number;
 	@observable private _minValue?: number;
 	@observable private _maxValue?: number;
-	@observable private _dpad: boolean = false;
 
 	get value(): number {
 		return this._value;
@@ -14,7 +12,6 @@ export class Axis {
 	set value(value: number) {
 		if (this._neutralValue === undefined) {
 			this._neutralValue = value;
-			this._dpad = value.toFixed(3) === dpadNeutralValue.toFixed(3);
 		}
 		if (this._minValue === undefined) {
 			this._minValue = value;
@@ -44,14 +41,9 @@ export class Axis {
 		return this._maxValue;
 	}
 
-	get dpad(): boolean {
-		return this._dpad;
-	}
-
 	public calibrate() {
 		this._minValue = undefined;
 		this._neutralValue = undefined;
 		this._maxValue = undefined;
-		this._dpad = false;
 	}
 }

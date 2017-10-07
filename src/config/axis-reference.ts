@@ -1,7 +1,7 @@
 import {observable} from "mobx";
 import {Axis} from "../controller/axis";
 import {Controller} from "../controller/controller";
-import {clampInt} from "../math";
+import {clampInt} from "../math/math";
 
 /**
  * A reference to a controller's axis by its index and if its value should be

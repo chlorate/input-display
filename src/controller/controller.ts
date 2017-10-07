@@ -1,6 +1,7 @@
 import {observable} from "mobx";
 import {Config} from "../config/config";
 import {getGamepads} from "../gamepad/service";
+import {almostEqual} from "../math/math";
 import {secondToMilliseconds} from "../time";
 import {Axis} from "./axis";
 import {Button} from "./button";
@@ -106,7 +107,7 @@ export class Controller {
 		const value = this.axes[this.config.dpadAxisIndex].value;
 		sortedDirections.forEach((direction) => {
 			const button = this.findOrCreateDpadButton(direction);
-			button.pressed = dpadAxisValues[direction].some((v) => v.toFixed(3) === value.toFixed(3));
+			button.pressed = dpadAxisValues[direction].some((v) => almostEqual(v, value));
 		});
 	}
 

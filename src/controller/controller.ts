@@ -4,9 +4,26 @@ import {getGamepads} from "../gamepad/service";
 import {secondToMilliseconds} from "../time";
 import {Axis} from "./axis";
 import {Button} from "./button";
-import {Direction, directionAxisValues, dpadAxisThreshold, orderedDirections} from "./direction";
+import {Direction, sortedDirections} from "./direction";
 import {DpadButton} from "./dpad-button";
 import {NormalButton} from "./normal-button";
+
+/**
+ * When the d-pad is mapped to a single axis, these are the axis values that
+ * correspond to a direction being pressed.
+ */
+const dpadAxisValues: {[id: string]: number[]} = {
+	[Direction.Up]: [1, -1, -5 / 7],
+	[Direction.Right]: [-5 / 7, -3 / 7, -1 / 7],
+	[Direction.Down]: [-1 / 7, 1 / 7, 3 / 7],
+	[Direction.Left]: [3 / 7, 5 / 7, 1],
+};
+
+/**
+ * When the d-pad is mapped to dual axes and an axis' absolute value is at least
+ * this, then a direction is considered pressed.
+ */
+const dpadAxisThreshold = 0.3;
 
 /**
  * Controller stores data and tracks statistics for a single controller. It
@@ -87,9 +104,9 @@ export class Controller {
 		}
 
 		const value = this.axes[this.config.dpadAxisIndex].value;
-		orderedDirections.forEach((direction) => {
+		sortedDirections.forEach((direction) => {
 			const button = this.findOrCreateDpadButton(direction);
-			button.pressed = directionAxisValues[direction].some((v) => v.toFixed(3) === value.toFixed(3));
+			button.pressed = dpadAxisValues[direction].some((v) => v.toFixed(3) === value.toFixed(3));
 		});
 	}
 

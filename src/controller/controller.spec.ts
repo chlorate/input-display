@@ -2,7 +2,7 @@ import {AxisReference} from "../config/axis-reference";
 import {Config} from "../config/config";
 import * as service from "../gamepad/service";
 import {Controller} from "./controller";
-import {orderedDirections} from "./direction";
+import {sortedDirections} from "./direction";
 
 describe("Controller", () => {
 	let config;
@@ -177,13 +177,13 @@ describe("Controller", () => {
 
 		function checkDpadButtonsExist() {
 			expect(controller.buttons.length).toBe(6);
-			orderedDirections.forEach((direction, i) => {
+			sortedDirections.forEach((direction, i) => {
 				expect(controller.buttons[i + 2].direction).toBe(direction);
 			});
 		}
 
 		function checkDpadButtonsPressed(pressed: boolean[]) {
-			orderedDirections.forEach((direction, i) => {
+			sortedDirections.forEach((direction, i) => {
 				expect(controller.buttons[i + 2].pressed).toBe(pressed[i]);
 			});
 		}

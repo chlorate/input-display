@@ -1,5 +1,5 @@
-import {Button} from "./button";
 import {secondToMilliseconds} from "../time";
+import {Button} from "./button";
 
 class TestButton extends Button {
 	get name(): string {

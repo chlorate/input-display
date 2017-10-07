@@ -1,25 +1,17 @@
 import {observable} from "mobx";
-import {clampInt} from "../math";
 import {secondToMilliseconds} from "../time";
 
-export class Button {
-	private _index: number;
+/**
+ * An abstract controller button. It has a unique name, can be pressed, and
+ * tracks statistics.
+ */
+export abstract class Button {
 	@observable private _pressed: boolean = false;
 	@observable private _presses: number = 0;
-	@observable private _pressTimes: number[] = [];
+	@observable private pressTimes: number[] = [];
 	@observable private _bestMashSpeed: number = 0;
 
-	constructor(index: number) {
-		this._index = clampInt(index, 0);
-	}
-
-	get name(): string {
-		return `Button ${this.index + 1}`;
-	}
-
-	get index(): number {
-		return this._index;
-	}
+	abstract get name(): string;
 
 	get pressed(): boolean {
 		return this._pressed;
@@ -27,12 +19,12 @@ export class Button {
 	set pressed(pressed: boolean) {
 		const now = window.performance.now();
 		if (pressed && !this.pressed) {
-			this._pressTimes.push(now);
+			this.pressTimes.push(now);
 			this._presses++;
 		}
 
 		const endTime = now - secondToMilliseconds;
-		this._pressTimes = this._pressTimes.filter((time) => time > endTime);
+		this.pressTimes = this.pressTimes.filter((time) => time > endTime);
 		this._bestMashSpeed = Math.max(this.mashSpeed, this._bestMashSpeed);
 
 		this._pressed = pressed;
@@ -43,7 +35,7 @@ export class Button {
 	}
 
 	get mashSpeed(): number {
-		return this._pressTimes.length;
+		return this.pressTimes.length;
 	}
 
 	get bestMashSpeed(): number {
@@ -52,7 +44,7 @@ export class Button {
 
 	public reset() {
 		this._presses = 0;
-		this._pressTimes = [];
+		this.pressTimes = [];
 		this._bestMashSpeed = 0;
 	}
 }

@@ -1,11 +1,17 @@
-import {secondToMilliseconds} from "../time";
 import {Button} from "./button";
+import {secondToMilliseconds} from "../time";
+
+class TestButton extends Button {
+	get name(): string {
+		return "";
+	}
+}
 
 describe("Button", () => {
 	let button;
 
 	beforeEach(() => {
-		button = new Button(123);
+		button = new TestButton();
 
 		let now = 0;
 		spyOn(window.performance, "now").and.callFake(() => {
@@ -20,15 +26,6 @@ describe("Button", () => {
 			button.pressed = false;
 		}
 	}
-
-	it("should not accept a negative index", () => {
-		button = new Button(-1);
-		expect(button.index).toBe(0);
-	});
-
-	it("should have a name", () => {
-		expect(button.name).toBe("Button 124");
-	});
 
 	describe("presses", () => {
 		it("should increment presses when pressed", () => {

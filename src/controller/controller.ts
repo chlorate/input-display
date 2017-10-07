@@ -6,6 +6,7 @@ import {Axis} from "./axis";
 import {Button} from "./button";
 import {Direction, directionAxisValues, dpadAxisThreshold, orderedDirections} from "./direction";
 import {DpadButton} from "./dpad-button";
+import {NormalButton} from "./normal-button";
 
 /**
  * Controller stores data and tracks statistics for a single controller. It
@@ -71,9 +72,9 @@ export class Controller {
 
 	private updateButtons(gamepad: Gamepad) {
 		gamepad.buttons.forEach((gamepadButton, i) => {
-			let button = this.buttons.find((b) => b instanceof Button && b.index === i);
+			let button = this.buttons.find((b) => b instanceof NormalButton && b.index === i);
 			if (!button) {
-				button = new Button(i);
+				button = new NormalButton(i);
 				this.buttons.push(button);
 			}
 			button.pressed = gamepadButton.pressed;
@@ -121,7 +122,7 @@ export class Controller {
 		// https://github.com/Microsoft/TypeScript/issues/18112
 		let button = this.buttons.find((b) => b instanceof DpadButton && b.direction === direction) as DpadButton | undefined;
 		if (!button) {
-			button = new DpadButton(0, direction);
+			button = new DpadButton(direction);
 			this.buttons.push(button);
 		}
 		return button;

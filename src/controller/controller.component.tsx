@@ -73,7 +73,7 @@ export const ControllerComponent = connect(["gamepad"], ({gamepad}: {gamepad: Co
 		<section>
 			<h2 class="h4">
 				Buttons
-				{gamepad.buttons.length &&
+				{gamepad.buttons.length > 0 &&
 					<button
 						class="btn btn-warning btn-sm float-right"
 						onClick={linkEvent(gamepad, handleClickResetButtons)}
@@ -86,7 +86,7 @@ export const ControllerComponent = connect(["gamepad"], ({gamepad}: {gamepad: Co
 
 			<h2 class="h4">
 				Axes
-				{gamepad.axes.length &&
+				{gamepad.axes.length > 0 &&
 					<button
 						class="btn btn-warning btn-sm float-right"
 						onClick={linkEvent(gamepad, handleClickResetAxes)}

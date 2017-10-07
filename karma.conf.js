@@ -6,6 +6,14 @@ module.exports = function(config) {
 	config.set({
 		frameworks: ["jasmine"],
 		reporters: ["junit", "progress"],
+		customLaunchers: {
+			// Until a headless option is added:
+			// https://github.com/karma-runner/karma-firefox-launcher/issues/76
+			FirefoxHeadless: {
+				base: "Firefox",
+				flags: ["-headless"],
+			},
+		},
 		files: [
 			"node_modules/mobx/lib/mobx.umd.js", // mobx fix
 			"src/**/*.spec.ts",
@@ -19,7 +27,6 @@ module.exports = function(config) {
 		junitReporter: {
 			outputDir: "junit/karma",
 			outputFile: "results.xml",
-			useBrowserName: false,
 		},
 		webpack: {
 			externals: ["mobx"], // mobx fix

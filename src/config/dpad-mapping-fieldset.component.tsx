@@ -60,16 +60,16 @@ export const DpadMappingFieldsetComponent = connect(["config", "gamepad"], (prop
 					onChange={linkEvent(props.config, handleIndexChange)}
 				/>
 			}
-			<div class="form-row form-row-dpad-dual-axes">
+			<div class="form-row">
 				{value === Mapping.DualAxes && [
 					<AxisReferenceSelectComponent
-						class="col-6"
+						class="col"
 						id="config-dpad-x-axis"
 						label="D-pad X axis"
 						reference={props.config.dpadXAxis}
 					/>,
 					<AxisReferenceSelectComponent
-						class="col-6"
+						class="col"
 						id="config-dpad-y-axis"
 						label="D-pad Y axis"
 						reference={props.config.dpadYAxis}

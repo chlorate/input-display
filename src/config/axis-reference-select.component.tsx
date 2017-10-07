@@ -11,7 +11,7 @@ interface Props {
 }
 
 export const AxisReferenceSelectComponent = connect((props: Props) => (
-	<div class={`form-group ${props.class ? props.class : ""}`}>
+	<div class={`form-group form-group-axis-reference ${props.class ? props.class : ""}`}>
 		<label for={props.id}>
 			{props.label}
 		</label>

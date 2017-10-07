@@ -9,3 +9,12 @@ main {
 	height: 100%;
 	overflow: hidden;
 }
+
+.scroll {
+	margin-bottom: $spacer;
+	overflow: auto;
+
+	> :last-child {
+		margin-bottom: 0;
+	}
+}

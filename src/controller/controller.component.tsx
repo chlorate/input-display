@@ -19,20 +19,22 @@ export const ControllerComponent = connect(["gamepad"], ({gamepad}: {gamepad: Co
 			</tr>
 		));
 		buttonTable = (
-			<table class="table table-bordered table-sm table-stats-buttons mb-4">
-				<thead>
-					<tr>
-						<th>Name</th>
-						<th class="text-center">Pressed</th>
-						<th class="text-right"># presses</th>
-						<th class="text-right">Mash speed</th>
-						<th class="text-right">Mash best</th>
-					</tr>
-				</thead>
-				<tbody>
-					{rows}
-				</tbody>
-			</table>
+			<div class="scroll">
+				<table class="table table-sm table-controller-buttons">
+					<thead>
+						<tr>
+							<th>Name</th>
+							<th class="text-center">Pressed</th>
+							<th class="text-right"># presses</th>
+							<th class="text-right">Mash speed</th>
+							<th class="text-right">Mash best</th>
+						</tr>
+					</thead>
+					<tbody>
+						{rows}
+					</tbody>
+				</table>
+			</div>
 		);
 	}
 
@@ -52,20 +54,22 @@ export const ControllerComponent = connect(["gamepad"], ({gamepad}: {gamepad: Co
 			</tr>
 		));
 		axesTable = (
-			<table class="table table-bordered table-sm table-stats-axes m-0">
-				<thead>
-					<tr>
-						<th>Name</th>
-						<th class="text-right">Value</th>
-						<th class="text-right">Neutral</th>
-						<th class="text-right">Min</th>
-						<th class="text-right">Max</th>
-					</tr>
-				</thead>
-				<tbody>
-					{rows}
-				</tbody>
-			</table>
+			<div class="scroll m-0">
+				<table class="table table-sm table-controller-axes">
+					<thead>
+						<tr>
+							<th>Name</th>
+							<th class="text-right">Value</th>
+							<th class="text-right">Neutral</th>
+							<th class="text-right">Min</th>
+							<th class="text-right">Max</th>
+						</tr>
+					</thead>
+					<tbody>
+						{rows}
+					</tbody>
+				</table>
+			</div>
 		);
 	}
 

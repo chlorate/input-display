@@ -1,5 +1,6 @@
 import {linkEvent} from "inferno";
 import {connect} from "inferno-mobx";
+import {formatNumber} from "../math/math";
 import {Controller} from "./controller";
 
 export const ControllerComponent = connect(["gamepad"], ({gamepad}: {gamepad: Controller}) => {
@@ -99,7 +100,7 @@ export const ControllerComponent = connect(["gamepad"], ({gamepad}: {gamepad: Co
 					{gamepad.timestamp !== undefined &&
 						<tr>
 							<th>Timestamp</th>
-							<td>{gamepad.timestamp}</td>
+							<td>{formatNumber(gamepad.timestamp)}</td>
 						</tr>
 					}
 				</table>,
@@ -153,7 +154,7 @@ function floatCell(value: number | undefined): any {
 function integerCell(value: number): any {
 	return (
 		<td class="text-right">
-			{value}
+			{formatNumber(value)}
 		</td>
 	);
 }

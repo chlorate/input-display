@@ -4,9 +4,13 @@ import {getGamepads} from "../gamepad/service";
 import {secondToMilliseconds} from "../time";
 import {Axis} from "./axis";
 import {Button} from "./button";
-import {Direction, directionAxisValues, orderedDirections} from "./direction";
+import {Direction, directionAxisValues, dpadAxisThreshold, orderedDirections} from "./direction";
 import {DpadButton} from "./dpad-button";
 
+/**
+ * Controller stores data and tracks statistics for a single controller. It
+ * continuously reads data from the Gamepad API.
+ */
 export class Controller {
 	private config: Config;
 	@observable private _axes: Axis[] = [];
@@ -53,6 +57,7 @@ export class Controller {
 		this.updateAxes(gamepad);
 		this.updateButtons(gamepad);
 		this.updateDpadSingleAxis(gamepad);
+		this.updateDpadDualAxes(gamepad);
 	}
 
 	private updateAxes(gamepad: Gamepad) {
@@ -85,6 +90,30 @@ export class Controller {
 			const button = this.findOrCreateDpadButton(direction);
 			button.pressed = directionAxisValues[direction].some((v) => v.toFixed(3) === value.toFixed(3));
 		});
+	}
+
+	private updateDpadDualAxes(gamepad: Gamepad) {
+		if (!this.config.dpadXAxis || !this.config.dpadYAxis) {
+			return;
+		}
+
+		const x = this.config.dpadXAxis.resolveValue(this);
+		const y = this.config.dpadYAxis.resolveValue(this);
+		if (x === undefined || y === undefined) {
+			return;
+		}
+
+		const up = this.findOrCreateDpadButton(Direction.Up);
+		up.pressed = y <= -dpadAxisThreshold;
+
+		const right = this.findOrCreateDpadButton(Direction.Right);
+		right.pressed = x >= dpadAxisThreshold;
+
+		const down = this.findOrCreateDpadButton(Direction.Down);
+		down.pressed = y >= dpadAxisThreshold;
+
+		const left = this.findOrCreateDpadButton(Direction.Left);
+		left.pressed = x <= -dpadAxisThreshold;
 	}
 
 	private findOrCreateDpadButton(direction: Direction): DpadButton {

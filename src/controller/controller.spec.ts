@@ -1,3 +1,4 @@
+import {AxisReference} from "../config/axis-reference";
 import {Config} from "../config/config";
 import * as service from "../gamepad/service";
 import {Controller} from "./controller";
@@ -77,10 +78,7 @@ describe("Controller", () => {
 			config.dpadAxisIndex = 1;
 			spyOnGetGamepads(gamepad);
 			controller.poll();
-			expect(controller.buttons.length).toBe(6);
-			orderedDirections.forEach((direction, i) => {
-				expect(controller.buttons[i + 2].direction).toBe(direction);
-			});
+			checkDpadButtonsExist();
 
 			const tests = [
 				{
@@ -123,10 +121,71 @@ describe("Controller", () => {
 			for (const test of tests) {
 				gamepad.axes[1] = test.value;
 				jasmine.clock().tick(20);
-				orderedDirections.forEach((direction, i) => {
-					expect(controller.buttons[i + 2].pressed).toBe(test.pressed[i]);
-				});
+				checkDpadButtonsPressed(test.pressed);
 			}
 		});
+
+		it("should not fail if single axis mapping points to missing axis", () => {
+			controller.dpadAxisIndex = 123;
+			spyOnGetGamepads(gamepad);
+			controller.poll();
+			expect(controller.buttons.length).toBe(2);
+		});
+
+		it("should update d-pad buttons if dual axes mapping is set", () => {
+			config.setDpadDualAxes(new AxisReference(0, false), new AxisReference(1, false));
+			spyOnGetGamepads(gamepad);
+			controller.poll();
+			checkDpadButtonsExist();
+
+			const tests = [
+				{
+					x: 0, y: 0,
+					pressed: [false, false, false, false],
+				},
+				{
+					x: 0, y: -1,
+					pressed: [true, false, false, false],
+				},
+				{
+					x: 1, y: 0,
+					pressed: [false, true, false, false],
+				},
+				{
+					x: 0, y: 1,
+					pressed: [false, false, true, false],
+				},
+				{
+					x: -1, y: 0,
+					pressed: [false, false, false, true],
+				},
+			];
+			for (const test of tests) {
+				gamepad.axes[0] = test.x;
+				gamepad.axes[1] = test.y;
+				jasmine.clock().tick(20);
+				checkDpadButtonsPressed(test.pressed);
+			}
+		});
+
+		it("should not fail if dual axes mapping points to missing axes", () => {
+			config.setDpadDualAxes(new AxisReference(8, false), new AxisReference(9, false));
+			spyOnGetGamepads(gamepad);
+			controller.poll();
+			expect(controller.buttons.length).toBe(2);
+		});
+
+		function checkDpadButtonsExist() {
+			expect(controller.buttons.length).toBe(6);
+			orderedDirections.forEach((direction, i) => {
+				expect(controller.buttons[i + 2].direction).toBe(direction);
+			});
+		}
+
+		function checkDpadButtonsPressed(pressed: boolean[]) {
+			orderedDirections.forEach((direction, i) => {
+				expect(controller.buttons[i + 2].pressed).toBe(pressed[i]);
+			});
+		}
 	});
 });

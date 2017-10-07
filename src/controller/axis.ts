@@ -28,12 +28,16 @@ export class Axis {
 		this._maxValue = Math.max(this._maxValue, value);
 	}
 
-	get minValue(): number | undefined {
-		return this._minValue;
+	get invertedValue(): number {
+		return -this.value;
 	}
 
 	get neutralValue(): number | undefined {
 		return this._neutralValue;
+	}
+
+	get minValue(): number | undefined {
+		return this._minValue;
 	}
 
 	get maxValue(): number | undefined {

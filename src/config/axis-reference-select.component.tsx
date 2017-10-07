@@ -25,7 +25,7 @@ export const AxisReferenceSelectComponent = connect((props: Props) => (
 				<input
 					type="checkbox"
 					class="mr-1"
-					checked={props.reference.invert}
+					checked={props.reference.inverted}
 					onClick={linkEvent(props.reference, handleInvertChange)}
 				/> Invert
 			</label>
@@ -38,5 +38,5 @@ function handleIndexChange(reference: AxisReference, event) {
 }
 
 function handleInvertChange(reference: AxisReference, event) {
-	reference.invert = event.target.checked;
+	reference.inverted = event.target.checked;
 }

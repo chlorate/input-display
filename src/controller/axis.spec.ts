@@ -15,6 +15,11 @@ describe("Axis", () => {
 		axis.value = 0;
 	}
 
+	it("can return its inverted value", () => {
+		axis.value = 0.123;
+		expect(axis.invertedValue).toBe(-0.123);
+	});
+
 	it("should store first value as neutral value", () => {
 		axis.value = 0.123;
 		rotate();

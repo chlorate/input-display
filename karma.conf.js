@@ -4,7 +4,7 @@ const webpack = require("webpack");
 // https://github.com/mobxjs/mobx/issues/1097#issuecomment-323698853
 module.exports = function(config) {
 	config.set({
-		frameworks: ["es6-shim", "jasmine"],
+		frameworks: ["jasmine"],
 		reporters: ["junit", "progress"],
 		files: [
 			"node_modules/mobx/lib/mobx.umd.js", // mobx fix

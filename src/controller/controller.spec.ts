@@ -50,8 +50,9 @@ describe("Controller", () => {
 			spyOnGetGamepads(gamepad);
 			controller.poll();
 			expect(controller.axes.length).toBe(2);
-			expect(controller.axes[0].value).toBe(0.1);
-			expect(controller.axes[1].value).toBe(0.2);
+			[0.1, 0.2].forEach((value, i) => {
+				expect(controller.axes[i].value).toBe(value);
+			});
 
 			gamepad.axes[0] = 0.3;
 			jasmine.clock().tick(20);
@@ -62,10 +63,10 @@ describe("Controller", () => {
 			spyOnGetGamepads(gamepad);
 			controller.poll();
 			expect(controller.buttons.length).toBe(2);
-			expect(controller.buttons[0].index).toBe(0);
-			expect(controller.buttons[0].pressed).toBe(false);
-			expect(controller.buttons[1].index).toBe(1);
-			expect(controller.buttons[1].pressed).toBe(true);
+			[false, true].forEach((pressed, i) => {
+				expect(controller.buttons[i].index).toBe(i);
+				expect(controller.buttons[i].pressed).toBe(pressed);
+			});
 
 			gamepad.buttons[0].pressed = true;
 			jasmine.clock().tick(20);

@@ -87,8 +87,10 @@ export class Controller {
 		});
 	}
 
-	private findOrCreateDpadButton(direction: Direction) {
-		let button = this.buttons.find((b) => b instanceof DpadButton && b.direction === direction);
+	private findOrCreateDpadButton(direction: Direction): DpadButton {
+		// TODO: Array.find doesn't consider type guards:
+		// https://github.com/Microsoft/TypeScript/issues/18112
+		let button = this.buttons.find((b) => b instanceof DpadButton && b.direction === direction) as DpadButton | undefined;
 		if (!button) {
 			button = new DpadButton(0, direction);
 			this.buttons.push(button);

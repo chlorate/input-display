@@ -23,10 +23,8 @@ export abstract class Button {
 			this._presses++;
 		}
 
-		const endTime = now - secondToMilliseconds;
-		this.pressTimes = this.pressTimes.filter((time) => time > endTime);
+		this.prunePressTimes(now - secondToMilliseconds);
 		this._bestMashSpeed = Math.max(this.mashSpeed, this._bestMashSpeed);
-
 		this._pressed = pressed;
 	}
 
@@ -46,5 +44,14 @@ export abstract class Button {
 		this._presses = 0;
 		this.pressTimes = [];
 		this._bestMashSpeed = 0;
+	}
+
+	/**
+	 * Remove all press timestamps that are older than a certain time.
+	 */
+	private prunePressTimes(endTime: number) {
+		while (this.pressTimes.length > 0 && this.pressTimes[0] <= endTime) {
+			this.pressTimes.shift();
+		}
 	}
 }

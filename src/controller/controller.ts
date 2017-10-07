@@ -46,6 +46,10 @@ export class Controller {
 		}
 
 		const gamepad = gamepads[this.config.gamepadIndex];
+		if (!gamepad) {
+			return;
+		}
+
 		this.updateAxes(gamepad);
 		this.updateButtons(gamepad);
 		this.updateDpadSingleAxis(gamepad);

@@ -16,7 +16,6 @@ describe("Controller", () => {
 			buttons: [{pressed: false}, {pressed: true}],
 		};
 
-		spyOn(service, "getGamepads").and.returnValue([gamepad]);
 		jasmine.clock().install();
 	});
 
@@ -24,9 +23,14 @@ describe("Controller", () => {
 		jasmine.clock().uninstall();
 	});
 
+	function spyOnGetGamepads(value: Gamepad | null) {
+		spyOn(service, "getGamepads").and.returnValue([value]);
+	}
+
 	describe("poll", () => {
 		it("should update according to the poll rate", () => {
 			config.pollRate = 1;
+			spyOnGetGamepads(gamepad);
 			controller.poll();
 			expect(service.getGamepads).toHaveBeenCalledTimes(1);
 			jasmine.clock().tick(900);
@@ -35,7 +39,15 @@ describe("Controller", () => {
 			expect(service.getGamepads).toHaveBeenCalledTimes(2);
 		});
 
+		it("should do nothing if no gamepad is found", () => {
+			spyOnGetGamepads(null);
+			controller.poll();
+			expect(controller.axes.length).toBe(0);
+			expect(controller.buttons.length).toBe(0);
+		});
+
 		it("should update axes", () => {
+			spyOnGetGamepads(gamepad);
 			controller.poll();
 			expect(controller.axes.length).toBe(2);
 			expect(controller.axes[0].value).toBe(0.1);
@@ -47,6 +59,7 @@ describe("Controller", () => {
 		});
 
 		it("should update buttons", () => {
+			spyOnGetGamepads(gamepad);
 			controller.poll();
 			expect(controller.buttons.length).toBe(2);
 			expect(controller.buttons[0].index).toBe(0);
@@ -61,6 +74,7 @@ describe("Controller", () => {
 
 		it("should update d-pad buttons if single axis mapping is set", () => {
 			config.dpadAxisIndex = 1;
+			spyOnGetGamepads(gamepad);
 			controller.poll();
 			expect(controller.buttons.length).toBe(6);
 			orderedDirections.forEach((direction, i) => {

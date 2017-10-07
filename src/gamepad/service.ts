@@ -2,7 +2,7 @@ const aliases: {[id: string]: string} = {
 	"Unknown Gamepad (Vendor: 057e Product: 0306)": "Wii Remote",
 };
 
-export function getGamepads(): Gamepad[] {
+export function getGamepads(): Array<Gamepad | null> {
 	return navigator.getGamepads();
 }
 

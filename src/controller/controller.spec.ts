@@ -37,6 +37,22 @@ describe("Controller", () => {
 		expect(controller.alias).toBe("Wii Remote");
 	});
 
+	it("can reset axes", () => {
+		spyOn(service, "getGamepads").and.returnValue([gamepad]);
+		controller.poll();
+		gamepad.axes.pop();
+		controller.resetAxes();
+		expect(controller.axes.length).toBe(1);
+	});
+
+	it("can reset buttons", () => {
+		spyOn(service, "getGamepads").and.returnValue([gamepad]);
+		controller.poll();
+		gamepad.buttons.pop();
+		controller.resetButtons();
+		expect(controller.buttons.length).toBe(1);
+	});
+
 	describe("poll", () => {
 		it("should update according to the poll rate", () => {
 			config.pollRate = 1;

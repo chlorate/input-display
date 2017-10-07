@@ -71,17 +71,29 @@ export const ControllerComponent = connect(["gamepad"], ({gamepad}: {gamepad: Co
 
 	return (
 		<section>
-			<button class="btn btn-danger mb-4" onClick={linkEvent(gamepad, reset)}>
-				Reset
-			</button>
-
-			<h2 class="h5">
+			<h2 class="h4">
 				Buttons
+				{gamepad.buttons.length &&
+					<button
+						class="btn btn-warning btn-sm float-right"
+						onClick={linkEvent(gamepad, handleClickResetButtons)}
+					>
+						Reset
+					</button>
+				}
 			</h2>
 			{buttonTable}
 
-			<h2 class="h5">
+			<h2 class="h4">
 				Axes
+				{gamepad.axes.length &&
+					<button
+						class="btn btn-warning btn-sm float-right"
+						onClick={linkEvent(gamepad, handleClickResetAxes)}
+					>
+						Reset
+					</button>
+				}
 			</h2>
 			{axesTable}
 		</section>
@@ -112,7 +124,10 @@ function integerCell(value: number): any {
 	);
 }
 
-function reset(controller: Controller) {
+function handleClickResetButtons(controller: Controller) {
 	controller.resetButtons();
+}
+
+function handleClickResetAxes(controller: Controller) {
 	controller.resetAxes();
 }

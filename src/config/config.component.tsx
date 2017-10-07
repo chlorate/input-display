@@ -20,7 +20,7 @@ export const ConfigComponent = connect(["config"], ({config}: Props) => (
 			</button>
 		</div>
 
-		<h2 class="h5">
+		<h2 class="h4">
 			Controller
 		</h2>
 		<DeviceSelectComponent />

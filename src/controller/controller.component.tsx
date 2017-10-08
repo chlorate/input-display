@@ -14,10 +14,13 @@ interface Props {
  */
 export const ControllerComponent = connect(["gamepad"], ({gamepad}: Props) => (
 	<section>
+		<h2 class="h4">
+			Device
+		</h2>
+		{gamepad.id === undefined &&
+			<p>Not connected.</p>
+		}
 		{gamepad.id !== undefined && [
-			<h2 class="h4">
-				Device
-			</h2>,
 			<table class="table table-sm table-controller-general">
 				<tr>
 					<th>ID</th>
@@ -50,9 +53,7 @@ export const ControllerComponent = connect(["gamepad"], ({gamepad}: Props) => (
 			}
 		</h2>
 		{!gamepad.buttons.length &&
-			<p class="mb-4">
-				No buttons detected.
-			</p>
+			<p>No buttons detected.</p>
 		}
 		{gamepad.buttons.length > 0 &&
 			<div class="scroll">
@@ -85,9 +86,7 @@ export const ControllerComponent = connect(["gamepad"], ({gamepad}: Props) => (
 			}
 		</h2>
 		{!gamepad.axes.length &&
-			<p class="m-0">
-				No axes detected.
-			</p>
+			<p class="m-0">No axes detected.</p>
 		}
 		{gamepad.axes.length > 0 &&
 			<div class="scroll m-0">

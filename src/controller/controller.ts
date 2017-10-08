@@ -37,6 +37,7 @@ export class Controller {
 	@observable private _axes: Axis[] = [];
 	@observable private _buttons: Button[] = [];
 	private timeout?: number;
+	private sorted: boolean = true;
 
 	constructor(config: Config) {
 		this.config = config;
@@ -117,6 +118,7 @@ export class Controller {
 		this.updateButtons(gamepad);
 		this.updateDpadSingleAxis(gamepad);
 		this.updateDpadDualAxes(gamepad);
+		this.sortButtons();
 	}
 
 	private clearGamepad() {
@@ -140,13 +142,25 @@ export class Controller {
 
 	private updateButtons(gamepad: Gamepad) {
 		gamepad.buttons.forEach((gamepadButton, i) => {
-			let button = this.buttons.find((b) => b instanceof NormalButton && b.index === i);
-			if (!button) {
-				button = new NormalButton(i);
-				this.buttons.push(button);
-			}
+			const button = this.findOrCreateNormalButton(i);
 			button.pressed = gamepadButton.pressed;
 		});
+	}
+
+	/**
+	 * Finds and returns the normal button having a certain index, creating it
+	 * if necessary.
+	 */
+	private findOrCreateNormalButton(index: number): NormalButton {
+		// TODO: Array.find doesn't consider type guards:
+		// https://github.com/Microsoft/TypeScript/issues/18112
+		let button = this.buttons.find((b) => b instanceof NormalButton && b.index === index) as NormalButton | undefined;
+		if (!button) {
+			button = new NormalButton(index);
+			this.buttons.push(button);
+			this.sorted = false;
+		}
+		return button;
 	}
 
 	private updateDpadSingleAxis(gamepad: Gamepad) {
@@ -185,6 +199,10 @@ export class Controller {
 		left.pressed = x <= -dpadAxisThreshold;
 	}
 
+	/**
+	 * Finds and returns the d-pad button having a certain direction, creating
+	 * it if necessary.
+	 */
 	private findOrCreateDpadButton(direction: Direction): DpadButton {
 		// TODO: Array.find doesn't consider type guards:
 		// https://github.com/Microsoft/TypeScript/issues/18112
@@ -192,7 +210,34 @@ export class Controller {
 		if (!button) {
 			button = new DpadButton(direction);
 			this.buttons.push(button);
+			this.sorted = false;
 		}
 		return button;
+	}
+
+	/**
+	 * Sorts the buttons if a new button was recently added. Normal buttons
+	 * first sorted by index, then d-pad buttons sorted by direction.
+	 */
+	private sortButtons(): void {
+		if (this.sorted) {
+			return;
+		}
+
+		// TODO: mobx doesn't sort arrays in-place. Might change in future:
+		// https://github.com/mobxjs/mobx/issues/1076
+		this._buttons = this.buttons.sort((x: Button, y: Button): number => {
+			if (x instanceof NormalButton && y instanceof NormalButton) {
+				return x.index - y.index;
+			} else if (x instanceof DpadButton && y instanceof DpadButton) {
+				return sortedDirections.indexOf(x.direction) - sortedDirections.indexOf(y.direction);
+			} else if (x instanceof NormalButton) {
+				return -1;
+			} else if (x instanceof DpadButton) {
+				return 1;
+			}
+			return 0;
+		});
+		this.sorted = true;
 	}
 }

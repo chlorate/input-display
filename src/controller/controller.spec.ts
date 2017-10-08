@@ -229,5 +229,22 @@ describe("Controller", () => {
 				expect(controller.buttons[i + 2].pressed).toBe(pressed[i]);
 			});
 		}
+
+		it("should sort buttons if new buttons are detected", () => {
+			config.dpadAxisIndex = 1;
+			spyOn(service, "getGamepads").and.returnValue([gamepad]);
+			controller.poll();
+			gamepad.buttons.push({pressed: false});
+			jasmine.clock().tick(20);
+			expect(controller.buttons.map((button) => button.name)).toEqual([
+				"Button 1",
+				"Button 2",
+				"Button 3",
+				"D-pad up",
+				"D-pad right",
+				"D-pad down",
+				"D-pad left",
+			]);
+		});
 	});
 });

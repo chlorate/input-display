@@ -1,5 +1,5 @@
 import {observable} from "mobx";
-import {secondToMilliseconds} from "../time";
+import {secondToMilliseconds} from "../time/const";
 
 /**
  * An abstract controller button. It has a unique name, can be pressed, and

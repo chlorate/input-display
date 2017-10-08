@@ -1,4 +1,4 @@
-import {secondToMilliseconds} from "../time";
+import {secondToMilliseconds} from "../time/const";
 import {Button} from "./button";
 
 class TestButton extends Button {

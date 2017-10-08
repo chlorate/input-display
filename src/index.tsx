@@ -2,7 +2,7 @@ import {render} from "inferno";
 import {Provider} from "inferno-mobx";
 import {Config} from "./config/config";
 import {Controller} from "./controller/controller";
-import {GamepadComponent} from "./gamepad.component";
+import {GamepadComponent} from "./display/gamepad.component";
 import {MenuComponent} from "./menu/menu.component";
 
 const config = new Config();

@@ -1,5 +1,5 @@
 import {observable} from "mobx";
-import {clampInt} from "../math/math";
+import {clampInt} from "../math/util";
 import {AxisReference} from "./axis-reference";
 
 // 4 ms is the smallest delay:

@@ -1,4 +1,4 @@
-import {almostEqual, clampInt, formatNumber} from "./math";
+import {almostEqual, clampInt, formatNumber} from "./util";
 
 describe("almostEqual", () => {
 	it("should compare numbers correctly", () => {

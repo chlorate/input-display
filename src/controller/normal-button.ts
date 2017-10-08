@@ -1,4 +1,4 @@
-import {clampInt} from "../math/math";
+import {clampInt} from "../math/util";
 import {Button} from "./button";
 
 /**

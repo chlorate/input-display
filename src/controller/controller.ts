@@ -1,8 +1,8 @@
 import {observable} from "mobx";
 import {Config} from "../config/config";
 import {aliases, getGamepads} from "../gamepad/service";
-import {almostEqual} from "../math/math";
-import {secondToMilliseconds} from "../time";
+import {almostEqual} from "../math/util";
+import {secondToMilliseconds} from "../time/const";
 import {Axis} from "./axis";
 import {Button} from "./button";
 import {Direction, sortedDirections} from "./direction";

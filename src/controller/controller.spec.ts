@@ -116,13 +116,18 @@ describe("Controller", () => {
 			expect(controller.buttons[0].pressed).toBe(true);
 		});
 
-		it("should update d-pad buttons if single axis mapping is set", () => {
-			config.dpadAxisIndex = 1;
-			spyOn(service, "getGamepads").and.returnValue([gamepad]);
-			controller.poll();
-			checkDpadButtonsExist();
+		describe("when the d-pad mapping is single axis", () => {
+			beforeEach(() => {
+				config.dpadAxisIndex = 1;
+				spyOn(service, "getGamepads").and.returnValue([gamepad]);
+				controller.poll();
+			});
 
-			const tests = [
+			it("should have created d-pad buttons", () => {
+				checkDpadButtonsExist();
+			});
+
+			[
 				{
 					value: 0,
 					pressed: [false, false, false, false],
@@ -159,12 +164,13 @@ describe("Controller", () => {
 					value: 1,
 					pressed: [true, false, false, true],
 				},
-			];
-			for (const test of tests) {
-				gamepad.axes[1] = test.value;
-				jasmine.clock().tick(20);
-				checkDpadButtonsPressed(test.pressed);
-			}
+			].forEach((test) => {
+				it(`should have expected directions pressed when axis value is ${test.value}`, () => {
+					gamepad.axes[1] = test.value;
+					jasmine.clock().tick(20);
+					checkDpadButtonsPressed(test.pressed);
+				});
+			});
 		});
 
 		it("should not fail if single axis mapping points to missing axis", () => {
@@ -174,13 +180,18 @@ describe("Controller", () => {
 			expect(controller.buttons.length).toBe(2);
 		});
 
-		it("should update d-pad buttons if dual axes mapping is set", () => {
-			config.setDpadDualAxes(new AxisReference(0, false), new AxisReference(1, false));
-			spyOn(service, "getGamepads").and.returnValue([gamepad]);
-			controller.poll();
-			checkDpadButtonsExist();
+		describe("when the d-pad mapping is dual axes", () => {
+			beforeEach(() => {
+				config.setDpadDualAxes(new AxisReference(0, false), new AxisReference(1, false));
+				spyOn(service, "getGamepads").and.returnValue([gamepad]);
+				controller.poll();
+			});
 
-			const tests = [
+			it("should have created d-pad buttons", () => {
+				checkDpadButtonsExist();
+			});
+
+			[
 				{
 					x: 0, y: 0,
 					pressed: [false, false, false, false],
@@ -201,13 +212,14 @@ describe("Controller", () => {
 					x: -1, y: 0,
 					pressed: [false, false, false, true],
 				},
-			];
-			for (const test of tests) {
-				gamepad.axes[0] = test.x;
-				gamepad.axes[1] = test.y;
-				jasmine.clock().tick(20);
-				checkDpadButtonsPressed(test.pressed);
-			}
+			].forEach((test) => {
+				it(`should have expected directions pressed when axis values are (${test.x}, ${test.y})`, () => {
+					gamepad.axes[0] = test.x;
+					gamepad.axes[1] = test.y;
+					jasmine.clock().tick(20);
+					checkDpadButtonsPressed(test.pressed);
+				});
+			});
 		});
 
 		it("should not fail if dual axes mapping points to missing axes", () => {

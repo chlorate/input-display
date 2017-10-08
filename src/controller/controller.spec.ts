@@ -24,6 +24,7 @@ describe("Controller", () => {
 	});
 
 	afterEach(() => {
+		controller.stopPoll();
 		jasmine.clock().uninstall();
 	});
 

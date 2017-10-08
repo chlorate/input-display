@@ -37,6 +37,7 @@ export class Controller {
 	@observable private _timestamp?: number;
 	@observable private _axes: Axis[] = [];
 	@observable private _buttons: Button[] = [];
+	private timeout?: number;
 
 	constructor(config: Config) {
 		this.config = config;
@@ -76,9 +77,23 @@ export class Controller {
 		this.update();
 	}
 
+	/**
+	 * Starts periodically reading the Gamepad API for data and updating the
+	 * state of the controller. The poll rate setting determines how often this
+	 * happens.
+	 */
 	public poll() {
 		this.update();
-		setTimeout(() => this.poll(), secondToMilliseconds / this.config.pollRate);
+		this.timeout = setTimeout(() => this.poll(), secondToMilliseconds / this.config.pollRate);
+	}
+
+	/**
+	 * Stops polling the Gamepad API.
+	 */
+	public stopPoll() {
+		if (this.timeout !== undefined) {
+			clearTimeout(this.timeout);
+		}
 	}
 
 	private update() {

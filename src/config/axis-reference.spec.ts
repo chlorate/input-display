@@ -18,6 +18,10 @@ describe("AxisReference", () => {
 		controller.poll();
 	});
 
+	afterEach(() => {
+		controller.stopPoll();
+	});
+
 	it("should not accept a negative index", () => {
 		reference.index = -1;
 		expect(reference.index).toBe(0);

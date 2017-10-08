@@ -1,7 +1,12 @@
 import {connect} from "inferno-mobx";
 import {Controller} from "./controller/controller";
+import {Store} from "./mobx/store";
 
-export const GamepadComponent = connect(["gamepad"], ({gamepad}: {gamepad: Controller}) => {
+interface Props {
+	controller: Controller;
+}
+
+export const GamepadComponent = connect([Store.Controller], ({controller}: Props) => {
 	return (
 		<div class="gamepad">
 			<div class="d-flex">

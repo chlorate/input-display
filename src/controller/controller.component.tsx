@@ -1,41 +1,42 @@
 import {linkEvent} from "inferno";
 import {connect} from "inferno-mobx";
+import {Store} from "../mobx/store";
 import {AxisRowComponent} from "./axis-row.component";
 import {ButtonRowComponent} from "./button-row.component";
 import {Controller} from "./controller";
 
 interface Props {
-	gamepad: Controller;
+	controller: Controller;
 }
 
 /**
  * Contents of the Controller tab. It displays information about the controller,
  * buttons, and axes.
  */
-export const ControllerComponent = connect(["gamepad"], ({gamepad}: Props) => (
+export const ControllerComponent = connect([Store.Controller], ({controller}: Props) => (
 	<section>
 		<h2 class="h4">
 			Device
 		</h2>
-		{gamepad.id === undefined &&
+		{controller.id === undefined &&
 			<p>Not connected.</p>
 		}
-		{gamepad.id !== undefined && [
+		{controller.id !== undefined && [
 			<table class="table table-sm table-controller-general">
 				<tr>
 					<th>ID</th>
-					<td>{gamepad.id}</td>
+					<td>{controller.id}</td>
 				</tr>
-				{gamepad.alias !== undefined &&
+				{controller.alias !== undefined &&
 					<tr>
 						<th>Alias</th>
-						<td>{gamepad.alias}</td>
+						<td>{controller.alias}</td>
 					</tr>
 				}
-				{gamepad.mapping !== undefined &&
+				{controller.mapping !== undefined &&
 					<tr>
 						<th>Mapping</th>
-						<td>{gamepad.mapping === "" ? <span class="text-muted">None</span> : gamepad.mapping}</td>
+						<td>{controller.mapping === "" ? <span class="text-muted">None</span> : controller.mapping}</td>
 					</tr>
 				}
 			</table>,
@@ -43,19 +44,19 @@ export const ControllerComponent = connect(["gamepad"], ({gamepad}: Props) => (
 
 		<h2 class="h4">
 			Buttons
-			{gamepad.buttons.length > 0 &&
+			{controller.buttons.length > 0 &&
 				<button
 					class="btn btn-warning btn-sm float-right"
-					onClick={linkEvent(gamepad, handleClickResetButtons)}
+					onClick={linkEvent(controller, handleClickResetButtons)}
 				>
 					Reset
 				</button>
 			}
 		</h2>
-		{!gamepad.buttons.length &&
+		{!controller.buttons.length &&
 			<p>No buttons detected.</p>
 		}
-		{gamepad.buttons.length > 0 &&
+		{controller.buttons.length > 0 &&
 			<div class="scroll">
 				<table class="table table-sm table-controller-buttons">
 					<thead>
@@ -68,7 +69,7 @@ export const ControllerComponent = connect(["gamepad"], ({gamepad}: Props) => (
 						</tr>
 					</thead>
 					<tbody>
-						{gamepad.buttons.map((button) => <ButtonRowComponent button={button} />)}
+						{controller.buttons.map((button) => <ButtonRowComponent button={button} />)}
 					</tbody>
 				</table>
 			</div>
@@ -76,19 +77,19 @@ export const ControllerComponent = connect(["gamepad"], ({gamepad}: Props) => (
 
 		<h2 class="h4">
 			Axes
-			{gamepad.axes.length > 0 &&
+			{controller.axes.length > 0 &&
 				<button
 					class="btn btn-warning btn-sm float-right"
-					onClick={linkEvent(gamepad, handleClickResetAxes)}
+					onClick={linkEvent(controller, handleClickResetAxes)}
 				>
 					Reset
 				</button>
 			}
 		</h2>
-		{!gamepad.axes.length &&
+		{!controller.axes.length &&
 			<p class="m-0">No axes detected.</p>
 		}
-		{gamepad.axes.length > 0 &&
+		{controller.axes.length > 0 &&
 			<div class="scroll m-0">
 				<table class="table table-sm table-controller-axes">
 					<thead>
@@ -101,7 +102,7 @@ export const ControllerComponent = connect(["gamepad"], ({gamepad}: Props) => (
 						</tr>
 					</thead>
 					<tbody>
-						{gamepad.axes.map((axis, i) => <AxisRowComponent axis={axis} index={i} />)}
+						{controller.axes.map((axis, i) => <AxisRowComponent axis={axis} index={i} />)}
 					</tbody>
 				</table>
 			</div>

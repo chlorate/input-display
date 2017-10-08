@@ -32,7 +32,7 @@ const IndexComponent = () => {
 };
 
 render(
-	<Provider config={config} gamepad={controller}>
+	<Provider config={config} controller={controller}>
 		<IndexComponent />
 	</Provider>,
 	document.getElementsByTagName("main")[0],

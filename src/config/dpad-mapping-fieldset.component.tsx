@@ -1,6 +1,7 @@
 import {linkEvent} from "inferno";
 import {connect} from "inferno-mobx";
 import {Controller} from "../controller/controller";
+import {Store} from "../mobx/store";
 import {AxisIndexSelectComponent} from "./axis-index-select.component";
 import {AxisReference} from "./axis-reference";
 import {AxisReferenceSelectComponent} from "./axis-reference-select.component";
@@ -17,10 +18,10 @@ enum Mapping {
 
 interface Props {
 	config: Config;
-	gamepad: Controller;
+	controller: Controller;
 }
 
-export const DpadMappingFieldsetComponent = connect(["config", "gamepad"], (props: Props) => {
+export const DpadMappingFieldsetComponent = connect([Store.Config, Store.Controller], (props: Props) => {
 	let value = Mapping.Buttons;
 	if (props.config.dpadAxisIndex !== undefined) {
 		value = Mapping.SingleAxis;
@@ -87,7 +88,7 @@ function handleMappingChange(props: Props, event) {
 			break;
 		case Mapping.SingleAxis:
 			// Usually it is the last axis.
-			props.config.dpadAxisIndex = props.gamepad.axes.length - 1;
+			props.config.dpadAxisIndex = props.controller.axes.length - 1;
 			break;
 		case Mapping.DualAxes:
 			props.config.setDpadDualAxes(

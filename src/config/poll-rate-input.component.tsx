@@ -1,12 +1,13 @@
 import {linkEvent} from "inferno";
 import {connect} from "inferno-mobx";
+import {Store} from "../mobx/store";
 import {Config, maxPollRate, minPollRate} from "./config";
 
 interface Props {
 	config: Config;
 }
 
-export const PollRateInputComponent = connect(["config"], ({config}: Props) => (
+export const PollRateInputComponent = connect([Store.Config], ({config}: Props) => (
 	<div class="form-group mb-0">
 		<label for="config-poll-rate">
 			Poll rate

@@ -3,6 +3,7 @@ import Component from "inferno-component";
 import {connect} from "inferno-mobx";
 import {arraysEqual} from "../array";
 import {getGamepadIds} from "../gamepad/service";
+import {Store} from "../mobx/store";
 import {secondToMilliseconds} from "../time";
 import {Config} from "./config";
 
@@ -16,7 +17,7 @@ interface State {
 	ids: Array<string | undefined>;
 }
 
-@connect(["config"])
+@connect([Store.Config])
 export class DeviceSelectComponent extends Component<Props, State> {
 	public state = {ids: []};
 	private interval?: number;

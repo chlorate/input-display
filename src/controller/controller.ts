@@ -79,6 +79,14 @@ export class Controller {
 	 */
 	public poll() {
 		this.update();
+
+		// setTimeout drifts a bit. Set the delay so the next call happens at
+		// a multiple of the poll rate. For example, if the poll rate is 60 Hz
+		// and this current call happened 1/3 through a frame, set the delay to
+		// 2/3 of a frame so the next call approximately happens at the
+		// beginning of the next frame.
+		let delay = secondToMilliseconds / this.config.pollRate;
+		delay = delay - window.performance.now() % delay;
 		this.timeout = setTimeout(() => this.poll(), secondToMilliseconds / this.config.pollRate);
 	}
 

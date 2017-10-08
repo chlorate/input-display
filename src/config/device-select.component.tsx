@@ -17,12 +17,16 @@ interface State {
 	ids: Array<string | undefined>;
 }
 
+/**
+ * A field for selecting which gamepad ("device") to read inputs from. This
+ * watches for any gamepad connects or disconnects and updates itself.
+ */
 @connect([Store.Config])
 export class DeviceSelectComponent extends Component<Props, State> {
-	public state = {ids: []};
+	public state: State = {ids: []};
 	private interval?: number;
 
-	public componentDidMount() {
+	public componentDidMount(): void {
 		// There are connect and disconnect events, but they are unreliable.
 		// Chrome (as of v61) doesn't fire the connect event in all cases. It
 		// will fire it on page load, but not when controllers are connected
@@ -31,13 +35,13 @@ export class DeviceSelectComponent extends Component<Props, State> {
 		this.interval = setInterval(() => this.updateNames(), secondToMilliseconds);
 	}
 
-	public componentWillUnmount() {
+	public componentWillUnmount(): void {
 		if (this.interval !== undefined) {
 			clearInterval(this.interval);
 		}
 	}
 
-	public shouldComponentUpdate(nextProps: Props, nextState: State) {
+	public shouldComponentUpdate(nextProps: Props, nextState: State): boolean {
 		return !arraysEqual(this.state.ids, nextState.ids);
 	}
 
@@ -60,7 +64,7 @@ export class DeviceSelectComponent extends Component<Props, State> {
 		);
 	}
 
-	private updateNames() {
+	private updateNames(): void {
 		this.setState({ids: getGamepadIds()});
 	}
 
@@ -78,6 +82,6 @@ export class DeviceSelectComponent extends Component<Props, State> {
 	}
 }
 
-function handleChange(config: Config, event) {
+function handleChange(config: Config, event): void {
 	config.gamepadIndex = event.target.value;
 }

@@ -110,10 +110,10 @@ export const ControllerComponent = connect([Store.Controller], ({controller}: Pr
 	</section>
 ));
 
-function handleClickResetButtons(controller: Controller) {
+function handleClickResetButtons(controller: Controller): void {
 	controller.resetButtons();
 }
 
-function handleClickResetAxes(controller: Controller) {
+function handleClickResetAxes(controller: Controller): void {
 	controller.resetAxes();
 }

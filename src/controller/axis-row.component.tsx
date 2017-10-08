@@ -7,7 +7,8 @@ interface Props {
 }
 
 /**
- * A row in the Axes table in the Controller tab.
+ * A row in the Axes table in the Controller tab. Shows information about an
+ * axis.
  */
 export const AxisRowComponent = connect(({axis, index}: Props) => (
 	<tr>
@@ -19,7 +20,7 @@ export const AxisRowComponent = connect(({axis, index}: Props) => (
 	</tr>
 ));
 
-function cell(value: number | undefined): any {
+function cell(value: number | undefined) {
 	return (
 		<td class="text-right">
 			{value !== undefined ? value.toFixed(3) : <span class="text-muted">None</span>}

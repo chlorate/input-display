@@ -21,6 +21,11 @@ interface Props {
 	controller: Controller;
 }
 
+/**
+ * A set of fields for selecting which d-pad mapping to use. When one of the
+ * axis mappings are selected, fields are shown that allow the user to select
+ * which axes to use.
+ */
 export const DpadMappingFieldsetComponent = connect([Store.Config, Store.Controller], (props: Props) => {
 	let value = Mapping.Buttons;
 	if (props.config.dpadAxisIndex !== undefined) {
@@ -40,7 +45,7 @@ export const DpadMappingFieldsetComponent = connect([Store.Config, Store.Control
 					class="form-control"
 					id="config-dpad-mapping"
 					value={value}
-					onChange={linkEvent(props, handleMappingChange)}
+					onChange={linkEvent(props, handleChangeMapping)}
 				>
 					<option value={Mapping.Buttons}>Buttons</option>
 					<option value={Mapping.SingleAxis}>Single axis</option>
@@ -58,36 +63,36 @@ export const DpadMappingFieldsetComponent = connect([Store.Config, Store.Control
 					id="config-dpad-axis-index"
 					label="D-pad axis"
 					value={props.config.dpadAxisIndex}
-					onChange={linkEvent(props.config, handleIndexChange)}
+					onChange={linkEvent(props.config, handleChangeIndex)}
 				/>
 			}
-			<div class="form-row">
-				{value === Mapping.DualAxes && [
+			{value === Mapping.DualAxes &&
+				<div class="form-row">
 					<AxisReferenceSelectComponent
 						class="col"
 						id="config-dpad-x-axis"
 						label="D-pad X axis"
 						reference={props.config.dpadXAxis}
-					/>,
+					/>
 					<AxisReferenceSelectComponent
 						class="col"
 						id="config-dpad-y-axis"
 						label="D-pad Y axis"
 						reference={props.config.dpadYAxis}
-					/>,
-				]}
-			</div>
+					/>
+				</div>
+			}
 		</fieldset>
 	);
 });
 
-function handleMappingChange(props: Props, event) {
+function handleChangeMapping(props: Props, event): void {
 	switch (event.target.value) {
 		case Mapping.Buttons:
 			props.config.clearDpadMapping();
 			break;
 		case Mapping.SingleAxis:
-			// Usually it is the last axis.
+			// Usually the last axis is the one to use.
 			props.config.dpadAxisIndex = props.controller.axes.length - 1;
 			break;
 		case Mapping.DualAxes:
@@ -99,6 +104,6 @@ function handleMappingChange(props: Props, event) {
 	}
 }
 
-function handleIndexChange(config: Config, event) {
+function handleChangeIndex(config: Config, event): void {
 	config.dpadAxisIndex = event.target.value;
 }

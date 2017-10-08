@@ -7,7 +7,8 @@ interface Props {
 }
 
 /**
- * A row in the Buttons table in the Controller tab.
+ * A row in the Buttons table in the Controller tab. Shows its current state and
+ * statistics.
  */
 export const ButtonRowComponent = connect(({button}: Props) => (
 	<tr>
@@ -19,7 +20,7 @@ export const ButtonRowComponent = connect(({button}: Props) => (
 	</tr>
 ));
 
-function booleanCell(value: boolean): any {
+function booleanCell(value: boolean) {
 	return (
 		<td class={`table-${value ? "success" : "danger"} text-center`}>
 			{value ? "Yes" : "No"}
@@ -27,7 +28,7 @@ function booleanCell(value: boolean): any {
 	);
 }
 
-function integerCell(value: number): any {
+function integerCell(value: number) {
 	return (
 		<td class="text-right">
 			{formatNumber(value)}

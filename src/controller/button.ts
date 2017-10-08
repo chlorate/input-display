@@ -3,7 +3,9 @@ import {secondToMilliseconds} from "../time/const";
 
 /**
  * An abstract controller button. It has a unique name, can be pressed, and
- * tracks statistics.
+ * tracks statistics. Whenever the button is pressed, a timestamp is recorded.
+ * The mashing speed is determined by how many timestamps were recorded in the
+ * last second.
  */
 export abstract class Button {
 	@observable private _pressed: boolean = false;

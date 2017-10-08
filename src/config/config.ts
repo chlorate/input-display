@@ -7,6 +7,9 @@ import {AxisReference} from "./axis-reference";
 export const minPollRate = 1;
 export const maxPollRate = 250;
 
+/**
+ * Stores all settings related to the controller and input display.
+ */
 export class Config {
 	@observable private _gamepadIndex: number = 0;
 	@observable private _dpadAxisIndex?: number;
@@ -48,12 +51,19 @@ export class Config {
 		this._pollRate = clampInt(pollRate, minPollRate, maxPollRate);
 	}
 
+	/**
+	 * Sets settings related to the d-pad dual axes mapping and clears all other
+	 * d-pad mapping settings to ensure only the one mapping is used.
+	 */
 	public setDpadDualAxes(x: AxisReference, y: AxisReference) {
 		this.clearDpadMapping();
 		this._dpadXAxis = x;
 		this._dpadYAxis = y;
 	}
 
+	/**
+	 * Clears all settings related to d-pad mappings.
+	 */
 	public clearDpadMapping() {
 		this._dpadAxisIndex = undefined;
 		this._dpadXAxis = undefined;

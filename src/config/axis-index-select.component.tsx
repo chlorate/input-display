@@ -8,8 +8,11 @@ interface Props {
 	onChange: any;
 }
 
+/**
+ * A field for editing an axis index. Allows the user to select an axis.
+ */
 export const AxisIndexSelectComponent = (props: Props) => (
-	<div class={`form-group ${props.class ? props.class : ""}`}>
+	<div class={`form-group ${props.class || ""}`}>
 		<label for={props.id}>
 			{props.label}
 		</label>

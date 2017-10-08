@@ -1,5 +1,10 @@
 import {observable} from "mobx";
 
+/**
+ * A controller axis. Stores its current value, neutral value, and range of
+ * possible values. The first value recorded is set as the neutral value. The
+ * minimum and maximum values are updated as the value changes.
+ */
 export class Axis {
 	@observable private _value: number = 0;
 	@observable private _neutralValue?: number;

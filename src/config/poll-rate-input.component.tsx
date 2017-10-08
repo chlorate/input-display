@@ -7,6 +7,9 @@ interface Props {
 	config: Config;
 }
 
+/**
+ * A numeric field for setting the controller poll rate.
+ */
 export const PollRateInputComponent = connect([Store.Config], ({config}: Props) => (
 	<div class="form-group mb-0">
 		<label for="config-poll-rate">
@@ -30,11 +33,11 @@ export const PollRateInputComponent = connect([Store.Config], ({config}: Props) 
 			</span>
 		</div>
 		<small class="form-text text-muted" id="config-poll-rate-help">
-			How often the controller's state is read.
+			How often the controller's inputs are read.
 		</small>
 	</div>
 ));
 
-function handleChange(config: Config, event: any) {
+function handleChange(config: Config, event): void {
 	config.pollRate = event.target.value;
 }

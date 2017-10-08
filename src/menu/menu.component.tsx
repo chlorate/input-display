@@ -11,20 +11,25 @@ enum Tab {
 const tabLinks = [
 	{
 		tab: Tab.Config,
-		handler: setConfigTab,
+		handler: handleClickConfig,
 	},
 	{
 		tab: Tab.Controller,
-		handler: setControllerTab,
+		handler: handleClickController,
 	},
 ];
 
-export class MenuComponent extends Component<{}, {tab: Tab}> {
-	public state = {
-		tab: Tab.Config,
-	};
+interface State {
+	tab: Tab;
+}
 
-	public setTab(tab: Tab) {
+/**
+ * Renders the menu. Tracks which tab is selected and shows its contents.
+ */
+export class MenuComponent extends Component<{}, State> {
+	public state: State = {tab: Tab.Config};
+
+	set tab(tab: Tab) {
 		this.setState({tab});
 	}
 
@@ -33,19 +38,17 @@ export class MenuComponent extends Component<{}, {tab: Tab}> {
 			<div class="card">
 				<div class="card-header">
 					<ul class="nav nav-tabs card-header-tabs">
-						{tabLinks.map((link) => {
-							return (
-								<li class="nav-item">
-									<a
-										class={this.linkClass(link.tab)}
-										href="#"
-										onClick={linkEvent(this, link.handler)}
-									>
-										{link.tab}
-									</a>
-								</li>
-							);
-						})}
+						{tabLinks.map((link) => (
+							<li class="nav-item">
+								<a
+									class={`nav-link ${this.state.tab === link.tab ? "active" : ""}`}
+									href="#"
+									onClick={linkEvent(this, link.handler)}
+								>
+									{link.tab}
+								</a>
+							</li>
+						))}
 					</ul>
 				</div>
 				<div class="card-body">
@@ -59,20 +62,12 @@ export class MenuComponent extends Component<{}, {tab: Tab}> {
 			</div>
 		);
 	}
-
-	private linkClass(tab): string {
-		const classes = ["nav-link"];
-		if (this.state.tab === tab) {
-			classes.push("active");
-		}
-		return classes.join(" ");
-	}
 }
 
-function setConfigTab(instance: MenuComponent) {
-	instance.setTab(Tab.Config);
+function handleClickConfig(menu: MenuComponent): void {
+	menu.tab = Tab.Config;
 }
 
-function setControllerTab(instance: MenuComponent) {
-	instance.setTab(Tab.Controller);
+function handleClickController(menu: MenuComponent): void {
+	menu.tab = Tab.Controller;
 }

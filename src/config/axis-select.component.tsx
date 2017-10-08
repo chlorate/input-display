@@ -9,6 +9,10 @@ interface Props {
 	onChange: any;
 }
 
+/**
+ * A <select> element for selecting an axis. Used by other components that
+ * involve selecting an axis.
+ */
 export const AxisSelectComponent = connect([Store.Controller], (props: Props) => (
 	<select
 		class="form-control"

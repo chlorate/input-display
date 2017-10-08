@@ -63,12 +63,18 @@ export class Controller {
 		return this._buttons;
 	}
 
-	public resetAxes() {
+	/**
+	 * Clears all axes and re-reads them from the gamepad.
+	 */
+	public resetAxes(): void {
 		this._axes = [];
 		this.update();
 	}
 
-	public resetButtons() {
+	/**
+	 * Clears all buttons and re-reads them from the gamepad.
+	 */
+	public resetButtons(): void {
 		this._buttons = [];
 		this.update();
 	}
@@ -78,7 +84,7 @@ export class Controller {
 	 * state of the controller. The poll rate setting determines how often this
 	 * happens.
 	 */
-	public poll() {
+	public poll(): void {
 		this.update();
 
 		// setTimeout drifts a bit. Set the delay so the next call happens at
@@ -94,13 +100,17 @@ export class Controller {
 	/**
 	 * Stops polling the Gamepad API.
 	 */
-	public stopPoll() {
+	public stopPoll(): void {
 		if (this.timeout !== undefined) {
 			clearTimeout(this.timeout);
 		}
 	}
 
-	private update() {
+	/**
+	 * Performs a full update of the controller state if the selected gamepad in
+	 * the config exists.
+	 */
+	private update(): void {
 		const gamepads = getGamepads();
 		if (gamepads.length <= this.config.gamepadIndex) {
 			this.clearGamepad();
@@ -121,17 +131,26 @@ export class Controller {
 		this.sortButtons();
 	}
 
-	private clearGamepad() {
+	/**
+	 * Clears the stored gamepad ID and mapping.
+	 */
+	private clearGamepad(): void {
 		this._id = undefined;
 		this._mapping = undefined;
 	}
 
-	private updateGamepad(gamepad: Gamepad) {
+	/**
+	 * Stores the gamepad ID and mapping.
+	 */
+	private updateGamepad(gamepad: Gamepad): void {
 		this._id = gamepad.id;
 		this._mapping = gamepad.mapping;
 	}
 
-	private updateAxes(gamepad: Gamepad) {
+	/**
+	 * Reads all axis values, creating axes if necessary.
+	 */
+	private updateAxes(gamepad: Gamepad): void {
 		gamepad.axes.forEach((value, i) => {
 			if (this.axes.length <= i) {
 				this.axes.push(new Axis());
@@ -140,7 +159,10 @@ export class Controller {
 		});
 	}
 
-	private updateButtons(gamepad: Gamepad) {
+	/**
+	 * Reads all normal button pressed states, creating buttons if necessary.
+	 */
+	private updateButtons(gamepad: Gamepad): void {
 		gamepad.buttons.forEach((gamepadButton, i) => {
 			const button = this.findOrCreateNormalButton(i);
 			button.pressed = gamepadButton.pressed;
@@ -163,6 +185,10 @@ export class Controller {
 		return button;
 	}
 
+	/**
+	 * Reads the d-pad button pressed states from a selected axis if the d-pad
+	 * mapping is set to single axis. Creates d-pad buttons if necessary.
+	 */
 	private updateDpadSingleAxis(gamepad: Gamepad) {
 		if (this.config.dpadAxisIndex === undefined || this.axes.length <= this.config.dpadAxisIndex) {
 			return;
@@ -175,7 +201,11 @@ export class Controller {
 		});
 	}
 
-	private updateDpadDualAxes(gamepad: Gamepad) {
+	/**
+	 * Reads the d-pad button pressed states from selected axes if the d-pad
+	 * mapping is set to dual axes. Creates d-pad buttons if necessary.
+	 */
+	private updateDpadDualAxes(gamepad: Gamepad): void {
 		if (!this.config.dpadXAxis || !this.config.dpadYAxis) {
 			return;
 		}

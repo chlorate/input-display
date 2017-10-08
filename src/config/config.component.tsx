@@ -10,6 +10,10 @@ interface Props {
 	config: Config;
 }
 
+/**
+ * Contents of the Config tab. Provides fields for configuring the controller
+ * and input display.
+ */
 export const ConfigComponent = connect([Store.Config], ({config}: Props) => (
 	<form onSubmit={linkEvent(undefined, handleSubmit)}>
 		<div class="mb-4">
@@ -30,6 +34,6 @@ export const ConfigComponent = connect([Store.Config], ({config}: Props) => (
 	</form>
 ));
 
-function handleSubmit(_: undefined, event: any) {
+function handleSubmit(_: undefined, event): void {
 	event.preventDefault();
 }

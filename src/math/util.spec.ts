@@ -1,4 +1,4 @@
-import {almostEqual, clampInt, formatNumber} from "./util";
+import {almostEqual, clampIndex, clampInt, formatNumber} from "./util";
 
 describe("almostEqual", () => {
 	it("should compare numbers correctly", () => {
@@ -45,6 +45,12 @@ describe("clampInt", () => {
 
 	it("should error if min > max", () => {
 		expect(() => clampInt(0, 2, 1)).toThrowError();
+	});
+});
+
+describe("clampIndex", () => {
+	it("should not allow a negative index", () => {
+		expect(clampIndex(-1)).toBe(0);
 	});
 });
 

@@ -6,6 +6,14 @@ export function almostEqual(x: number, y: number): boolean {
 }
 
 /**
+ * Converts a number to an integer and clamps it to a valid array index (0 or
+ * larger).
+ */
+export function clampIndex(n: any): number {
+	return clampInt(n, 0);
+}
+
+/**
  * Converts a number to an integer and optionally clamps it to a min and/or max
  * value.
  */

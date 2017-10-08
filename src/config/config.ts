@@ -1,5 +1,5 @@
 import {observable} from "mobx";
-import {clampInt} from "../math/util";
+import {clampIndex, clampInt} from "../math/util";
 import {AxisReference} from "./axis-reference";
 
 // 4 ms is the smallest delay:
@@ -18,7 +18,7 @@ export class Config {
 		return this._gamepadIndex;
 	}
 	set gamepadIndex(gamepadIndex: number) {
-		this._gamepadIndex = clampInt(gamepadIndex, 0);
+		this._gamepadIndex = clampIndex(gamepadIndex);
 	}
 
 	get dpadAxisIndex(): number | undefined {
@@ -29,7 +29,7 @@ export class Config {
 			this._dpadAxisIndex = undefined;
 		} else {
 			this.clearDpadMapping();
-			this._dpadAxisIndex = clampInt(index, 0);
+			this._dpadAxisIndex = clampIndex(index);
 		}
 	}
 

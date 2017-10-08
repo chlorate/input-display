@@ -1,7 +1,7 @@
 import {observable} from "mobx";
 import {Axis} from "../controller/axis";
 import {Controller} from "../controller/controller";
-import {clampInt} from "../math/util";
+import {clampIndex} from "../math/util";
 
 /**
  * A reference to a controller's axis by its index and if its value should be
@@ -20,7 +20,7 @@ export class AxisReference {
 		return this._index;
 	}
 	set index(index: number) {
-		this._index = clampInt(index, 0);
+		this._index = clampIndex(index);
 	}
 
 	/**

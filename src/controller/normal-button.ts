@@ -1,4 +1,4 @@
-import {clampInt} from "../math/util";
+import {clampIndex} from "../math/util";
 import {Button} from "./button";
 
 /**
@@ -12,7 +12,7 @@ export class NormalButton extends Button {
 
 	constructor(index: number) {
 		super();
-		this._index = clampInt(index, 0);
+		this._index = clampIndex(index);
 	}
 
 	get name(): string {

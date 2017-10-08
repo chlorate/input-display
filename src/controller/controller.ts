@@ -34,7 +34,6 @@ export class Controller {
 	private config: Config;
 	@observable private _id?: string;
 	@observable private _mapping?: string;
-	@observable private _timestamp?: number;
 	@observable private _axes: Axis[] = [];
 	@observable private _buttons: Button[] = [];
 	private timeout?: number;
@@ -53,10 +52,6 @@ export class Controller {
 
 	get mapping(): string | undefined {
 		return this._mapping;
-	}
-
-	get timestamp(): number | undefined {
-		return this._timestamp;
 	}
 
 	get axes(): Axis[] {
@@ -119,13 +114,11 @@ export class Controller {
 	private clearGamepad() {
 		this._id = undefined;
 		this._mapping = undefined;
-		this._timestamp = undefined;
 	}
 
 	private updateGamepad(gamepad: Gamepad) {
 		this._id = gamepad.id;
 		this._mapping = gamepad.mapping;
-		this._timestamp = gamepad.timestamp;
 	}
 
 	private updateAxes(gamepad: Gamepad) {

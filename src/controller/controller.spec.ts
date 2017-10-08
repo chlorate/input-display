@@ -15,7 +15,6 @@ describe("Controller", () => {
 		gamepad = {
 			id: "Test Gamepad",
 			mapping: "standard",
-			timestamp: 123,
 			axes: [0.1, 0.2],
 			buttons: [{pressed: false}, {pressed: true}],
 		};
@@ -79,7 +78,6 @@ describe("Controller", () => {
 			expect(controller.id).toBe("Test Gamepad");
 			expect(controller.alias).toBeUndefined();
 			expect(controller.mapping).toBe("standard");
-			expect(controller.timestamp).toBe(123);
 		});
 
 		it("should clear gamepad data if controller is disconnected", () => {
@@ -89,7 +87,6 @@ describe("Controller", () => {
 			expect(controller.id).toBeUndefined();
 			expect(controller.alias).toBeUndefined();
 			expect(controller.mapping).toBeUndefined();
-			expect(controller.timestamp).toBeUndefined();
 		});
 
 		it("should update axes", () => {

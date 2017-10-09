@@ -1,6 +1,6 @@
-import {isAxisObject} from "./axis-object";
+import {isAxisJSON} from "./axis-json";
 
-describe("isAxisObject", () => {
+describe("isAxisJSON", () => {
 	[
 		{
 			input: {},
@@ -32,7 +32,7 @@ describe("isAxisObject", () => {
 		},
 	].forEach((test) => {
 		it(`should return ${test.output} for ${JSON.stringify(test.input)}`, () => {
-			expect(isAxisObject(test.input)).toBe(test.output);
+			expect(isAxisJSON(test.input)).toBe(test.output);
 		});
 	});
 });

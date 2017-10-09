@@ -1,13 +1,15 @@
 /**
- * An object that implements this can marshal its data to an object.
+ * An object that implements this can load data from a parsed JSON result,
+ * handling any arbitrary user input.
  */
-export interface Marshaler {
-	marshal(): object;
+export interface Loader {
+	loadJSON(json: any): void;
 }
 
 /**
- * An object that implements this can unmarshal data from an object.
+ * An object that implements this can return a JSON representation of its
+ * values to be saved.
  */
-export interface Unmarshaler {
-	unmarshal(input: any): void;
+export interface Saver {
+	toJSON(): object;
 }

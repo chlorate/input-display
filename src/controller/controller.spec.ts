@@ -37,11 +37,11 @@ describe("Controller", () => {
 		expect(controller.alias).toBe("Wii Remote");
 	});
 
-	describe("marshal", () => {
+	describe("toJSON", () => {
 		it("should return an object", () => {
 			spyOn(service, "getGamepads").and.returnValue([gamepad]);
 			controller.poll();
-			expect(controller.marshal()).toEqual({
+			expect(controller.toJSON()).toEqual({
 				axes: [
 					{
 						neutralValue: 0.1,
@@ -58,18 +58,18 @@ describe("Controller", () => {
 		});
 
 		it("can return an empty object if there are no axes or buttons", () => {
-			expect(controller.marshal()).toEqual({});
+			expect(controller.toJSON()).toEqual({});
 		});
 	});
 
-	describe("unmarshal", () => {
+	describe("loadJSON", () => {
 		beforeEach(() => {
 			spyOn(service, "getGamepads").and.returnValue([gamepad]);
 			controller.poll();
 		});
 
 		it("should update as expected", () => {
-			controller.unmarshal({
+			controller.loadJSON({
 				axes: [
 					{
 						neutralValue: 0.5,
@@ -81,13 +81,12 @@ describe("Controller", () => {
 		});
 
 		it("should handle an empty object", () => {
-			controller.unmarshal({});
+			controller.loadJSON({});
 			expect(controller.axes.length).toBe(0);
 		});
 
 		it("should do nothing if not passed a ControllerObject", () => {
-			controller.unmarshal("bad");
-			expect(controller.axes.length).toBe(2);
+			expect(() => controller.loadJSON("bad")).toThrowError();
 		});
 	});
 

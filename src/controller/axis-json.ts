@@ -1,16 +1,16 @@
 /**
- * Axis data as a plain object for storage.
+ * A JSON representation of an Axis.
  */
-export interface AxisObject {
+export interface AxisJSON {
 	neutralValue?: number;
 	minValue?: number;
 	maxValue?: number;
 }
 
 /**
- * Returns true if some arbitrary value is a valid AxisObject.
+ * Returns true if some value is an AxisJSON object.
  */
-export function isAxisObject(input: any): input is AxisObject {
+export function isAxisJSON(input: any): input is AxisJSON {
 	return (
 		typeof input === "object" &&
 		(input.neutralValue === undefined || typeof input.neutralValue === "number") &&

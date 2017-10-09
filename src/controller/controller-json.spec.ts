@@ -1,6 +1,6 @@
-import {isControllerObject} from "./controller-object";
+import {isControllerJSON} from "./controller-json";
 
-describe("isControllerObject", () => {
+describe("isControllerJSON", () => {
 	[
 		{
 			input: {},
@@ -36,7 +36,7 @@ describe("isControllerObject", () => {
 		},
 	].forEach((test) => {
 		it(`should return ${test.output} for ${JSON.stringify(test.input)}`, () => {
-			expect(isControllerObject(test.input)).toBe(test.output);
+			expect(isControllerJSON(test.input)).toBe(test.output);
 		});
 	});
 });

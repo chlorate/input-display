@@ -1,5 +1,5 @@
 import {observable} from "mobx";
-import {AxisObject} from "./axis-object";
+import {AxisJSON} from "./axis-json";
 
 /**
  * A controller axis. Stores its current value, neutral value, and range of
@@ -7,6 +7,20 @@ import {AxisObject} from "./axis-object";
  * minimum and maximum values are updated as the value changes.
  */
 export class Axis {
+	/**
+	 * Creates an axis from its JSON representation.
+	 */
+	public static fromJSON(json: AxisJSON): Axis {
+		const axis = new Axis();
+		Object.assign(axis, {
+			// TODO: range checks
+			_neutralValue: json.neutralValue,
+			_minValue: json.minValue,
+			_maxValue: json.maxValue,
+		});
+		return axis;
+	}
+
 	@observable private _value: number = 0;
 	@observable private _neutralValue?: number;
 	@observable private _minValue?: number;
@@ -48,23 +62,13 @@ export class Axis {
 	}
 
 	/**
-	 * Marshals this axis to an object.
+	 * Returns a JSON representation of this axis.
 	 */
-	public marshal(): AxisObject {
+	public toJSON(): AxisJSON {
 		return {
 			neutralValue: this.neutralValue,
 			minValue: this.minValue,
 			maxValue: this.maxValue,
 		};
-	}
-
-	/**
-	 * Unmarshals an object into this axis.
-	 */
-	public unmarshal(input: AxisObject): void {
-		// TODO: range checks
-		this._neutralValue = input.neutralValue;
-		this._minValue = input.minValue;
-		this._maxValue = input.maxValue;
 	}
 }

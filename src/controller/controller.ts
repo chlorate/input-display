@@ -5,7 +5,7 @@ import {almostEqual} from "../math/util";
 import {secondToMilliseconds} from "../time/const";
 import {Axis} from "./axis";
 import {Button} from "./button";
-import {ControllerObject, isControllerObject} from "./controller-object";
+import {ControllerJSON, isControllerJSON} from "./controller-json";
 import {Direction, sortedDirections} from "./direction";
 import {DpadButton} from "./dpad-button";
 import {NormalButton} from "./normal-button";
@@ -65,32 +65,27 @@ export class Controller {
 	}
 
 	/**
-	 * Marshals this controller to an object.
+	 * Returns a JSON representation of this controller.
 	 */
-	public marshal(): ControllerObject {
-		const obj: ControllerObject = {};
+	public toJSON(): ControllerJSON {
+		const json: ControllerJSON = {};
 		if (this.axes.length) {
-			obj.axes = this.axes.map((axis) => axis.marshal());
+			json.axes = this.axes.map((axis) => axis.toJSON());
 		}
-		return obj;
+		return json;
 	}
 
 	/**
-	 * Unmarshals an arbitrary value into this controller. Does nothing if the
-	 * value isn't a ControllerObject.
+	 * Loads values into this controller from its JSON representation.
 	 */
-	public unmarshal(input: any): void {
-		if (!isControllerObject(input)) {
-			return;
+	public loadJSON(json: any): void {
+		if (!isControllerJSON(json)) {
+			throw new TypeError("invalid controller JSON");
 		}
 
 		this._axes = [];
-		if (input.axes) {
-			this._axes = input.axes.map((axisObj, i) => {
-				const axis = new Axis();
-				axis.unmarshal(axisObj);
-				return axis;
-			});
+		if (json.axes) {
+			this._axes = json.axes.map((axis) => Axis.fromJSON(axis));
 		}
 	}
 

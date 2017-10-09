@@ -5,6 +5,7 @@ import {almostEqual} from "../math/util";
 import {secondToMilliseconds} from "../time/const";
 import {Axis} from "./axis";
 import {Button} from "./button";
+import {ControllerObject, isControllerObject} from "./controller-object";
 import {Direction, sortedDirections} from "./direction";
 import {DpadButton} from "./dpad-button";
 import {NormalButton} from "./normal-button";
@@ -61,6 +62,36 @@ export class Controller {
 
 	get buttons(): Button[] {
 		return this._buttons;
+	}
+
+	/**
+	 * Marshals this controller to an object.
+	 */
+	public marshal(): ControllerObject {
+		const obj: ControllerObject = {};
+		if (this.axes.length) {
+			obj.axes = this.axes.map((axis) => axis.marshal());
+		}
+		return obj;
+	}
+
+	/**
+	 * Unmarshals an arbitrary value into this controller. Does nothing if the
+	 * value isn't a ControllerObject.
+	 */
+	public unmarshal(input: any): void {
+		if (!isControllerObject(input)) {
+			return;
+		}
+
+		this._axes = [];
+		if (input.axes) {
+			this._axes = input.axes.map((axisObj, i) => {
+				const axis = new Axis();
+				axis.unmarshal(axisObj);
+				return axis;
+			});
+		}
 	}
 
 	/**

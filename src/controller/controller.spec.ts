@@ -37,6 +37,60 @@ describe("Controller", () => {
 		expect(controller.alias).toBe("Wii Remote");
 	});
 
+	describe("marshal", () => {
+		it("should return an object", () => {
+			spyOn(service, "getGamepads").and.returnValue([gamepad]);
+			controller.poll();
+			expect(controller.marshal()).toEqual({
+				axes: [
+					{
+						neutralValue: 0.1,
+						minValue: 0.1,
+						maxValue: 0.1,
+					},
+					{
+						neutralValue: 0.2,
+						minValue: 0.2,
+						maxValue: 0.2,
+					},
+				],
+			});
+		});
+
+		it("can return an empty object if there are no axes or buttons", () => {
+			expect(controller.marshal()).toEqual({});
+		});
+	});
+
+	describe("unmarshal", () => {
+		beforeEach(() => {
+			spyOn(service, "getGamepads").and.returnValue([gamepad]);
+			controller.poll();
+		});
+
+		it("should update as expected", () => {
+			controller.unmarshal({
+				axes: [
+					{
+						neutralValue: 0.5,
+					},
+				],
+			});
+			expect(controller.axes.length).toBe(1);
+			expect(controller.axes[0].neutralValue).toBe(0.5);
+		});
+
+		it("should handle an empty object", () => {
+			controller.unmarshal({});
+			expect(controller.axes.length).toBe(0);
+		});
+
+		it("should do nothing if not passed a ControllerObject", () => {
+			controller.unmarshal("bad");
+			expect(controller.axes.length).toBe(2);
+		});
+	});
+
 	it("can reset axes", () => {
 		spyOn(service, "getGamepads").and.returnValue([gamepad]);
 		controller.poll();

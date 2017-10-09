@@ -19,6 +19,26 @@ describe("Axis", () => {
 		expect(axis.invertedValue).toBe(-0.123);
 	});
 
+	it("can be marshaled", () => {
+		rotate();
+		expect(axis.marshal()).toEqual({
+			neutralValue: 0,
+			minValue: -1,
+			maxValue: 1,
+		});
+	});
+
+	it("can be unmarshaled", () => {
+		axis.unmarshal({
+			neutralValue: 0.1,
+			minValue: -0.2,
+			maxValue: 0.2,
+		});
+		expect(axis.neutralValue).toBe(0.1);
+		expect(axis.minValue).toBe(-0.2);
+		expect(axis.maxValue).toBe(0.2);
+	});
+
 	it("should store first value as neutral value", () => {
 		axis.value = 0.123;
 		rotate();

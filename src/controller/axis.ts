@@ -1,4 +1,5 @@
 import {observable} from "mobx";
+import {AxisObject} from "./axis-object";
 
 /**
  * A controller axis. Stores its current value, neutral value, and range of
@@ -44,5 +45,26 @@ export class Axis {
 
 	get maxValue(): number | undefined {
 		return this._maxValue;
+	}
+
+	/**
+	 * Marshals this axis to an object.
+	 */
+	public marshal(): AxisObject {
+		return {
+			neutralValue: this.neutralValue,
+			minValue: this.minValue,
+			maxValue: this.maxValue,
+		};
+	}
+
+	/**
+	 * Unmarshals an object into this axis.
+	 */
+	public unmarshal(input: AxisObject): void {
+		// TODO: range checks
+		this._neutralValue = input.neutralValue;
+		this._minValue = input.minValue;
+		this._maxValue = input.maxValue;
 	}
 }

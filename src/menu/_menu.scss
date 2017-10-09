@@ -1,12 +1,9 @@
 .menu {
+	display: flex;
+	flex-direction: column;
 	flex-grow: 1;
 	min-width: 20em;
 	max-width: 40em;
-	overflow: auto;
-
-	.card {
-		max-height: 100%;
-	}
 
 	.card-body {
 		overflow: auto;

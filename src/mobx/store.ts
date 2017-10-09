@@ -4,4 +4,5 @@
 export enum Store {
 	Config = "config",
 	Controller = "controller",
+	Errors = "errors",
 }

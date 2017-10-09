@@ -4,11 +4,18 @@ import {Config} from "./config/config";
 import {Controller} from "./controller/controller";
 import {GamepadComponent} from "./display/gamepad.component";
 import {MenuComponent} from "./menu/menu.component";
+import {Store} from "./mobx/store";
+import {loadLocalStorage, saveLocalStorage} from "./storage/local";
 
 const config = new Config();
 
 const controller = new Controller(config);
+loadLocalStorage(Store.Controller, controller);
 controller.poll();
+
+window.addEventListener("beforeunload", () => {
+	saveLocalStorage(Store.Controller, controller);
+});
 
 const IndexComponent = () => {
 	if (!navigator.getGamepads) {

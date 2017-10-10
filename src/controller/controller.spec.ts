@@ -142,7 +142,20 @@ describe("Controller", () => {
 			expect(controller.mapping).toBeUndefined();
 		});
 
-		it("should update axes", () => {
+		it("should ignore axes if all values are zero", () => {
+			gamepad.axes = [0, 0];
+			spyOn(service, "getGamepads").and.returnValue([gamepad]);
+			controller.poll();
+			expect(controller.axes.length).toBe(2);
+			controller.axes.forEach((axis) => {
+				expect(axis.value).toBe(0);
+				expect(axis.neutralValue).toBeUndefined();
+				expect(axis.minValue).toBeUndefined();
+				expect(axis.maxValue).toBeUndefined();
+			});
+		});
+
+		it("should update axes if any value is non-zero", () => {
 			spyOn(service, "getGamepads").and.returnValue([gamepad]);
 			controller.poll();
 			expect(controller.axes.length).toBe(2);

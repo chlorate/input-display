@@ -1,4 +1,4 @@
-import {almostEqual, clampIndex, clampInt, formatNumber} from "./util";
+import {almostEqual, clamp, clampIndex, clampInt, formatNumber} from "./util";
 
 describe("almostEqual", () => {
 	[
@@ -14,39 +14,41 @@ describe("almostEqual", () => {
 	});
 });
 
-describe("clampInt", () => {
+describe("clamp", () => {
 	it("should return number as-is if no bounds set", () => {
-		expect(clampInt(123)).toBe(123);
+		expect(clamp(123)).toBe(123);
 	});
 
 	it("should accept strings", () => {
-		expect(clampInt("123")).toBe(123);
+		expect(clamp("123")).toBe(123);
 	});
 
 	it("should return 0 for non-finite numbers", () => {
-		expect(clampInt("bad")).toBe(0);
-		expect(clampInt(Infinity)).toBe(0);
-		expect(clampInt(-Infinity)).toBe(0);
-		expect(clampInt(NaN)).toBe(0);
-	});
-
-	it("should truncate floats", () => {
-		expect(clampInt(123.6)).toBe(123);
-		expect(clampInt(-123.6)).toBe(-123);
+		expect(clamp("bad")).toBe(0);
+		expect(clamp(Infinity)).toBe(0);
+		expect(clamp(-Infinity)).toBe(0);
+		expect(clamp(NaN)).toBe(0);
 	});
 
 	it("should respect minimum bound", () => {
-		expect(clampInt(0, 5)).toBe(5);
-		expect(clampInt("bad", 5)).toBe(5);
+		expect(clamp(0, 5)).toBe(5);
+		expect(clamp("bad", 5)).toBe(5);
 	});
 
 	it("should respect maximum bound", () => {
-		expect(clampInt(0, undefined, -5)).toBe(-5);
-		expect(clampInt("bad", undefined, -5)).toBe(-5);
+		expect(clamp(0, undefined, -5)).toBe(-5);
+		expect(clamp("bad", undefined, -5)).toBe(-5);
 	});
 
 	it("should error if min > max", () => {
-		expect(() => clampInt(0, 2, 1)).toThrowError();
+		expect(() => clamp(0, 2, 1)).toThrowError();
+	});
+});
+
+describe("clampInt", () => {
+	it("should truncate floats", () => {
+		expect(clampInt(123.6)).toBe(123);
+		expect(clampInt(-123.6)).toBe(-123);
 	});
 });
 

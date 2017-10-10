@@ -6,33 +6,41 @@ export function almostEqual(x: number, y: number): boolean {
 }
 
 /**
- * Converts a number to an integer and clamps it to a valid array index (0 or
- * larger).
- */
-export function clampIndex(n: any): number {
-	return clampInt(n, 0);
-}
-
-/**
- * Converts a number to an integer and optionally clamps it to a min and/or max
+ * Converts any value to a number and optionally clamps it to a min and/or max
  * value.
  */
-export function clampInt(n: any, min?: number, max?: number): number {
+export function clamp(value: any, min?: number, max?: number): number {
 	if (min !== undefined && max !== undefined && min > max) {
 		throw new RangeError("min must be less than max");
 	}
 
-	n = parseInt(n, 10);
-	if (isNaN(n)) {
-		n = 0;
+	value = parseFloat(value);
+	if (!isFinite(value)) {
+		value = 0;
 	}
-	if (min !== undefined && n < min) {
-		n = min;
+	if (min !== undefined && value < min) {
+		value = min;
 	}
-	if (max !== undefined && n > max) {
-		n = max;
+	if (max !== undefined && value > max) {
+		value = max;
 	}
-	return Math.trunc(n);
+	return value;
+}
+
+/**
+ * Converts any value to an integer and optionally clamps it to a min and/or max
+ * value.
+ */
+export function clampInt(value: any, min?: number, max?: number): number {
+	return Math.trunc(clamp(value, min, max));
+}
+
+/**
+ * Converts any value to an integer and clamps it to a valid array index (0 or
+ * larger).
+ */
+export function clampIndex(value: any): number {
+	return clampInt(value, 0);
 }
 
 /**

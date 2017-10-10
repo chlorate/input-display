@@ -1,4 +1,5 @@
 import {observable} from "mobx";
+import {clamp} from "../math/util";
 import {AxisJSON} from "./axis-json";
 
 /**
@@ -12,12 +13,9 @@ export class Axis {
 	 */
 	public static fromJSON(json: AxisJSON): Axis {
 		const axis = new Axis();
-		Object.assign(axis, {
-			// TODO: range checks
-			_neutralValue: json.neutralValue,
-			_minValue: json.minValue,
-			_maxValue: json.maxValue,
-		});
+		axis.neutralValue = json.neutralValue;
+		axis.minValue = json.minValue;
+		axis.maxValue = json.maxValue;
 		return axis;
 	}
 
@@ -30,19 +28,19 @@ export class Axis {
 		return this._value;
 	}
 	set value(value: number) {
-		if (this._neutralValue === undefined) {
-			this._neutralValue = value;
+		if (this.neutralValue === undefined) {
+			this.neutralValue = value;
 		}
-		if (this._minValue === undefined) {
-			this._minValue = value;
+		if (this.minValue === undefined) {
+			this.minValue = value;
 		}
-		if (this._maxValue === undefined) {
-			this._maxValue = value;
+		if (this.maxValue === undefined) {
+			this.maxValue = value;
 		}
 
 		this._value = value;
-		this._minValue = Math.min(this._minValue, value);
-		this._maxValue = Math.max(this._maxValue, value);
+		this.minValue = Math.min(this.minValue, value);
+		this.maxValue = Math.max(this.maxValue, value);
 	}
 
 	get invertedValue(): number {
@@ -52,13 +50,22 @@ export class Axis {
 	get neutralValue(): number | undefined {
 		return this._neutralValue;
 	}
+	set neutralValue(value: number | undefined) {
+		this._neutralValue = value === undefined ? value : clamp(value);
+	}
 
 	get minValue(): number | undefined {
 		return this._minValue;
 	}
+	set minValue(value: number | undefined) {
+		this._minValue = value === undefined ? value : clamp(value);
+	}
 
 	get maxValue(): number | undefined {
 		return this._maxValue;
+	}
+	set maxValue(value: number | undefined) {
+		this._maxValue = value === undefined ? value : clamp(value);
 	}
 
 	/**

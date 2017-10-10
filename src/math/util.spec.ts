@@ -23,8 +23,11 @@ describe("clampInt", () => {
 		expect(clampInt("123")).toBe(123);
 	});
 
-	it("should return 0 for non-numbers", () => {
+	it("should return 0 for non-finite numbers", () => {
 		expect(clampInt("bad")).toBe(0);
+		expect(clampInt(Infinity)).toBe(0);
+		expect(clampInt(-Infinity)).toBe(0);
+		expect(clampInt(NaN)).toBe(0);
 	});
 
 	it("should truncate floats", () => {

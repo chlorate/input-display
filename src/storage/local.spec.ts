@@ -12,6 +12,8 @@ class TestObject {
 	}
 }
 
+// Spying on localStorage doesn't work on Firefox, but Storage.prototype does.
+
 describe("loadLocalStorage", () => {
 	let obj;
 
@@ -20,13 +22,13 @@ describe("loadLocalStorage", () => {
 	});
 
 	it("should do nothing if item doesn't exist", () => {
-		spyOn(localStorage, "getItem").and.returnValue(null);
+		spyOn(Storage.prototype, "getItem").and.returnValue(null);
 		loadLocalStorage("key", obj);
 		expect(obj.json).toBeUndefined();
 	});
 
 	it("should call loadJSON if item does exist", () => {
-		spyOn(localStorage, "getItem").and.returnValue("{}");
+		spyOn(Storage.prototype, "getItem").and.returnValue("{}");
 		loadLocalStorage("key", obj);
 		expect(obj.json).toEqual({});
 	});
@@ -34,7 +36,7 @@ describe("loadLocalStorage", () => {
 
 describe("saveLocalStorage", () => {
 	it("should save to local storage", () => {
-		spyOn(localStorage, "setItem");
+		spyOn(Storage.prototype, "setItem");
 		saveLocalStorage("key", new TestObject());
 		expect(localStorage.setItem).toHaveBeenCalledWith("inputDisplay.key", "{}");
 	});

@@ -51,21 +51,21 @@ export class Axis {
 		return this._neutralValue;
 	}
 	set neutralValue(value: number | undefined) {
-		this._neutralValue = value === undefined ? value : clamp(value);
+		this._neutralValue = value === undefined ? value : clamp(value, this.minValue, this.maxValue);
 	}
 
 	get minValue(): number | undefined {
 		return this._minValue;
 	}
 	set minValue(value: number | undefined) {
-		this._minValue = value === undefined ? value : clamp(value);
+		this._minValue = value === undefined ? value : clamp(value, undefined, this.neutralValue || this.maxValue);
 	}
 
 	get maxValue(): number | undefined {
 		return this._maxValue;
 	}
 	set maxValue(value: number | undefined) {
-		this._maxValue = value === undefined ? value : clamp(value);
+		this._maxValue = value === undefined ? value : clamp(value, this.neutralValue || this.minValue);
 	}
 
 	/**

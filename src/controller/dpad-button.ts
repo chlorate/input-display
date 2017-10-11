@@ -9,6 +9,15 @@ import {DpadButtonJSON} from "./json/dpad-button-json";
  * It is uniquely identified by a direction.
  */
 export class DpadButton extends Button {
+	/**
+	 * Creates a button from its JSON representation.
+	 */
+	public static fromJSON(json: DpadButtonJSON): DpadButton {
+		const button = new DpadButton(json.direction);
+		button.loadJSON(json);
+		return button;
+	}
+
 	private _direction: Direction;
 
 	constructor(direction: Direction) {
@@ -24,6 +33,9 @@ export class DpadButton extends Button {
 		return this._direction;
 	}
 
+	/**
+	 * Returns a JSON representation of this button.
+	 */
 	public toJSON(): DpadButtonJSON {
 		return {
 			type: ButtonType.Dpad,

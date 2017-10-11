@@ -10,6 +10,15 @@ import {NormalButtonJSON} from "./json/normal-button-json";
  * identified by a numeric index.
  */
 export class NormalButton extends Button {
+	/**
+	 * Creates a button from its JSON representation.
+	 */
+	public static fromJSON(json: NormalButtonJSON): NormalButton {
+		const button = new NormalButton(json.index);
+		button.loadJSON(json);
+		return button;
+	}
+
 	private _index: number;
 
 	constructor(index: number) {

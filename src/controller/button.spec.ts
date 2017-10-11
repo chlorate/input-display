@@ -35,8 +35,8 @@ describe("Button", () => {
 		}
 	}
 
-	describe("presses", () => {
-		it("should increment presses when pressed", () => {
+	describe("pressed", () => {
+		it("should increment presses when true", () => {
 			button.pressed = true;
 			expect(button.presses).toBe(1);
 		});
@@ -52,6 +52,19 @@ describe("Button", () => {
 			mash();
 			expect(button.presses).toBe(10);
 		});
+
+		it("should update best mash speed", () => {
+			mash();
+			for (let i = 0; i < 10; i++) {
+				button.pressed = false;
+			}
+			expect(button.bestMashSpeed).toBe(5);
+		});
+	});
+
+	it("should not allow presses to be negative", () => {
+		button.presses = -1;
+		expect(button.presses).toBe(0);
 	});
 
 	it("should track mash speed over the last second", () => {
@@ -59,11 +72,8 @@ describe("Button", () => {
 		expect(button.mashSpeed).toBe(5);
 	});
 
-	it("should track best mash speed", () => {
-		mash();
-		for (let i = 0; i < 10; i++) {
-			button.pressed = false;
-		}
-		expect(button.bestMashSpeed).toBe(5);
+	it("should not allow best mash speed to be negative", () => {
+		button.bestMashSpeed = -1;
+		expect(button.bestMashSpeed).toBe(0);
 	});
 });

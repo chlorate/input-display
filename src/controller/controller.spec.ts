@@ -2,7 +2,7 @@ import {AxisReference} from "../config/axis-reference";
 import {Config} from "../config/config";
 import * as service from "../gamepad/service";
 import {Controller} from "./controller";
-import {sortedDirections} from "./direction";
+import {Direction, sortedDirections} from "./direction";
 import {ButtonType} from "./json/button-json";
 
 describe("Controller", () => {
@@ -84,9 +84,30 @@ describe("Controller", () => {
 						neutralValue: 0.5,
 					},
 				],
+				buttons: [
+					{
+						type: ButtonType.Normal,
+						index: 1,
+						presses: 2,
+						bestMashSpeed: 3,
+					},
+					{
+						type: ButtonType.Dpad,
+						direction: Direction.Down,
+						presses: 4,
+						bestMashSpeed: 5,
+					},
+				],
 			});
 			expect(controller.axes.length).toBe(1);
 			expect(controller.axes[0].neutralValue).toBe(0.5);
+			expect(controller.buttons.length).toBe(2);
+			expect(controller.buttons[0].index).toBe(1);
+			expect(controller.buttons[0].presses).toBe(2);
+			expect(controller.buttons[0].bestMashSpeed).toBe(3);
+			expect(controller.buttons[1].direction).toBe(Direction.Down);
+			expect(controller.buttons[1].presses).toBe(4);
+			expect(controller.buttons[1].bestMashSpeed).toBe(5);
 		});
 
 		it("should handle an empty object", () => {

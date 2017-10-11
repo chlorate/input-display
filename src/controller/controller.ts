@@ -7,6 +7,7 @@ import {Axis} from "./axis";
 import {Button} from "./button";
 import {Direction, sortedDirections} from "./direction";
 import {DpadButton} from "./dpad-button";
+import {ButtonType} from "./json/button-json";
 import {ControllerJSON, isControllerJSON} from "./json/controller-json";
 import {NormalButton} from "./normal-button";
 
@@ -75,7 +76,7 @@ export class Controller {
 	}
 
 	/**
-	 * Loads values into this controller from its JSON representation.
+	 * Assigns properties from a JSON representation of this controller.
 	 */
 	public loadJSON(json: any): void {
 		if (!isControllerJSON(json)) {
@@ -85,6 +86,18 @@ export class Controller {
 		this._axes = [];
 		if (json.axes) {
 			this._axes = json.axes.map((axis) => Axis.fromJSON(axis));
+		}
+
+		this._buttons = [];
+		if (json.buttons) {
+			this._buttons = json.buttons.map((button) => {
+				switch (button.type) {
+					case ButtonType.Normal:
+						return NormalButton.fromJSON(button);
+					case ButtonType.Dpad:
+						return DpadButton.fromJSON(button);
+				}
+			});
 		}
 	}
 

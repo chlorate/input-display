@@ -1,4 +1,5 @@
 import {observable} from "mobx";
+import {clampInt} from "../math/util";
 import {secondToMilliseconds} from "../time/const";
 import {ButtonJSON} from "./json/button-json";
 
@@ -34,6 +35,9 @@ export abstract class Button {
 	get presses(): number {
 		return this._presses;
 	}
+	set presses(presses: number) {
+		this._presses = clampInt(presses, 0);
+	}
 
 	get mashSpeed(): number {
 		return this.pressTimes.length;
@@ -42,8 +46,23 @@ export abstract class Button {
 	get bestMashSpeed(): number {
 		return this._bestMashSpeed;
 	}
+	set bestMashSpeed(bestMashSpeed: number) {
+		this._bestMashSpeed = clampInt(bestMashSpeed, 0);
+	}
 
 	public abstract toJSON(): ButtonJSON;
+
+	/**
+	 * Assigns common button properties from a JSON representation.
+	 */
+	public loadJSON(json: ButtonJSON) {
+		if (json.presses !== undefined) {
+			this.presses = json.presses;
+		}
+		if (json.bestMashSpeed !== undefined) {
+			this.bestMashSpeed = json.bestMashSpeed;
+		}
+	}
 
 	/**
 	 * Remove all press timestamps that are older than a certain time.

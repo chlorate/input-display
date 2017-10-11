@@ -3,6 +3,7 @@ import {Config} from "../config/config";
 import * as service from "../gamepad/service";
 import {Controller} from "./controller";
 import {sortedDirections} from "./direction";
+import {ButtonType} from "./json/button-json";
 
 describe("Controller", () => {
 	let config;
@@ -37,28 +38,36 @@ describe("Controller", () => {
 		expect(controller.alias).toBe("Wii Remote");
 	});
 
-	describe("toJSON", () => {
-		it("should return an object", () => {
-			spyOn(service, "getGamepads").and.returnValue([gamepad]);
-			controller.poll();
-			expect(controller.toJSON()).toEqual({
-				axes: [
-					{
-						neutralValue: 0.1,
-						minValue: 0.1,
-						maxValue: 0.1,
-					},
-					{
-						neutralValue: 0.2,
-						minValue: 0.2,
-						maxValue: 0.2,
-					},
-				],
-			});
-		});
-
-		it("can return an empty object if there are no axes or buttons", () => {
-			expect(controller.toJSON()).toEqual({});
+	it("can return a JSON representation", () => {
+		spyOn(service, "getGamepads").and.returnValue([gamepad]);
+		controller.poll();
+		expect(controller.toJSON()).toEqual({
+			axes: [
+				{
+					neutralValue: 0.1,
+					minValue: 0.1,
+					maxValue: 0.1,
+				},
+				{
+					neutralValue: 0.2,
+					minValue: 0.2,
+					maxValue: 0.2,
+				},
+			],
+			buttons: [
+				{
+					type: ButtonType.Normal,
+					index: 0,
+					presses: 0,
+					bestMashSpeed: 0,
+				},
+				{
+					type: ButtonType.Normal,
+					index: 1,
+					presses: 1,
+					bestMashSpeed: 1,
+				},
+			],
 		});
 	});
 

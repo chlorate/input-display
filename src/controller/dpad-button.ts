@@ -1,5 +1,7 @@
 import {Button} from "./button";
 import {Direction} from "./direction";
+import {ButtonType} from "./json/button-json";
+import {DpadButtonJSON} from "./json/dpad-button-json";
 
 /**
  * A button that represents a d-pad direction. This is somewhat of a virtual
@@ -20,5 +22,14 @@ export class DpadButton extends Button {
 
 	get direction(): Direction {
 		return this._direction;
+	}
+
+	public toJSON(): DpadButtonJSON {
+		return {
+			type: ButtonType.Dpad,
+			direction: this.direction,
+			presses: this.presses,
+			bestMashSpeed: this.bestMashSpeed,
+		};
 	}
 }

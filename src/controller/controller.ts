@@ -5,9 +5,9 @@ import {almostEqual} from "../math/util";
 import {secondToMilliseconds} from "../time/const";
 import {Axis} from "./axis";
 import {Button} from "./button";
-import {ControllerJSON, isControllerJSON} from "./controller-json";
 import {Direction, sortedDirections} from "./direction";
 import {DpadButton} from "./dpad-button";
+import {ControllerJSON, isControllerJSON} from "./json/controller-json";
 import {NormalButton} from "./normal-button";
 
 /**
@@ -68,11 +68,10 @@ export class Controller {
 	 * Returns a JSON representation of this controller.
 	 */
 	public toJSON(): ControllerJSON {
-		const json: ControllerJSON = {};
-		if (this.axes.length) {
-			json.axes = this.axes.map((axis) => axis.toJSON());
-		}
-		return json;
+		return {
+			axes: this.axes.map((axis) => axis.toJSON()),
+			buttons: this.buttons.map((button) => button.toJSON()),
+		};
 	}
 
 	/**

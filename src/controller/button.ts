@@ -1,5 +1,6 @@
 import {observable} from "mobx";
 import {secondToMilliseconds} from "../time/const";
+import {ButtonJSON} from "./json/button-json";
 
 /**
  * An abstract controller button. It has a unique name, can be pressed, and
@@ -41,6 +42,8 @@ export abstract class Button {
 	get bestMashSpeed(): number {
 		return this._bestMashSpeed;
 	}
+
+	public abstract toJSON(): ButtonJSON;
 
 	/**
 	 * Remove all press timestamps that are older than a certain time.

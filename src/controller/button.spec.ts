@@ -1,9 +1,17 @@
 import {secondToMilliseconds} from "../time/const";
 import {Button} from "./button";
+import {ButtonJSON, ButtonType} from "./json/button-json";
 
 class TestButton extends Button {
 	get name(): string {
 		return "";
+	}
+
+	public toJSON(): ButtonJSON {
+		return {
+			type: ButtonType.Normal,
+			index: 0,
+		};
 	}
 }
 

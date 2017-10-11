@@ -1,5 +1,7 @@
 import {clampIndex} from "../math/util";
 import {Button} from "./button";
+import {ButtonType} from "./json/button-json";
+import {NormalButtonJSON} from "./json/normal-button-json";
 
 /**
  * A "normal" controller button. This corresponds to a button reported by the
@@ -21,5 +23,17 @@ export class NormalButton extends Button {
 
 	get index(): number {
 		return this._index;
+	}
+
+	/**
+	 * Returns a JSON representation of this button.
+	 */
+	public toJSON(): NormalButtonJSON {
+		return {
+			type: ButtonType.Normal,
+			index: this.index,
+			presses: this.presses,
+			bestMashSpeed: this.bestMashSpeed,
+		};
 	}
 }

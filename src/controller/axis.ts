@@ -1,6 +1,6 @@
 import {observable} from "mobx";
 import {clamp} from "../math/util";
-import {AxisJSON} from "./axis-json";
+import {AxisJSON} from "./json/axis-json";
 
 /**
  * A controller axis. Stores its current value, neutral value, and range of

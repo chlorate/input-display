@@ -1,9 +1,9 @@
 import {linkEvent} from "inferno";
 import {connect} from "inferno-mobx";
-import {Store} from "../mobx/store";
+import {Controller} from "../../controller/controller";
+import {Store} from "../../mobx/store";
 import {AxisRowComponent} from "./axis-row.component";
 import {ButtonRowComponent} from "./button-row.component";
-import {Controller} from "./controller";
 
 interface Props {
 	controller: Controller;

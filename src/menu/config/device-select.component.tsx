@@ -1,11 +1,11 @@
 import {linkEvent} from "inferno";
 import Component from "inferno-component";
 import {connect} from "inferno-mobx";
-import {arraysEqual} from "../array/util";
-import {getGamepadIds} from "../gamepad/service";
-import {Store} from "../mobx/store";
-import {secondToMilliseconds} from "../time/const";
-import {Config} from "./config";
+import {arraysEqual} from "../../array/util";
+import {Config} from "../../config/config";
+import {getGamepadIds} from "../../gamepad/service";
+import {Store} from "../../mobx/store";
+import {secondToMilliseconds} from "../../time/const";
 
 const notConnected = "No controller connected";
 

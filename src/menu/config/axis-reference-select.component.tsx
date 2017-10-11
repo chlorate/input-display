@@ -1,6 +1,6 @@
 import {linkEvent} from "inferno";
 import {connect} from "inferno-mobx";
-import {AxisReference} from "./axis-reference";
+import {AxisReference} from "../../config/axis-reference";
 import {AxisSelectComponent} from "./axis-select.component";
 
 interface Props {

@@ -1,5 +1,5 @@
 import {connect} from "inferno-mobx";
-import {Axis} from "./axis";
+import {Axis} from "../../controller/axis";
 
 interface Props {
 	axis: Axis;

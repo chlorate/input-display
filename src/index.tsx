@@ -5,7 +5,7 @@ import {observable} from "mobx";
 import {Config} from "./config/config";
 import {Controller} from "./controller/controller";
 import {GamepadComponent} from "./display/gamepad.component";
-import {ErrorsComponent} from "./error/errors.component";
+import {ErrorsComponent} from "./menu/error/errors.component";
 import {MenuComponent} from "./menu/menu.component";
 import {Store} from "./mobx/store";
 import {loadLocalStorage, saveLocalStorage} from "./storage/local";

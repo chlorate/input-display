@@ -1,11 +1,11 @@
 import {linkEvent} from "inferno";
 import {connect} from "inferno-mobx";
-import {Controller} from "../controller/controller";
-import {Store} from "../mobx/store";
+import {AxisReference} from "../../config/axis-reference";
+import {Config} from "../../config/config";
+import {Controller} from "../../controller/controller";
+import {Store} from "../../mobx/store";
 import {AxisIndexSelectComponent} from "./axis-index-select.component";
-import {AxisReference} from "./axis-reference";
 import {AxisReferenceSelectComponent} from "./axis-reference-select.component";
-import {Config} from "./config";
 
 const defaultXAxisIndex = 0;
 const defaultYAxisIndex = 1;

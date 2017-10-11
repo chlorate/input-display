@@ -1,6 +1,6 @@
 import {linkEvent} from "inferno";
 import {connect} from "inferno-mobx";
-import {Store} from "../mobx/store";
+import {Store} from "../../mobx/store";
 
 interface Props {
 	errors: string[];

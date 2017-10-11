@@ -1,6 +1,6 @@
 import {connect} from "inferno-mobx";
-import {formatNumber} from "../math/util";
-import {Button} from "./button";
+import {Button} from "../../controller/button";
+import {formatNumber} from "../../math/util";
 
 interface Props {
 	button: Button;

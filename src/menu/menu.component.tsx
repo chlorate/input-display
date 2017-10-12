@@ -64,10 +64,10 @@ export class MenuComponent extends Component<{}, State> {
 	}
 }
 
-function handleClickConfig(menu: MenuComponent): void {
-	menu.tab = Tab.Config;
+function handleClickConfig(component: MenuComponent): void {
+	component.tab = Tab.Config;
 }
 
-function handleClickController(menu: MenuComponent): void {
-	menu.tab = Tab.Controller;
+function handleClickController(component: MenuComponent): void {
+	component.tab = Tab.Controller;
 }

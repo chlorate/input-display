@@ -3,13 +3,14 @@ import Component from "inferno-component";
 import {connect} from "inferno-mobx";
 import {Config} from "../../config/config";
 import {Store} from "../../mobx/store";
-import {saveFile} from "../../storage/file";
+import {loadFile, saveFile} from "../../storage/file";
 import {DeviceSelectComponent} from "./device-select.component";
 import {DpadMappingFieldsetComponent} from "./dpad-mapping-fieldset.component";
 import {PollRateInputComponent} from "./poll-rate-input.component";
 
 interface Props {
 	config: Config;
+	errors: string[];
 }
 
 interface State {
@@ -20,9 +21,10 @@ interface State {
  * Contents of the Config tab. Provides fields for configuring the controller
  * and input display.
  */
-@connect([Store.Config])
+@connect([Store.Config, Store.Errors])
 export class ConfigComponent extends Component<Props, State> {
 	public state: State = {};
+	public fileInput?: HTMLInputElement;
 
 	set saveUrl(url: string | undefined) {
 		if (this.state.saveUrl) {
@@ -39,7 +41,18 @@ export class ConfigComponent extends Component<Props, State> {
 		return (
 			<form onSubmit={linkEvent(undefined, handleSubmit)}>
 				<div class="mb-3">
-					<button type="button" class="btn btn-secondary">
+					<input
+						type="file"
+						accept=".json"
+						hidden
+						ref={(input) => this.fileInput = input}
+						onChange={linkEvent(this, handleChangeFile)}
+					/>
+					<button
+						type="button"
+						class="btn btn-secondary"
+						onClick={linkEvent(this, handleClickOpen)}
+					>
 						Open
 					</button>{" "}
 					<button
@@ -82,10 +95,31 @@ function handleSubmit(_: undefined, event): void {
 	event.preventDefault();
 }
 
-function handleClickSave(component: ConfigComponent, event): void {
+function handleChangeFile(component: ConfigComponent): void {
+	if (component.fileInput && component.fileInput.files) {
+		loadFile(component.fileInput.files[0], component.props.config)
+			.catch((error: string) => {
+				component.props.errors.push("Failed to open config file: " + error);
+			})
+			.then(() => {
+				if (component.fileInput) {
+					// Deselect current file.
+					component.fileInput.value = "";
+				}
+			});
+	}
+}
+
+function handleClickOpen(component: ConfigComponent): void {
+	if (component.fileInput) {
+		component.fileInput.click();
+	}
+}
+
+function handleClickSave(component: ConfigComponent): void {
 	component.saveUrl = saveFile(component.props.config);
 }
 
-function handleClickCloseSave(component: ConfigComponent, event): void {
+function handleClickCloseSave(component: ConfigComponent): void {
 	component.saveUrl = undefined;
 }

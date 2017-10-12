@@ -57,11 +57,16 @@ export class Config {
 	 * Returns a JSON representation of this config.
 	 */
 	public toJSON(): ConfigJSON {
-		return {
+		const json: ConfigJSON = {
 			gamepadIndex: this.gamepadIndex,
 			dpadAxisIndex: this.dpadAxisIndex,
 			pollRate: this.pollRate,
 		};
+		if (this.dpadXAxis && this.dpadYAxis) {
+			json.dpadXAxis = this.dpadXAxis.toJSON();
+			json.dpadYAxis = this.dpadYAxis.toJSON();
+		}
+		return json;
 	}
 
 	/**
@@ -75,6 +80,13 @@ export class Config {
 		this.gamepadIndex = json.gamepadIndex !== undefined ? json.gamepadIndex : 0;
 		this.dpadAxisIndex = json.dpadAxisIndex;
 		this.pollRate = json.pollRate !== undefined ? json.pollRate : defaultPollRate;
+
+		if (json.dpadXAxis && json.dpadYAxis) {
+			this.setDpadDualAxes(
+				AxisReference.fromJSON(json.dpadXAxis),
+				AxisReference.fromJSON(json.dpadYAxis),
+			);
+		}
 	}
 
 	/**

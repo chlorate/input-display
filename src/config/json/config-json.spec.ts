@@ -9,6 +9,14 @@ describe("ConfigJSON", () => {
 		const json = {
 			gamepadIndex: 0,
 			dpadAxisIndex: 0,
+			dpadXAxis: {
+				index: 1,
+				inverted: false,
+			},
+			dpadYAxis: {
+				index: 2,
+				inverted: true,
+			},
 			pollRate: 60,
 		};
 		expect(isConfigJSON(json)).toBe(true);
@@ -24,6 +32,14 @@ describe("ConfigJSON", () => {
 
 	it("should return false if dpadAxisIndex is not numeric", () => {
 		expect(isConfigJSON({dpadAxisIndex: "bad"})).toBe(false);
+	});
+
+	it("should return false if dpadXAxis is not an AxisReferenceJSON object", () => {
+		expect(isConfigJSON({dpadXAxis: "bad"})).toBe(false);
+	});
+
+	it("should return false if dpadYAxis is not an AxisReferenceJSON object", () => {
+		expect(isConfigJSON({dpadYAxis: "bad"})).toBe(false);
 	});
 
 	it("should return false if pollRate is not numeric", () => {

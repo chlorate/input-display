@@ -22,9 +22,27 @@ describe("AxisReference", () => {
 		controller.stopPoll();
 	});
 
+	it("can be created from a JSON representation", () => {
+		reference = AxisReference.fromJSON({
+			index: 1,
+			inverted: true,
+		});
+		expect(reference.index).toBe(1);
+		expect(reference.inverted).toBe(true);
+	});
+
 	it("should not accept a negative index", () => {
 		reference.index = -1;
 		expect(reference.index).toBe(0);
+	});
+
+	it("can return a JSON representation of itself", () => {
+		reference.index = 1;
+		reference.inverted = true;
+		expect(reference.toJSON()).toEqual({
+			index: 1,
+			inverted: true,
+		});
 	});
 
 	describe("resolveAxis", () => {

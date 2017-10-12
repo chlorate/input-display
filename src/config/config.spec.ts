@@ -56,6 +56,13 @@ describe("Config", () => {
 			dpadAxisIndex: 2,
 			pollRate: defaultPollRate,
 		});
+
+		setDualAxes();
+		const json = config.toJSON();
+		expect(json.dpadXAxis.index).toBe(0);
+		expect(json.dpadXAxis.inverted).toBe(false);
+		expect(json.dpadYAxis.index).toBe(1);
+		expect(json.dpadYAxis.inverted).toBe(false);
 	});
 
 	describe("loadJSON", () => {
@@ -75,6 +82,21 @@ describe("Config", () => {
 			expect(config.gamepadIndex).toBe(1);
 			expect(config.dpadAxisIndex).toBe(2);
 			expect(config.pollRate).toBe(30);
+
+			config.loadJSON({
+				dpadXAxis: {
+					index: 1,
+					inverted: false,
+				},
+				dpadYAxis: {
+					index: 2,
+					inverted: true,
+				},
+			});
+			expect(config.dpadXAxis.index).toEqual(1);
+			expect(config.dpadXAxis.inverted).toBe(false);
+			expect(config.dpadYAxis.index).toEqual(2);
+			expect(config.dpadYAxis.inverted).toBe(true);
 		});
 
 		it("should throw error when not passed a ConfigJSON object", () => {

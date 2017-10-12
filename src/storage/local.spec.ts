@@ -1,16 +1,5 @@
 import {loadLocalStorage, saveLocalStorage} from "./local";
-
-class TestObject {
-	public json?: any;
-
-	public toJSON(): object {
-		return {};
-	}
-
-	public loadJSON(json: any): void {
-		this.json = json;
-	}
-}
+import {TestObject} from "./test";
 
 // Spying on localStorage doesn't work on Firefox, but Storage.prototype does.
 

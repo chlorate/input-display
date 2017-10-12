@@ -1,7 +1,7 @@
 KARMA=node_modules/.bin/karma
 NCU=node_modules/.bin/ncu
 WEBPACK=node_modules/.bin/webpack
-WEBPACK_DEV_SERVER=node_modules/.bin/webpack-dev-server -d
+WEBPACK_DEV_SERVER=node_modules/.bin/webpack-dev-server -d --host 0.0.0.0
 
 .PHONY: build
 build: node_modules

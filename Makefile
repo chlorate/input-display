@@ -14,7 +14,7 @@ test: node_modules
 
 .PHONY: watch
 watch: node_modules
-	$(WEBPACK_DEV_SERVER) & $(KARMA) start
+	$(WEBPACK_DEV_SERVER) & $(KARMA) start & wait
 
 .PHONY: clean
 clean: 

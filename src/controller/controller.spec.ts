@@ -77,6 +77,12 @@ describe("Controller", () => {
 			controller.poll();
 		});
 
+		it("should clear everything if passed an empty object", () => {
+			controller.loadJSON({});
+			expect(controller.axes.length).toBe(0);
+			expect(controller.buttons.length).toBe(0);
+		});
+
 		it("should update as expected", () => {
 			controller.loadJSON({
 				axes: [
@@ -110,12 +116,7 @@ describe("Controller", () => {
 			expect(controller.buttons[1].bestMashSpeed).toBe(5);
 		});
 
-		it("should handle an empty object", () => {
-			controller.loadJSON({});
-			expect(controller.axes.length).toBe(0);
-		});
-
-		it("should do nothing if not passed a ControllerObject", () => {
+		it("should throw error when not passed a ControllerJSON object", () => {
 			expect(() => controller.loadJSON("bad")).toThrowError();
 		});
 	});

@@ -1,11 +1,13 @@
 import {observable} from "mobx";
 import {clampIndex, clampInt} from "../math/util";
 import {AxisReference} from "./axis-reference";
+import {ConfigJSON, isConfigJSON} from "./json/config-json";
 
 // 4 ms is the smallest delay:
 // https://developer.mozilla.org/en-US/docs/Web/API/WindowOrWorkerGlobalScope/setTimeout#Timeouts_throttled_to_>4ms
 export const minPollRate = 1;
 export const maxPollRate = 250;
+export const defaultPollRate = 60;
 
 /**
  * Stores all settings related to the controller and input display.
@@ -15,7 +17,7 @@ export class Config {
 	@observable private _dpadAxisIndex?: number;
 	@observable private _dpadXAxis?: AxisReference;
 	@observable private _dpadYAxis?: AxisReference;
-	@observable private _pollRate: number = 60;
+	@observable private _pollRate: number = defaultPollRate;
 
 	get gamepadIndex(): number {
 		return this._gamepadIndex;
@@ -49,6 +51,30 @@ export class Config {
 	}
 	set pollRate(pollRate: number) {
 		this._pollRate = clampInt(pollRate, minPollRate, maxPollRate);
+	}
+
+	/**
+	 * Returns a JSON representation of this config.
+	 */
+	public toJSON(): ConfigJSON {
+		return {
+			gamepadIndex: this.gamepadIndex,
+			dpadAxisIndex: this.dpadAxisIndex,
+			pollRate: this.pollRate,
+		};
+	}
+
+	/**
+	 * Assigns properties from a JSON representation of a config object.
+	 */
+	public loadJSON(json: any): void {
+		if (!isConfigJSON(json)) {
+			throw new TypeError("invalid config JSON");
+		}
+
+		this.gamepadIndex = json.gamepadIndex !== undefined ? json.gamepadIndex : 0;
+		this.dpadAxisIndex = json.dpadAxisIndex;
+		this.pollRate = json.pollRate !== undefined ? json.pollRate : defaultPollRate;
 	}
 
 	/**

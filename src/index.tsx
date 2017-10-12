@@ -36,6 +36,12 @@ class IndexComponent extends Component<{}, State> {
 
 	public componentDidMount(): void {
 		try {
+			loadLocalStorage(Store.Config, this.state.config);
+		} catch (exception) {
+			this.state.errors.push("Failed to config data: " + exception.toString());
+		}
+
+		try {
 			loadLocalStorage(Store.Controller, this.state.controller);
 		} catch (exception) {
 			this.state.errors.push("Failed to load controller data: " + exception.toString());
@@ -43,6 +49,7 @@ class IndexComponent extends Component<{}, State> {
 		this.state.controller.poll();
 
 		window.addEventListener("beforeunload", () => {
+			saveLocalStorage(Store.Config, this.state.config);
 			saveLocalStorage(Store.Controller, this.state.controller);
 		});
 	}

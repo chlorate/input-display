@@ -1,5 +1,5 @@
 import {AxisReference} from "./axis-reference";
-import {Config, maxPollRate, minPollRate} from "./config";
+import {Config, defaultPollRate, maxPollRate, minPollRate} from "./config";
 
 describe("Config", () => {
 	let config;
@@ -36,8 +36,8 @@ describe("Config", () => {
 		it("should not clear dual axes mapping if set to undefined", () => {
 			setDualAxes();
 			config.dpadAxisIndex = undefined;
-			expect(config.dpadXAxis).not.toBeUndefined();
-			expect(config.dpadYAxis).not.toBeUndefined();
+			expect(config.dpadXAxis).toBeDefined();
+			expect(config.dpadYAxis).toBeDefined();
 		});
 	});
 
@@ -48,11 +48,45 @@ describe("Config", () => {
 		expect(config.pollRate).toBe(maxPollRate);
 	});
 
+	it("can return a JSON representation", () => {
+		config.gamepadIndex = 1;
+		config.dpadAxisIndex = 2;
+		expect(config.toJSON()).toEqual({
+			gamepadIndex: 1,
+			dpadAxisIndex: 2,
+			pollRate: defaultPollRate,
+		});
+	});
+
+	describe("loadJSON", () => {
+		it("should set defaults when passed an empty object", () => {
+			config.loadJSON({});
+			expect(config.gamepadIndex).toBe(0);
+			expect(config.dpadAxisIndex).toBeUndefined();
+			expect(config.pollRate).toBe(defaultPollRate);
+		});
+
+		it("should update properties as expected", () => {
+			config.loadJSON({
+				gamepadIndex: 1,
+				dpadAxisIndex: 2,
+				pollRate: 30,
+			});
+			expect(config.gamepadIndex).toBe(1);
+			expect(config.dpadAxisIndex).toBe(2);
+			expect(config.pollRate).toBe(30);
+		});
+
+		it("should throw error when not passed a ConfigJSON object", () => {
+			expect(() => config.loadJSON("bad")).toThrowError();
+		});
+	});
+
 	describe("setDpadDualAxes", () => {
 		it("should set both X and Y axes", () => {
 			setDualAxes();
-			expect(config.dpadXAxis).not.toBeUndefined();
-			expect(config.dpadYAxis).not.toBeUndefined();
+			expect(config.dpadXAxis).toBeDefined();
+			expect(config.dpadYAxis).toBeDefined();
 		});
 
 		it("should clear single axis mapping", () => {

@@ -2,11 +2,7 @@ import {ButtonType} from "./button-json";
 import {isControllerJSON} from "./controller-json";
 
 describe("isControllerJSON", () => {
-	it("should return true for an empty object", () => {
-		expect(isControllerJSON({})).toBe(true);
-	});
-
-	it("should return true for all valid, optional properties", () => {
+	it("should return true if valid", () => {
 		const json = {
 			axes: [
 				{

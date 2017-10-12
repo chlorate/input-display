@@ -56,12 +56,8 @@ export abstract class Button {
 	 * Assigns common button properties from a JSON representation.
 	 */
 	public loadJSON(json: ButtonJSON) {
-		if (json.presses !== undefined) {
-			this.presses = json.presses;
-		}
-		if (json.bestMashSpeed !== undefined) {
-			this.bestMashSpeed = json.bestMashSpeed;
-		}
+		this.presses = json.presses;
+		this.bestMashSpeed = json.bestMashSpeed;
 	}
 
 	/**

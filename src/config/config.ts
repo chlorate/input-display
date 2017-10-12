@@ -7,7 +7,6 @@ import {ConfigJSON, isConfigJSON} from "./json/config-json";
 // https://developer.mozilla.org/en-US/docs/Web/API/WindowOrWorkerGlobalScope/setTimeout#Timeouts_throttled_to_>4ms
 export const minPollRate = 1;
 export const maxPollRate = 250;
-export const defaultPollRate = 60;
 
 /**
  * Stores all settings related to the controller and input display.
@@ -17,7 +16,7 @@ export class Config {
 	@observable private _dpadAxisIndex?: number;
 	@observable private _dpadXAxis?: AxisReference;
 	@observable private _dpadYAxis?: AxisReference;
-	@observable private _pollRate: number = defaultPollRate;
+	@observable private _pollRate: number = 60;
 
 	get gamepadIndex(): number {
 		return this._gamepadIndex;
@@ -77,9 +76,9 @@ export class Config {
 			throw new TypeError("invalid config JSON");
 		}
 
-		this.gamepadIndex = json.gamepadIndex !== undefined ? json.gamepadIndex : 0;
+		this.gamepadIndex = json.gamepadIndex;
 		this.dpadAxisIndex = json.dpadAxisIndex;
-		this.pollRate = json.pollRate !== undefined ? json.pollRate : defaultPollRate;
+		this.pollRate = json.pollRate;
 
 		if (json.dpadXAxis && json.dpadYAxis) {
 			this.setDpadDualAxes(

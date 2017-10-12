@@ -5,27 +5,16 @@ import {ButtonType} from "./json/button-json";
 describe("DpadButton", () => {
 	let button;
 
-	describe("fromJSON", () => {
-		it("can create a button with only required properties", () => {
-			button = DpadButton.fromJSON({
-				type: ButtonType.Dpad,
-				direction: Direction.Left,
-			});
-			expect(button.direction).toBe(Direction.Left);
-			expect(button.presses).toBe(0);
-			expect(button.bestMashSpeed).toBe(0);
+	it("can be created from a JSON representation", () => {
+		button = DpadButton.fromJSON({
+			type: ButtonType.Dpad,
+			direction: Direction.Left,
+			presses: 123,
+			bestMashSpeed: 30,
 		});
-
-		it("can create a button with all optional properties", () => {
-			button = DpadButton.fromJSON({
-				type: ButtonType.Dpad,
-				direction: Direction.Left,
-				presses: 1,
-				bestMashSpeed: 2,
-			});
-			expect(button.presses).toBe(1);
-			expect(button.bestMashSpeed).toBe(2);
-		});
+		expect(button.direction).toBe(Direction.Left);
+		expect(button.presses).toBe(123);
+		expect(button.bestMashSpeed).toBe(30);
 	});
 
 	it("should have a name", () => {

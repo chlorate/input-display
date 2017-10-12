@@ -4,27 +4,16 @@ import {NormalButton} from "./normal-button";
 describe("NormalButton", () => {
 	let button;
 
-	describe("fromJSON", () => {
-		it("can create a button with only required properties", () => {
-			button = NormalButton.fromJSON({
-				type: ButtonType.Normal,
-				index: 1,
-			});
-			expect(button.index).toBe(1);
-			expect(button.presses).toBe(0);
-			expect(button.bestMashSpeed).toBe(0);
+	it("can be created from a JSON representation", () => {
+		button = NormalButton.fromJSON({
+			type: ButtonType.Normal,
+			index: 1,
+			presses: 123,
+			bestMashSpeed: 30,
 		});
-
-		it("can create a button with all optional properties", () => {
-			button = NormalButton.fromJSON({
-				type: ButtonType.Normal,
-				index: 1,
-				presses: 2,
-				bestMashSpeed: 3,
-			});
-			expect(button.presses).toBe(2);
-			expect(button.bestMashSpeed).toBe(3);
-		});
+		expect(button.index).toBe(1);
+		expect(button.presses).toBe(123);
+		expect(button.bestMashSpeed).toBe(30);
 	});
 
 	it("should not accept a negative index", () => {

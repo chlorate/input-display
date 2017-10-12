@@ -1,5 +1,5 @@
 import {AxisReference} from "./axis-reference";
-import {Config, defaultPollRate, maxPollRate, minPollRate} from "./config";
+import {Config, maxPollRate, minPollRate} from "./config";
 
 describe("Config", () => {
 	let config;
@@ -51,10 +51,11 @@ describe("Config", () => {
 	it("can return a JSON representation", () => {
 		config.gamepadIndex = 1;
 		config.dpadAxisIndex = 2;
+		config.pollRate = 45;
 		expect(config.toJSON()).toEqual({
 			gamepadIndex: 1,
 			dpadAxisIndex: 2,
-			pollRate: defaultPollRate,
+			pollRate: 45,
 		});
 
 		setDualAxes();
@@ -66,33 +67,40 @@ describe("Config", () => {
 	});
 
 	describe("loadJSON", () => {
-		it("should set defaults when passed an empty object", () => {
-			config.loadJSON({});
-			expect(config.gamepadIndex).toBe(0);
-			expect(config.dpadAxisIndex).toBeUndefined();
-			expect(config.pollRate).toBe(defaultPollRate);
+		let json;
+
+		beforeEach(() => {
+			json = {
+				gamepadIndex: 1,
+				pollRate: 30,
+			};
 		});
 
-		it("should update properties as expected", () => {
-			config.loadJSON({
-				gamepadIndex: 1,
-				dpadAxisIndex: 2,
-				pollRate: 30,
-			});
+		it("should update all required properties", () => {
+			config.loadJSON(json);
 			expect(config.gamepadIndex).toBe(1);
-			expect(config.dpadAxisIndex).toBe(2);
+			expect(config.dpadAxisIndex).toBeUndefined();
+			expect(config.dpadXIndex).toBeUndefined();
+			expect(config.dpadYIndex).toBeUndefined();
 			expect(config.pollRate).toBe(30);
+		});
 
-			config.loadJSON({
-				dpadXAxis: {
-					index: 1,
-					inverted: false,
-				},
-				dpadYAxis: {
-					index: 2,
-					inverted: true,
-				},
-			});
+		it("can update dpadAxisIndex", () => {
+			json.dpadAxisIndex = 2;
+			config.loadJSON(json);
+			expect(config.dpadAxisIndex).toBe(2);
+		});
+
+		it("can update d-pad dual axes settings", () => {
+			json.dpadXAxis = {
+				index: 1,
+				inverted: false,
+			};
+			json.dpadYAxis = {
+				index: 2,
+				inverted: true,
+			};
+			config.loadJSON(json);
 			expect(config.dpadXAxis.index).toEqual(1);
 			expect(config.dpadXAxis.inverted).toBe(false);
 			expect(config.dpadYAxis.index).toEqual(2);

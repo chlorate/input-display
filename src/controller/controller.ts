@@ -83,22 +83,15 @@ export class Controller {
 			throw new TypeError("invalid controller JSON");
 		}
 
-		this._axes = [];
-		if (json.axes) {
-			this._axes = json.axes.map((axis) => Axis.fromJSON(axis));
-		}
-
-		this._buttons = [];
-		if (json.buttons) {
-			this._buttons = json.buttons.map((button) => {
-				switch (button.type) {
-					case ButtonType.Normal:
-						return NormalButton.fromJSON(button);
-					case ButtonType.Dpad:
-						return DpadButton.fromJSON(button);
-				}
-			});
-		}
+		this._axes = json.axes.map((axis) => Axis.fromJSON(axis));
+		this._buttons = json.buttons.map((button) => {
+			switch (button.type) {
+				case ButtonType.Normal:
+					return NormalButton.fromJSON(button);
+				case ButtonType.Dpad:
+					return DpadButton.fromJSON(button);
+			}
+		});
 	}
 
 	/**

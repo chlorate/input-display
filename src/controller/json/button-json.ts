@@ -19,8 +19,8 @@ export type ButtonJSON = NormalButtonJSON | DpadButtonJSON;
  * Common properties for all button JSON representations.
  */
 export interface BaseButtonJSON {
-	presses?: number;
-	bestMashSpeed?: number;
+	presses: number;
+	bestMashSpeed: number;
 }
 
 /**
@@ -29,17 +29,11 @@ export interface BaseButtonJSON {
 export function isButtonJSON(input: any): input is ButtonJSON {
 	return (
 		typeof input === "object" &&
-		(input.presses === undefined || typeof input.presses === "number") &&
-		(input.bestMashSpeed === undefined || typeof input.bestMashSpeed === "number") &&
+		typeof input.presses === "number" &&
+		typeof input.bestMashSpeed === "number" &&
 		(
-			(
-				input.type === ButtonType.Normal &&
-				typeof input.index === "number"
-			) ||
-			(
-				input.type === ButtonType.Dpad &&
-				sortedDirections.indexOf(input.direction) >= 0
-			)
+			(input.type === ButtonType.Normal && typeof input.index === "number") ||
+			(input.type === ButtonType.Dpad && sortedDirections.indexOf(input.direction) >= 0)
 		)
 	);
 }

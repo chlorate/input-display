@@ -1,11 +1,15 @@
 import {isConfigJSON} from "./config-json";
 
 describe("ConfigJSON", () => {
-	it("should return true for an empty object", () => {
-		expect(isConfigJSON({})).toBe(true);
+	it("should return true if only required properties are set", () => {
+		const json = {
+			gamepadIndex: 0,
+			pollRate: 60,
+		};
+		expect(isConfigJSON(json)).toBe(true);
 	});
 
-	it("should return true for all valid, optional properties", () => {
+	it("should return true if all optional properties are set", () => {
 		const json = {
 			gamepadIndex: 0,
 			dpadAxisIndex: 0,

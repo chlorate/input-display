@@ -4,11 +4,11 @@ import {AxisReferenceJSON, isAxisReferenceJSON} from "./axis-reference-json";
  * A JSON representation of a Config object.
  */
 export interface ConfigJSON {
-	gamepadIndex?: number;
+	gamepadIndex: number;
 	dpadAxisIndex?: number;
 	dpadXAxis?: AxisReferenceJSON;
 	dpadYAxis?: AxisReferenceJSON;
-	pollRate?: number;
+	pollRate: number;
 }
 
 /**
@@ -17,10 +17,10 @@ export interface ConfigJSON {
 export function isConfigJSON(input: any): input is ConfigJSON {
 	return (
 		typeof input === "object" &&
-		(input.gamepadIndex === undefined || typeof input.gamepadIndex === "number") &&
+		typeof input.gamepadIndex === "number" &&
 		(input.dpadAxisIndex === undefined || typeof input.dpadAxisIndex === "number") &&
 		(input.dpadXAxis === undefined || isAxisReferenceJSON(input.dpadXAxis)) &&
 		(input.dpadYAxis === undefined || isAxisReferenceJSON(input.dpadYAxis)) &&
-		(input.pollRate === undefined || typeof input.pollRate === "number")
+		typeof input.pollRate === "number"
 	);
 }

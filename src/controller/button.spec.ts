@@ -11,6 +11,8 @@ class TestButton extends Button {
 		return {
 			type: ButtonType.Normal,
 			index: 0,
+			presses: 0,
+			bestMashSpeed: 0,
 		};
 	}
 }

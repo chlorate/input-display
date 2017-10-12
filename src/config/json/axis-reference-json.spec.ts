@@ -1,7 +1,7 @@
 import {isAxisReferenceJSON} from "./axis-reference-json";
 
 describe("isAxisReferenceJSON", () => {
-	it("should return true if everything is valid", () => {
+	it("should return true if valid", () => {
 		const json = {
 			index: 1,
 			inverted: true,

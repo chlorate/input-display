@@ -1,11 +1,11 @@
 import {isAxisJSON} from "./axis-json";
 
 describe("isAxisJSON", () => {
-	it("should return true for an empty object", () => {
+	it("should return true if an empty object", () => {
 		expect(isAxisJSON({})).toBe(true);
 	});
 
-	it("should return true for all valid, optional properties", () => {
+	it("should return true if all valid, optional properties are set", () => {
 		const json = {
 			neutralValue: 0.1,
 			minValue: -0.2,

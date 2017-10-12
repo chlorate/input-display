@@ -77,13 +77,7 @@ describe("Controller", () => {
 			controller.poll();
 		});
 
-		it("should clear everything if passed an empty object", () => {
-			controller.loadJSON({});
-			expect(controller.axes.length).toBe(0);
-			expect(controller.buttons.length).toBe(0);
-		});
-
-		it("should update as expected", () => {
+		it("should update properties", () => {
 			controller.loadJSON({
 				axes: [
 					{

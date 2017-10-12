@@ -38,7 +38,7 @@ class IndexComponent extends Component<{}, State> {
 		try {
 			loadLocalStorage(Store.Config, this.state.config);
 		} catch (exception) {
-			this.state.errors.push("Failed to config data: " + exception.toString());
+			this.state.errors.push("Failed to load config data: " + exception.toString());
 		}
 
 		try {

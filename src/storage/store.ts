@@ -1,5 +1,5 @@
 /**
- * Names of mobx stores.
+ * Names used for mobx stores, localStorage keys, and filenames.
  */
 export enum Store {
 	Config = "config",

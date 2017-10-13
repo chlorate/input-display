@@ -1,6 +1,6 @@
 import {connect} from "inferno-mobx";
 import {Controller} from "../controller/controller";
-import {Store} from "../mobx/store";
+import {Store} from "../storage/store";
 
 interface Props {
 	controller: Controller;

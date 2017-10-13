@@ -4,7 +4,7 @@ import {connect} from "inferno-mobx";
 import {arraysEqual} from "../../array/util";
 import {Config} from "../../config/config";
 import {getGamepadIds} from "../../gamepad/service";
-import {Store} from "../../mobx/store";
+import {Store} from "../../storage/store";
 import {secondToMilliseconds} from "../../time/const";
 
 const notConnected = "No controller connected";

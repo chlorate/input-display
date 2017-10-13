@@ -3,7 +3,7 @@ import {connect} from "inferno-mobx";
 import {AxisReference} from "../../config/axis-reference";
 import {Config} from "../../config/config";
 import {Controller} from "../../controller/controller";
-import {Store} from "../../mobx/store";
+import {Store} from "../../storage/store";
 import {AxisIndexSelectComponent} from "./axis-index-select.component";
 import {AxisReferenceSelectComponent} from "./axis-reference-select.component";
 

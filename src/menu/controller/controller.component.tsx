@@ -1,7 +1,7 @@
 import {linkEvent} from "inferno";
 import {connect} from "inferno-mobx";
 import {Controller} from "../../controller/controller";
-import {Store} from "../../mobx/store";
+import {Store} from "../../storage/store";
 import {AxisRowComponent} from "./axis-row.component";
 import {ButtonRowComponent} from "./button-row.component";
 

@@ -1,7 +1,7 @@
 import {linkEvent} from "inferno";
 import {connect} from "inferno-mobx";
 import {Config, maxPollRate, minPollRate} from "../../config/config";
-import {Store} from "../../mobx/store";
+import {Store} from "../../storage/store";
 
 interface Props {
 	config: Config;

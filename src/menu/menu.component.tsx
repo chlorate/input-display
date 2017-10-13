@@ -20,7 +20,7 @@ const tabLinks = [
 ];
 
 interface State {
-	tab: Tab;
+	tab?: Tab;
 }
 
 /**
@@ -29,11 +29,24 @@ interface State {
 export class MenuComponent extends Component<{}, State> {
 	public state: State = {tab: Tab.Config};
 
-	set tab(tab: Tab) {
+	set tab(tab: Tab | undefined) {
 		this.setState({tab});
 	}
 
 	public render() {
+		if (!this.state.tab) {
+			return (
+				<div class="text-right">
+					<button
+						class="btn btn-primary"
+						onClick={linkEvent(this, handleClickConfig)}
+					>
+						Menu
+					</button>
+				</div>
+			);
+		}
+
 		return (
 			<div class="card">
 				<div class="card-header">
@@ -49,6 +62,15 @@ export class MenuComponent extends Component<{}, State> {
 								</a>
 							</li>
 						))}
+						<li class="nav-item ml-auto">
+							<button
+								class="close"
+								aria-label="Close"
+								onClick={linkEvent(this, handleClickClose)}
+							>
+								<span aria-hidden="true">×</span>
+							</button>
+						</li>
 					</ul>
 				</div>
 				<div class="card-body">
@@ -70,4 +92,8 @@ function handleClickConfig(component: MenuComponent): void {
 
 function handleClickController(component: MenuComponent): void {
 	component.tab = Tab.Controller;
+}
+
+function handleClickClose(component: MenuComponent): void {
+	component.tab = undefined;
 }

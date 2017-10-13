@@ -3,6 +3,7 @@ import Component from "inferno-component";
 import {IndexRoute, Route, Router} from "inferno-router";
 import {ConfigComponent} from "./config/config.component";
 import {ControllerComponent} from "./controller/controller.component";
+import {HelpComponent} from "./help/help.component";
 import {MenuButtonComponent} from "./menu-button.component";
 import {MenuCardComponent} from "./menu-card.component";
 
@@ -33,6 +34,7 @@ export class MenuComponent extends Component<{}, State> {
 				<Route component={MenuCardComponent}>
 					<Route path="/config" component={ConfigComponent} />
 					<Route path="/controller" component={ControllerComponent} />
+					<Route path="/help" component={HelpComponent} />
 				</Route>
 			</Router>
 		);

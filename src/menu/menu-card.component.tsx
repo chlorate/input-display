@@ -13,6 +13,10 @@ const links = [
 		path: "/controller",
 		name: "Controller",
 	},
+	{
+		path: "/help",
+		name: "Help",
+	},
 ];
 
 /**

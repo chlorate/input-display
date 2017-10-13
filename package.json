@@ -18,6 +18,7 @@
 		"inferno": "3.10.0",
 		"inferno-component": "3.10.0",
 		"inferno-mobx": "3.10.0",
+		"inferno-router": "3.10.0",
 		"jasmine": "2.8.0",
 		"karma": "1.7.1",
 		"karma-chrome-launcher": "2.2.0",

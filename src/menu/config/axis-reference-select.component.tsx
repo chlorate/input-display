@@ -4,7 +4,7 @@ import {AxisReference} from "../../config/axis-reference";
 import {AxisSelectComponent} from "./axis-select.component";
 
 interface Props {
-	class?: string;
+	className?: string;
 	id: string;
 	label: string;
 	reference: AxisReference;
@@ -15,20 +15,20 @@ interface Props {
  * if its value should be inverted.
  */
 export const AxisReferenceSelectComponent = connect((props: Props) => (
-	<div class={`form-group form-group-axis-reference ${props.class || ""}`}>
+	<div className={`form-group form-group-axis-reference ${props.className || ""}`}>
 		<label for={props.id}>
 			{props.label}
 		</label>
-		<div class="input-group">
+		<div className="input-group">
 			<AxisSelectComponent
 				id={props.id}
 				value={props.reference.index}
 				onChange={linkEvent(props.reference, handleChangeIndex)}
 			/>
-			<label class="input-group-addon">
+			<label className="input-group-addon">
 				<input
 					type="checkbox"
-					class="mr-1"
+					className="mr-1"
 					checked={props.reference.inverted}
 					onClick={linkEvent(props.reference, handleChangeInverted)}
 				/> Invert

@@ -22,8 +22,8 @@ export const AxisRowComponent = connect(({axis, index}: Props) => (
 
 function cell(value: number | undefined) {
 	return (
-		<td class="text-right">
-			{value !== undefined ? value.toFixed(3) : <span class="text-muted">Unknown</span>}
+		<td className="text-right">
+			{value !== undefined ? value.toFixed(3) : <span className="text-muted">Unknown</span>}
 		</td>
 	);
 }

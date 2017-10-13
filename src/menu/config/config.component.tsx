@@ -40,7 +40,7 @@ export class ConfigComponent extends Component<Props, State> {
 	public render() {
 		return (
 			<form onSubmit={linkEvent(undefined, handleSubmit)}>
-				<div class="mb-3">
+				<div className="mb-3">
 					<input
 						type="file"
 						accept=".json"
@@ -50,14 +50,14 @@ export class ConfigComponent extends Component<Props, State> {
 					/>
 					<button
 						type="button"
-						class="btn btn-secondary"
+						className="btn btn-secondary"
 						onClick={linkEvent(this, handleClickOpen)}
 					>
 						Open
 					</button>{" "}
 					<button
 						type="button"
-						class="btn btn-secondary"
+						className="btn btn-secondary"
 						onClick={linkEvent(this, handleClickSave)}
 					>
 						Save
@@ -65,9 +65,9 @@ export class ConfigComponent extends Component<Props, State> {
 				</div>
 
 				{this.state.saveUrl &&
-					<div class="alert alert-success" role="alert">
+					<div className="alert alert-success" role="alert">
 						<button
-							class="close"
+							className="close"
 							aria-label="Close"
 							onClick={linkEvent(this, handleClickCloseSave)}
 						>
@@ -80,7 +80,7 @@ export class ConfigComponent extends Component<Props, State> {
 					</div>
 				}
 
-				<h2 class="h4">
+				<h2 className="h4">
 					Controller
 				</h2>
 				<DeviceSelectComponent />

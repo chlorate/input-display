@@ -15,11 +15,11 @@ export const ErrorsComponent = connect([Store.Errors], ({errors}: Props) => {
 	}
 
 	return (
-		<div class="errors scroll">
+		<div className="errors scroll">
 			{errors.map((error, i) => (
-				<div class="alert alert-warning">
+				<div className="alert alert-warning">
 					<button
-						class="close"
+						className="close"
 						aria-label="Dismiss"
 						onClick={linkEvent({errors, index: i}, handleClick)}
 					>

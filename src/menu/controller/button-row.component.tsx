@@ -22,7 +22,7 @@ export const ButtonRowComponent = connect(({button}: Props) => (
 
 function booleanCell(value: boolean) {
 	return (
-		<td class={`table-${value ? "success" : "danger"} text-center`}>
+		<td className={`table-${value ? "success" : "danger"} text-center`}>
 			{value ? "Yes" : "No"}
 		</td>
 	);
@@ -30,7 +30,7 @@ function booleanCell(value: boolean) {
 
 function integerCell(value: number) {
 	return (
-		<td class="text-right">
+		<td className="text-right">
 			{formatNumber(value)}
 		</td>
 	);

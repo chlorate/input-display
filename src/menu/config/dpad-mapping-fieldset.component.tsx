@@ -37,12 +37,12 @@ export const DpadMappingFieldsetComponent = connect([Store.Config, Store.Control
 
 	return (
 		<fieldset>
-			<div class="form-group">
+			<div className="form-group">
 				<label for="config-dpad-mapping">
 					D-pad mapping
 				</label>
 				<select
-					class="form-control"
+					className="form-control"
 					id="config-dpad-mapping"
 					value={value}
 					onChange={linkEvent(props, handleChangeMapping)}
@@ -51,7 +51,7 @@ export const DpadMappingFieldsetComponent = connect([Store.Config, Store.Control
 					<option value={Mapping.SingleAxis}>Single axis</option>
 					<option value={Mapping.DualAxes}>Dual axes</option>
 				</select>
-				<small class="form-text text-muted">
+				<small className="form-text text-muted">
 					Controllers vary in how d-pad inputs are mapped. Directions
 					could be mapped to buttons, to values on a single axis, or to
 					separate X and Y axes. Go to the Controller tab and move the
@@ -67,15 +67,15 @@ export const DpadMappingFieldsetComponent = connect([Store.Config, Store.Control
 				/>
 			}
 			{value === Mapping.DualAxes &&
-				<div class="form-row">
+				<div className="form-row">
 					<AxisReferenceSelectComponent
-						class="col"
+						className="col"
 						id="config-dpad-x-axis"
 						label="D-pad X axis"
 						reference={props.config.dpadXAxis}
 					/>
 					<AxisReferenceSelectComponent
-						class="col"
+						className="col"
 						id="config-dpad-y-axis"
 						label="D-pad Y axis"
 						reference={props.config.dpadYAxis}

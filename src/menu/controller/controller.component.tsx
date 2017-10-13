@@ -15,14 +15,14 @@ interface Props {
  */
 export const ControllerComponent = connect([Store.Controller], ({controller}: Props) => (
 	<section>
-		<h2 class="h4">
+		<h2 className="h4">
 			Device
 		</h2>
 		{controller.id === undefined &&
 			<p>Not connected.</p>
 		}
 		{controller.id !== undefined && [
-			<table class="table table-sm table-controller-general">
+			<table className="table table-sm table-controller-general">
 				<tr>
 					<th>ID</th>
 					<td>{controller.id}</td>
@@ -36,17 +36,17 @@ export const ControllerComponent = connect([Store.Controller], ({controller}: Pr
 				{controller.mapping !== undefined &&
 					<tr>
 						<th>Mapping</th>
-						<td>{controller.mapping === "" ? <span class="text-muted">None</span> : controller.mapping}</td>
+						<td>{controller.mapping === "" ? <span className="text-muted">None</span> : controller.mapping}</td>
 					</tr>
 				}
 			</table>,
 		]}
 
-		<h2 class="h4">
+		<h2 className="h4">
 			Buttons
 			{controller.buttons.length > 0 &&
 				<button
-					class="btn btn-warning btn-sm float-right"
+					className="btn btn-warning btn-sm float-right"
 					onClick={linkEvent(controller, handleClickResetButtons)}
 				>
 					Reset
@@ -57,15 +57,15 @@ export const ControllerComponent = connect([Store.Controller], ({controller}: Pr
 			<p>No buttons detected.</p>
 		}
 		{controller.buttons.length > 0 &&
-			<div class="scroll">
-				<table class="table table-sm table-controller-buttons">
+			<div className="scroll">
+				<table className="table table-sm table-controller-buttons">
 					<thead>
 						<tr>
 							<th>Name</th>
-							<th class="text-center">Pressed</th>
-							<th class="text-right"># presses</th>
-							<th class="text-right">Mash speed</th>
-							<th class="text-right">Mash best</th>
+							<th className="text-center">Pressed</th>
+							<th className="text-right"># presses</th>
+							<th className="text-right">Mash speed</th>
+							<th className="text-right">Mash best</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -75,11 +75,11 @@ export const ControllerComponent = connect([Store.Controller], ({controller}: Pr
 			</div>
 		}
 
-		<h2 class="h4">
+		<h2 className="h4">
 			Axes
 			{controller.axes.length > 0 &&
 				<button
-					class="btn btn-warning btn-sm float-right"
+					className="btn btn-warning btn-sm float-right"
 					onClick={linkEvent(controller, handleClickResetAxes)}
 				>
 					Reset
@@ -87,18 +87,18 @@ export const ControllerComponent = connect([Store.Controller], ({controller}: Pr
 			}
 		</h2>
 		{!controller.axes.length &&
-			<p class="m-0">No axes detected.</p>
+			<p className="m-0">No axes detected.</p>
 		}
 		{controller.axes.length > 0 &&
-			<div class="scroll m-0">
-				<table class="table table-sm table-controller-axes">
+			<div className="scroll m-0">
+				<table className="table table-sm table-controller-axes">
 					<thead>
 						<tr>
 							<th>Name</th>
-							<th class="text-right">Value</th>
-							<th class="text-right">Neutral</th>
-							<th class="text-right">Min</th>
-							<th class="text-right">Max</th>
+							<th className="text-right">Value</th>
+							<th className="text-right">Neutral</th>
+							<th className="text-right">Min</th>
+							<th className="text-right">Max</th>
 						</tr>
 					</thead>
 					<tbody>

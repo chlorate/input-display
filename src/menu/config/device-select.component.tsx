@@ -47,12 +47,12 @@ export class DeviceSelectComponent extends Component<Props, State> {
 
 	public render() {
 		return (
-			<div class="form-group">
+			<div className="form-group">
 				<label for="config-controller">
 					Device
 				</label>
 				<select
-					class="form-control"
+					className="form-control"
 					id="config-controller"
 					value={this.props.config.gamepadIndex}
 					required

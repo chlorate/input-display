@@ -11,14 +11,14 @@ interface Props {
  * A numeric field for setting the controller poll rate.
  */
 export const PollRateInputComponent = connect([Store.Config], ({config}: Props) => (
-	<div class="form-group mb-0">
+	<div className="form-group mb-0">
 		<label for="config-poll-rate">
 			Poll rate
 		</label>
-		<div class="input-group input-group-poll-rate">
+		<div className="input-group input-group-poll-rate">
 			<input
 				type="number"
-				class="form-control"
+				className="form-control"
 				id="config-poll-rate"
 				value={config.pollRate}
 				min={minPollRate}
@@ -28,11 +28,11 @@ export const PollRateInputComponent = connect([Store.Config], ({config}: Props) 
 				aria-describedby="config-poll-rate-addon config-poll-rate-help"
 				onChange={linkEvent(config, handleChange)}
 			/>
-			<span class="input-group-addon" id="config-poll-rate-addon">
+			<span className="input-group-addon" id="config-poll-rate-addon">
 				Hz
 			</span>
 		</div>
-		<small class="form-text text-muted" id="config-poll-rate-help">
+		<small className="form-text text-muted" id="config-poll-rate-help">
 			How often the controller's inputs are read.
 		</small>
 	</div>

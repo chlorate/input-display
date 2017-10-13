@@ -1,7 +1,7 @@
 import {AxisSelectComponent} from "./axis-select.component";
 
 interface Props {
-	class?: string;
+	className?: string;
 	id: string;
 	label: string;
 	value: number;
@@ -12,7 +12,7 @@ interface Props {
  * A field for editing an axis index. Allows the user to select an axis.
  */
 export const AxisIndexSelectComponent = (props: Props) => (
-	<div class={`form-group ${props.class || ""}`}>
+	<div className={`form-group ${props.className || ""}`}>
 		<label for={props.id}>
 			{props.label}
 		</label>

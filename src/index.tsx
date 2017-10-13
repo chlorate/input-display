@@ -57,7 +57,7 @@ class IndexComponent extends Component<{}, State> {
 	public render() {
 		if (!navigator.getGamepads) {
 			return (
-				<div class="alert alert-danger text-center m-3" role="alert">
+				<div className="alert alert-danger text-center m-3" role="alert">
 					Your browser doesn't support the Gamepad API.
 				</div>
 			);
@@ -69,11 +69,11 @@ class IndexComponent extends Component<{}, State> {
 				controller={this.state.controller}
 				errors={this.state.errors}
 			>
-				<section class="d-flex justify-content-between h-100">
-					<div class="gamepads p-3">
+				<section className="d-flex justify-content-between h-100">
+					<div className="gamepads p-3">
 						<GamepadComponent />
 					</div>
-					<div class="menu p-3">
+					<div className="menu p-3">
 						<ErrorsComponent />
 						<MenuComponent />
 					</div>

@@ -15,7 +15,7 @@ interface Props {
  */
 export const AxisSelectComponent = connect([Store.Controller], (props: Props) => (
 	<select
-		class="form-control"
+		className="form-control"
 		id={props.id}
 		value={props.value}
 		required

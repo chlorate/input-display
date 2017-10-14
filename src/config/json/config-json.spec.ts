@@ -1,4 +1,5 @@
 import {isConfigJSON} from "./config-json";
+import {WidgetType} from "./widget-json";
 
 describe("ConfigJSON", () => {
 	let json;
@@ -10,6 +11,16 @@ describe("ConfigJSON", () => {
 			displayWidth: 100,
 			displayHeight: 200,
 			displayOutline: true,
+			widgets: [
+				{
+					type: WidgetType.CircleButton,
+					x: 0,
+					y: 0,
+					width: 0,
+					height: 0,
+					borderWidth: 0,
+				},
+			],
 		};
 	});
 
@@ -71,6 +82,16 @@ describe("ConfigJSON", () => {
 
 	it("should return false if displayOutline is not boolean", () => {
 		json.displayOutline = "bad";
+		expect(isConfigJSON(json)).toBe(false);
+	});
+
+	it("should return false if widgets is not an array", () => {
+		json.widgets = "bad";
+		expect(isConfigJSON(json)).toBe(false);
+	});
+
+	it("should return false if widgets array does not contain a valid widget", () => {
+		json.widgets[0] = "bad";
 		expect(isConfigJSON(json)).toBe(false);
 	});
 });

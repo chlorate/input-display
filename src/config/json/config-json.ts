@@ -1,4 +1,5 @@
 import {AxisReferenceJSON, isAxisReferenceJSON} from "./axis-reference-json";
+import {isWidgetJSON, WidgetJSON} from "./widget-json";
 
 /**
  * A JSON representation of a Config object.
@@ -12,6 +13,7 @@ export interface ConfigJSON {
 	displayWidth: number;
 	displayHeight: number;
 	displayOutline: boolean;
+	widgets: WidgetJSON[];
 }
 
 /**
@@ -27,6 +29,7 @@ export function isConfigJSON(input: any): input is ConfigJSON {
 		typeof input.pollRate === "number" &&
 		typeof input.displayWidth === "number" &&
 		typeof input.displayHeight === "number" &&
-		typeof input.displayOutline === "boolean"
+		typeof input.displayOutline === "boolean" &&
+		Array.isArray(input.widgets) && input.widgets.every((widget) => isWidgetJSON(widget))
 	);
 }

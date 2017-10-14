@@ -1,5 +1,7 @@
 import {AxisReference} from "./axis-reference";
+import {CircleButtonWidget} from "./circle-button-widget";
 import {Config, maxHeight, maxPollRate, maxWidth, minHeight, minPollRate, minWidth} from "./config";
+import {WidgetType} from "./json/widget-json";
 
 describe("Config", () => {
 	let config;
@@ -69,6 +71,7 @@ describe("Config", () => {
 		config.displayWidth = 100;
 		config.displayHeight = 200;
 		config.displayOutline = true;
+		config.widgets.push(new CircleButtonWidget());
 		expect(config.toJSON()).toEqual({
 			gamepadIndex: 1,
 			dpadAxisIndex: 2,
@@ -76,6 +79,16 @@ describe("Config", () => {
 			displayWidth: 100,
 			displayHeight: 200,
 			displayOutline: true,
+			widgets: [
+				{
+					type: WidgetType.CircleButton,
+					x: 0,
+					y: 0,
+					width: 20,
+					height: 20,
+					borderWidth: 1.5,
+				},
+			],
 		});
 
 		setDualAxes();
@@ -96,6 +109,16 @@ describe("Config", () => {
 				displayWidth: 100,
 				displayHeight: 200,
 				displayOutline: true,
+				widgets: [
+					{
+						type: WidgetType.CircleButton,
+						x: 0,
+						y: 1,
+						width: 2,
+						height: 3,
+						borderWidth: 4,
+					},
+				],
 			};
 		});
 
@@ -109,6 +132,8 @@ describe("Config", () => {
 			expect(config.displayWidth).toBe(100);
 			expect(config.displayHeight).toBe(200);
 			expect(config.displayOutline).toBe(true);
+			expect(config.widgets.length).toBe(1);
+			expect(config.widgets[0] instanceof CircleButtonWidget).toBe(true);
 		});
 
 		it("can update dpadAxisIndex", () => {

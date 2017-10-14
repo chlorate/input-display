@@ -1,7 +1,10 @@
 import {observable} from "mobx";
 import {clampIndex, clampInt} from "../math/util";
 import {AxisReference} from "./axis-reference";
+import {CircleButtonWidget} from "./circle-button-widget";
 import {ConfigJSON, isConfigJSON} from "./json/config-json";
+import {WidgetType} from "./json/widget-json";
+import {Widget} from "./widget";
 
 // 4 ms is the smallest delay:
 // https://developer.mozilla.org/en-US/docs/Web/API/WindowOrWorkerGlobalScope/setTimeout#Timeouts_throttled_to_>4ms
@@ -25,6 +28,7 @@ export class Config {
 	@observable private _pollRate: number = 60;
 	@observable private _displayWidth: number = 300;
 	@observable private _displayHeight: number = 100;
+	@observable private _widgets: Widget[] = [];
 
 	get gamepadIndex(): number {
 		return this._gamepadIndex;
@@ -74,6 +78,10 @@ export class Config {
 		this._displayHeight = clampInt(height, minHeight, maxHeight);
 	}
 
+	get widgets(): Widget[] {
+		return this._widgets;
+	}
+
 	/**
 	 * Returns a JSON representation of this config.
 	 */
@@ -85,6 +93,7 @@ export class Config {
 			displayWidth: this.displayWidth,
 			displayHeight: this.displayHeight,
 			displayOutline: this.displayOutline,
+			widgets: this.widgets.map((widget) => widget.toJSON()),
 		};
 		if (this.dpadXAxis && this.dpadYAxis) {
 			json.dpadXAxis = this.dpadXAxis.toJSON();
@@ -107,6 +116,12 @@ export class Config {
 		this.displayWidth = json.displayWidth;
 		this.displayHeight = json.displayHeight;
 		this.displayOutline = json.displayOutline;
+		this._widgets = json.widgets.map((widget) => {
+			switch (widget.type) {
+				case WidgetType.CircleButton:
+					return CircleButtonWidget.fromJSON(widget);
+			}
+		});
 
 		if (json.dpadXAxis && json.dpadYAxis) {
 			this.setDpadDualAxes(

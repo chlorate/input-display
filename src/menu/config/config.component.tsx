@@ -5,6 +5,7 @@ import {Config} from "../../config/config";
 import {loadFile, saveFile} from "../../storage/file";
 import {Store} from "../../storage/store";
 import {DeviceSelectComponent} from "./device-select.component";
+import {DisplayFieldsetComponent} from "./display-fieldset.component";
 import {DpadMappingFieldsetComponent} from "./dpad-mapping-fieldset.component";
 import {PollRateInputComponent} from "./poll-rate-input.component";
 
@@ -86,6 +87,11 @@ export class ConfigComponent extends Component<Props, State> {
 				<DeviceSelectComponent />
 				<DpadMappingFieldsetComponent />
 				<PollRateInputComponent />
+
+				<h2 className="h4">
+					Display
+				</h2>
+				<DisplayFieldsetComponent />
 			</form>
 		);
 	}

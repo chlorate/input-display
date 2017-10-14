@@ -2,8 +2,10 @@ import {ButtonType} from "./button-json";
 import {isControllerJSON} from "./controller-json";
 
 describe("isControllerJSON", () => {
-	it("should return true if valid", () => {
-		const json = {
+	let json;
+
+	beforeEach(() => {
+		json = {
 			axes: [
 				{
 					neutralValue: 0.1,
@@ -20,6 +22,9 @@ describe("isControllerJSON", () => {
 				},
 			],
 		};
+	})
+
+	it("should return true if valid", () => {
 		expect(isControllerJSON(json)).toBe(true);
 	});
 
@@ -28,10 +33,12 @@ describe("isControllerJSON", () => {
 	});
 
 	it("should return false if axes is not an array", () => {
-		expect(isControllerJSON({axes: "bad"})).toBe(false);
+		json.axes = "bad";
+		expect(isControllerJSON(json)).toBe(false);
 	});
 
 	it("should return false if buttons is set and not an array", () => {
-		expect(isControllerJSON({buttons: "bad"})).toBe(false);
+		json.buttons = "bad";
+		expect(isControllerJSON(json)).toBe(false);
 	});
 });

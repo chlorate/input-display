@@ -6,11 +6,11 @@ import {version, versionDate} from "../../version";
 export const HelpComponent = () => (
 	<section>
 		<h1>Input Display</h1>
-		<p class="lead text-muted">
+		<p className="lead text-muted">
 			v{version} ({versionDate})
 		</p>
 
-		<h2 class="h4 mt-5">
+		<h2 className="h4 mt-5">
 			Limitations
 		</h2>
 		<ul>
@@ -20,7 +20,7 @@ export const HelpComponent = () => (
 			</li>
 		</ul>
 
-		<h2 class="h4">
+		<h2 className="h4">
 			Control stick calibration
 		</h2>
 		<p>

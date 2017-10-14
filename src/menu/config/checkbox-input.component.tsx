@@ -10,8 +10,8 @@ interface Props {
  * A generic checkbox field.
  */
 export const CheckboxInputComponent = (props: Props) => (
-	<div class="form-check">
-		<label class="form-check-label">
+	<div className="form-check">
+		<label className="form-check-label">
 			<input
 				type="checkbox"
 				className="form-check-input"

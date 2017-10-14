@@ -5,7 +5,7 @@ interface Props {
 	id: string;
 	label: string;
 	value: number;
-	onChange: any;
+	onChange;
 }
 
 /**

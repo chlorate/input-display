@@ -2,6 +2,10 @@
  * Aliases for cryptic gamepad IDs.
  */
 export const aliases: {[id: string]: string} = {
+	// Firefox
+	"057e-0306-Unknown Gamepad": "Wii Remote",
+
+	// Chrome
 	"Unknown Gamepad (Vendor: 057e Product: 0306)": "Wii Remote",
 };
 

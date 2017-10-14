@@ -4,7 +4,7 @@ import {Provider} from "inferno-mobx";
 import {observable} from "mobx";
 import {Config} from "./config/config";
 import {Controller} from "./controller/controller";
-import {GamepadComponent} from "./display/gamepad.component";
+import {DisplayComponent} from "./display/display.component";
 import {ErrorsComponent} from "./menu/error/errors.component";
 import {MenuComponent} from "./menu/menu.component";
 import {loadLocalStorage, saveLocalStorage} from "./storage/local";
@@ -71,7 +71,7 @@ class IndexComponent extends Component<{}, State> {
 			>
 				<section className="d-flex justify-content-between h-100">
 					<div className="gamepads p-3">
-						<GamepadComponent />
+						<DisplayComponent />
 					</div>
 					<div className="menu p-3">
 						<ErrorsComponent />

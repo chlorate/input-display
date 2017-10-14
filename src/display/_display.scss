@@ -1,67 +1,7 @@
-.gamepads {
+.display {
 	flex-shrink: 0;
 }
 
-.gamepad {
-	line-height: 0;
-}
-
-.gamepad-diamond {
-	:first-child,
-	:last-child {
-		margin: auto;
-	}
-
-	:nth-child(2),
-	:nth-child(3) {
-		display: inline-block;
-		margin: -1px 0;
-	}
-
-	:nth-child(2) {
-		margin-right: 18px;
-	}
-}
-
-.gamepad-dpad-top,
-.gamepad-dpad-left,
-.gamepad-dpad-right,
-.gamepad-dpad-bottom {
-	border: 1px solid $yellow;
-	background: $red;
-	width: 20px;
-	height: 20px;
-}
-
-.gamepad-dpad-top {
-	border-bottom: 0;
-}
-
-.gamepad-dpad-left {
-	border-right: 0;
-}
-
-.gamepad-dpad-right {
-	border-left: 0;
-}
-
-.gamepad-dpad-bottom {
-	border-top: 0;
-}
-
-.gamepad-button-face {
-	border: 1px solid $yellow;
-	border-radius: 100%;
-	background: $red;
-	width: 20px;
-	height: 20px;
-}
-
-.gamepad-middle {
-	margin-right: 10px;
-
-	* {
-		display: inline-block;
-		margin-left: 10px;
-	}
+.display-outline {
+	outline: 1px solid $body-color;
 }

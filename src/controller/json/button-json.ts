@@ -3,7 +3,7 @@ import {DpadButtonJSON} from "./dpad-button-json";
 import {NormalButtonJSON} from "./normal-button-json";
 
 /**
- * Type values for distinguishing button subclass JSON representations.
+ * Type values for distinguishing Button subclass JSON representations.
  */
 export enum ButtonType {
 	Normal = "normal",
@@ -11,12 +11,12 @@ export enum ButtonType {
 }
 
 /**
- * JSON representations of all button subclasses.
+ * JSON representations of all Button subclasses.
  */
 export type ButtonJSON = NormalButtonJSON | DpadButtonJSON;
 
 /**
- * Common properties for all button JSON representations.
+ * Common properties for all Button JSON representations.
  */
 export interface BaseButtonJSON {
 	presses: number;

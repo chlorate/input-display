@@ -1,14 +1,23 @@
 import {observable} from "mobx";
 import {Button} from "../controller/button";
 import {Controller} from "../controller/controller";
+import {ButtonType} from "../controller/json/button-json";
 import {NormalButton} from "../controller/normal-button";
 import {clampIndex} from "../math/util";
 import {ButtonReference} from "./button-reference";
+import {NormalButtonReferenceJSON} from "./json/normal-button-reference-json";
 
 /**
  * A reference to a controller's normal button by its index.
  */
 export class NormalButtonReference extends ButtonReference {
+	/**
+	 * Creates a reference from its JSON representation.
+	 */
+	public static fromJSON(json: NormalButtonReferenceJSON): NormalButtonReference {
+		return new NormalButtonReference(json.index);
+	}
+
 	@observable private _index: number;
 
 	constructor(index: number) {
@@ -25,6 +34,16 @@ export class NormalButtonReference extends ButtonReference {
 	}
 	set index(index: number) {
 		this._index = clampIndex(index);
+	}
+
+	/**
+	 * Returns a JSON representation of this reference.
+	 */
+	public toJSON(): NormalButtonReferenceJSON {
+		return {
+			type: ButtonType.Normal,
+			index: this.index,
+		};
 	}
 
 	/**

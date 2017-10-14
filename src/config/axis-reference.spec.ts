@@ -36,7 +36,7 @@ describe("AxisReference", () => {
 		expect(reference.index).toBe(0);
 	});
 
-	it("can return a JSON representation of itself", () => {
+	it("can return a JSON representation", () => {
 		reference.index = 1;
 		reference.inverted = true;
 		expect(reference.toJSON()).toEqual({

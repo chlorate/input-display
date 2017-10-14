@@ -37,8 +37,23 @@ describe("DpadButtonReference", () => {
 		});
 	});
 
+	it("can be created from a JSON representation", () => {
+		reference = DpadButtonReference.fromJSON({
+			type: ButtonType.Dpad,
+			direction: Direction.Left,
+		});
+		expect(reference.direction).toBe(Direction.Left);
+	});
+
 	it("has a name", () => {
 		expect(reference.name).toBe("D-pad down");
+	});
+
+	it("can return a JSON representation", () => {
+		expect(reference.toJSON()).toEqual({
+			type: ButtonType.Dpad,
+			direction: Direction.Down,
+		});
 	});
 
 	describe("resolve", () => {

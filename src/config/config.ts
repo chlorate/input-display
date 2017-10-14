@@ -8,15 +8,23 @@ import {ConfigJSON, isConfigJSON} from "./json/config-json";
 export const minPollRate = 1;
 export const maxPollRate = 250;
 
+export const minWidth = 32;
+export const maxWidth = 3840;
+export const minHeight = 32;
+export const maxHeight = 2160;
+
 /**
  * Stores all settings related to the controller and input display.
  */
 export class Config {
+	@observable public displayOutline: boolean = false;
 	@observable private _gamepadIndex: number = 0;
 	@observable private _dpadAxisIndex?: number;
 	@observable private _dpadXAxis?: AxisReference;
 	@observable private _dpadYAxis?: AxisReference;
 	@observable private _pollRate: number = 60;
+	@observable private _displayWidth: number = 300;
+	@observable private _displayHeight: number = 100;
 
 	get gamepadIndex(): number {
 		return this._gamepadIndex;
@@ -52,6 +60,20 @@ export class Config {
 		this._pollRate = clampInt(pollRate, minPollRate, maxPollRate);
 	}
 
+	get displayWidth(): number {
+		return this._displayWidth;
+	}
+	set displayWidth(width: number) {
+		this._displayWidth = clampInt(width, minWidth, maxWidth);
+	}
+
+	get displayHeight(): number {
+		return this._displayHeight;
+	}
+	set displayHeight(height: number) {
+		this._displayHeight = clampInt(height, minHeight, maxHeight);
+	}
+
 	/**
 	 * Returns a JSON representation of this config.
 	 */
@@ -60,6 +82,9 @@ export class Config {
 			gamepadIndex: this.gamepadIndex,
 			dpadAxisIndex: this.dpadAxisIndex,
 			pollRate: this.pollRate,
+			displayWidth: this.displayWidth,
+			displayHeight: this.displayHeight,
+			displayOutline: this.displayOutline,
 		};
 		if (this.dpadXAxis && this.dpadYAxis) {
 			json.dpadXAxis = this.dpadXAxis.toJSON();
@@ -79,6 +104,9 @@ export class Config {
 		this.gamepadIndex = json.gamepadIndex;
 		this.dpadAxisIndex = json.dpadAxisIndex;
 		this.pollRate = json.pollRate;
+		this.displayWidth = json.displayWidth;
+		this.displayHeight = json.displayHeight;
+		this.displayOutline = json.displayOutline;
 
 		if (json.dpadXAxis && json.dpadYAxis) {
 			this.setDpadDualAxes(

@@ -1,27 +1,31 @@
 import {isConfigJSON} from "./config-json";
 
 describe("ConfigJSON", () => {
-	it("should return true if only required properties are set", () => {
-		const json = {
+	let json;
+
+	beforeEach(() => {
+		json = {
 			gamepadIndex: 0,
 			pollRate: 60,
+			displayWidth: 100,
+			displayHeight: 200,
+			displayOutline: true,
 		};
+	});
+
+	it("should return true if only required properties are set", () => {
 		expect(isConfigJSON(json)).toBe(true);
 	});
 
 	it("should return true if all optional properties are set", () => {
-		const json = {
-			gamepadIndex: 0,
-			dpadAxisIndex: 0,
-			dpadXAxis: {
-				index: 1,
-				inverted: false,
-			},
-			dpadYAxis: {
-				index: 2,
-				inverted: true,
-			},
-			pollRate: 60,
+		json.dpadAxisIndex = 0;
+		json.dpadXAxis = {
+			index: 1,
+			inverted: false,
+		};
+		json.dpadYAxis = {
+			index: 2,
+			inverted: true,
 		};
 		expect(isConfigJSON(json)).toBe(true);
 	});
@@ -31,22 +35,42 @@ describe("ConfigJSON", () => {
 	});
 
 	it("should return false if gamepadIndex is not numeric", () => {
-		expect(isConfigJSON({gamepadIndex: "bad"})).toBe(false);
+		json.gamepadIndex = "bad";
+		expect(isConfigJSON(json)).toBe(false);
 	});
 
 	it("should return false if dpadAxisIndex is not numeric", () => {
-		expect(isConfigJSON({dpadAxisIndex: "bad"})).toBe(false);
+		json.dpadAxisIndex = "bad";
+		expect(isConfigJSON(json)).toBe(false);
 	});
 
 	it("should return false if dpadXAxis is not an AxisReferenceJSON object", () => {
-		expect(isConfigJSON({dpadXAxis: "bad"})).toBe(false);
+		json.dpadXAxis = "bad";
+		expect(isConfigJSON(json)).toBe(false);
 	});
 
 	it("should return false if dpadYAxis is not an AxisReferenceJSON object", () => {
-		expect(isConfigJSON({dpadYAxis: "bad"})).toBe(false);
+		json.dpadYAxis = "bad";
+		expect(isConfigJSON(json)).toBe(false);
 	});
 
 	it("should return false if pollRate is not numeric", () => {
-		expect(isConfigJSON({pollRate: "bad"})).toBe(false);
+		json.pollRate = "bad";
+		expect(isConfigJSON(json)).toBe(false);
+	});
+
+	it("should return false if displayWidth is not numeric", () => {
+		json.displayWidth = "bad";
+		expect(isConfigJSON(json)).toBe(false);
+	});
+
+	it("should return false if displayHeight is not numeric", () => {
+		json.displayHeight = "bad";
+		expect(isConfigJSON(json)).toBe(false);
+	});
+
+	it("should return false if displayOutline is not boolean", () => {
+		json.displayOutline = "bad";
+		expect(isConfigJSON(json)).toBe(false);
 	});
 });

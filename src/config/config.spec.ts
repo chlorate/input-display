@@ -1,5 +1,5 @@
 import {AxisReference} from "./axis-reference";
-import {Config, maxPollRate, minPollRate} from "./config";
+import {Config, maxHeight, maxPollRate, maxWidth, minHeight, minPollRate, minWidth} from "./config";
 
 describe("Config", () => {
 	let config;
@@ -48,14 +48,34 @@ describe("Config", () => {
 		expect(config.pollRate).toBe(maxPollRate);
 	});
 
+	it("should clamp display width", () => {
+		config.displayWidth = 0;
+		expect(config.displayWidth).toBe(minWidth);
+		config.displayWidth = 5000;
+		expect(config.displayWidth).toBe(maxWidth);
+	});
+
+	it("should clamp display height", () => {
+		config.displayHeight = 0;
+		expect(config.displayHeight).toBe(minHeight);
+		config.displayHeight = 5000;
+		expect(config.displayHeight).toBe(maxHeight);
+	});
+
 	it("can return a JSON representation", () => {
 		config.gamepadIndex = 1;
 		config.dpadAxisIndex = 2;
 		config.pollRate = 45;
+		config.displayWidth = 100;
+		config.displayHeight = 200;
+		config.displayOutline = true;
 		expect(config.toJSON()).toEqual({
 			gamepadIndex: 1,
 			dpadAxisIndex: 2,
 			pollRate: 45,
+			displayWidth: 100,
+			displayHeight: 200,
+			displayOutline: true,
 		});
 
 		setDualAxes();
@@ -73,6 +93,9 @@ describe("Config", () => {
 			json = {
 				gamepadIndex: 1,
 				pollRate: 30,
+				displayWidth: 100,
+				displayHeight: 200,
+				displayOutline: true,
 			};
 		});
 
@@ -83,6 +106,9 @@ describe("Config", () => {
 			expect(config.dpadXIndex).toBeUndefined();
 			expect(config.dpadYIndex).toBeUndefined();
 			expect(config.pollRate).toBe(30);
+			expect(config.displayWidth).toBe(100);
+			expect(config.displayHeight).toBe(200);
+			expect(config.displayOutline).toBe(true);
 		});
 
 		it("can update dpadAxisIndex", () => {

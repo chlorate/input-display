@@ -9,6 +9,9 @@ export interface ConfigJSON {
 	dpadXAxis?: AxisReferenceJSON;
 	dpadYAxis?: AxisReferenceJSON;
 	pollRate: number;
+	displayWidth: number;
+	displayHeight: number;
+	displayOutline: boolean;
 }
 
 /**
@@ -21,6 +24,9 @@ export function isConfigJSON(input: any): input is ConfigJSON {
 		(input.dpadAxisIndex === undefined || typeof input.dpadAxisIndex === "number") &&
 		(input.dpadXAxis === undefined || isAxisReferenceJSON(input.dpadXAxis)) &&
 		(input.dpadYAxis === undefined || isAxisReferenceJSON(input.dpadYAxis)) &&
-		typeof input.pollRate === "number"
+		typeof input.pollRate === "number" &&
+		typeof input.displayWidth === "number" &&
+		typeof input.displayHeight === "number" &&
+		typeof input.displayOutline === "boolean"
 	);
 }

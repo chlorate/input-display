@@ -1,3 +1,4 @@
+import EventEmitter from "events";
 import {linkEvent} from "inferno";
 import Component from "inferno-component";
 import {connect} from "inferno-mobx";
@@ -26,6 +27,12 @@ interface State {
 export class ConfigComponent extends Component<Props, State> {
 	public state: State = {};
 	public fileInput?: HTMLInputElement;
+	private events: EventEmitter;
+
+	constructor(props: Props, state: State) {
+		super(props, state);
+		this.events = new EventEmitter();
+	}
 
 	set saveUrl(url: string | undefined) {
 		if (this.state.saveUrl) {
@@ -94,8 +101,8 @@ export class ConfigComponent extends Component<Props, State> {
 				<h2 className="h4">
 					Widgets
 				</h2>
-				<AddWidgetFormComponent />
-				<EditWidgetFieldsetComponent />
+				<AddWidgetFormComponent events={this.events} />
+				<EditWidgetFieldsetComponent events={this.events} />
 			</div>
 		);
 	}

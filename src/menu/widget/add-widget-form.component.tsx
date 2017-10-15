@@ -1,3 +1,4 @@
+import {EventEmitter} from "events";
 import {linkEvent} from "inferno";
 import Component from "inferno-component";
 import {connect} from "inferno-mobx";
@@ -5,9 +6,11 @@ import {Config} from "../../config/config";
 import {Store} from "../../storage/store";
 import {WidgetType} from "../../widget/json/widget-json";
 import {RoundButtonWidget} from "../../widget/round-button-widget";
+import {Event} from "../config/event";
 
 interface Props {
 	config: Config;
+	events: EventEmitter;
 }
 
 interface State {
@@ -71,4 +74,5 @@ function handleSubmit(component: AddWidgetFormComponent, event): void {
 			component.props.config.widgets.push(new RoundButtonWidget());
 			break;
 	}
+	component.props.events.emit(Event.AddWidget);
 }

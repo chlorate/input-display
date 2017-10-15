@@ -5,9 +5,9 @@ import {almostEqual} from "../math/util";
 import {secondToMilliseconds} from "../time/const";
 import {Axis} from "./axis";
 import {Button} from "./button";
+import {parseButtonJSON} from "./button.factory";
 import {Direction, sortedDirections} from "./direction";
 import {DpadButton} from "./dpad-button";
-import {ButtonType} from "./json/button-json";
 import {ControllerJSON, isControllerJSON} from "./json/controller-json";
 import {NormalButton} from "./normal-button";
 
@@ -84,14 +84,7 @@ export class Controller {
 		}
 
 		this._axes = json.axes.map((axis) => Axis.fromJSON(axis));
-		this._buttons = json.buttons.map((button) => {
-			switch (button.type) {
-				case ButtonType.Normal:
-					return NormalButton.fromJSON(button);
-				case ButtonType.Dpad:
-					return DpadButton.fromJSON(button);
-			}
-		});
+		this._buttons = json.buttons.map((button) => parseButtonJSON(button));
 	}
 
 	/**

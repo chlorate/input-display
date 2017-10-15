@@ -53,14 +53,6 @@ export abstract class Button {
 	public abstract toJSON(): ButtonJSON;
 
 	/**
-	 * Assigns common button properties from a JSON representation.
-	 */
-	public loadJSON(json: ButtonJSON) {
-		this.presses = json.presses;
-		this.bestMashSpeed = json.bestMashSpeed;
-	}
-
-	/**
 	 * Remove all press timestamps that are older than a certain time.
 	 */
 	private prunePressTimes(endTime: number) {

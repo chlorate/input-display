@@ -1,6 +1,4 @@
-import {sortedDirections} from "../direction";
-import {DpadButtonJSON} from "./dpad-button-json";
-import {NormalButtonJSON} from "./normal-button-json";
+import {Direction, sortedDirections} from "../direction";
 
 /**
  * Type values for distinguishing Button subclass JSON representations.
@@ -14,6 +12,22 @@ export enum ButtonType {
  * JSON representations of all Button subclasses.
  */
 export type ButtonJSON = NormalButtonJSON | DpadButtonJSON;
+
+/**
+ * A JSON representation of a NormalButton.
+ */
+export interface NormalButtonJSON extends BaseButtonJSON {
+	type: ButtonType.Normal;
+	index: number;
+}
+
+/**
+ * A JSON representation of a DpadButton.
+ */
+export interface DpadButtonJSON extends BaseButtonJSON {
+	type: ButtonType.Dpad;
+	direction: Direction;
+}
 
 /**
  * Common properties for all Button JSON representations.

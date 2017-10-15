@@ -1,7 +1,6 @@
 import {clampIndex} from "../math/util";
 import {Button} from "./button";
-import {ButtonType} from "./json/button-json";
-import {NormalButtonJSON} from "./json/normal-button-json";
+import {ButtonType, NormalButtonJSON} from "./json/button-json";
 
 /**
  * A "normal" controller button. This corresponds to a button reported by the
@@ -10,15 +9,6 @@ import {NormalButtonJSON} from "./json/normal-button-json";
  * identified by a numeric index.
  */
 export class NormalButton extends Button {
-	/**
-	 * Creates a button from its JSON representation.
-	 */
-	public static fromJSON(json: NormalButtonJSON): NormalButton {
-		const button = new NormalButton(json.index);
-		button.loadJSON(json);
-		return button;
-	}
-
 	private _index: number;
 
 	constructor(index: number) {

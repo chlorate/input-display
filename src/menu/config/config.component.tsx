@@ -4,6 +4,7 @@ import {connect} from "inferno-mobx";
 import {Config} from "../../config/config";
 import {loadFile, saveFile} from "../../storage/file";
 import {Store} from "../../storage/store";
+import {WidgetFieldsetComponent} from "../widget/widget-fieldset.component";
 import {ControllerFieldsetComponent} from "./controller-fieldset.component";
 import {DisplayFieldsetComponent} from "./display-fieldset.component";
 
@@ -88,6 +89,11 @@ export class ConfigComponent extends Component<Props, State> {
 					Display
 				</h2>
 				<DisplayFieldsetComponent />
+
+				<h2 className="h4">
+					Widgets
+				</h2>
+				<WidgetFieldsetComponent />
 			</form>
 		);
 	}

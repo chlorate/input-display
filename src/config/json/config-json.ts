@@ -1,5 +1,5 @@
+import {isWidgetJSON, WidgetJSON} from "../../widget/json/widget-json";
 import {AxisReferenceJSON, isAxisReferenceJSON} from "./axis-reference-json";
-import {isWidgetJSON, WidgetJSON} from "./widget-json";
 
 /**
  * A JSON representation of a Config object.

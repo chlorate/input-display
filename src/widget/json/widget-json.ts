@@ -1,4 +1,4 @@
-import {isButtonReferenceJSON} from "./button-reference-json";
+import {isButtonReferenceJSON} from "../../config/json/button-reference-json";
 import {CircleButtonWidgetJSON} from "./circle-button-widget-json";
 
 /**

@@ -1,11 +1,11 @@
 import {observable} from "mobx";
+import {ButtonReference} from "../config/button-reference";
+import {parseButtonReferenceJSON} from "../config/button-reference.factory";
+import {NormalButtonReference} from "../config/normal-button-reference";
 import {clamp, clampInt} from "../math/util";
-import {ButtonReference} from "./button-reference";
 import {CircleButtonWidgetJSON} from "./json/circle-button-widget-json";
 import {WidgetType} from "./json/widget-json";
-import {NormalButtonReference} from "./normal-button-reference";
 import {maxBorderWidth, maxHeight, maxWidth, minBorderWidth, minHeight, minWidth, Widget} from "./widget";
-import {parseButtonReferenceJSON} from "./button-reference.factory";
 
 /**
  * A widget that represents a button shaped like a circle or ellipse.

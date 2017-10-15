@@ -1,8 +1,8 @@
 import {ButtonType} from "../controller/json/button-json";
+import {CircleButtonWidget} from "../widget/circle-button-widget";
+import {WidgetType} from "../widget/json/widget-json";
 import {AxisReference} from "./axis-reference";
-import {CircleButtonWidget} from "./circle-button-widget";
 import {Config, maxHeight, maxPollRate, maxWidth, minHeight, minPollRate, minWidth} from "./config";
-import {WidgetType} from "./json/widget-json";
 
 describe("Config", () => {
 	let config;

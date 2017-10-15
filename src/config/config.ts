@@ -1,10 +1,10 @@
 import {observable} from "mobx";
 import {clampIndex, clampInt} from "../math/util";
+import {CircleButtonWidget} from "../widget/circle-button-widget";
+import {WidgetType} from "../widget/json/widget-json";
+import {Widget} from "../widget/widget";
 import {AxisReference} from "./axis-reference";
-import {CircleButtonWidget} from "./circle-button-widget";
 import {ConfigJSON, isConfigJSON} from "./json/config-json";
-import {WidgetType} from "./json/widget-json";
-import {Widget} from "./widget";
 
 // 4 ms is the smallest delay:
 // https://developer.mozilla.org/en-US/docs/Web/API/WindowOrWorkerGlobalScope/setTimeout#Timeouts_throttled_to_>4ms

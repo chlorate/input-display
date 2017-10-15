@@ -1,5 +1,5 @@
+import {ButtonReferenceJSON} from "../../config/json/button-reference-json";
 import {BaseWidgetJSON, WidgetType} from "./widget-json";
-import {ButtonReferenceJSON} from "./button-reference-json";
 
 /**
  * A JSON representation of a CircleButtonWidget.

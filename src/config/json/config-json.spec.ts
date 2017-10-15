@@ -1,6 +1,6 @@
 import {ButtonType} from "../../controller/json/button-json";
+import {WidgetType} from "../../widget/json/widget-json";
 import {isConfigJSON} from "./config-json";
-import {WidgetType} from "./widget-json";
 
 describe("ConfigJSON", () => {
 	let json;

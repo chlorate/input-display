@@ -83,8 +83,12 @@ describe("Config", () => {
 			widgets: [
 				{
 					type: WidgetType.RoundButton,
+					name: "",
 					x: 0,
 					y: 0,
+					showName: true,
+					showPresses: false,
+					showMashSpeed: true,
 					width: 20,
 					height: 20,
 					borderWidth: 1.5,
@@ -117,8 +121,12 @@ describe("Config", () => {
 				widgets: [
 					{
 						type: WidgetType.RoundButton,
+						name: "name",
 						x: 0,
 						y: 1,
+						showName: true,
+						showPresses: true,
+						showMashSpeed: true,
 						width: 2,
 						height: 3,
 						borderWidth: 4,

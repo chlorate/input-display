@@ -15,8 +15,12 @@ describe("ConfigJSON", () => {
 			widgets: [
 				{
 					type: WidgetType.RoundButton,
+					name: "",
 					x: 0,
 					y: 0,
+					showName: false,
+					showPresses: false,
+					showMashSpeed: true,
 					width: 0,
 					height: 0,
 					borderWidth: 0,

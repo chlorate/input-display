@@ -8,8 +8,12 @@ describe("isWidgetJSON", () => {
 		beforeEach(() => {
 			json = {
 				type: WidgetType.RoundButton,
+				name: "name",
 				x: 1,
 				y: 2,
+				showName: true,
+				showPresses: true,
+				showMashSpeed: true,
 				width: 3,
 				height: 4,
 				borderWidth: 5,
@@ -24,6 +28,11 @@ describe("isWidgetJSON", () => {
 			expect(isWidgetJSON(json)).toBe(true);
 		});
 
+		it("should return false if name is not a string", () => {
+			json.name = 123;
+			expect(isWidgetJSON(json)).toBe(false);
+		});
+
 		it("should return false if x is not numeric", () => {
 			json.x = "bad";
 			expect(isWidgetJSON(json)).toBe(false);
@@ -31,6 +40,21 @@ describe("isWidgetJSON", () => {
 
 		it("should return false if y is not numeric", () => {
 			json.y = "bad";
+			expect(isWidgetJSON(json)).toBe(false);
+		});
+
+		it("should return false if showName is not boolean", () => {
+			json.showName = "bad";
+			expect(isWidgetJSON(json)).toBe(false);
+		});
+
+		it("should return false if showPresses is not boolean", () => {
+			json.showPresses = "bad";
+			expect(isWidgetJSON(json)).toBe(false);
+		});
+
+		it("should return false if showMashSpeed is not boolean", () => {
+			json.showMashSpeed = "bad";
 			expect(isWidgetJSON(json)).toBe(false);
 		});
 

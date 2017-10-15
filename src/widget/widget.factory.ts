@@ -20,7 +20,11 @@ export function parseWidgetJSON(json: WidgetJSON): Widget {
 		default:
 			throw new TypeError("invalid widget JSON");
 	}
+	widget.name = json.name;
 	widget.x = json.x;
 	widget.y = json.y;
+	widget.showName = json.showName;
+	widget.showPresses = json.showPresses;
+	widget.showMashSpeed = json.showMashSpeed;
 	return widget;
 }

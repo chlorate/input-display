@@ -27,8 +27,12 @@ export interface RoundButtonWidgetJSON extends BaseWidgetJSON {
  * Common properties for all Widget JSON representations.
  */
 export interface BaseWidgetJSON {
+	name: string;
 	x: number;
 	y: number;
+	showName: boolean;
+	showPresses: boolean;
+	showMashSpeed: boolean;
 }
 
 /**
@@ -37,8 +41,12 @@ export interface BaseWidgetJSON {
 export function isWidgetJSON(input: any): input is WidgetJSON {
 	return (
 		typeof input === "object" &&
+		typeof input.name === "string" &&
 		typeof input.x === "number" &&
 		typeof input.y === "number" &&
+		typeof input.showName === "boolean" &&
+		typeof input.showPresses === "boolean" &&
+		typeof input.showMashSpeed === "boolean" &&
 		(
 			(
 				input.type === WidgetType.RoundButton &&

@@ -54,8 +54,12 @@ export class RoundButtonWidget extends Widget {
 	public toJSON(): RoundButtonWidgetJSON {
 		return {
 			type: WidgetType.RoundButton,
+			name: this.name,
 			x: this.x,
 			y: this.y,
+			showName: this.showName,
+			showPresses: this.showPresses,
+			showMashSpeed: this.showMashSpeed,
 			width: this.width,
 			height: this.height,
 			borderWidth: this.borderWidth,

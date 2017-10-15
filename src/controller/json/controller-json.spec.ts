@@ -22,7 +22,7 @@ describe("isControllerJSON", () => {
 				},
 			],
 		};
-	})
+	});
 
 	it("should return true if valid", () => {
 		expect(isControllerJSON(json)).toBe(true);
@@ -37,8 +37,18 @@ describe("isControllerJSON", () => {
 		expect(isControllerJSON(json)).toBe(false);
 	});
 
-	it("should return false if buttons is set and not an array", () => {
+	it("should return false if axes array does not contain a valid axis", () => {
+		json.axes[0] = "bad";
+		expect(isControllerJSON(json)).toBe(false);
+	});
+
+	it("should return false if buttons is not an array", () => {
 		json.buttons = "bad";
+		expect(isControllerJSON(json)).toBe(false);
+	});
+
+	it("should return false if buttons array does not contain a valid button", () => {
+		json.buttons[0] = "bad";
 		expect(isControllerJSON(json)).toBe(false);
 	});
 });

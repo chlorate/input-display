@@ -24,21 +24,30 @@ interface State {
 @connect([Store.Config])
 export class DeviceSelectComponent extends Component<Props, State> {
 	public state: State = {ids: []};
+	private listener: () => void;
 	private interval?: number;
 
+	constructor(props: Props, state: State) {
+		super(props, state);
+		this.listener = () => this.updateNames();
+	}
+
 	public componentDidMount(): void {
-		// There are connect and disconnect events, but they are unreliable.
-		// Chrome (as of v61) doesn't fire the connect event in all cases. It
-		// will fire it on page load, but not when controllers are connected
-		// after page load.
 		this.updateNames();
-		this.interval = setInterval(() => this.updateNames(), secondToMilliseconds);
+
+		// Chrome (as of v61) doesn't fire the connect event in all cases (only
+		// on page load), so this is also polled periodically.
+		this.interval = setInterval(this.listener, secondToMilliseconds);
+		window.addEventListener("gamepadconnected", this.listener);
+		window.addEventListener("gamepaddisconnected", this.listener);
 	}
 
 	public componentWillUnmount(): void {
 		if (this.interval !== undefined) {
 			clearInterval(this.interval);
 		}
+		window.removeEventListener("gamepadconnected", this.listener);
+		window.removeEventListener("gamepaddisconnected", this.listener);
 	}
 
 	public shouldComponentUpdate(nextProps: Props, nextState: State): boolean {

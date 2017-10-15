@@ -1,5 +1,4 @@
-import {isButtonReferenceJSON} from "../../config/json/button-reference-json";
-import {CircleButtonWidgetJSON} from "./circle-button-widget-json";
+import {ButtonReferenceJSON, isButtonReferenceJSON} from "../../config/json/button-reference-json";
 
 /**
  * Type values for distinguishing Widget subclass JSON representations.
@@ -12,6 +11,17 @@ export enum WidgetType {
  * JSON representations of all Widget subclasses.
  */
 export type WidgetJSON = CircleButtonWidgetJSON;
+
+/**
+ * A JSON representation of a CircleButtonWidget.
+ */
+export interface CircleButtonWidgetJSON extends BaseWidgetJSON {
+	type: WidgetType.CircleButton;
+	width: number;
+	height: number;
+	borderWidth: number;
+	button: ButtonReferenceJSON;
+}
 
 /**
  * Common properties for all Widget JSON representations.

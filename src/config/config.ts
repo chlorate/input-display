@@ -1,8 +1,7 @@
 import {observable} from "mobx";
 import {clampIndex, clampInt} from "../math/util";
-import {CircleButtonWidget} from "../widget/circle-button-widget";
-import {WidgetType} from "../widget/json/widget-json";
 import {Widget} from "../widget/widget";
+import {parseWidgetJSON} from "../widget/widget.factory";
 import {AxisReference} from "./axis-reference";
 import {ConfigJSON, isConfigJSON} from "./json/config-json";
 
@@ -116,12 +115,7 @@ export class Config {
 		this.displayWidth = json.displayWidth;
 		this.displayHeight = json.displayHeight;
 		this.displayOutline = json.displayOutline;
-		this._widgets = json.widgets.map((widget) => {
-			switch (widget.type) {
-				case WidgetType.CircleButton:
-					return CircleButtonWidget.fromJSON(widget);
-			}
-		});
+		this._widgets = json.widgets.map((widget) => parseWidgetJSON(widget));
 
 		if (json.dpadXAxis && json.dpadYAxis) {
 			this.setDpadDualAxes(

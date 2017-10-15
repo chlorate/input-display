@@ -6,6 +6,7 @@ import {Config} from "../../config/config";
 import {clampIndex} from "../../math/util";
 import {Store} from "../../storage/store";
 import {RoundButtonWidget} from "../../widget/round-button-widget";
+import {Widget} from "../../widget/widget";
 import {Event} from "../config/event";
 import {WidgetFieldsetComponent} from "./widget-fieldset.component";
 
@@ -31,6 +32,9 @@ export class EditWidgetFieldsetComponent extends Component<Props, State> {
 		this.listener = () => this.selectLast();
 	}
 
+	get index(): number {
+		return this.state.index;
+	}
 	set index(index: number) {
 		this.setState({index: clampIndex(index)});
 	}
@@ -48,6 +52,7 @@ export class EditWidgetFieldsetComponent extends Component<Props, State> {
 			return;
 		}
 
+		const hasMultipleWidgets = this.props.config.widgets.length > 1;
 		return (
 			<fieldset>
 				<h3 className="h5">
@@ -60,7 +65,7 @@ export class EditWidgetFieldsetComponent extends Component<Props, State> {
 					<select
 						className="form-control"
 						id="config-edit-widget"
-						value={this.state.index}
+						value={this.index}
 						onChange={linkEvent(this, handleChange)}
 					>
 						{this.props.config.widgets.map((widget, i) => (
@@ -74,8 +79,25 @@ export class EditWidgetFieldsetComponent extends Component<Props, State> {
 				</div>
 				<hr />
 				<WidgetFieldsetComponent
-					widget={this.props.config.widgets[this.state.index]}
+					widget={this.props.config.widgets[this.index]}
 				/>
+				{hasMultipleWidgets && this.index > 0 && [
+					<button
+						className="btn btn-secondary"
+						onClick={linkEvent(this, handleClickMoveUp)}
+					>
+						Move up
+					</button>,
+					" ",
+				]}
+				{hasMultipleWidgets && this.index < this.props.config.widgets.length - 1 &&
+					<button
+						className="btn btn-secondary"
+						onClick={linkEvent(this, handleClickMoveDown)}
+					>
+						Move down
+					</button>
+				}
 				<button
 					className="btn btn-danger float-right"
 					onClick={linkEvent(this, handleClickDelete)}
@@ -95,11 +117,25 @@ function handleChange(component: EditWidgetFieldsetComponent, event) {
 	component.index = event.target.value;
 }
 
+function handleClickMoveUp(component: EditWidgetFieldsetComponent) {
+	swap(component.props.config.widgets, component.index - 1, component.index);
+	component.index--;
+}
+
+function handleClickMoveDown(component: EditWidgetFieldsetComponent) {
+	swap(component.props.config.widgets, component.index, component.index + 1);
+	component.index++;
+}
+
+function swap(widgets: Widget[], x: number, y: number) {
+	[widgets[x], widgets[y]] = [widgets[y], widgets[x]];
+}
+
 function handleClickDelete(component: EditWidgetFieldsetComponent) {
-	const index = component.state.index;
-	if (component.state.index === component.props.config.widgets.length - 1) {
+	const index = component.index;
+	if (component.index === component.props.config.widgets.length - 1) {
 		// Keep in bounds if deleting last widget.
-		component.index = index - 1;
+		component.index--;
 	}
 	component.props.config.widgets.splice(index, 1);
 }

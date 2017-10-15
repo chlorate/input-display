@@ -5,7 +5,7 @@ import {ButtonType} from "../controller/json/button-json";
 import {NormalButton} from "../controller/normal-button";
 import {clampIndex} from "../math/util";
 import {ButtonReference} from "./button-reference";
-import {NormalButtonReferenceJSON} from "./json/normal-button-reference-json";
+import {NormalButtonReferenceJSON} from "./json/button-reference-json";
 
 /**
  * A reference to a controller's normal button by its index.

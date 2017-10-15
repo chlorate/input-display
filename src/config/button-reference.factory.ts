@@ -13,5 +13,7 @@ export function parseButtonReferenceJSON(json: ButtonReferenceJSON): ButtonRefer
 			return new NormalButtonReference(json.index);
 		case ButtonType.Dpad:
 			return new DpadButtonReference(json.direction);
+		default:
+			throw new TypeError("invalid button reference JSON");
 	}
 }

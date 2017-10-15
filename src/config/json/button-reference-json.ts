@@ -1,12 +1,26 @@
-import {sortedDirections} from "../../controller/direction";
+import {Direction, sortedDirections} from "../../controller/direction";
 import {ButtonType} from "../../controller/json/button-json";
-import {DpadButtonReferenceJSON} from "./dpad-button-reference-json";
-import {NormalButtonReferenceJSON} from "./normal-button-reference-json";
 
 /**
  * JSON representations of all ButtonReference subclasses.
  */
 export type ButtonReferenceJSON = NormalButtonReferenceJSON | DpadButtonReferenceJSON;
+
+/**
+ * A JSON representation of a NormalButtonReference.
+ */
+export interface NormalButtonReferenceJSON {
+	type: ButtonType.Normal;
+	index: number;
+}
+
+/**
+ * A JSON representation of a DpadButtonReference.
+ */
+export interface DpadButtonReferenceJSON {
+	type: ButtonType.Dpad;
+	direction: Direction;
+}
 
 /**
  * Returns true if some value is a ButtonReferenceJSON object.

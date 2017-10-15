@@ -5,7 +5,7 @@ import {Direction} from "../controller/direction";
 import {DpadButton} from "../controller/dpad-button";
 import {ButtonType} from "../controller/json/button-json";
 import {ButtonReference} from "./button-reference";
-import {DpadButtonReferenceJSON} from "./json/dpad-button-reference-json";
+import {DpadButtonReferenceJSON} from "./json/button-reference-json";
 
 /**
  * A reference to a controller's d-pad button by its direction.

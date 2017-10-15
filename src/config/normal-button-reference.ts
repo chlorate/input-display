@@ -11,13 +11,6 @@ import {NormalButtonReferenceJSON} from "./json/normal-button-reference-json";
  * A reference to a controller's normal button by its index.
  */
 export class NormalButtonReference extends ButtonReference {
-	/**
-	 * Creates a reference from its JSON representation.
-	 */
-	public static fromJSON(json: NormalButtonReferenceJSON): NormalButtonReference {
-		return new NormalButtonReference(json.index);
-	}
-
 	@observable private _index: number;
 
 	constructor(index: number) {

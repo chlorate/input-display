@@ -11,13 +11,6 @@ import {DpadButtonReferenceJSON} from "./json/dpad-button-reference-json";
  * A reference to a controller's d-pad button by its direction.
  */
 export class DpadButtonReference extends ButtonReference {
-	/**
-	 * Creates a reference from its JSON representation.
-	 */
-	public static fromJSON(json: DpadButtonReferenceJSON): DpadButtonReference {
-		return new DpadButtonReference(json.direction);
-	}
-
 	@observable public direction: Direction;
 
 	constructor(direction: Direction) {

@@ -1,3 +1,4 @@
+import {ButtonType} from "../../controller/json/button-json";
 import {isWidgetJSON, WidgetType} from "./widget-json";
 
 describe("isWidgetJSON", () => {
@@ -12,6 +13,10 @@ describe("isWidgetJSON", () => {
 				width: 3,
 				height: 4,
 				borderWidth: 5,
+				button: {
+					type: ButtonType.Normal,
+					index: 6,
+				},
 			};
 		});
 
@@ -41,6 +46,11 @@ describe("isWidgetJSON", () => {
 
 		it("should return false if border width is not numeric", () => {
 			json.borderWidth = "bad";
+			expect(isWidgetJSON(json)).toBe(false);
+		});
+
+		it("should return false if button is not a ButtonReference", () => {
+			json.button = "bad";
 			expect(isWidgetJSON(json)).toBe(false);
 		});
 	});

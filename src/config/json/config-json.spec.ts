@@ -1,3 +1,4 @@
+import {ButtonType} from "../../controller/json/button-json";
 import {isConfigJSON} from "./config-json";
 import {WidgetType} from "./widget-json";
 
@@ -19,6 +20,10 @@ describe("ConfigJSON", () => {
 					width: 0,
 					height: 0,
 					borderWidth: 0,
+					button: {
+						type: ButtonType.Normal,
+						index: 0,
+					},
 				},
 			],
 		};

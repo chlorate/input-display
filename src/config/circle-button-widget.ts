@@ -3,7 +3,9 @@ import {clamp, clampInt} from "../math/util";
 import {ButtonReference} from "./button-reference";
 import {CircleButtonWidgetJSON} from "./json/circle-button-widget-json";
 import {WidgetType} from "./json/widget-json";
+import {NormalButtonReference} from "./normal-button-reference";
 import {maxBorderWidth, maxHeight, maxWidth, minBorderWidth, minHeight, minWidth, Widget} from "./widget";
+import {parseButtonReferenceJSON} from "./button-reference.factory";
 
 /**
  * A widget that represents a button shaped like a circle or ellipse.
@@ -19,6 +21,7 @@ export class CircleButtonWidget extends Widget {
 		widget.width = json.width;
 		widget.height = json.height;
 		widget.borderWidth = json.borderWidth;
+		widget.button = parseButtonReferenceJSON(json.button);
 		return widget;
 	}
 
@@ -26,6 +29,11 @@ export class CircleButtonWidget extends Widget {
 	@observable private _width: number = 20;
 	@observable private _height: number = 20;
 	@observable private _borderWidth: number = 1.5;
+
+	constructor() {
+		super();
+		this.button = new NormalButtonReference(0);
+	}
 
 	get width(): number {
 		return this._width;
@@ -67,6 +75,7 @@ export class CircleButtonWidget extends Widget {
 			width: this.width,
 			height: this.height,
 			borderWidth: this.borderWidth,
+			button: this.button.toJSON(),
 		};
 	}
 }

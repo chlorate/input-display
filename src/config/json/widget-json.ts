@@ -1,3 +1,4 @@
+import {isButtonReferenceJSON} from "./button-reference-json";
 import {CircleButtonWidgetJSON} from "./circle-button-widget-json";
 
 /**
@@ -33,7 +34,8 @@ export function isWidgetJSON(input: any): input is WidgetJSON {
 				input.type === WidgetType.CircleButton &&
 				typeof input.width === "number" &&
 				typeof input.height === "number" &&
-				typeof input.borderWidth === "number"
+				typeof input.borderWidth === "number" &&
+				isButtonReferenceJSON(input.button)
 			)
 		)
 	);

@@ -1,3 +1,4 @@
+import {ButtonType} from "../controller/json/button-json";
 import {AxisReference} from "./axis-reference";
 import {CircleButtonWidget} from "./circle-button-widget";
 import {Config, maxHeight, maxPollRate, maxWidth, minHeight, minPollRate, minWidth} from "./config";
@@ -87,6 +88,10 @@ describe("Config", () => {
 					width: 20,
 					height: 20,
 					borderWidth: 1.5,
+					button: {
+						type: ButtonType.Normal,
+						index: 0,
+					},
 				},
 			],
 		});
@@ -117,6 +122,10 @@ describe("Config", () => {
 						width: 2,
 						height: 3,
 						borderWidth: 4,
+						button: {
+							type: ButtonType.Normal,
+							index: 2,
+						},
 					},
 				],
 			};

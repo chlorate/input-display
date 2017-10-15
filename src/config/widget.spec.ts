@@ -1,3 +1,4 @@
+import {ButtonType} from "../controller/json/button-json";
 import {WidgetJSON, WidgetType} from "./json/widget-json";
 import {maxX, maxY, minX, minY, Widget} from "./widget";
 
@@ -10,6 +11,10 @@ class TestWidget extends Widget {
 			width: 0,
 			height: 0,
 			borderWidth: 0,
+			button: {
+				type: ButtonType.Normal,
+				index: 2,
+			},
 		};
 	}
 }

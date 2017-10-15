@@ -37,14 +37,6 @@ describe("NormalButtonReference", () => {
 		});
 	});
 
-	it("can be created from a JSON representation", () => {
-		reference = NormalButtonReference.fromJSON({
-			type: ButtonType.Normal,
-			index: 2,
-		});
-		expect(reference.index).toBe(2);
-	});
-
 	it("has a name", () => {
 		expect(reference.name).toBe("Button 2");
 	});

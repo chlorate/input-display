@@ -1,3 +1,4 @@
+import {ButtonType} from "../controller/json/button-json";
 import {CircleButtonWidget} from "./circle-button-widget";
 import {WidgetType} from "./json/widget-json";
 import {maxBorderWidth, maxHeight, maxWidth, minBorderWidth, minHeight, minWidth} from "./widget";
@@ -17,12 +18,17 @@ describe("CircleButtonWidget", () => {
 			width: 2,
 			height: 3,
 			borderWidth: 4,
+			button: {
+				type: ButtonType.Normal,
+				index: 5,
+			},
 		});
 		expect(widget.x).toBe(0);
 		expect(widget.y).toBe(1);
 		expect(widget.width).toBe(2);
 		expect(widget.height).toBe(3);
 		expect(widget.borderWidth).toBe(4);
+		expect(widget.button.index).toBe(5);
 	});
 
 	it("should clamp width", () => {
@@ -64,6 +70,10 @@ describe("CircleButtonWidget", () => {
 			width: 20,
 			height: 20,
 			borderWidth: 1.5,
+			button: {
+				type: ButtonType.Normal,
+				index: 0,
+			},
 		});
 	});
 });

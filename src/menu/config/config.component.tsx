@@ -4,7 +4,8 @@ import {connect} from "inferno-mobx";
 import {Config} from "../../config/config";
 import {loadFile, saveFile} from "../../storage/file";
 import {Store} from "../../storage/store";
-import {WidgetFieldsetComponent} from "../widget/widget-fieldset.component";
+import {AddWidgetFormComponent} from "../widget/add-widget-form.component";
+import {EditWidgetFieldsetComponent} from "../widget/edit-widget-fieldset.component";
 import {ControllerFieldsetComponent} from "./controller-fieldset.component";
 import {DisplayFieldsetComponent} from "./display-fieldset.component";
 
@@ -39,7 +40,7 @@ export class ConfigComponent extends Component<Props, State> {
 
 	public render() {
 		return (
-			<form onSubmit={linkEvent(undefined, handleSubmit)}>
+			<div>
 				<div className="mb-3">
 					<input
 						type="file"
@@ -93,14 +94,11 @@ export class ConfigComponent extends Component<Props, State> {
 				<h2 className="h4">
 					Widgets
 				</h2>
-				<WidgetFieldsetComponent />
-			</form>
+				<AddWidgetFormComponent />
+				<EditWidgetFieldsetComponent />
+			</div>
 		);
 	}
-}
-
-function handleSubmit(_: undefined, event): void {
-	event.preventDefault();
 }
 
 function handleChangeFile(component: ConfigComponent): void {

@@ -5,9 +5,9 @@ import {parseWidgetJSON} from "./widget.factory";
 describe("parseWidgetJSON", () => {
 	let widget;
 
-	it("can create a CircleButtonWidget", () => {
+	it("can create a RoundButtonWidget", () => {
 		widget = parseWidgetJSON({
-			type: WidgetType.CircleButton,
+			type: WidgetType.RoundButton,
 			x: 0,
 			y: 1,
 			width: 2,

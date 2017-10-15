@@ -4,19 +4,19 @@ import {ButtonReferenceJSON, isButtonReferenceJSON} from "../../config/json/butt
  * Type values for distinguishing Widget subclass JSON representations.
  */
 export enum WidgetType {
-	CircleButton = "circleButton",
+	RoundButton = "roundButton",
 }
 
 /**
  * JSON representations of all Widget subclasses.
  */
-export type WidgetJSON = CircleButtonWidgetJSON;
+export type WidgetJSON = RoundButtonWidgetJSON;
 
 /**
- * A JSON representation of a CircleButtonWidget.
+ * A JSON representation of a RoundButtonWidget.
  */
-export interface CircleButtonWidgetJSON extends BaseWidgetJSON {
-	type: WidgetType.CircleButton;
+export interface RoundButtonWidgetJSON extends BaseWidgetJSON {
+	type: WidgetType.RoundButton;
 	width: number;
 	height: number;
 	borderWidth: number;
@@ -41,7 +41,7 @@ export function isWidgetJSON(input: any): input is WidgetJSON {
 		typeof input.y === "number" &&
 		(
 			(
-				input.type === WidgetType.CircleButton &&
+				input.type === WidgetType.RoundButton &&
 				typeof input.width === "number" &&
 				typeof input.height === "number" &&
 				typeof input.borderWidth === "number" &&

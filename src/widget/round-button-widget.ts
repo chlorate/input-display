@@ -2,13 +2,13 @@ import {observable} from "mobx";
 import {ButtonReference} from "../config/button-reference";
 import {NormalButtonReference} from "../config/normal-button-reference";
 import {clamp, clampInt} from "../math/util";
-import {CircleButtonWidgetJSON, WidgetType} from "./json/widget-json";
+import {RoundButtonWidgetJSON, WidgetType} from "./json/widget-json";
 import {maxBorderWidth, maxHeight, maxWidth, minBorderWidth, minHeight, minWidth, Widget} from "./widget";
 
 /**
  * A widget that represents a button shaped like a circle or ellipse.
  */
-export class CircleButtonWidget extends Widget {
+export class RoundButtonWidget extends Widget {
 	public button: ButtonReference;
 	@observable private _width: number = 20;
 	@observable private _height: number = 20;
@@ -51,9 +51,9 @@ export class CircleButtonWidget extends Widget {
 	/**
 	 * Returns a JSON representation of this widget.
 	 */
-	public toJSON(): CircleButtonWidgetJSON {
+	public toJSON(): RoundButtonWidgetJSON {
 		return {
-			type: WidgetType.CircleButton,
+			type: WidgetType.RoundButton,
 			x: this.x,
 			y: this.y,
 			width: this.width,

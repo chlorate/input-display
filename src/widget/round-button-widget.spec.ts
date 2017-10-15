@@ -1,13 +1,13 @@
 import {ButtonType} from "../controller/json/button-json";
-import {CircleButtonWidget} from "./circle-button-widget";
 import {WidgetType} from "./json/widget-json";
+import {RoundButtonWidget} from "./round-button-widget";
 import {maxBorderWidth, maxHeight, maxWidth, minBorderWidth, minHeight, minWidth} from "./widget";
 
-describe("CircleButtonWidget", () => {
+describe("RoundButtonWidget", () => {
 	let widget;
 
 	beforeEach(() => {
-		widget = new CircleButtonWidget();
+		widget = new RoundButtonWidget();
 	});
 
 	it("should clamp width", () => {
@@ -43,7 +43,7 @@ describe("CircleButtonWidget", () => {
 
 	it("can return a JSON representation", () => {
 		expect(widget.toJSON()).toEqual({
-			type: WidgetType.CircleButton,
+			type: WidgetType.RoundButton,
 			x: 0,
 			y: 0,
 			width: 20,

@@ -1,6 +1,6 @@
 import {ButtonType} from "../controller/json/button-json";
-import {CircleButtonWidget} from "../widget/circle-button-widget";
 import {WidgetType} from "../widget/json/widget-json";
+import {RoundButtonWidget} from "../widget/round-button-widget";
 import {AxisReference} from "./axis-reference";
 import {Config, maxHeight, maxPollRate, maxWidth, minHeight, minPollRate, minWidth} from "./config";
 
@@ -72,7 +72,7 @@ describe("Config", () => {
 		config.displayWidth = 100;
 		config.displayHeight = 200;
 		config.displayOutline = true;
-		config.widgets.push(new CircleButtonWidget());
+		config.widgets.push(new RoundButtonWidget());
 		expect(config.toJSON()).toEqual({
 			gamepadIndex: 1,
 			dpadAxisIndex: 2,
@@ -82,7 +82,7 @@ describe("Config", () => {
 			displayOutline: true,
 			widgets: [
 				{
-					type: WidgetType.CircleButton,
+					type: WidgetType.RoundButton,
 					x: 0,
 					y: 0,
 					width: 20,
@@ -116,7 +116,7 @@ describe("Config", () => {
 				displayOutline: true,
 				widgets: [
 					{
-						type: WidgetType.CircleButton,
+						type: WidgetType.RoundButton,
 						x: 0,
 						y: 1,
 						width: 2,
@@ -142,7 +142,7 @@ describe("Config", () => {
 			expect(config.displayHeight).toBe(200);
 			expect(config.displayOutline).toBe(true);
 			expect(config.widgets.length).toBe(1);
-			expect(config.widgets[0] instanceof CircleButtonWidget).toBe(true);
+			expect(config.widgets[0] instanceof RoundButtonWidget).toBe(true);
 		});
 
 		it("can update dpadAxisIndex", () => {

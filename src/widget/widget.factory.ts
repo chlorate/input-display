@@ -1,6 +1,6 @@
 import {parseButtonReferenceJSON} from "../config/button-reference.factory";
-import {CircleButtonWidget} from "./circle-button-widget";
 import {WidgetJSON, WidgetType} from "./json/widget-json";
+import {RoundButtonWidget} from "./round-button-widget";
 import {Widget} from "./widget";
 
 /**
@@ -9,8 +9,8 @@ import {Widget} from "./widget";
 export function parseWidgetJSON(json: WidgetJSON): Widget {
 	let widget: Widget;
 	switch (json.type) {
-		case WidgetType.CircleButton:
-			const buttonWidget = new CircleButtonWidget();
+		case WidgetType.RoundButton:
+			const buttonWidget = new RoundButtonWidget();
 			buttonWidget.width = json.width;
 			buttonWidget.height = json.height;
 			buttonWidget.borderWidth = json.borderWidth;

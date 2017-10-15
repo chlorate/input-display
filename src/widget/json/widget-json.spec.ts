@@ -4,10 +4,10 @@ import {isWidgetJSON, WidgetType} from "./widget-json";
 describe("isWidgetJSON", () => {
 	let json;
 
-	describe("CircleButtonWidgetJSON", () => {
+	describe("RoundButtonWidgetJSON", () => {
 		beforeEach(() => {
 			json = {
-				type: WidgetType.CircleButton,
+				type: WidgetType.RoundButton,
 				x: 1,
 				y: 2,
 				width: 3,

@@ -14,7 +14,7 @@ describe("ConfigJSON", () => {
 			displayOutline: true,
 			widgets: [
 				{
-					type: WidgetType.CircleButton,
+					type: WidgetType.RoundButton,
 					x: 0,
 					y: 0,
 					width: 0,

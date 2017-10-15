@@ -5,7 +5,7 @@ import {maxX, maxY, minX, minY, Widget} from "./widget";
 class TestWidget extends Widget {
 	public toJSON(): WidgetJSON {
 		return {
-			type: WidgetType.CircleButton,
+			type: WidgetType.RoundButton,
 			x: 0,
 			y: 0,
 			width: 0,

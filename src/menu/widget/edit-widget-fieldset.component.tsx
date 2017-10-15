@@ -76,6 +76,12 @@ export class EditWidgetFieldsetComponent extends Component<Props, State> {
 				<WidgetFieldsetComponent
 					widget={this.props.config.widgets[this.state.index]}
 				/>
+				<button
+					className="btn btn-danger float-right"
+					onClick={linkEvent(this, handleClickDelete)}
+				>
+					Delete
+				</button>
 			</fieldset>
 		);
 	}
@@ -87,4 +93,13 @@ export class EditWidgetFieldsetComponent extends Component<Props, State> {
 
 function handleChange(component: EditWidgetFieldsetComponent, event) {
 	component.index = event.target.value;
+}
+
+function handleClickDelete(component: EditWidgetFieldsetComponent) {
+	const index = component.state.index;
+	if (component.state.index === component.props.config.widgets.length - 1) {
+		// Keep in bounds if deleting last widget.
+		component.index = index - 1;
+	}
+	component.props.config.widgets.splice(index, 1);
 }

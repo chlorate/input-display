@@ -8,7 +8,7 @@ import {maxBorderWidth, maxHeight, maxWidth, minBorderWidth, minHeight, minWidth
  * An abstract widget that represents a button.
  */
 export abstract class ButtonWidget extends Widget {
-	public button: ButtonReference;
+	@observable public button: ButtonReference;
 	@observable private _width: number = 20;
 	@observable private _height: number = 20;
 	@observable private _borderWidth: number = 1.5;

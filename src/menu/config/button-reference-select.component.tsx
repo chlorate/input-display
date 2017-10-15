@@ -40,7 +40,7 @@ export const ButtonReferenceSelectComponent = connect([Store.Controller], (props
 	}
 
 	return (
-		<div class={`"form-group form-group-button-reference ${props.className || ""}`}>
+		<div class={`form-group form-group-button-reference ${props.className || ""}`}>
 			<label for={props.id}>
 				Button
 			</label>

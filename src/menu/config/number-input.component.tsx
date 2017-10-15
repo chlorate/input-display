@@ -6,6 +6,7 @@ interface Props {
 	value: number;
 	min: number;
 	max: number;
+	step?: number;
 	help?: string;
 	onChange;
 }
@@ -26,6 +27,7 @@ export const NumberInputComponent = (props: Props) => (
 				value={props.value}
 				min={props.min}
 				max={props.max}
+				step={props.step}
 				placeholder={props.min}
 				required
 				aria-describedby={`${props.id}-addon ${props.help ? `${props.id}-help` : ""}`}

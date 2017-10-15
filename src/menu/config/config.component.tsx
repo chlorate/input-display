@@ -4,10 +4,8 @@ import {connect} from "inferno-mobx";
 import {Config} from "../../config/config";
 import {loadFile, saveFile} from "../../storage/file";
 import {Store} from "../../storage/store";
-import {DeviceSelectComponent} from "./device-select.component";
+import {ControllerFieldsetComponent} from "./controller-fieldset.component";
 import {DisplayFieldsetComponent} from "./display-fieldset.component";
-import {DpadMappingFieldsetComponent} from "./dpad-mapping-fieldset.component";
-import {PollRateInputComponent} from "./poll-rate-input.component";
 
 interface Props {
 	config: Config;
@@ -84,9 +82,7 @@ export class ConfigComponent extends Component<Props, State> {
 				<h2 className="h4">
 					Controller
 				</h2>
-				<DeviceSelectComponent />
-				<DpadMappingFieldsetComponent />
-				<PollRateInputComponent />
+				<ControllerFieldsetComponent />
 
 				<h2 className="h4">
 					Display

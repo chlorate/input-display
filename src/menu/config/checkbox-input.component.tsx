@@ -1,4 +1,5 @@
 interface Props {
+	className?: string;
 	id?: string;
 	label: string;
 	checked: boolean;
@@ -10,7 +11,7 @@ interface Props {
  * A generic checkbox field.
  */
 export const CheckboxInputComponent = (props: Props) => (
-	<div className="form-check">
+	<div className={`form-check ${props.className || ""}`}>
 		<label className="form-check-label">
 			<input
 				type="checkbox"

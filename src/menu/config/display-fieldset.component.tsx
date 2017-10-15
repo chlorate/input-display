@@ -16,7 +16,7 @@ export const DisplayFieldsetComponent = connect([Store.Config], ({config}: Props
 	<fieldset>
 		<div className="form-row">
 			<NumberInputComponent
-				className="col-auto"
+				className="col"
 				id="config-display-width"
 				label="Width"
 				suffix="px"
@@ -26,7 +26,7 @@ export const DisplayFieldsetComponent = connect([Store.Config], ({config}: Props
 				onChange={linkEvent(config, handleChangeWidth)}
 			/>
 			<NumberInputComponent
-				className="col-auto"
+				className="col"
 				id="config-display-height"
 				label="Height"
 				suffix="px"
@@ -37,6 +37,7 @@ export const DisplayFieldsetComponent = connect([Store.Config], ({config}: Props
 			/>
 		</div>
 		<CheckboxInputComponent
+			className="mb-3"
 			id="config-display-outline"
 			label="Show outline"
 			checked={config.displayOutline}

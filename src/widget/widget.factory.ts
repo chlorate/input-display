@@ -10,19 +10,18 @@ export function parseWidgetJSON(json: WidgetJSON): Widget {
 	let widget: Widget;
 	switch (json.type) {
 		case WidgetType.RoundButton:
-			const buttonWidget = new RoundButtonWidget();
-			buttonWidget.width = json.width;
-			buttonWidget.height = json.height;
-			buttonWidget.borderWidth = json.borderWidth;
-			buttonWidget.button = parseButtonReferenceJSON(json.button);
-			widget = buttonWidget;
+			widget = new RoundButtonWidget();
 			break;
 		default:
 			throw new TypeError("invalid widget JSON");
 	}
 	widget.name = json.name;
+	widget.button = json.button ? parseButtonReferenceJSON(json.button) : undefined;
 	widget.x = json.x;
 	widget.y = json.y;
+	widget.width = json.width;
+	widget.height = json.height;
+	widget.borderWidth = json.borderWidth;
 	widget.showName = json.showName;
 	widget.showPresses = json.showPresses;
 	widget.showMashSpeed = json.showMashSpeed;

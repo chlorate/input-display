@@ -1,4 +1,3 @@
-import {ButtonType} from "../controller/json/button-json";
 import {WidgetType} from "../widget/json/widget-json";
 import {RoundButtonWidget} from "../widget/round-button-widget";
 import {AxisReference} from "./axis-reference";
@@ -86,16 +85,12 @@ describe("Config", () => {
 					name: "",
 					x: 0,
 					y: 0,
-					showName: true,
-					showPresses: false,
-					showMashSpeed: true,
 					width: 20,
 					height: 20,
 					borderWidth: 1.5,
-					button: {
-						type: ButtonType.Normal,
-						index: 0,
-					},
+					showName: true,
+					showPresses: false,
+					showMashSpeed: true,
 				},
 			],
 		});
@@ -124,16 +119,12 @@ describe("Config", () => {
 						name: "name",
 						x: 0,
 						y: 1,
-						showName: true,
-						showPresses: true,
-						showMashSpeed: true,
 						width: 2,
 						height: 3,
 						borderWidth: 4,
-						button: {
-							type: ButtonType.Normal,
-							index: 2,
-						},
+						showName: true,
+						showPresses: true,
+						showMashSpeed: true,
 					},
 				],
 			};

@@ -14,6 +14,10 @@ interface Props {
  * mash speed can be toggled for display.
  */
 export const WidgetLabelComponent = connect([Store.Controller], (props: Props) => {
+	if (!props.widget.button) {
+		return;
+	}
+
 	const button = props.widget.button.resolve(props.controller);
 	if (!button) {
 		return;

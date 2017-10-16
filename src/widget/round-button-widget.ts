@@ -9,18 +9,21 @@ export class RoundButtonWidget extends ButtonWidget {
 	 * Returns a JSON representation of this widget.
 	 */
 	public toJSON(): RoundButtonWidgetJSON {
-		return {
+		const json: RoundButtonWidgetJSON = {
 			type: WidgetType.RoundButton,
 			name: this.name,
 			x: this.x,
 			y: this.y,
-			showName: this.showName,
-			showPresses: this.showPresses,
-			showMashSpeed: this.showMashSpeed,
 			width: this.width,
 			height: this.height,
 			borderWidth: this.borderWidth,
-			button: this.button.toJSON(),
+			showName: this.showName,
+			showPresses: this.showPresses,
+			showMashSpeed: this.showMashSpeed,
 		};
+		if (this.button) {
+			json.button = this.button.toJSON();
+		}
+		return json;
 	}
 }

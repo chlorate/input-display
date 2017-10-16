@@ -17,10 +17,6 @@ export type WidgetJSON = RoundButtonWidgetJSON;
  */
 export interface RoundButtonWidgetJSON extends BaseWidgetJSON {
 	type: WidgetType.RoundButton;
-	width: number;
-	height: number;
-	borderWidth: number;
-	button: ButtonReferenceJSON;
 }
 
 /**
@@ -28,8 +24,12 @@ export interface RoundButtonWidgetJSON extends BaseWidgetJSON {
  */
 export interface BaseWidgetJSON {
 	name: string;
+	button?: ButtonReferenceJSON;
 	x: number;
 	y: number;
+	width: number;
+	height: number;
+	borderWidth: number;
 	showName: boolean;
 	showPresses: boolean;
 	showMashSpeed: boolean;
@@ -42,19 +42,17 @@ export function isWidgetJSON(input: any): input is WidgetJSON {
 	return (
 		typeof input === "object" &&
 		typeof input.name === "string" &&
+		(input.button === undefined || isButtonReferenceJSON(input.button)) &&
 		typeof input.x === "number" &&
 		typeof input.y === "number" &&
+		typeof input.width === "number" &&
+		typeof input.height === "number" &&
+		typeof input.borderWidth === "number" &&
 		typeof input.showName === "boolean" &&
 		typeof input.showPresses === "boolean" &&
 		typeof input.showMashSpeed === "boolean" &&
 		(
-			(
-				input.type === WidgetType.RoundButton &&
-				typeof input.width === "number" &&
-				typeof input.height === "number" &&
-				typeof input.borderWidth === "number" &&
-				isButtonReferenceJSON(input.button)
-			)
+			input.type === WidgetType.RoundButton // || ...
 		)
 	);
 }

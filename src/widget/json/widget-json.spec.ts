@@ -11,20 +11,24 @@ describe("isWidgetJSON", () => {
 				name: "name",
 				x: 1,
 				y: 2,
-				showName: true,
-				showPresses: true,
-				showMashSpeed: true,
 				width: 3,
 				height: 4,
 				borderWidth: 5,
-				button: {
-					type: ButtonType.Normal,
-					index: 6,
-				},
+				showName: true,
+				showPresses: true,
+				showMashSpeed: true,
 			};
 		});
 
-		it("should return true if valid", () => {
+		it("should return true if only required properties are set", () => {
+			expect(isWidgetJSON(json)).toBe(true);
+		});
+
+		it("should return true if button is a valid button reference", () => {
+			json.button = {
+				type: ButtonType.Normal,
+				index: 6,
+			};
 			expect(isWidgetJSON(json)).toBe(true);
 		});
 

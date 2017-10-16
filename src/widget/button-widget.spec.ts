@@ -1,6 +1,5 @@
 import {ButtonWidget} from "./button-widget";
 import {WidgetJSON} from "./json/widget-json";
-import {maxBorderWidth, maxHeight, maxWidth, minBorderWidth, minHeight, minWidth} from "./widget";
 
 class TestButtonWidget extends ButtonWidget {
 	public toJSON(): WidgetJSON {
@@ -15,34 +14,14 @@ describe("ButtonWidget", () => {
 		widget = new TestButtonWidget();
 	});
 
-	it("should clamp width", () => {
-		widget.width = -1;
-		expect(widget.width).toBe(minWidth);
-		widget.width = 5000;
-		expect(widget.width).toBe(maxWidth);
+	it("can return y-position of widget top", () => {
+		widget.borderWidth = 11;
+		expect(widget.topY).toBe(-5.5);
 	});
 
-	it("should clamp height", () => {
-		widget.height = -1;
-		expect(widget.height).toBe(minHeight);
-		widget.height = 5000;
-		expect(widget.height).toBe(maxHeight);
-	});
-
-	it("should clamp border width", () => {
-		widget.borderWidth = -1;
-		expect(widget.borderWidth).toBe(minBorderWidth);
-		widget.borderWidth = 5000;
-		expect(widget.borderWidth).toBe(maxBorderWidth);
-	});
-
-	it("can return x-position of widget center", () => {
-		widget.width = 100;
-		expect(widget.centerX).toBe(50);
-	});
-
-	it("can return y-position of widget center", () => {
+	it("can return y-position of widget bottom", () => {
 		widget.height = 50;
-		expect(widget.centerY).toBe(25);
+		widget.borderWidth = 11;
+		expect(widget.bottomY).toBe(55.5);
 	});
 });

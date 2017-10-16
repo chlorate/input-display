@@ -14,12 +14,14 @@ interface Props {
  * Draws a RoundButtonWidget.
  */
 export const RoundButtonWidgetComponent = connect([Store.Controller], ((props: Props) => {
-	const button = props.widget.button.resolve(props.controller);
 	let fill = "grey";
-	if (button && button.pressed) {
-		fill = "green";
-		if (button.mashSpeed > 5) {
-			fill = "red";
+	if (props.widget.button) {
+		const button = props.widget.button.resolve(props.controller);
+		if (button && button.pressed) {
+			fill = "green";
+			if (button.mashSpeed >= 5) {
+				fill = "red";
+			}
 		}
 	}
 

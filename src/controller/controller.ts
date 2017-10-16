@@ -118,7 +118,7 @@ export class Controller {
 		// beginning of the next frame.
 		let delay = secondToMilliseconds / this.config.pollRate;
 		delay = delay - window.performance.now() % delay;
-		this.timeout = setTimeout(() => this.poll(), secondToMilliseconds / this.config.pollRate);
+		this.timeout = setTimeout(() => this.poll(), delay);
 	}
 
 	/**

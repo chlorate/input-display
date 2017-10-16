@@ -70,10 +70,10 @@ class IndexComponent extends Component<{}, State> {
 				errors={this.state.errors}
 			>
 				<section className="d-flex justify-content-between h-100">
-					<div className="gamepads p-3">
+					<div className="display">
 						<DisplayComponent />
 					</div>
-					<div className="menu p-3">
+					<div className="menu">
 						<ErrorsComponent />
 						<MenuComponent />
 					</div>

@@ -124,12 +124,16 @@ describe("Controller", () => {
 
 	describe("poll", () => {
 		it("should update according to the poll rate", () => {
-			config.pollRate = 1;
+			let now = 0;
+			spyOn(window.performance, "now").and.callFake(() => now);
 			spyOn(service, "getGamepads").and.returnValue([gamepad]);
+			config.pollRate = 1;
 			controller.poll();
 			expect(service.getGamepads).toHaveBeenCalledTimes(1);
+			now += 900;
 			jasmine.clock().tick(900);
 			expect(service.getGamepads).toHaveBeenCalledTimes(1);
+			now += 200;
 			jasmine.clock().tick(200);
 			expect(service.getGamepads).toHaveBeenCalledTimes(2);
 		});
@@ -150,6 +154,7 @@ describe("Controller", () => {
 		});
 
 		it("should clear gamepad data if controller is disconnected", () => {
+			spyOn(window.performance, "now").and.returnValue(0);
 			spyOn(service, "getGamepads").and.returnValues([gamepad], []);
 			controller.poll();
 			jasmine.clock().tick(20);

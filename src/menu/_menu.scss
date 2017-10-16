@@ -9,10 +9,10 @@
 		min-width: 20em;
 		overflow: auto;
 	}
+}
 
-	.card-body {
-		overflow: auto;
-	}
+.card-scroll {
+	overflow: auto;
 }
 
 .nav-item .close {

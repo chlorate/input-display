@@ -40,8 +40,10 @@ export const MenuCardComponent = ({children}: Props) => (
 				</li>
 			</ul>
 		</div>
-		<div className="card-body">
-			{children}
+		<div className="card-scroll">
+			<div className="card-body">
+				{children}
+			</div>
 		</div>
 	</div>
 );

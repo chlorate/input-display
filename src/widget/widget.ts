@@ -21,9 +21,9 @@ export const maxBorderWidth = 1000;
  * An abstract component that is shown in the display.
  */
 export abstract class Widget {
-	public showName: boolean = true;
-	public showPresses: boolean = false;
-	public showMashSpeed: boolean = true;
+	@observable public showName: boolean = true;
+	@observable public showPresses: boolean = false;
+	@observable public showMashSpeed: boolean = true;
 	@observable private _name: string = "";
 	@observable private _x: number = 0;
 	@observable private _y: number = 0;

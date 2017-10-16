@@ -4,6 +4,7 @@ import {ButtonReference} from "../../config/button-reference";
 import {ButtonWidget} from "../../widget/button-widget";
 import {Widget} from "../../widget/widget";
 import {ButtonReferenceSelectComponent} from "../config/button-reference-select.component";
+import {CheckboxInputComponent} from "../config/checkbox-input.component";
 import {NumberInputComponent} from "../config/number-input.component";
 import {TextInputComponent} from "../config/text-input.component";
 
@@ -22,7 +23,7 @@ interface Props {
 export const WidgetFieldsetComponent = connect(({widget}: Props) => (
 	<fieldset>
 		<TextInputComponent
-			id={`config-widget-name`}
+			id="config-widget-name"
 			label="Name"
 			value={widget.name}
 			maxLength={maxNameLength}
@@ -33,7 +34,7 @@ export const WidgetFieldsetComponent = connect(({widget}: Props) => (
 			{widget instanceof ButtonWidget &&
 				<ButtonReferenceSelectComponent
 					className="col"
-					id={`config-widget-button`}
+					id="config-widget-button"
 					reference={widget.button}
 					onChange={linkEvent(widget, handleChangeButton)}
 				/>
@@ -43,7 +44,7 @@ export const WidgetFieldsetComponent = connect(({widget}: Props) => (
 		<div className="form-row">
 			<NumberInputComponent
 				className="col"
-				id={`config-widget-x`}
+				id="config-widget-x"
 				label="X"
 				suffix="px"
 				value={widget.x}
@@ -53,7 +54,7 @@ export const WidgetFieldsetComponent = connect(({widget}: Props) => (
 			/>
 			<NumberInputComponent
 				className="col"
-				id={`config-widget-y`}
+				id="config-widget-y"
 				label="Y"
 				suffix="px"
 				value={widget.y}
@@ -67,7 +68,7 @@ export const WidgetFieldsetComponent = connect(({widget}: Props) => (
 			{widget instanceof ButtonWidget && [
 				<NumberInputComponent
 					className="col"
-					id={`config-widget-width`}
+					id="config-widget-width"
 					label="Width"
 					suffix="px"
 					value={widget.width}
@@ -77,7 +78,7 @@ export const WidgetFieldsetComponent = connect(({widget}: Props) => (
 				/>,
 				<NumberInputComponent
 					className="col"
-					id={`config-widget-height`}
+					id="config-widget-height"
 					label="Height"
 					suffix="px"
 					value={widget.height}
@@ -92,7 +93,7 @@ export const WidgetFieldsetComponent = connect(({widget}: Props) => (
 			{widget instanceof ButtonWidget &&
 				<NumberInputComponent
 					className="col"
-					id={`config-widget-border-width`}
+					id="config-widget-border-width"
 					label="Border width"
 					suffix="px"
 					value={widget.borderWidth}
@@ -102,6 +103,30 @@ export const WidgetFieldsetComponent = connect(({widget}: Props) => (
 					onChange={linkEvent(widget, handleChangeBorderWidth)}
 				/>
 			}
+		</div>
+
+		<div class="form-row">
+			<CheckboxInputComponent
+				className="col mb-3"
+				id="config-widget-show-name"
+				label="Show name"
+				checked={widget.showName}
+				onClick={linkEvent(widget, handleClickShowName)}
+			/>
+			<CheckboxInputComponent
+				className="col mb-3"
+				id="config-widget-show-presses"
+				label="Show press count"
+				checked={widget.showPresses}
+				onClick={linkEvent(widget, handleClickShowPresses)}
+			/>
+			<CheckboxInputComponent
+				className="col mb-3"
+				id="config-widget-show-mash-speed"
+				label="Show mash speed"
+				checked={widget.showMashSpeed}
+				onClick={linkEvent(widget, handleClickShowMashSpeed)}
+			/>
 		</div>
 	</fieldset>
 ));
@@ -134,4 +159,16 @@ function handleChangeHeight(widget: ButtonWidget, event): void {
 
 function handleChangeBorderWidth(widget: ButtonWidget, event): void {
 	widget.borderWidth = event.target.value;
+}
+
+function handleClickShowName(widget: Widget, event): void {
+	widget.showName = event.target.checked;
+}
+
+function handleClickShowPresses(widget: Widget, event): void {
+	widget.showPresses = event.target.checked;
+}
+
+function handleClickShowMashSpeed(widget: Widget, event): void {
+	widget.showMashSpeed = event.target.checked;
 }

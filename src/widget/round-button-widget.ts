@@ -5,14 +5,6 @@ import {RoundButtonWidgetJSON, WidgetType} from "./json/widget-json";
  * A widget that represents a button shaped like a circle or ellipse.
  */
 export class RoundButtonWidget extends ButtonWidget {
-	get centerX(): number {
-		return this.width / 2;
-	}
-
-	get centerY(): number {
-		return this.height / 2;
-	}
-
 	/**
 	 * Returns a JSON representation of this widget.
 	 */

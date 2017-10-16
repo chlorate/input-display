@@ -38,4 +38,12 @@ export abstract class ButtonWidget extends Widget {
 	set borderWidth(width: number) {
 		this._borderWidth = clamp(width, minBorderWidth, maxBorderWidth);
 	}
+
+	get centerX(): number {
+		return this.width / 2;
+	}
+
+	get centerY(): number {
+		return this.height / 2;
+	}
 }

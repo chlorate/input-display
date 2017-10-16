@@ -3,23 +3,8 @@ import {WidgetType} from "./json/widget-json";
 import {RoundButtonWidget} from "./round-button-widget";
 
 describe("RoundButtonWidget", () => {
-	let widget;
-
-	beforeEach(() => {
-		widget = new RoundButtonWidget();
-	});
-
-	it("should return x-position of widget center", () => {
-		widget.width = 100;
-		expect(widget.centerX).toBe(50);
-	});
-
-	it("should return y-position of widget center", () => {
-		widget.height = 50;
-		expect(widget.centerY).toBe(25);
-	});
-
 	it("can return a JSON representation", () => {
+		const widget = new RoundButtonWidget();
 		expect(widget.toJSON()).toEqual({
 			type: WidgetType.RoundButton,
 			name: "",

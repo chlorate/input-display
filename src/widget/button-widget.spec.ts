@@ -35,4 +35,14 @@ describe("ButtonWidget", () => {
 		widget.borderWidth = 5000;
 		expect(widget.borderWidth).toBe(maxBorderWidth);
 	});
+
+	it("can return x-position of widget center", () => {
+		widget.width = 100;
+		expect(widget.centerX).toBe(50);
+	});
+
+	it("can return y-position of widget center", () => {
+		widget.height = 50;
+		expect(widget.centerY).toBe(25);
+	});
 });

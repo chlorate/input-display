@@ -27,10 +27,10 @@ export abstract class Widget {
 	@observable public showPresses: boolean = false;
 	@observable public showMashSpeed: boolean = true;
 	@observable private _name: string = "";
-	@observable private _x: number = 0;
-	@observable private _y: number = 0;
-	@observable private _width: number = 20;
-	@observable private _height: number = 20;
+	@observable private _x: number = 5;
+	@observable private _y: number = 5;
+	@observable private _width: number = 24;
+	@observable private _height: number = 24;
 	@observable private _borderWidth: number = 1.5;
 
 	get name(): string {

@@ -129,9 +129,7 @@ function handleChangeName(widget: Widget, event): void {
 }
 
 function handleChangeButton(widget: Widget, reference?: ButtonReference): void {
-	if (reference !== undefined) {
-		widget.button = reference;
-	}
+	widget.button = reference;
 }
 
 function handleChangeX(widget: Widget, event): void {

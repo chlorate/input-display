@@ -13,7 +13,6 @@ interface Props {
 	controller: Controller;
 	className?: string;
 	id: string;
-	optional?: boolean;
 	reference?: ButtonReference;
 	onChange: LinkedEvent;
 }
@@ -51,9 +50,7 @@ export const ButtonReferenceSelectComponent = connect([Store.Controller], (props
 				required
 				onChange={linkEvent(props, handleChange)}
 			>
-				{props.optional || index === undefined &&
-					<option value="">None</option>
-				}
+				<option value="">None</option>
 				{props.controller.buttons.map((button, i) => (
 					<option value={i}>{button.name}</option>
 				))}

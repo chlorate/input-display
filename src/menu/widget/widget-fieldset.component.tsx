@@ -84,7 +84,7 @@ export const WidgetFieldsetComponent = connect(({widget}: Props) => (
 			/>
 		</div>
 
-		<div class="form-row">
+		<div className="form-row">
 			<NumberInputComponent
 				className="col"
 				id="config-widget-border-width"
@@ -98,7 +98,7 @@ export const WidgetFieldsetComponent = connect(({widget}: Props) => (
 			/>
 		</div>
 
-		<div class="form-row">
+		<div className="form-row">
 			<CheckboxInputComponent
 				className="col mb-3"
 				id="config-widget-show-name"

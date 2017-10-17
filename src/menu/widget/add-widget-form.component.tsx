@@ -53,7 +53,7 @@ export class AddWidgetFormComponent extends Component<Props, State> {
 						<option value="">Analog stick</option>
 					</select>
 				</div>
-				<div class="form-group">
+				<div className="form-group">
 					<button className="btn btn-primary">
 						Add
 					</button>

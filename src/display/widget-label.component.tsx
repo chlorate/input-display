@@ -49,7 +49,7 @@ export const WidgetLabelComponent = connect([Store.Controller], (props: Props) =
 	}
 
 	return (
-		<g class="widget-label">
+		<g className="widget-label">
 			{showTopLabel &&
 				<text
 					className={`widget-label-${showMashSpeed ? "mash-speed" : "name"}`}

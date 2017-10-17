@@ -2,11 +2,11 @@ import {connect} from "inferno-mobx";
 import {Controller} from "../controller/controller";
 import {formatNumber} from "../math/util";
 import {Store} from "../storage/store";
-import {ButtonWidget} from "../widget/button-widget";
+import {Widget} from "../widget/widget";
 
 interface Props {
 	controller: Controller;
-	widget: ButtonWidget;
+	widget: Widget;
 }
 
 /**

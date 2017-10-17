@@ -64,8 +64,19 @@ describe("Widget", () => {
 		expect(widget.centerX).toBe(50);
 	});
 
+	it("can return y-position of widget top", () => {
+		widget.borderWidth = 11;
+		expect(widget.topY).toBe(-5.5);
+	});
+
 	it("can return y-position of widget center", () => {
 		widget.height = 50;
 		expect(widget.centerY).toBe(25);
+	});
+
+	it("can return y-position of widget bottom", () => {
+		widget.height = 50;
+		widget.borderWidth = 11;
+		expect(widget.bottomY).toBe(55.5);
 	});
 });

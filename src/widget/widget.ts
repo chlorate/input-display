@@ -79,8 +79,16 @@ export abstract class Widget {
 		return this.width / 2;
 	}
 
+	get topY(): number {
+		return -this.borderWidth / 2;
+	}
+
 	get centerY(): number {
 		return this.height / 2;
+	}
+
+	get bottomY(): number {
+		return this.height + this.borderWidth / 2;
 	}
 
 	public abstract toJSON(): WidgetJSON;

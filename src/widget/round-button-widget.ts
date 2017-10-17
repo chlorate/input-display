@@ -1,10 +1,10 @@
-import {ButtonWidget} from "./button-widget";
 import {RoundButtonWidgetJSON, WidgetType} from "./json/widget-json";
+import {Widget} from "./widget";
 
 /**
  * A widget that represents a button shaped like a circle or ellipse.
  */
-export class RoundButtonWidget extends ButtonWidget {
+export class RoundButtonWidget extends Widget {
 	/**
 	 * Returns a JSON representation of this widget.
 	 */

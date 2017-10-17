@@ -1,7 +1,6 @@
 import {linkEvent} from "inferno";
 import {connect} from "inferno-mobx";
 import {ButtonReference} from "../../config/button-reference";
-import {ButtonWidget} from "../../widget/button-widget";
 import {Widget} from "../../widget/widget";
 import {ButtonReferenceSelectComponent} from "../config/button-reference-select.component";
 import {CheckboxInputComponent} from "../config/checkbox-input.component";
@@ -31,14 +30,12 @@ export const WidgetFieldsetComponent = connect(({widget}: Props) => (
 		/>
 
 		<div className="form-row">
-			{widget instanceof ButtonWidget &&
-				<ButtonReferenceSelectComponent
-					className="col"
-					id="config-widget-button"
-					reference={widget.button}
-					onChange={linkEvent(widget, handleChangeButton)}
-				/>
-			}
+			<ButtonReferenceSelectComponent
+				className="col"
+				id="config-widget-button"
+				reference={widget.button}
+				onChange={linkEvent(widget, handleChangeButton)}
+			/>
 		</div>
 
 		<div className="form-row">
@@ -65,44 +62,40 @@ export const WidgetFieldsetComponent = connect(({widget}: Props) => (
 		</div>
 
 		<div className="form-row">
-			{widget instanceof ButtonWidget && [
-				<NumberInputComponent
-					className="col"
-					id="config-widget-width"
-					label="Width"
-					suffix="px"
-					value={widget.width}
-					min={minWidth}
-					max={maxWidth}
-					onChange={linkEvent(widget, handleChangeWidth)}
-				/>,
-				<NumberInputComponent
-					className="col"
-					id="config-widget-height"
-					label="Height"
-					suffix="px"
-					value={widget.height}
-					min={minHeight}
-					max={maxHeight}
-					onChange={linkEvent(widget, handleChangeHeight)}
-				/>,
-			]}
+			<NumberInputComponent
+				className="col"
+				id="config-widget-width"
+				label="Width"
+				suffix="px"
+				value={widget.width}
+				min={minWidth}
+				max={maxWidth}
+				onChange={linkEvent(widget, handleChangeWidth)}
+			/>
+			<NumberInputComponent
+				className="col"
+				id="config-widget-height"
+				label="Height"
+				suffix="px"
+				value={widget.height}
+				min={minHeight}
+				max={maxHeight}
+				onChange={linkEvent(widget, handleChangeHeight)}
+			/>
 		</div>
 
 		<div class="form-row">
-			{widget instanceof ButtonWidget &&
-				<NumberInputComponent
-					className="col"
-					id="config-widget-border-width"
-					label="Border width"
-					suffix="px"
-					value={widget.borderWidth}
-					min={minBorderWidth}
-					max={maxBorderWidth}
-					step={0.1}
-					onChange={linkEvent(widget, handleChangeBorderWidth)}
-				/>
-			}
+			<NumberInputComponent
+				className="col"
+				id="config-widget-border-width"
+				label="Border width"
+				suffix="px"
+				value={widget.borderWidth}
+				min={minBorderWidth}
+				max={maxBorderWidth}
+				step={0.1}
+				onChange={linkEvent(widget, handleChangeBorderWidth)}
+			/>
 		</div>
 
 		<div class="form-row">
@@ -135,7 +128,7 @@ function handleChangeName(widget: Widget, event): void {
 	widget.name = event.target.value;
 }
 
-function handleChangeButton(widget: ButtonWidget, reference?: ButtonReference): void {
+function handleChangeButton(widget: Widget, reference?: ButtonReference): void {
 	if (reference !== undefined) {
 		widget.button = reference;
 	}
@@ -149,15 +142,15 @@ function handleChangeY(widget: Widget, event): void {
 	widget.y = event.target.value;
 }
 
-function handleChangeWidth(widget: ButtonWidget, event): void {
+function handleChangeWidth(widget: Widget, event): void {
 	widget.width = event.target.value;
 }
 
-function handleChangeHeight(widget: ButtonWidget, event): void {
+function handleChangeHeight(widget: Widget, event): void {
 	widget.height = event.target.value;
 }
 
-function handleChangeBorderWidth(widget: ButtonWidget, event): void {
+function handleChangeBorderWidth(widget: Widget, event): void {
 	widget.borderWidth = event.target.value;
 }
 

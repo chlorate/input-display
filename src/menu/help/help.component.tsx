@@ -9,25 +9,22 @@ export const HelpComponent = () => (
 		<p className="lead text-muted">
 			v{version} ({versionDate})
 		</p>
-
-		<h2 className="h4 mt-5">
-			Limitations
-		</h2>
-		<ul>
+		<ul className="list-unstyled m-0">
 			<li>
-				Microsoft Edge only supports controllers with the "standard"
-				mapping (Xbox 360 or similar).
+				<a href="https://github.com/chlorate/input-display" target="_blank">
+					GitHub
+				</a>
+			</li>
+			<li>
+				<a href="https://github.com/chlorate/input-display/wiki" target="_blank">
+					Documentation
+				</a>
+			</li>
+			<li>
+				<a href="https://github.com/chlorate/input-display/wiki/Compatibility" target="_blank">
+					Browser and controller compatibility
+				</a>
 			</li>
 		</ul>
-
-		<h2 className="h4">
-			Control stick calibration
-		</h2>
-		<p>
-			Leave all control sticks at their neutral position. In the
-			Controller tab, click the axes Reset button. Rotate each control
-			stick or push them in each direction to record their possible
-			ranges.
-		</p>
 	</section>
 );

@@ -63,7 +63,7 @@ export const ControllerComponent = connect([Store.Controller], ({controller}: Pr
 						<tr>
 							<th>Name</th>
 							<th className="text-center">Pressed</th>
-							<th className="text-right"># presses</th>
+							<th className="text-right">Press count</th>
 							<th className="text-right">Mash speed</th>
 							<th className="text-right">Mash best</th>
 						</tr>

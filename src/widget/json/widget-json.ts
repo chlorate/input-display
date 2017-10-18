@@ -1,4 +1,6 @@
 import {ButtonReferenceJSON, isButtonReferenceJSON} from "../../config/json/button-reference-json";
+import {LabelPosition, sortedLabelPositions} from "../label-position";
+import {LabelReplacement, sortedLabelReplacements} from "../label-replacement";
 
 /**
  * Type values for distinguishing Widget subclass JSON representations.
@@ -33,6 +35,9 @@ export interface BaseWidgetJSON {
 	showName: boolean;
 	showPresses: boolean;
 	showMashSpeed: boolean;
+	nameLabel?: LabelPosition;
+	pressesLabel?: LabelPosition;
+	mashSpeedLabel?: LabelPosition | LabelReplacement;
 }
 
 /**
@@ -51,6 +56,19 @@ export function isWidgetJSON(input: any): input is WidgetJSON {
 		typeof input.showName === "boolean" &&
 		typeof input.showPresses === "boolean" &&
 		typeof input.showMashSpeed === "boolean" &&
+		(
+			input.nameLabel === undefined ||
+			sortedLabelPositions.indexOf(input.nameLabel) >= 0
+		) &&
+		(
+			input.pressesLabel === undefined ||
+			sortedLabelPositions.indexOf(input.pressesLabel) >= 0
+		) &&
+		(
+			input.mashSpeedLabel === undefined ||
+			sortedLabelPositions.indexOf(input.mashSpeedLabel) >= 0 ||
+			sortedLabelReplacements.indexOf(input.mashSpeedLabel) >= 0
+		) &&
 		(
 			input.type === WidgetType.RoundButton // || ...
 		)

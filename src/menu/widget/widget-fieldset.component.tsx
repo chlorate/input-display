@@ -6,6 +6,7 @@ import {ButtonReferenceSelectComponent} from "../config/button-reference-select.
 import {CheckboxInputComponent} from "../config/checkbox-input.component";
 import {NumberInputComponent} from "../config/number-input.component";
 import {TextInputComponent} from "../config/text-input.component";
+import {LabelSelectComponent} from "./label-select.component";
 
 import {
 	maxBorderWidth, maxHeight, maxNameLength, maxWidth, maxX, maxY,
@@ -121,6 +122,31 @@ export const WidgetFieldsetComponent = connect(({widget}: Props) => (
 				onClick={linkEvent(widget, handleClickShowMashSpeed)}
 			/>
 		</div>
+
+		<div className="form-row">
+			<LabelSelectComponent
+				className="col"
+				id="config-widget-name-label"
+				label="Name label"
+				value={widget.nameLabel}
+				onChange={linkEvent(widget, handleChangeNameLabel)}
+			/>
+			<LabelSelectComponent
+				className="col"
+				id="config-widget-presses-label"
+				label="Press count label"
+				value={widget.pressesLabel}
+				onChange={linkEvent(widget, handleChangePressesLabel)}
+			/>
+			<LabelSelectComponent
+				className="col"
+				id="config-widget-mash-speed-label"
+				label="Mash speed label"
+				value={widget.mashSpeedLabel}
+				replacement={true}
+				onChange={linkEvent(widget, handleChangeMashSpeedLabel)}
+			/>
+		</div>
 	</fieldset>
 ));
 
@@ -162,4 +188,16 @@ function handleClickShowPresses(widget: Widget, event): void {
 
 function handleClickShowMashSpeed(widget: Widget, event): void {
 	widget.showMashSpeed = event.target.checked;
+}
+
+function handleChangeNameLabel(widget: Widget, event): void {
+	widget.nameLabel = event.target.value || undefined;
+}
+
+function handleChangePressesLabel(widget: Widget, event): void {
+	widget.pressesLabel = event.target.value || undefined;
+}
+
+function handleChangeMashSpeedLabel(widget: Widget, event): void {
+	widget.mashSpeedLabel = event.target.value || undefined;
 }

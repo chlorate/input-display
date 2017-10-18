@@ -1,4 +1,6 @@
 import {WidgetType} from "../widget/json/widget-json";
+import {LabelPosition} from "../widget/label-position";
+import {LabelReplacement} from "../widget/label-replacement";
 import {RoundButtonWidget} from "../widget/round-button-widget";
 import {AxisReference} from "./axis-reference";
 import {Config, maxHeight, maxPollRate, maxWidth, minHeight, minPollRate, minWidth} from "./config";
@@ -83,6 +85,7 @@ describe("Config", () => {
 				{
 					type: WidgetType.RoundButton,
 					name: "",
+					button: undefined,
 					x: 5,
 					y: 5,
 					width: 24,
@@ -91,6 +94,9 @@ describe("Config", () => {
 					showName: true,
 					showPresses: false,
 					showMashSpeed: true,
+					nameLabel: LabelPosition.Center,
+					pressesLabel: undefined,
+					mashSpeedLabel: LabelReplacement.Name,
 				},
 			],
 		});

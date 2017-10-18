@@ -1,6 +1,7 @@
 import {NormalButtonReference} from "../config/normal-button-reference";
 import {ButtonType} from "../controller/json/button-json";
 import {WidgetType} from "./json/widget-json";
+import {LabelPosition} from "./label-position";
 import {parseWidgetJSON} from "./widget.factory";
 
 describe("parseWidgetJSON", () => {
@@ -18,6 +19,9 @@ describe("parseWidgetJSON", () => {
 			showName: true,
 			showPresses: true,
 			showMashSpeed: true,
+			nameLabel: LabelPosition.Above,
+			pressesLabel: LabelPosition.Below,
+			mashSpeedLabel: LabelPosition.Center,
 		};
 	});
 
@@ -33,6 +37,9 @@ describe("parseWidgetJSON", () => {
 		expect(widget.showName).toBe(true);
 		expect(widget.showPresses).toBe(true);
 		expect(widget.showMashSpeed).toBe(true);
+		expect(widget.nameLabel).toBe(LabelPosition.Above);
+		expect(widget.pressesLabel).toBe(LabelPosition.Below);
+		expect(widget.mashSpeedLabel).toBe(LabelPosition.Center);
 	});
 
 	it("can create a RoundButtonWidget with a button reference", () => {

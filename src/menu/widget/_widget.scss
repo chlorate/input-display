@@ -1,0 +1,13 @@
+.form-group-label-position {
+	label {
+		white-space: nowrap;
+	}
+
+	.form-control {
+		min-width: 7em;
+	}
+}
+
+.form-group-label-replacement .form-control {
+	min-width: 13em;
+}

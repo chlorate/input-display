@@ -1,6 +1,8 @@
 import {NormalButtonReference} from "../config/normal-button-reference";
 import {ButtonType} from "../controller/json/button-json";
 import {WidgetType} from "./json/widget-json";
+import {LabelPosition} from "./label-position";
+import {LabelReplacement} from "./label-replacement";
 import {RoundButtonWidget} from "./round-button-widget";
 
 describe("RoundButtonWidget", () => {
@@ -11,10 +13,11 @@ describe("RoundButtonWidget", () => {
 	});
 
 	describe("toJSON", () => {
-		it("can return a minimal JSON representation", () => {
+		it("can return a JSON representation", () => {
 			expect(widget.toJSON()).toEqual({
 				type: WidgetType.RoundButton,
 				name: "",
+				button: undefined,
 				x: 5,
 				y: 5,
 				width: 24,
@@ -23,6 +26,9 @@ describe("RoundButtonWidget", () => {
 				showName: true,
 				showPresses: false,
 				showMashSpeed: true,
+				nameLabel: LabelPosition.Center,
+				pressesLabel: undefined,
+				mashSpeedLabel: LabelReplacement.Name,
 			});
 		});
 

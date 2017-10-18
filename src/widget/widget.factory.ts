@@ -25,5 +25,8 @@ export function parseWidgetJSON(json: WidgetJSON): Widget {
 	widget.showName = json.showName;
 	widget.showPresses = json.showPresses;
 	widget.showMashSpeed = json.showMashSpeed;
+	widget.nameLabel = json.nameLabel;
+	widget.pressesLabel = json.pressesLabel;
+	widget.mashSpeedLabel = json.mashSpeedLabel;
 	return widget;
 }

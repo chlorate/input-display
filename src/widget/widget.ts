@@ -2,6 +2,8 @@ import {observable} from "mobx";
 import {ButtonReference} from "../config/button-reference";
 import {clamp, clampInt} from "../math/util";
 import {WidgetJSON} from "./json/widget-json";
+import {LabelPosition} from "./label-position";
+import {LabelReplacement} from "./label-replacement";
 
 export const maxNameLength = 100;
 
@@ -26,6 +28,9 @@ export abstract class Widget {
 	@observable public showName: boolean = true;
 	@observable public showPresses: boolean = false;
 	@observable public showMashSpeed: boolean = true;
+	@observable public nameLabel?: LabelPosition = LabelPosition.Center;
+	@observable public pressesLabel?: LabelPosition;
+	@observable public mashSpeedLabel?: LabelPosition | LabelReplacement = LabelReplacement.Name;
 	@observable private _name: string = "";
 	@observable private _x: number = 5;
 	@observable private _y: number = 5;

@@ -32,9 +32,6 @@ export interface BaseWidgetJSON {
 	width: number;
 	height: number;
 	borderWidth: number;
-	showName: boolean;
-	showPresses: boolean;
-	showMashSpeed: boolean;
 	nameLabel?: LabelPosition;
 	pressesLabel?: LabelPosition;
 	mashSpeedLabel?: LabelPosition | LabelReplacement;
@@ -53,9 +50,6 @@ export function isWidgetJSON(input: any): input is WidgetJSON {
 		typeof input.width === "number" &&
 		typeof input.height === "number" &&
 		typeof input.borderWidth === "number" &&
-		typeof input.showName === "boolean" &&
-		typeof input.showPresses === "boolean" &&
-		typeof input.showMashSpeed === "boolean" &&
 		(
 			input.nameLabel === undefined ||
 			sortedLabelPositions.indexOf(input.nameLabel) >= 0

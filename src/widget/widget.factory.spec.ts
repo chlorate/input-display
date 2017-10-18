@@ -16,9 +16,6 @@ describe("parseWidgetJSON", () => {
 			width: 2,
 			height: 3,
 			borderWidth: 4,
-			showName: true,
-			showPresses: true,
-			showMashSpeed: true,
 			nameLabel: LabelPosition.Above,
 			pressesLabel: LabelPosition.Below,
 			mashSpeedLabel: LabelPosition.Center,
@@ -34,9 +31,6 @@ describe("parseWidgetJSON", () => {
 		expect(widget.width).toBe(2);
 		expect(widget.height).toBe(3);
 		expect(widget.borderWidth).toBe(4);
-		expect(widget.showName).toBe(true);
-		expect(widget.showPresses).toBe(true);
-		expect(widget.showMashSpeed).toBe(true);
 		expect(widget.nameLabel).toBe(LabelPosition.Above);
 		expect(widget.pressesLabel).toBe(LabelPosition.Below);
 		expect(widget.mashSpeedLabel).toBe(LabelPosition.Center);

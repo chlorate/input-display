@@ -25,9 +25,6 @@ export const maxBorderWidth = 1000;
  */
 export abstract class Widget {
 	@observable public button?: ButtonReference;
-	@observable public showName: boolean = true;
-	@observable public showPresses: boolean = false;
-	@observable public showMashSpeed: boolean = true;
 	@observable public nameLabel?: LabelPosition = LabelPosition.Center;
 	@observable public pressesLabel?: LabelPosition;
 	@observable public mashSpeedLabel?: LabelPosition | LabelReplacement = LabelReplacement.Name;

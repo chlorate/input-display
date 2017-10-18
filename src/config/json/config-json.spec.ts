@@ -25,9 +25,6 @@ describe("ConfigJSON", () => {
 					width: 0,
 					height: 0,
 					borderWidth: 0,
-					showName: false,
-					showPresses: false,
-					showMashSpeed: true,
 				},
 			],
 		};

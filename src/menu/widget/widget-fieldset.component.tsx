@@ -3,7 +3,6 @@ import {connect} from "inferno-mobx";
 import {ButtonReference} from "../../config/button-reference";
 import {Widget} from "../../widget/widget";
 import {ButtonReferenceSelectComponent} from "../config/button-reference-select.component";
-import {CheckboxInputComponent} from "../config/checkbox-input.component";
 import {NumberInputComponent} from "../config/number-input.component";
 import {TextInputComponent} from "../config/text-input.component";
 import {LabelSelectComponent} from "./label-select.component";
@@ -100,30 +99,6 @@ export const WidgetFieldsetComponent = connect(({widget}: Props) => (
 		</div>
 
 		<div className="form-row">
-			<CheckboxInputComponent
-				className="col mb-3"
-				id="config-widget-show-name"
-				label="Show name"
-				checked={widget.showName}
-				onClick={linkEvent(widget, handleClickShowName)}
-			/>
-			<CheckboxInputComponent
-				className="col mb-3"
-				id="config-widget-show-presses"
-				label="Show press count"
-				checked={widget.showPresses}
-				onClick={linkEvent(widget, handleClickShowPresses)}
-			/>
-			<CheckboxInputComponent
-				className="col mb-3"
-				id="config-widget-show-mash-speed"
-				label="Show mash speed"
-				checked={widget.showMashSpeed}
-				onClick={linkEvent(widget, handleClickShowMashSpeed)}
-			/>
-		</div>
-
-		<div className="form-row">
 			<LabelSelectComponent
 				className="col"
 				id="config-widget-name-label"
@@ -176,18 +151,6 @@ function handleChangeHeight(widget: Widget, event): void {
 
 function handleChangeBorderWidth(widget: Widget, event): void {
 	widget.borderWidth = event.target.value;
-}
-
-function handleClickShowName(widget: Widget, event): void {
-	widget.showName = event.target.checked;
-}
-
-function handleClickShowPresses(widget: Widget, event): void {
-	widget.showPresses = event.target.checked;
-}
-
-function handleClickShowMashSpeed(widget: Widget, event): void {
-	widget.showMashSpeed = event.target.checked;
 }
 
 function handleChangeNameLabel(widget: Widget, event): void {

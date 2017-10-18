@@ -16,9 +16,6 @@ describe("isWidgetJSON", () => {
 				width: 3,
 				height: 4,
 				borderWidth: 5,
-				showName: true,
-				showPresses: true,
-				showMashSpeed: true,
 			};
 		});
 
@@ -72,21 +69,6 @@ describe("isWidgetJSON", () => {
 
 		it("should return false if button is not a ButtonReference", () => {
 			json.button = "bad";
-			expect(isWidgetJSON(json)).toBe(false);
-		});
-
-		it("should return false if showName is not boolean", () => {
-			json.showName = "bad";
-			expect(isWidgetJSON(json)).toBe(false);
-		});
-
-		it("should return false if showPresses is not boolean", () => {
-			json.showPresses = "bad";
-			expect(isWidgetJSON(json)).toBe(false);
-		});
-
-		it("should return false if showMashSpeed is not boolean", () => {
-			json.showMashSpeed = "bad";
 			expect(isWidgetJSON(json)).toBe(false);
 		});
 

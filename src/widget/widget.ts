@@ -80,8 +80,16 @@ export abstract class Widget {
 		this._borderWidth = clamp(width, minBorderWidth, maxBorderWidth);
 	}
 
+	get leftX(): number {
+		return this.topY; // Same value.
+	}
+
 	get centerX(): number {
 		return this.width / 2;
+	}
+
+	get rightX(): number {
+		return this.width + this.borderWidth / 2;
 	}
 
 	get topY(): number {

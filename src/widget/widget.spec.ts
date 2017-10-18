@@ -59,9 +59,20 @@ describe("Widget", () => {
 		expect(widget.borderWidth).toBe(maxBorderWidth);
 	});
 
+	it("can return x-position of widget left", () => {
+		widget.borderWidth = 11;
+		expect(widget.leftX).toBe(-5.5);
+	});
+
 	it("can return x-position of widget center", () => {
 		widget.width = 100;
 		expect(widget.centerX).toBe(50);
+	});
+
+	it("can return x-position of widget right", () => {
+		widget.width = 50;
+		widget.borderWidth = 11;
+		expect(widget.rightX).toBe(55.5);
 	});
 
 	it("can return y-position of widget top", () => {

@@ -58,14 +58,14 @@ export class ConfigComponent extends Component<Props, State> {
 					/>
 					<button
 						type="button"
-						className="btn btn-secondary"
+						className="btn btn-primary"
 						onClick={linkEvent(this, handleClickOpen)}
 					>
 						Open
 					</button>{" "}
 					<button
 						type="button"
-						className="btn btn-secondary"
+						className="btn btn-primary"
 						onClick={linkEvent(this, handleClickSave)}
 					>
 						Save

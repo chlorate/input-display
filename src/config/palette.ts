@@ -1,4 +1,5 @@
 import {observable} from "mobx";
+import {ensureColor} from "../css/util";
 
 /**
  * Defines a palette of widget colors for a particular button state.
@@ -21,21 +22,20 @@ export class Palette {
 		return this._border;
 	}
 	set border(border: string) {
-		// TODO: validate color or reset to default
-		this._border = border;
+		this._border = ensureColor(border, this.defaultBorder);
 	}
 
 	get fill(): string {
 		return this._fill;
 	}
 	set fill(fill: string) {
-		this._fill = fill;
+		this._fill = ensureColor(fill, this.defaultFill);
 	}
 
 	get label(): string {
 		return this._label;
 	}
 	set label(label: string) {
-		this._label = label;
+		this._label = ensureColor(label, this.defaultLabel);
 	}
 }

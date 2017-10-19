@@ -4,6 +4,7 @@ import {Widget} from "../widget/widget";
 import {parseWidgetJSON} from "../widget/widget.factory";
 import {AxisReference} from "./axis-reference";
 import {ConfigJSON, isConfigJSON} from "./json/config-json";
+import {Palette} from "./palette";
 
 // 4 ms is the smallest delay:
 // https://developer.mozilla.org/en-US/docs/Web/API/WindowOrWorkerGlobalScope/setTimeout#Timeouts_throttled_to_>4ms
@@ -27,7 +28,18 @@ export class Config {
 	@observable private _pollRate: number = 60;
 	@observable private _displayWidth: number = 300;
 	@observable private _displayHeight: number = 100;
+	@observable private _buttonUnpressedPalette: Palette;
+	@observable private _buttonPressedPalette: Palette;
+	@observable private _buttonMashingUnpressedPalette: Palette;
+	@observable private _buttonMashingPressedPalette: Palette;
 	@observable private _widgets: Widget[] = [];
+
+	constructor() {
+		this._buttonUnpressedPalette = new Palette("#565f67", "#1c1f21", "#565f67");
+		this._buttonPressedPalette = new Palette("#469fef", "#0e5280", "#b8ddff");
+		this._buttonMashingUnpressedPalette = new Palette("#7b6f67", "#312d2a", "#7b6f67");
+		this._buttonMashingPressedPalette = new Palette("#ef8b48", "#813c0e", "#ffd4b8");
+	}
 
 	get gamepadIndex(): number {
 		return this._gamepadIndex;
@@ -75,6 +87,22 @@ export class Config {
 	}
 	set displayHeight(height: number) {
 		this._displayHeight = clampInt(height, minHeight, maxHeight);
+	}
+
+	get buttonUnpressedPalette(): Palette {
+		return this._buttonUnpressedPalette;
+	}
+
+	get buttonPressedPalette(): Palette {
+		return this._buttonPressedPalette;
+	}
+
+	get buttonMashingUnpressedPalette(): Palette {
+		return this._buttonMashingUnpressedPalette;
+	}
+
+	get buttonMashingPressedPalette(): Palette {
+		return this._buttonMashingPressedPalette;
 	}
 
 	get widgets(): Widget[] {

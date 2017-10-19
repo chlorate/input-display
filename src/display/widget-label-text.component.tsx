@@ -23,7 +23,6 @@ export const WidgetLabelTextComponent = (props: Props) => (
 		y={props.y}
 		text-anchor={props.anchor}
 		dominant-baseline={props.baseline}
-		fill="white"
 	>
 		{props.labels.map((label, i) => (
 			<tspan

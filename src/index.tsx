@@ -5,6 +5,7 @@ import {observable} from "mobx";
 import {Config} from "./config/config";
 import {Controller} from "./controller/controller";
 import {DisplayComponent} from "./display/display.component";
+import {StylesheetComponent} from "./display/stylesheet.component";
 import {ErrorsComponent} from "./menu/error/errors.component";
 import {MenuComponent} from "./menu/menu.component";
 import {loadLocalStorage, saveLocalStorage} from "./storage/local";
@@ -72,6 +73,7 @@ class IndexComponent extends Component<{}, State> {
 				<section className="d-flex justify-content-between h-100">
 					<div className="display">
 						<DisplayComponent />
+						<StylesheetComponent />
 					</div>
 					<div className="menu">
 						<ErrorsComponent />

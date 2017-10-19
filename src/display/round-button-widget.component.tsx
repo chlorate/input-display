@@ -14,26 +14,14 @@ interface Props {
  * Draws a RoundButtonWidget.
  */
 export const RoundButtonWidgetComponent = connect([Store.Controller], ((props: Props) => {
-	let fill = "grey";
-	if (props.widget.button) {
-		const button = props.widget.button.resolve(props.controller);
-		if (button && button.pressed) {
-			fill = "green";
-			if (button.mashSpeed >= 5) {
-				fill = "red";
-			}
-		}
-	}
-
 	return (
 		<WidgetGroupComponent widget={props.widget}>
 			<ellipse
+				className="widget-button"
 				cx={props.widget.centerX}
 				cy={props.widget.centerY}
 				rx={props.widget.centerX}
 				ry={props.widget.centerY}
-				fill={fill}
-				stroke="white"
 				stroke-width={props.widget.borderWidth}
 			/>
 			<WidgetLabelComponent widget={props.widget} />

@@ -17,16 +17,25 @@ export const ControllerFieldsetComponent = connect([Store.Config], ({config}: Pr
 	<fieldset>
 		<DeviceSelectComponent />
 		<DpadMappingFieldsetComponent />
-		<NumberInputComponent
-			id="config-poll-rate"
-			label="Poll rate"
-			suffix="Hz"
-			value={config.pollRate}
-			min={minPollRate}
-			max={maxPollRate}
-			help="How often the controller's inputs are read."
-			onChange={linkEvent(config, handleChange)}
-		/>
+		<div class="form-row">
+			<NumberInputComponent
+				className="col m-0"
+				id="config-poll-rate"
+				label="Poll rate"
+				suffix="Hz"
+				value={config.pollRate}
+				min={minPollRate}
+				max={maxPollRate}
+				help={true}
+				onChange={linkEvent(config, handleChange)}
+			/>
+			<div class="col-6 col-spacer"></div>
+			<div class="col-2 col-spacer"></div>
+			<div class="col-1 col-spacer"></div>
+		</div>
+		<small className="form-text text-muted mb-3" id="config-poll-rate-help">
+			How often the controller's inputs are read.
+		</small>
 	</fieldset>
 ));
 

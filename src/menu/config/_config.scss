@@ -1,3 +1,15 @@
+// Used in a .form-row to prevent stretching small fields to full width when the
+// menu is wider than its min-width. Stretching to full width seems to be
+// Boostrap's style but I find it looks really off when a field only holds a few
+// digits for example. Can't use normal grid breakpoints because the menu width
+// isn't based on the window width.
+//
+// Negative margin prevents moving content below down by 1px when a spacer gets
+// moved to its own row.
+.col-spacer {
+	margin-top: -1px;
+}
+
 .form-control-color {
 	border: 0;
 	padding: 0;

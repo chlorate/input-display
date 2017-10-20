@@ -23,7 +23,8 @@ export const ColorFieldsetComponent = connect([Store.Config], ({config}: Props) 
 				placeholder={DefaultColors.Background}
 				onChange={linkEvent(config, handleChange)}
 			/>
-			<div class="col-8"></div>
+			<div class="col-6"></div>
+			<div class="col-2"></div>
 		</div>
 
 		<h3 class="h5">

@@ -23,7 +23,7 @@ export const CheckboxInputComponent = (props: Props) => (
 			{props.label}
 		</label>
 		{props.help !== undefined &&
-			<small className="form-text text-muted" id={`${props.id}-help`}>
+			<small className="form-text text-muted m-0" id={`${props.id}-help`}>
 				{props.help}
 			</small>
 		}

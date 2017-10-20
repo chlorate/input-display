@@ -21,15 +21,15 @@ interface Props {
  */
 export const WidgetFieldsetComponent = connect(({widget}: Props) => (
 	<fieldset>
-		<TextInputComponent
-			id="config-widget-name"
-			label="Name"
-			value={widget.name}
-			maxLength={maxNameLength}
-			onChange={linkEvent(widget, handleChangeName)}
-		/>
-
 		<div className="form-row">
+			<TextInputComponent
+				className="col"
+				id="config-widget-name"
+				label="Name"
+				value={widget.name}
+				maxLength={maxNameLength}
+				onChange={linkEvent(widget, handleChangeName)}
+			/>
 			<ButtonReferenceSelectComponent
 				className="col"
 				id="config-widget-button"
@@ -38,50 +38,56 @@ export const WidgetFieldsetComponent = connect(({widget}: Props) => (
 			/>
 		</div>
 
+		{/* Nested rows make it so the fields wrap in pairs. */}
 		<div className="form-row">
-			<NumberInputComponent
-				className="col"
-				id="config-widget-x"
-				label="X"
-				suffix="px"
-				value={widget.x}
-				min={minX}
-				max={maxX}
-				onChange={linkEvent(widget, handleChangeX)}
-			/>
-			<NumberInputComponent
-				className="col"
-				id="config-widget-y"
-				label="Y"
-				suffix="px"
-				value={widget.y}
-				min={minY}
-				max={maxY}
-				onChange={linkEvent(widget, handleChangeY)}
-			/>
-		</div>
-
-		<div className="form-row">
-			<NumberInputComponent
-				className="col"
-				id="config-widget-width"
-				label="Width"
-				suffix="px"
-				value={widget.width}
-				min={minWidth}
-				max={maxWidth}
-				onChange={linkEvent(widget, handleChangeWidth)}
-			/>
-			<NumberInputComponent
-				className="col"
-				id="config-widget-height"
-				label="Height"
-				suffix="px"
-				value={widget.height}
-				min={minHeight}
-				max={maxHeight}
-				onChange={linkEvent(widget, handleChangeHeight)}
-			/>
+			<div class="col">
+				<div class="form-row flex-nowrap">
+					<NumberInputComponent
+						className="col"
+						id="config-widget-x"
+						label="X"
+						suffix="px"
+						value={widget.x}
+						min={minX}
+						max={maxX}
+						onChange={linkEvent(widget, handleChangeX)}
+					/>
+					<NumberInputComponent
+						className="col"
+						id="config-widget-y"
+						label="Y"
+						suffix="px"
+						value={widget.y}
+						min={minY}
+						max={maxY}
+						onChange={linkEvent(widget, handleChangeY)}
+					/>
+				</div>
+			</div>
+			<div class="col">
+				<div class="form-row flex-nowrap">
+					<NumberInputComponent
+						className="col"
+						id="config-widget-width"
+						label="Width"
+						suffix="px"
+						value={widget.width}
+						min={minWidth}
+						max={maxWidth}
+						onChange={linkEvent(widget, handleChangeWidth)}
+					/>
+					<NumberInputComponent
+						className="col"
+						id="config-widget-height"
+						label="Height"
+						suffix="px"
+						value={widget.height}
+						min={minHeight}
+						max={maxHeight}
+						onChange={linkEvent(widget, handleChangeHeight)}
+					/>
+				</div>
+			</div>
 		</div>
 
 		<div className="form-row">
@@ -96,6 +102,8 @@ export const WidgetFieldsetComponent = connect(({widget}: Props) => (
 				step={0.1}
 				onChange={linkEvent(widget, handleChangeBorderWidth)}
 			/>
+			<div class="col-6 col-spacer"></div>
+			<div class="col-3 col-spacer"></div>
 		</div>
 
 		<div className="form-row">

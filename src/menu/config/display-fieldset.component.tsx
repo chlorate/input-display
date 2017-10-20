@@ -35,6 +35,8 @@ export const DisplayFieldsetComponent = connect([Store.Config], ({config}: Props
 				max={maxHeight}
 				onChange={linkEvent(config, handleChangeHeight)}
 			/>
+			<div class="col-4 col-spacer"></div>
+			<div class="col-2 col-spacer"></div>
 		</div>
 		<CheckboxInputComponent
 			className="mb-3"

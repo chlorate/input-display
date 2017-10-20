@@ -38,6 +38,7 @@ export const PaletteFieldsetComponent = connect((props: Props) => (
 				placeholder={props.palette.defaultLabel}
 				onChange={linkEvent(props.palette, handleChangeLabel)}
 			/>
+			<div class="col-6 col-spacer"></div>
 		</div>
 	</fieldset>
 ));

@@ -89,22 +89,22 @@ export class ConfigComponent extends Component<Props, State> {
 					</div>
 				}
 
-				<h2 className="h4">
+				<h2 className="h4 mt-4">
 					Controller
 				</h2>
 				<ControllerFieldsetComponent />
 
-				<h2 className="h4">
+				<h2 className="h4 mt-4">
 					Display
 				</h2>
 				<DisplayFieldsetComponent />
 
-				<h2 className="h4">
+				<h2 className="h4 mt-4">
 					Colors
 				</h2>
 				<ColorFieldsetComponent />
 
-				<h2 className="h4">
+				<h2 className="h4 mt-4">
 					Widgets
 				</h2>
 				<AddWidgetFormComponent events={this.events} />

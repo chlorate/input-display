@@ -7,7 +7,7 @@ interface Props {
 	min: number;
 	max: number;
 	step?: number;
-	help?: string;
+	help?: string | boolean; // true if help is outside this component.
 	onChange;
 }
 
@@ -37,7 +37,7 @@ export const NumberInputComponent = (props: Props) => (
 				{props.suffix}
 			</span>
 		</div>
-		{props.help !== undefined &&
+		{typeof props.help === "string" &&
 			<small className="form-text text-muted" id={`${props.id}-help`}>
 				{props.help}
 			</small>

@@ -9,14 +9,14 @@ export class Palette {
 	@observable private _border: string;
 	@observable private _fill: string;
 	@observable private _label: string;
-	private defaultBorder: string;
-	private defaultFill: string;
-	private defaultLabel: string;
+	private _defaultBorder: string;
+	private _defaultFill: string;
+	private _defaultLabel: string;
 
 	constructor(defaultBorder: string, defaultFill: string, defaultLabel: string) {
-		this._border = this.defaultBorder = defaultBorder;
-		this._fill = this.defaultFill = defaultFill;
-		this._label = this.defaultLabel = defaultLabel;
+		this._border = this._defaultBorder = defaultBorder;
+		this._fill = this._defaultFill = defaultFill;
+		this._label = this._defaultLabel = defaultLabel;
 	}
 
 	get border(): string {
@@ -38,6 +38,18 @@ export class Palette {
 	}
 	set label(label: string) {
 		this._label = ensureColor(label, this.defaultLabel);
+	}
+
+	get defaultBorder(): string {
+		return this._defaultBorder;
+	}
+
+	get defaultFill(): string {
+		return this._defaultFill;
+	}
+
+	get defaultLabel(): string {
+		return this._defaultLabel;
 	}
 
 	/**

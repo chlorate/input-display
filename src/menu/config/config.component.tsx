@@ -7,6 +7,7 @@ import {loadFile, saveFile} from "../../storage/file";
 import {Store} from "../../storage/store";
 import {AddWidgetFormComponent} from "../widget/add-widget-form.component";
 import {EditWidgetFieldsetComponent} from "../widget/edit-widget-fieldset.component";
+import {ColorFieldsetComponent} from "./color-fieldset.component";
 import {ControllerFieldsetComponent} from "./controller-fieldset.component";
 import {DisplayFieldsetComponent} from "./display-fieldset.component";
 
@@ -97,6 +98,11 @@ export class ConfigComponent extends Component<Props, State> {
 					Display
 				</h2>
 				<DisplayFieldsetComponent />
+
+				<h2 className="h4">
+					Colors
+				</h2>
+				<ColorFieldsetComponent />
 
 				<h2 className="h4">
 					Widgets

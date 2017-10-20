@@ -12,6 +12,7 @@
 }
 
 .card-scroll {
+	position: relative; // Fix .sr-only labels causing additional scrollbar.
 	overflow: auto;
 }
 

@@ -35,8 +35,8 @@ export class AddWidgetFormComponent extends Component<Props, State> {
 					Add widget
 				</h3>
 				<div className="form-group">
-					<label for="config-add-widget">
-						Type
+					<label className="sr-only" for="config-add-widget">
+						Widget type
 					</label>
 					<select
 						className="form-control"

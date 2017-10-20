@@ -59,8 +59,8 @@ export class EditWidgetFieldsetComponent extends Component<Props, State> {
 					Edit widget
 				</h3>
 				<div className="form-group">
-					<label for="config-edit-widget">
-						Widget
+					<label className="sr-only" for="config-edit-widget">
+						Widget to edit
 					</label>
 					<select
 						className="form-control"

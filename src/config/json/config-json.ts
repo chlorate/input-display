@@ -14,6 +14,7 @@ export interface ConfigJSON {
 	displayWidth: number;
 	displayHeight: number;
 	displayOutline: boolean;
+	backgroundColor: string;
 	buttonUnpressedPalette: PaletteJSON;
 	buttonPressedPalette: PaletteJSON;
 	buttonMashingUnpressedPalette: PaletteJSON;
@@ -35,6 +36,7 @@ export function isConfigJSON(input: any): input is ConfigJSON {
 		typeof input.displayWidth === "number" &&
 		typeof input.displayHeight === "number" &&
 		typeof input.displayOutline === "boolean" &&
+		typeof input.backgroundColor === "string" &&
 		isPaletteJSON(input.buttonUnpressedPalette) &&
 		isPaletteJSON(input.buttonPressedPalette) &&
 		isPaletteJSON(input.buttonMashingUnpressedPalette) &&

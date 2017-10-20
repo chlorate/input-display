@@ -66,6 +66,11 @@ describe("Config", () => {
 		expect(config.displayHeight).toBe(maxHeight);
 	});
 
+	it("should reset background color if not valid", () => {
+		config.backgroundColor = "bad";
+		expect(config.backgroundColor).toBe(DefaultColors.Background);
+	});
+
 	it("can return a JSON representation", () => {
 		config.gamepadIndex = 1;
 		config.dpadAxisIndex = 2;
@@ -73,6 +78,7 @@ describe("Config", () => {
 		config.displayWidth = 100;
 		config.displayHeight = 200;
 		config.displayOutline = true;
+		config.backgroundColor = "#111111";
 		config.widgets.push(new RoundButtonWidget());
 		expect(config.toJSON()).toEqual({
 			gamepadIndex: 1,
@@ -81,6 +87,7 @@ describe("Config", () => {
 			displayWidth: 100,
 			displayHeight: 200,
 			displayOutline: true,
+			backgroundColor: "#111111",
 			buttonUnpressedPalette: {
 				border: DefaultColors.ButtonUnpressedBorder,
 				fill: DefaultColors.ButtonUnpressedFill,
@@ -136,6 +143,7 @@ describe("Config", () => {
 				displayWidth: 100,
 				displayHeight: 200,
 				displayOutline: true,
+				backgroundColor: "#111111",
 				buttonUnpressedPalette: {
 					border: "#000001",
 					fill: "#000002",
@@ -180,6 +188,7 @@ describe("Config", () => {
 			expect(config.displayWidth).toBe(100);
 			expect(config.displayHeight).toBe(200);
 			expect(config.displayOutline).toBe(true);
+			expect(config.backgroundColor).toBe("#111111");
 			expect(config.buttonUnpressedPalette.border).toBe("#000001");
 			expect(config.buttonPressedPalette.border).toBe("#000004");
 			expect(config.buttonMashingUnpressedPalette.border).toBe("#000007");

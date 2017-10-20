@@ -12,6 +12,11 @@ interface Props {
  */
 export const StylesheetComponent = connect([Store.Config], ({config}: Props) => (
 	<style>
+		{`
+			.display svg {
+				background-color: ${config.backgroundColor};
+			}
+		`}
 		{paletteCss(config.buttonUnpressedPalette)}
 		{paletteCss(config.buttonPressedPalette, ".widget-button-pressed")}
 		{paletteCss(config.buttonMashingUnpressedPalette, ".widget-button-mashing")}

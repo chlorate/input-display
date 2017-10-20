@@ -1,4 +1,5 @@
 import {observable} from "mobx";
+import {ensureColor} from "../css/util";
 import {clampIndex, clampInt} from "../math/util";
 import {Widget} from "../widget/widget";
 import {parseWidgetJSON} from "../widget/widget.factory";
@@ -17,6 +18,7 @@ export const minHeight = 32;
 export const maxHeight = 2160;
 
 export enum DefaultColors {
+	Background = "#000000",
 	ButtonUnpressedBorder = "#565f67",
 	ButtonUnpressedFill = "#1c1f21",
 	ButtonUnpressedLabel = "#565f67",
@@ -43,6 +45,7 @@ export class Config {
 	@observable private _pollRate: number = 60;
 	@observable private _displayWidth: number = 300;
 	@observable private _displayHeight: number = 100;
+	@observable private _backgroundColor: string = DefaultColors.Background;
 	@observable private _buttonUnpressedPalette: Palette;
 	@observable private _buttonPressedPalette: Palette;
 	@observable private _buttonMashingUnpressedPalette: Palette;
@@ -120,6 +123,13 @@ export class Config {
 		this._displayHeight = clampInt(height, minHeight, maxHeight);
 	}
 
+	get backgroundColor(): string {
+		return this._backgroundColor;
+	}
+	set backgroundColor(color: string) {
+		this._backgroundColor = ensureColor(color, DefaultColors.Background);
+	}
+
 	get buttonUnpressedPalette(): Palette {
 		return this._buttonUnpressedPalette;
 	}
@@ -151,6 +161,7 @@ export class Config {
 			displayWidth: this.displayWidth,
 			displayHeight: this.displayHeight,
 			displayOutline: this.displayOutline,
+			backgroundColor: this.backgroundColor,
 			buttonUnpressedPalette: this.buttonUnpressedPalette.toJSON(),
 			buttonPressedPalette: this.buttonPressedPalette.toJSON(),
 			buttonMashingUnpressedPalette: this.buttonMashingUnpressedPalette.toJSON(),
@@ -178,6 +189,7 @@ export class Config {
 		this.displayWidth = json.displayWidth;
 		this.displayHeight = json.displayHeight;
 		this.displayOutline = json.displayOutline;
+		this.backgroundColor = json.backgroundColor;
 		this.buttonUnpressedPalette.loadJSON(json.buttonUnpressedPalette);
 		this.buttonPressedPalette.loadJSON(json.buttonPressedPalette);
 		this.buttonMashingUnpressedPalette.loadJSON(json.buttonMashingUnpressedPalette);

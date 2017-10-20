@@ -12,6 +12,7 @@ describe("ConfigJSON", () => {
 			displayWidth: 100,
 			displayHeight: 200,
 			displayOutline: true,
+			backgroundColor: "#000000",
 			buttonUnpressedPalette: {
 				border: "#000001",
 				fill: "#000002",
@@ -108,6 +109,11 @@ describe("ConfigJSON", () => {
 
 	it("should return false if displayOutline is not boolean", () => {
 		json.displayOutline = "bad";
+		expect(isConfigJSON(json)).toBe(false);
+	});
+
+	it("should return false if backgroundColor is not a string", () => {
+		json.backgroundColor = 123;
 		expect(isConfigJSON(json)).toBe(false);
 	});
 

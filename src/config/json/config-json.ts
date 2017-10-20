@@ -1,5 +1,6 @@
 import {isWidgetJSON, WidgetJSON} from "../../widget/json/widget-json";
 import {AxisReferenceJSON, isAxisReferenceJSON} from "./axis-reference-json";
+import {isPaletteJSON, PaletteJSON} from "./palette-json";
 
 /**
  * A JSON representation of a Config object.
@@ -13,6 +14,10 @@ export interface ConfigJSON {
 	displayWidth: number;
 	displayHeight: number;
 	displayOutline: boolean;
+	buttonUnpressedPalette: PaletteJSON;
+	buttonPressedPalette: PaletteJSON;
+	buttonMashingUnpressedPalette: PaletteJSON;
+	buttonMashingPressedPalette: PaletteJSON;
 	widgets: WidgetJSON[];
 }
 
@@ -30,6 +35,10 @@ export function isConfigJSON(input: any): input is ConfigJSON {
 		typeof input.displayWidth === "number" &&
 		typeof input.displayHeight === "number" &&
 		typeof input.displayOutline === "boolean" &&
+		isPaletteJSON(input.buttonUnpressedPalette) &&
+		isPaletteJSON(input.buttonPressedPalette) &&
+		isPaletteJSON(input.buttonMashingUnpressedPalette) &&
+		isPaletteJSON(input.buttonMashingPressedPalette) &&
 		Array.isArray(input.widgets) && input.widgets.every((widget) => isWidgetJSON(widget))
 	);
 }

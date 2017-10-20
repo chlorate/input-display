@@ -1,5 +1,6 @@
 import {observable} from "mobx";
 import {ensureColor} from "../css/util";
+import {PaletteJSON} from "./json/palette-json";
 
 /**
  * Defines a palette of widget colors for a particular button state.
@@ -37,5 +38,25 @@ export class Palette {
 	}
 	set label(label: string) {
 		this._label = ensureColor(label, this.defaultLabel);
+	}
+
+	/**
+	 * Returns a JSON representation of this palette.
+	 */
+	public toJSON(): PaletteJSON {
+		return {
+			border: this.border,
+			fill: this.fill,
+			label: this.label,
+		};
+	}
+
+	/**
+	 * Assigns properties from a JSON representation of a palette.
+	 */
+	public loadJSON(json: PaletteJSON): void {
+		this.border = json.border;
+		this.fill = json.fill;
+		this.label = json.label;
 	}
 }

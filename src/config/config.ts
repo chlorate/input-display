@@ -16,6 +16,21 @@ export const maxWidth = 3840;
 export const minHeight = 32;
 export const maxHeight = 2160;
 
+export enum DefaultColors {
+	ButtonUnpressedBorder = "#565f67",
+	ButtonUnpressedFill = "#1c1f21",
+	ButtonUnpressedLabel = "#565f67",
+	ButtonPressedBorder = "#469fef",
+	ButtonPressedFill = "#0e5280",
+	ButtonPressedLabel = "#b8ddff",
+	ButtonMashingUnpressedBorder = "#7b6f67",
+	ButtonMashingUnpressedFill = "#312d2a",
+	ButtonMashingUnpressedLabel = "#7b6f67",
+	ButtonMashingPressedBorder = "#ef8b48",
+	ButtonMashingPressedFill = "#813c0e",
+	ButtonMashingPressedLabel = "#ffd4b8",
+}
+
 /**
  * Stores all settings related to the controller and input display.
  */
@@ -35,10 +50,26 @@ export class Config {
 	@observable private _widgets: Widget[] = [];
 
 	constructor() {
-		this._buttonUnpressedPalette = new Palette("#565f67", "#1c1f21", "#565f67");
-		this._buttonPressedPalette = new Palette("#469fef", "#0e5280", "#b8ddff");
-		this._buttonMashingUnpressedPalette = new Palette("#7b6f67", "#312d2a", "#7b6f67");
-		this._buttonMashingPressedPalette = new Palette("#ef8b48", "#813c0e", "#ffd4b8");
+		this._buttonUnpressedPalette = new Palette(
+			DefaultColors.ButtonUnpressedBorder,
+			DefaultColors.ButtonUnpressedFill,
+			DefaultColors.ButtonUnpressedLabel,
+		);
+		this._buttonPressedPalette = new Palette(
+			DefaultColors.ButtonPressedBorder,
+			DefaultColors.ButtonPressedFill,
+			DefaultColors.ButtonPressedLabel,
+		);
+		this._buttonMashingUnpressedPalette = new Palette(
+			DefaultColors.ButtonMashingUnpressedBorder,
+			DefaultColors.ButtonMashingUnpressedFill,
+			DefaultColors.ButtonMashingUnpressedLabel,
+		);
+		this._buttonMashingPressedPalette = new Palette(
+			DefaultColors.ButtonMashingPressedBorder,
+			DefaultColors.ButtonMashingPressedFill,
+			DefaultColors.ButtonMashingPressedLabel,
+		);
 	}
 
 	get gamepadIndex(): number {
@@ -120,6 +151,10 @@ export class Config {
 			displayWidth: this.displayWidth,
 			displayHeight: this.displayHeight,
 			displayOutline: this.displayOutline,
+			buttonUnpressedPalette: this.buttonUnpressedPalette.toJSON(),
+			buttonPressedPalette: this.buttonPressedPalette.toJSON(),
+			buttonMashingUnpressedPalette: this.buttonMashingUnpressedPalette.toJSON(),
+			buttonMashingPressedPalette: this.buttonMashingPressedPalette.toJSON(),
 			widgets: this.widgets.map((widget) => widget.toJSON()),
 		};
 		if (this.dpadXAxis && this.dpadYAxis) {
@@ -143,6 +178,10 @@ export class Config {
 		this.displayWidth = json.displayWidth;
 		this.displayHeight = json.displayHeight;
 		this.displayOutline = json.displayOutline;
+		this.buttonUnpressedPalette.loadJSON(json.buttonUnpressedPalette);
+		this.buttonPressedPalette.loadJSON(json.buttonPressedPalette);
+		this.buttonMashingUnpressedPalette.loadJSON(json.buttonMashingUnpressedPalette);
+		this.buttonMashingPressedPalette.loadJSON(json.buttonMashingPressedPalette);
 		this._widgets = json.widgets.map((widget) => parseWidgetJSON(widget));
 
 		if (json.dpadXAxis && json.dpadYAxis) {

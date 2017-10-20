@@ -12,6 +12,26 @@ describe("ConfigJSON", () => {
 			displayWidth: 100,
 			displayHeight: 200,
 			displayOutline: true,
+			buttonUnpressedPalette: {
+				border: "#000001",
+				fill: "#000002",
+				label: "#000003",
+			},
+			buttonPressedPalette: {
+				border: "#000004",
+				fill: "#000005",
+				label: "#000006",
+			},
+			buttonMashingUnpressedPalette: {
+				border: "#000007",
+				fill: "#000008",
+				label: "#000009",
+			},
+			buttonMashingPressedPalette: {
+				border: "#00000a",
+				fill: "#00000b",
+				label: "#00000c",
+			},
 			widgets: [
 				{
 					type: WidgetType.RoundButton,
@@ -88,6 +108,26 @@ describe("ConfigJSON", () => {
 
 	it("should return false if displayOutline is not boolean", () => {
 		json.displayOutline = "bad";
+		expect(isConfigJSON(json)).toBe(false);
+	});
+
+	it("should return false if buttonUnpressedPalette is not a PaletteJSON object", () => {
+		json.buttonUnpressedPalette = "bad";
+		expect(isConfigJSON(json)).toBe(false);
+	});
+
+	it("should return false if buttonPressedPalette is not a PaletteJSON object", () => {
+		json.buttonPressedPalette = "bad";
+		expect(isConfigJSON(json)).toBe(false);
+	});
+
+	it("should return false if buttonMashingUnpressedPalette is not a PaletteJSON object", () => {
+		json.buttonMashingUnpressedPalette = "bad";
+		expect(isConfigJSON(json)).toBe(false);
+	});
+
+	it("should return false if buttonMashingPressedPalette is not a PaletteJSON", () => {
+		json.buttonMashingPressedPalette = "bad";
 		expect(isConfigJSON(json)).toBe(false);
 	});
 

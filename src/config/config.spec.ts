@@ -3,7 +3,7 @@ import {LabelPosition} from "../widget/label-position";
 import {LabelReplacement} from "../widget/label-replacement";
 import {RoundButtonWidget} from "../widget/round-button-widget";
 import {AxisReference} from "./axis-reference";
-import {Config, maxHeight, maxPollRate, maxWidth, minHeight, minPollRate, minWidth} from "./config";
+import {Config, DefaultColors, maxHeight, maxPollRate, maxWidth, minHeight, minPollRate, minWidth} from "./config";
 
 describe("Config", () => {
 	let config;
@@ -81,6 +81,26 @@ describe("Config", () => {
 			displayWidth: 100,
 			displayHeight: 200,
 			displayOutline: true,
+			buttonUnpressedPalette: {
+				border: DefaultColors.ButtonUnpressedBorder,
+				fill: DefaultColors.ButtonUnpressedFill,
+				label: DefaultColors.ButtonUnpressedLabel,
+			},
+			buttonPressedPalette: {
+				border: DefaultColors.ButtonPressedBorder,
+				fill: DefaultColors.ButtonPressedFill,
+				label: DefaultColors.ButtonPressedLabel,
+			},
+			buttonMashingUnpressedPalette: {
+				border: DefaultColors.ButtonMashingUnpressedBorder,
+				fill: DefaultColors.ButtonMashingUnpressedFill,
+				label: DefaultColors.ButtonMashingUnpressedLabel,
+			},
+			buttonMashingPressedPalette: {
+				border: DefaultColors.ButtonMashingPressedBorder,
+				fill: DefaultColors.ButtonMashingPressedFill,
+				label: DefaultColors.ButtonMashingPressedLabel,
+			},
 			widgets: [
 				{
 					type: WidgetType.RoundButton,
@@ -116,6 +136,26 @@ describe("Config", () => {
 				displayWidth: 100,
 				displayHeight: 200,
 				displayOutline: true,
+				buttonUnpressedPalette: {
+					border: "#000001",
+					fill: "#000002",
+					label: "#000003",
+				},
+				buttonPressedPalette: {
+					border: "#000004",
+					fill: "#000005",
+					label: "#000006",
+				},
+				buttonMashingUnpressedPalette: {
+					border: "#000007",
+					fill: "#000008",
+					label: "#000009",
+				},
+				buttonMashingPressedPalette: {
+					border: "#00000a",
+					fill: "#00000b",
+					label: "#00000c",
+				},
 				widgets: [
 					{
 						type: WidgetType.RoundButton,
@@ -140,6 +180,10 @@ describe("Config", () => {
 			expect(config.displayWidth).toBe(100);
 			expect(config.displayHeight).toBe(200);
 			expect(config.displayOutline).toBe(true);
+			expect(config.buttonUnpressedPalette.border).toBe("#000001");
+			expect(config.buttonPressedPalette.border).toBe("#000004");
+			expect(config.buttonMashingUnpressedPalette.border).toBe("#000007");
+			expect(config.buttonMashingPressedPalette.border).toBe("#00000a");
 			expect(config.widgets.length).toBe(1);
 			expect(config.widgets[0] instanceof RoundButtonWidget).toBe(true);
 		});

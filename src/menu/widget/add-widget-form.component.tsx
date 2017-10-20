@@ -38,25 +38,27 @@ export class AddWidgetFormComponent extends Component<Props, State> {
 					<label className="sr-only" for="config-add-widget">
 						Widget type
 					</label>
-					<select
-						className="form-control"
-						id="config-add-widget"
-						value={this.state.type}
-						onChange={linkEvent(this, handleChange)}
-					>
-						<option value={WidgetType.RoundButton}>Round button</option>
-						<option value="">Square button</option>
-						<option value="">Angled button</option>
-						<option value="">Triangular button</option>
-						<option value="">Trigger button</option>
-						<option value="">D-pad button</option>
-						<option value="">Analog stick</option>
-					</select>
-				</div>
-				<div className="form-group">
-					<button className="btn btn-primary">
-						Add
-					</button>
+					<div class="input-group">
+						<select
+							className="form-control"
+							id="config-add-widget"
+							value={this.state.type}
+							onChange={linkEvent(this, handleChange)}
+						>
+							<option value={WidgetType.RoundButton}>Round button</option>
+							<option value="">Square button</option>
+							<option value="">Angled button</option>
+							<option value="">Triangular button</option>
+							<option value="">Trigger button</option>
+							<option value="">D-pad button</option>
+							<option value="">Analog stick</option>
+						</select>
+						<span class="input-group-btn">
+							<button className="btn btn-primary">
+								Add
+							</button>
+						</span>
+					</div>
 				</div>
 			</form>
 		);

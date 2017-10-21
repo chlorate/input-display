@@ -51,9 +51,11 @@ export class WidgetConfigComponent extends Component<Props, {}> {
 				</h3>
 				<AddWidgetFormComponent events={this.events} />
 
-				<h3 className="h5">
-					Edit widget
-				</h3>
+				{this.props.config.widgets.length > 0 &&
+					<h3 className="h5">
+						Edit widget
+					</h3>
+				}
 				<EditWidgetFieldsetComponent events={this.events} />
 			</section>
 		);

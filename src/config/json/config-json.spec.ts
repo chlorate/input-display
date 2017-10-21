@@ -169,7 +169,7 @@ describe("ConfigJSON", () => {
 		expect(isConfigJSON(json)).toBe(false);
 	});
 
-	it("should return false if mashSpeedThreshold is not a number", () => {
+	it("should return false if mashSpeedThreshold is not numeric", () => {
 		json.mashSpeedThreshold = "bad";
 		expect(isConfigJSON(json)).toBe(false);
 	});

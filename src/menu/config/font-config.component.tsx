@@ -15,7 +15,7 @@ interface Props {
  */
 export const FontConfigComponent = connect([Store.Config], ({config}: Props) => (
 	<section>
-		<div class="form-row">
+		<div className="form-row">
 			<TextInputComponent
 				className="col"
 				id="config-font-name"
@@ -35,7 +35,7 @@ export const FontConfigComponent = connect([Store.Config], ({config}: Props) => 
 				onChange={linkEvent(config, handleChangeSize)}
 			/>
 		</div>
-		<div class="form-row">
+		<div className="form-row">
 			<CheckboxInputComponent
 				className="col-auto"
 				label="Bold"

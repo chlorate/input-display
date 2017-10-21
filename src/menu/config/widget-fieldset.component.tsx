@@ -31,7 +31,7 @@ export const WidgetFieldsetComponent = connect(({widget}: Props) => (
 				onChange={linkEvent(widget, handleChangeName)}
 			/>
 			<ButtonReferenceSelectComponent
-				className="col"
+				className="col-auto"
 				id="config-widget-button"
 				reference={widget.button}
 				onChange={linkEvent(widget, handleChangeButton)}

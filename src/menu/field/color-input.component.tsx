@@ -24,6 +24,8 @@ export const ColorInputComponent = (props: Props) => (
 				value={props.value}
 				placeholder={props.placeholder}
 				required
+				maxLength="7"
+				spellCheck="false"
 				onChange={props.onChange}
 			/>
 			<span class="input-group-addon">

@@ -49,6 +49,7 @@ describe("ConfigJSON", () => {
 					borderWidth: 0,
 				},
 			],
+			customCss: "css",
 		};
 	});
 
@@ -150,6 +151,11 @@ describe("ConfigJSON", () => {
 
 	it("should return false if widgets array does not contain a valid widget", () => {
 		json.widgets[0] = "bad";
+		expect(isConfigJSON(json)).toBe(false);
+	});
+
+	it("should return false if customCss is not a string", () => {
+		json.customCss = 123;
 		expect(isConfigJSON(json)).toBe(false);
 	});
 });

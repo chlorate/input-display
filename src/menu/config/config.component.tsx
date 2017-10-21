@@ -4,6 +4,7 @@ import {connect} from "inferno-mobx";
 import {Config} from "../../config/config";
 import {loadFile, saveFile} from "../../storage/file";
 import {Store} from "../../storage/store";
+import {AdvancedConfigComponent} from "./advanced-config.component";
 import {ColorConfigComponent} from "./color-config.component";
 import {ControllerConfigComponent} from "./controller-config.component";
 import {DisplayConfigComponent} from "./display-config.component";
@@ -100,6 +101,11 @@ export class ConfigComponent extends Component<Props, State> {
 					Widgets
 				</h2>
 				<WidgetConfigComponent />
+
+				<h2 className="h4 mt-4">
+					Advanced
+				</h2>
+				<AdvancedConfigComponent />
 			</div>
 		);
 	}

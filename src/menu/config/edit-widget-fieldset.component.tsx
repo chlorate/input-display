@@ -78,29 +78,31 @@ export class EditWidgetFieldsetComponent extends Component<Props, State> {
 				<WidgetFieldsetComponent
 					widget={this.props.config.widgets[this.index]}
 				/>
-				{hasMultipleWidgets && this.index > 0 && [
+				<div class="form-group">
+					{hasMultipleWidgets && this.index > 0 && [
+						<button
+							className="btn btn-secondary"
+							onClick={linkEvent(this, handleClickMoveUp)}
+						>
+							Move up
+						</button>,
+						" ",
+					]}
+					{hasMultipleWidgets && this.index < this.props.config.widgets.length - 1 &&
+						<button
+							className="btn btn-secondary"
+							onClick={linkEvent(this, handleClickMoveDown)}
+						>
+							Move down
+						</button>
+					}
 					<button
-						className="btn btn-secondary"
-						onClick={linkEvent(this, handleClickMoveUp)}
+						className="btn btn-danger float-right"
+						onClick={linkEvent(this, handleClickDelete)}
 					>
-						Move up
-					</button>,
-					" ",
-				]}
-				{hasMultipleWidgets && this.index < this.props.config.widgets.length - 1 &&
-					<button
-						className="btn btn-secondary"
-						onClick={linkEvent(this, handleClickMoveDown)}
-					>
-						Move down
+						Delete
 					</button>
-				}
-				<button
-					className="btn btn-danger float-right"
-					onClick={linkEvent(this, handleClickDelete)}
-				>
-					Delete
-				</button>
+				</div>
 			</fieldset>
 		);
 	}

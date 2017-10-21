@@ -6,7 +6,7 @@ import {AxisReference} from "./axis-reference";
 
 import {
 	Config, DefaultColors,
-	maxHeight, maxMashSpeedThreshold, maxPollRate, maxWidth,
+	maxCustomCssLength, maxHeight, maxMashSpeedThreshold, maxPollRate, maxWidth,
 	minHeight, minMashSpeedThreshold, minPollRate, minWidth,
 } from "./config";
 
@@ -83,6 +83,11 @@ describe("Config", () => {
 		expect(config.mashSpeedThreshold).toBe(maxMashSpeedThreshold);
 	});
 
+	it("should truncate custom CSS", () => {
+		config.customCss = "x".repeat(1000001);
+		expect(config.customCss.length).toBe(maxCustomCssLength);
+	});
+
 	it("can return a JSON representation", () => {
 		config.gamepadIndex = 1;
 		config.dpadAxisIndex = 2;
@@ -93,6 +98,7 @@ describe("Config", () => {
 		config.backgroundColor = "#111111";
 		config.mashSpeedThreshold = 15;
 		config.widgets.push(new RoundButtonWidget());
+		config.customCss = "css";
 		expect(config.toJSON()).toEqual({
 			gamepadIndex: 1,
 			dpadAxisIndex: 2,
@@ -137,6 +143,7 @@ describe("Config", () => {
 					mashSpeedLabel: LabelReplacement.Name,
 				},
 			],
+			customCss: "css",
 		});
 
 		setDualAxes();
@@ -190,6 +197,7 @@ describe("Config", () => {
 						borderWidth: 4,
 					},
 				],
+				customCss: "css",
 			};
 		});
 
@@ -211,6 +219,7 @@ describe("Config", () => {
 			expect(config.mashSpeedThreshold).toBe(15);
 			expect(config.widgets.length).toBe(1);
 			expect(config.widgets[0] instanceof RoundButtonWidget).toBe(true);
+			expect(config.customCss).toBe("css");
 		});
 
 		it("can update dpadAxisIndex", () => {

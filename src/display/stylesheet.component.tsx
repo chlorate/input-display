@@ -21,6 +21,7 @@ export const StylesheetComponent = connect([Store.Config], ({config}: Props) => 
 		{paletteCss(config.buttonPressedPalette, ".widget-button-pressed")}
 		{paletteCss(config.buttonMashingUnpressedPalette, ".widget-button-mashing")}
 		{paletteCss(config.buttonMashingPressedPalette, ".widget-button-mashing.widget-button-pressed")}
+		{config.customCss}
 	</style>
 ));
 

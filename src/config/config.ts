@@ -20,6 +20,8 @@ export const maxWidth = 3840;
 export const minHeight = 32;
 export const maxHeight = 2160;
 
+export const maxCustomCssLength = 1000000;
+
 export enum DefaultColors {
 	Background = "#000000",
 	ButtonUnpressedBorder = "#565f67",
@@ -55,6 +57,7 @@ export class Config {
 	@observable private _buttonMashingPressedPalette: Palette;
 	@observable private _mashSpeedThreshold: number = 5;
 	@observable private _widgets: Widget[] = [];
+	@observable private _customCss: string = "";
 
 	constructor() {
 		this._buttonUnpressedPalette = new Palette(
@@ -161,6 +164,13 @@ export class Config {
 		return this._widgets;
 	}
 
+	get customCss(): string {
+		return this._customCss;
+	}
+	set customCss(css: string) {
+		this._customCss = css.substr(0, maxCustomCssLength);
+	}
+
 	/**
 	 * Returns a JSON representation of this config.
 	 */
@@ -179,6 +189,7 @@ export class Config {
 			buttonMashingPressedPalette: this.buttonMashingPressedPalette.toJSON(),
 			mashSpeedThreshold: this.mashSpeedThreshold,
 			widgets: this.widgets.map((widget) => widget.toJSON()),
+			customCss: this.customCss,
 		};
 		if (this.dpadXAxis && this.dpadYAxis) {
 			json.dpadXAxis = this.dpadXAxis.toJSON();
@@ -208,6 +219,7 @@ export class Config {
 		this.buttonMashingPressedPalette.loadJSON(json.buttonMashingPressedPalette);
 		this.mashSpeedThreshold = json.mashSpeedThreshold;
 		this._widgets = json.widgets.map((widget) => parseWidgetJSON(widget));
+		this.customCss = json.customCss;
 
 		if (json.dpadXAxis && json.dpadYAxis) {
 			this.setDpadDualAxes(

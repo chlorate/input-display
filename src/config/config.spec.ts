@@ -3,7 +3,12 @@ import {LabelPosition} from "../widget/label-position";
 import {LabelReplacement} from "../widget/label-replacement";
 import {RoundButtonWidget} from "../widget/round-button-widget";
 import {AxisReference} from "./axis-reference";
-import {Config, DefaultColors, maxHeight, maxPollRate, maxWidth, minHeight, minPollRate, minWidth} from "./config";
+
+import {
+	Config, DefaultColors,
+	maxHeight, maxMashSpeedThreshold, maxPollRate, maxWidth,
+	minHeight, minMashSpeedThreshold, minPollRate, minWidth,
+} from "./config";
 
 describe("Config", () => {
 	let config;
@@ -71,6 +76,13 @@ describe("Config", () => {
 		expect(config.backgroundColor).toBe(DefaultColors.Background);
 	});
 
+	it("should clamp mash speed threshold", () => {
+		config.mashSpeedThreshold = 0;
+		expect(config.mashSpeedThreshold).toBe(minMashSpeedThreshold);
+		config.mashSpeedThreshold = 60;
+		expect(config.mashSpeedThreshold).toBe(maxMashSpeedThreshold);
+	});
+
 	it("can return a JSON representation", () => {
 		config.gamepadIndex = 1;
 		config.dpadAxisIndex = 2;
@@ -79,6 +91,7 @@ describe("Config", () => {
 		config.displayHeight = 200;
 		config.displayOutline = true;
 		config.backgroundColor = "#111111";
+		config.mashSpeedThreshold = 15;
 		config.widgets.push(new RoundButtonWidget());
 		expect(config.toJSON()).toEqual({
 			gamepadIndex: 1,
@@ -108,6 +121,7 @@ describe("Config", () => {
 				fill: DefaultColors.ButtonMashingPressedFill,
 				label: DefaultColors.ButtonMashingPressedLabel,
 			},
+			mashSpeedThreshold: 15,
 			widgets: [
 				{
 					type: WidgetType.RoundButton,
@@ -164,6 +178,7 @@ describe("Config", () => {
 					fill: "#00000b",
 					label: "#00000c",
 				},
+				mashSpeedThreshold: 15,
 				widgets: [
 					{
 						type: WidgetType.RoundButton,
@@ -193,6 +208,7 @@ describe("Config", () => {
 			expect(config.buttonPressedPalette.border).toBe("#000004");
 			expect(config.buttonMashingUnpressedPalette.border).toBe("#000007");
 			expect(config.buttonMashingPressedPalette.border).toBe("#00000a");
+			expect(config.mashSpeedThreshold).toBe(15);
 			expect(config.widgets.length).toBe(1);
 			expect(config.widgets[0] instanceof RoundButtonWidget).toBe(true);
 		});

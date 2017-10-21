@@ -22,7 +22,7 @@ export const WidgetGroupComponent = connect([Store.Config, Store.Controller], (p
 	if (props.widget.button) {
 		const button = props.widget.button.resolve(props.controller);
 		if (button) {
-			if (button.mashSpeed >= 5) {
+			if (button.mashSpeed >= props.config.mashSpeedThreshold) {
 				classNames.push("widget-button-mashing");
 			}
 			if (button.pressed) {

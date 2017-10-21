@@ -1,5 +1,6 @@
 import Component from "inferno-component";
 import {connect} from "inferno-mobx";
+import {Config} from "../config/config";
 import {Button} from "../controller/button";
 import {Controller} from "../controller/controller";
 import {formatNumber} from "../math/util";
@@ -11,6 +12,7 @@ import {Label, LabelClass} from "./label";
 import {WidgetLabelTextComponent} from "./widget-label-text.component";
 
 interface Props {
+	config: Config;
 	controller: Controller;
 	widget: Widget;
 }
@@ -34,7 +36,7 @@ const horizontalMargin = 0.3;
  * button mash speed can be positioned in multiple places relative to the
  * widget.
  */
-@connect([Store.Controller])
+@connect([Store.Config, Store.Controller])
 export class WidgetLabelComponent extends Component<Props, {}> {
 	public render() {
 		const widget = this.props.widget;
@@ -119,7 +121,7 @@ export class WidgetLabelComponent extends Component<Props, {}> {
 		}
 
 		let mashSpeedLabel: Label | undefined;
-		if (widget.mashSpeedLabel && button && button.mashSpeed >= 5) {
+		if (widget.mashSpeedLabel && button && button.mashSpeed >= this.props.config.mashSpeedThreshold) {
 			mashSpeedLabel = {
 				className: LabelClass.MashSpeed,
 				text: `×${button.mashSpeed}`,

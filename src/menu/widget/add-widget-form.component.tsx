@@ -31,9 +31,6 @@ export class AddWidgetFormComponent extends Component<Props, State> {
 	public render() {
 		return (
 			<form onSubmit={linkEvent(this, handleSubmit)}>
-				<h3 className="h5">
-					Add widget
-				</h3>
 				<div className="form-group">
 					<label className="sr-only" for="config-add-widget">
 						Widget type

@@ -35,6 +35,12 @@
 	min-width: 11em;
 }
 
-.input-group-number {
-	min-width: 8em;
+.form-group-number {
+	label {
+		white-space: nowrap;
+	}
+
+	.form-control {
+		min-width: 5.2em;
+	}
 }

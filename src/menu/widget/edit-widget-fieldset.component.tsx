@@ -55,9 +55,6 @@ export class EditWidgetFieldsetComponent extends Component<Props, State> {
 		const hasMultipleWidgets = this.props.config.widgets.length > 1;
 		return (
 			<fieldset>
-				<h3 className="h5">
-					Edit widget
-				</h3>
 				<div className="form-group">
 					<label className="sr-only" for="config-edit-widget">
 						Widget to edit

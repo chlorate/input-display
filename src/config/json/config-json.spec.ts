@@ -33,6 +33,7 @@ describe("ConfigJSON", () => {
 				fill: "#00000b",
 				label: "#00000c",
 			},
+			mashSpeedThreshold: 15,
 			widgets: [
 				{
 					type: WidgetType.RoundButton,
@@ -134,6 +135,11 @@ describe("ConfigJSON", () => {
 
 	it("should return false if buttonMashingPressedPalette is not a PaletteJSON", () => {
 		json.buttonMashingPressedPalette = "bad";
+		expect(isConfigJSON(json)).toBe(false);
+	});
+
+	it("should return false if mashSpeedThreshold is not a number", () => {
+		json.mashSpeedThreshold = "bad";
 		expect(isConfigJSON(json)).toBe(false);
 	});
 

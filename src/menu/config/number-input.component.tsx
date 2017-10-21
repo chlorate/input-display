@@ -15,11 +15,11 @@ interface Props {
  * A generic number field.
  */
 export const NumberInputComponent = (props: Props) => (
-	<div className={`form-group ${props.className || ""}`}>
+	<div className={`form-group form-group-number ${props.className || ""}`}>
 		<label for={props.id}>
 			{props.label}
 		</label>
-		<div className="input-group input-group-number">
+		<div className="input-group">
 			<input
 				type="number"
 				className="form-control"

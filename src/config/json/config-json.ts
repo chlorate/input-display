@@ -19,6 +19,7 @@ export interface ConfigJSON {
 	buttonPressedPalette: PaletteJSON;
 	buttonMashingUnpressedPalette: PaletteJSON;
 	buttonMashingPressedPalette: PaletteJSON;
+	mashSpeedThreshold: number;
 	widgets: WidgetJSON[];
 }
 
@@ -41,6 +42,7 @@ export function isConfigJSON(input: any): input is ConfigJSON {
 		isPaletteJSON(input.buttonPressedPalette) &&
 		isPaletteJSON(input.buttonMashingUnpressedPalette) &&
 		isPaletteJSON(input.buttonMashingPressedPalette) &&
+		typeof input.mashSpeedThreshold === "number" &&
 		Array.isArray(input.widgets) && input.widgets.every((widget) => isWidgetJSON(widget))
 	);
 }

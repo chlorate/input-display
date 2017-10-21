@@ -12,6 +12,9 @@ import {Palette} from "./palette";
 export const minPollRate = 1;
 export const maxPollRate = 250;
 
+export const minMashSpeedThreshold = 1;
+export const maxMashSpeedThreshold = 30;
+
 export const minWidth = 32;
 export const maxWidth = 3840;
 export const minHeight = 32;
@@ -50,6 +53,7 @@ export class Config {
 	@observable private _buttonPressedPalette: Palette;
 	@observable private _buttonMashingUnpressedPalette: Palette;
 	@observable private _buttonMashingPressedPalette: Palette;
+	@observable private _mashSpeedThreshold: number = 5;
 	@observable private _widgets: Widget[] = [];
 
 	constructor() {
@@ -146,6 +150,13 @@ export class Config {
 		return this._buttonMashingPressedPalette;
 	}
 
+	get mashSpeedThreshold(): number {
+		return this._mashSpeedThreshold;
+	}
+	set mashSpeedThreshold(threshold: number) {
+		this._mashSpeedThreshold = clampInt(threshold, minMashSpeedThreshold, maxMashSpeedThreshold);
+	}
+
 	get widgets(): Widget[] {
 		return this._widgets;
 	}
@@ -166,6 +177,7 @@ export class Config {
 			buttonPressedPalette: this.buttonPressedPalette.toJSON(),
 			buttonMashingUnpressedPalette: this.buttonMashingUnpressedPalette.toJSON(),
 			buttonMashingPressedPalette: this.buttonMashingPressedPalette.toJSON(),
+			mashSpeedThreshold: this.mashSpeedThreshold,
 			widgets: this.widgets.map((widget) => widget.toJSON()),
 		};
 		if (this.dpadXAxis && this.dpadYAxis) {
@@ -194,6 +206,7 @@ export class Config {
 		this.buttonPressedPalette.loadJSON(json.buttonPressedPalette);
 		this.buttonMashingUnpressedPalette.loadJSON(json.buttonMashingUnpressedPalette);
 		this.buttonMashingPressedPalette.loadJSON(json.buttonMashingPressedPalette);
+		this.mashSpeedThreshold = json.mashSpeedThreshold;
 		this._widgets = json.widgets.map((widget) => parseWidgetJSON(widget));
 
 		if (json.dpadXAxis && json.dpadYAxis) {

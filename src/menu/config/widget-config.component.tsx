@@ -4,7 +4,7 @@ import Component from "inferno-component";
 import {connect} from "inferno-mobx";
 import {Config, maxMashSpeedThreshold, minMashSpeedThreshold} from "../../config/config";
 import {Store} from "../../storage/store";
-import {NumberInputComponent} from "../config/number-input.component";
+import {NumberInputComponent} from "../field/number-input.component";
 import {AddWidgetFormComponent} from "./add-widget-form.component";
 import {EditWidgetFieldsetComponent} from "./edit-widget-fieldset.component";
 
@@ -13,7 +13,7 @@ interface Props {
 }
 
 /**
- * Contents of the Widgets config section.
+ * A section within the Config tab related to widgets.
  */
 @connect([Store.Config])
 export class WidgetConfigComponent extends Component<Props, {}> {

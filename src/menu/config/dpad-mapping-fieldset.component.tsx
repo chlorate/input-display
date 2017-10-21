@@ -4,8 +4,8 @@ import {AxisReference} from "../../config/axis-reference";
 import {Config} from "../../config/config";
 import {Controller} from "../../controller/controller";
 import {Store} from "../../storage/store";
-import {AxisIndexSelectComponent} from "./axis-index-select.component";
-import {AxisReferenceSelectComponent} from "./axis-reference-select.component";
+import {AxisIndexSelectComponent} from "../field/axis-index-select.component";
+import {AxisReferenceSelectComponent} from "../field/axis-reference-select.component";
 
 const defaultXAxisIndex = 0;
 const defaultYAxisIndex = 1;

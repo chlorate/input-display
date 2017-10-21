@@ -1,7 +1,7 @@
 import {linkEvent} from "inferno";
 import {connect} from "inferno-mobx";
 import {Palette} from "../../config/palette";
-import {ColorInputComponent} from "./color-input.component";
+import {ColorInputComponent} from "../field/color-input.component";
 
 interface Props {
 	id: string;

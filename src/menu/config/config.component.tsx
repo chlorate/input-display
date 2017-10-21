@@ -4,10 +4,10 @@ import {connect} from "inferno-mobx";
 import {Config} from "../../config/config";
 import {loadFile, saveFile} from "../../storage/file";
 import {Store} from "../../storage/store";
-import {WidgetConfigComponent} from "../widget/widget-config.component";
-import {ColorFieldsetComponent} from "./color-fieldset.component";
-import {ControllerFieldsetComponent} from "./controller-fieldset.component";
-import {DisplayFieldsetComponent} from "./display-fieldset.component";
+import {ColorConfigComponent} from "./color-config.component";
+import {ControllerConfigComponent} from "./controller-config.component";
+import {DisplayConfigComponent} from "./display-config.component";
+import {WidgetConfigComponent} from "./widget-config.component";
 
 interface Props {
 	config: Config;
@@ -84,17 +84,17 @@ export class ConfigComponent extends Component<Props, State> {
 				<h2 className="h4 mt-4">
 					Controller
 				</h2>
-				<ControllerFieldsetComponent />
+				<ControllerConfigComponent />
 
 				<h2 className="h4 mt-4">
 					Display
 				</h2>
-				<DisplayFieldsetComponent />
+				<DisplayConfigComponent />
 
 				<h2 className="h4 mt-4">
 					Colors
 				</h2>
-				<ColorFieldsetComponent />
+				<ColorConfigComponent />
 
 				<h2 className="h4 mt-4">
 					Widgets

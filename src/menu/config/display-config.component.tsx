@@ -2,17 +2,18 @@ import {linkEvent} from "inferno";
 import {connect} from "inferno-mobx";
 import {Config, maxHeight, maxWidth, minHeight, minWidth} from "../../config/config";
 import {Store} from "../../storage/store";
-import {CheckboxInputComponent} from "./checkbox-input.component";
-import {NumberInputComponent} from "./number-input.component";
+import {CheckboxInputComponent} from "../field/checkbox-input.component";
+import {NumberInputComponent} from "../field/number-input.component";
 
 interface Props {
 	config: Config;
 }
 
 /**
- * A set of fields related to overall configuration of the display.
+ * A section within the Config tab related to overall configuration of the
+ * display.
  */
-export const DisplayFieldsetComponent = connect([Store.Config], ({config}: Props) => (
+export const DisplayConfigComponent = connect([Store.Config], ({config}: Props) => (
 	<fieldset>
 		<div className="form-row">
 			<NumberInputComponent

@@ -2,7 +2,7 @@ import {linkEvent} from "inferno";
 import {connect} from "inferno-mobx";
 import {Config, DefaultColors} from "../../config/config";
 import {Store} from "../../storage/store";
-import {ColorInputComponent} from "./color-input.component";
+import {ColorInputComponent} from "../field/color-input.component";
 import {PaletteFieldsetComponent} from "./palette-fieldset.component";
 
 interface Props {
@@ -10,10 +10,10 @@ interface Props {
 }
 
 /**
- * A set of fields for customizing the colors of the display.
+ * A section within the Config tab for customizing the colors of the display.
  */
-export const ColorFieldsetComponent = connect([Store.Config], ({config}: Props) => (
-	<fieldset>
+export const ColorConfigComponent = connect([Store.Config], ({config}: Props) => (
+	<section>
 		<div class="form-row">
 			<ColorInputComponent
 				className="col"
@@ -58,7 +58,7 @@ export const ColorFieldsetComponent = connect([Store.Config], ({config}: Props) 
 			id="config-button-mashing-pressed-palette"
 			palette={config.buttonMashingPressedPalette}
 		/>
-	</fieldset>
+	</section>
 ));
 
 function handleChange(config: Config, event): void {

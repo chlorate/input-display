@@ -2,19 +2,19 @@ import {linkEvent} from "inferno";
 import {connect} from "inferno-mobx";
 import {Config, maxPollRate, minPollRate} from "../../config/config";
 import {Store} from "../../storage/store";
-import {DeviceSelectComponent} from "./device-select.component";
+import {DeviceSelectComponent} from "../field/device-select.component";
+import {NumberInputComponent} from "../field/number-input.component";
 import {DpadMappingFieldsetComponent} from "./dpad-mapping-fieldset.component";
-import {NumberInputComponent} from "./number-input.component";
 
 interface Props {
 	config: Config;
 }
 
 /**
- * A set of fields related to controller configuration.
+ * A section within the Config tab for controller configuration.
  */
-export const ControllerFieldsetComponent = connect([Store.Config], ({config}: Props) => (
-	<fieldset>
+export const ControllerConfigComponent = connect([Store.Config], ({config}: Props) => (
+	<section>
 		<DeviceSelectComponent />
 		<DpadMappingFieldsetComponent />
 		<div class="form-row">
@@ -36,7 +36,7 @@ export const ControllerFieldsetComponent = connect([Store.Config], ({config}: Pr
 		<small className="form-text text-muted mb-3" id="config-poll-rate-help">
 			How often the controller's inputs are read.
 		</small>
-	</fieldset>
+	</section>
 ));
 
 function handleChange(config: Config, event): void {

@@ -2,10 +2,10 @@ import {linkEvent} from "inferno";
 import {connect} from "inferno-mobx";
 import {ButtonReference} from "../../config/button-reference";
 import {Widget} from "../../widget/widget";
-import {ButtonReferenceSelectComponent} from "../config/button-reference-select.component";
-import {NumberInputComponent} from "../config/number-input.component";
-import {TextInputComponent} from "../config/text-input.component";
-import {LabelSelectComponent} from "./label-select.component";
+import {ButtonReferenceSelectComponent} from "../field/button-reference-select.component";
+import {LabelSelectComponent} from "../field/label-select.component";
+import {NumberInputComponent} from "../field/number-input.component";
+import {TextInputComponent} from "../field/text-input.component";
 
 import {
 	maxBorderWidth, maxHeight, maxNameLength, maxWidth, maxX, maxY,

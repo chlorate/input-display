@@ -9,39 +9,3 @@
 .col-spacer {
 	margin-top: -1px;
 }
-
-.form-control-color {
-	border: 0;
-	padding: 0;
-	width: 2em;
-
-	&::-webkit-color-swatch {
-		border-color: $gray-800;
-	}
-
-	&::-webkit-color-swatch-wrapper {
-		padding: 0;
-	}
-}
-
-.form-group-axis-reference {
-	min-width: 13em;
-}
-
-.form-group-button-reference {
-	min-width: 9.5em;
-}
-
-.form-group-color {
-	min-width: 10.5em;
-}
-
-.form-group-number {
-	label {
-		white-space: nowrap;
-	}
-
-	.form-control {
-		min-width: 5.2em;
-	}
-}

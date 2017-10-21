@@ -20,6 +20,10 @@ export const maxWidth = 3840;
 export const minHeight = 32;
 export const maxHeight = 2160;
 
+export const maxFontNameLength = 250;
+export const minFontSize = 1;
+export const maxFontSize = 2000;
+
 export const maxCustomCssLength = 1000000;
 
 export enum DefaultColors {
@@ -43,6 +47,9 @@ export enum DefaultColors {
  */
 export class Config {
 	@observable public displayOutline: boolean = false;
+	@observable public fontBold: boolean = false;
+	@observable public fontItalic: boolean = false;
+	@observable public fontShadow: boolean = true;
 	@observable private _gamepadIndex: number = 0;
 	@observable private _dpadAxisIndex?: number;
 	@observable private _dpadXAxis?: AxisReference;
@@ -50,6 +57,8 @@ export class Config {
 	@observable private _pollRate: number = 60;
 	@observable private _displayWidth: number = 300;
 	@observable private _displayHeight: number = 100;
+	@observable private _fontName: string = "";
+	@observable private _fontSize: number = 16;
 	@observable private _backgroundColor: string = DefaultColors.Background;
 	@observable private _buttonUnpressedPalette: Palette;
 	@observable private _buttonPressedPalette: Palette;
@@ -130,6 +139,20 @@ export class Config {
 		this._displayHeight = clampInt(height, minHeight, maxHeight);
 	}
 
+	get fontName(): string {
+		return this._fontName;
+	}
+	set fontName(name: string) {
+		this._fontName = name.substr(0, maxFontNameLength);
+	}
+
+	get fontSize(): number {
+		return this._fontSize;
+	}
+	set fontSize(size: number) {
+		this._fontSize = clampInt(size, minFontSize, maxFontSize);
+	}
+
 	get backgroundColor(): string {
 		return this._backgroundColor;
 	}
@@ -182,6 +205,11 @@ export class Config {
 			displayWidth: this.displayWidth,
 			displayHeight: this.displayHeight,
 			displayOutline: this.displayOutline,
+			fontName: this.fontName,
+			fontBold: this.fontBold,
+			fontItalic: this.fontItalic,
+			fontShadow: this.fontShadow,
+			fontSize: this.fontSize,
 			backgroundColor: this.backgroundColor,
 			buttonUnpressedPalette: this.buttonUnpressedPalette.toJSON(),
 			buttonPressedPalette: this.buttonPressedPalette.toJSON(),
@@ -212,6 +240,11 @@ export class Config {
 		this.displayWidth = json.displayWidth;
 		this.displayHeight = json.displayHeight;
 		this.displayOutline = json.displayOutline;
+		this.fontName = json.fontName;
+		this.fontBold = json.fontBold;
+		this.fontItalic = json.fontItalic;
+		this.fontShadow = json.fontShadow;
+		this.fontSize = json.fontSize;
 		this.backgroundColor = json.backgroundColor;
 		this.buttonUnpressedPalette.loadJSON(json.buttonUnpressedPalette);
 		this.buttonPressedPalette.loadJSON(json.buttonPressedPalette);

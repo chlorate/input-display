@@ -8,6 +8,7 @@ import {AdvancedConfigComponent} from "./advanced-config.component";
 import {ColorConfigComponent} from "./color-config.component";
 import {ControllerConfigComponent} from "./controller-config.component";
 import {DisplayConfigComponent} from "./display-config.component";
+import {FontConfigComponent} from "./font-config.component";
 import {WidgetConfigComponent} from "./widget-config.component";
 
 interface Props {
@@ -91,6 +92,11 @@ export class ConfigComponent extends Component<Props, State> {
 					Display
 				</h2>
 				<DisplayConfigComponent />
+
+				<h2 className="h4 mt-4">
+					Font
+				</h2>
+				<FontConfigComponent />
 
 				<h2 className="h4 mt-4">
 					Colors

@@ -6,8 +6,8 @@ import {AxisReference} from "./axis-reference";
 
 import {
 	Config, DefaultColors,
-	maxCustomCssLength, maxHeight, maxMashSpeedThreshold, maxPollRate, maxWidth,
-	minHeight, minMashSpeedThreshold, minPollRate, minWidth,
+	maxCustomCssLength, maxFontNameLength, maxFontSize, maxHeight, maxMashSpeedThreshold, maxPollRate, maxWidth,
+	minFontSize, minHeight, minMashSpeedThreshold, minPollRate, minWidth,
 } from "./config";
 
 describe("Config", () => {
@@ -71,6 +71,18 @@ describe("Config", () => {
 		expect(config.displayHeight).toBe(maxHeight);
 	});
 
+	it("should truncate font name", () => {
+		config.fontName = "x".repeat(600);
+		expect(config.fontName.length).toBe(maxFontNameLength);
+	});
+
+	it("should clamp font size", () => {
+		config.fontSize = 0;
+		expect(config.fontSize).toBe(minFontSize);
+		config.fontSize = 5000;
+		expect(config.fontSize).toBe(maxFontSize);
+	});
+
 	it("should reset background color if not valid", () => {
 		config.backgroundColor = "bad";
 		expect(config.backgroundColor).toBe(DefaultColors.Background);
@@ -95,6 +107,11 @@ describe("Config", () => {
 		config.displayWidth = 100;
 		config.displayHeight = 200;
 		config.displayOutline = true;
+		config.fontName = "font";
+		config.fontBold = true;
+		config.fontItalic = true;
+		config.fontShadow = true;
+		config.fontSize = 20;
 		config.backgroundColor = "#111111";
 		config.mashSpeedThreshold = 15;
 		config.widgets.push(new RoundButtonWidget());
@@ -107,6 +124,11 @@ describe("Config", () => {
 			displayHeight: 200,
 			displayOutline: true,
 			backgroundColor: "#111111",
+			fontName: "font",
+			fontBold: true,
+			fontItalic: true,
+			fontShadow: true,
+			fontSize: 20,
 			buttonUnpressedPalette: {
 				border: DefaultColors.ButtonUnpressedBorder,
 				fill: DefaultColors.ButtonUnpressedFill,
@@ -165,6 +187,11 @@ describe("Config", () => {
 				displayHeight: 200,
 				displayOutline: true,
 				backgroundColor: "#111111",
+				fontName: "font",
+				fontBold: true,
+				fontItalic: true,
+				fontShadow: true,
+				fontSize: 20,
 				buttonUnpressedPalette: {
 					border: "#000001",
 					fill: "#000002",
@@ -211,6 +238,11 @@ describe("Config", () => {
 			expect(config.displayWidth).toBe(100);
 			expect(config.displayHeight).toBe(200);
 			expect(config.displayOutline).toBe(true);
+			expect(config.fontName).toBe("font");
+			expect(config.fontBold).toBe(true);
+			expect(config.fontItalic).toBe(true);
+			expect(config.fontShadow).toBe(true);
+			expect(config.fontSize).toBe(20);
 			expect(config.backgroundColor).toBe("#111111");
 			expect(config.buttonUnpressedPalette.border).toBe("#000001");
 			expect(config.buttonPressedPalette.border).toBe("#000004");

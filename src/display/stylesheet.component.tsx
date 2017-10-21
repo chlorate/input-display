@@ -15,6 +15,11 @@ export const StylesheetComponent = connect([Store.Config], ({config}: Props) => 
 		{`
 			.display svg {
 				background-color: ${config.backgroundColor};
+				${config.fontName ? `font-family: "${config.fontName}";` : ""}
+				${config.fontBold ? "font-weight: bold;" : ""}
+				${config.fontItalic ? "font-style: italic;" : ""}
+				${!config.fontShadow ? "text-shadow: none;" : ""}
+				font-size: ${config.fontSize}px;
 			}
 		`}
 		{paletteCss(config.buttonUnpressedPalette)}

@@ -13,6 +13,11 @@ describe("ConfigJSON", () => {
 			displayHeight: 200,
 			displayOutline: true,
 			backgroundColor: "#000000",
+			fontName: "font",
+			fontBold: true,
+			fontItalic: true,
+			fontShadow: true,
+			fontSize: 20,
 			buttonUnpressedPalette: {
 				border: "#000001",
 				fill: "#000002",
@@ -111,6 +116,31 @@ describe("ConfigJSON", () => {
 
 	it("should return false if displayOutline is not boolean", () => {
 		json.displayOutline = "bad";
+		expect(isConfigJSON(json)).toBe(false);
+	});
+
+	it("should return false if fontName is not a string", () => {
+		json.fontName = 123;
+		expect(isConfigJSON(json)).toBe(false);
+	});
+
+	it("should return false if fontBold is not boolean", () => {
+		json.fontBold = "bad";
+		expect(isConfigJSON(json)).toBe(false);
+	});
+
+	it("should return false if fontItalic is not boolean", () => {
+		json.fontItalic = "bad";
+		expect(isConfigJSON(json)).toBe(false);
+	});
+
+	it("should return false if fontShadow is not boolean", () => {
+		json.fontShadow = "bad";
+		expect(isConfigJSON(json)).toBe(false);
+	});
+
+	it("should return false if fontSize is not numeric", () => {
+		json.fontSize = "bad";
 		expect(isConfigJSON(json)).toBe(false);
 	});
 

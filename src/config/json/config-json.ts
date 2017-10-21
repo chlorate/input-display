@@ -14,6 +14,11 @@ export interface ConfigJSON {
 	displayWidth: number;
 	displayHeight: number;
 	displayOutline: boolean;
+	fontName: string;
+	fontBold: boolean;
+	fontItalic: boolean;
+	fontShadow: boolean;
+	fontSize: number;
 	backgroundColor: string;
 	buttonUnpressedPalette: PaletteJSON;
 	buttonPressedPalette: PaletteJSON;
@@ -38,6 +43,11 @@ export function isConfigJSON(input: any): input is ConfigJSON {
 		typeof input.displayWidth === "number" &&
 		typeof input.displayHeight === "number" &&
 		typeof input.displayOutline === "boolean" &&
+		typeof input.fontName === "string" &&
+		typeof input.fontBold === "boolean" &&
+		typeof input.fontItalic === "boolean" &&
+		typeof input.fontShadow === "boolean" &&
+		typeof input.fontSize === "number" &&
 		typeof input.backgroundColor === "string" &&
 		isPaletteJSON(input.buttonUnpressedPalette) &&
 		isPaletteJSON(input.buttonPressedPalette) &&

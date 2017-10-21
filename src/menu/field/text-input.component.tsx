@@ -5,6 +5,7 @@ interface Props {
 	value: string;
 	maxLength: number;
 	onChange;
+	onInput;
 }
 
 /**
@@ -22,6 +23,7 @@ export const TextInputComponent = (props: Props) => (
 			value={props.value}
 			maxLength={props.maxLength}
 			onChange={props.onChange}
+			onInput={props.onInput}
 		/>
 	</div>
 );

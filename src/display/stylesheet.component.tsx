@@ -1,6 +1,7 @@
 import {connect} from "inferno-mobx";
 import {Config} from "../config/config";
 import {Palette} from "../config/palette";
+import {quote} from "../css/util";
 import {Store} from "../storage/store";
 
 interface Props {
@@ -15,7 +16,7 @@ export const StylesheetComponent = connect([Store.Config], ({config}: Props) => 
 		{`
 			.display svg {
 				background-color: ${config.backgroundColor};
-				${config.fontName ? `font-family: "${config.fontName}";` : ""}
+				${config.fontName ? `font-family: ${quote(config.fontName)};` : ""}
 				${config.fontBold ? "font-weight: bold;" : ""}
 				${config.fontItalic ? "font-style: italic;" : ""}
 				${!config.fontShadow ? "text-shadow: none;" : ""}

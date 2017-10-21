@@ -8,3 +8,10 @@ export function ensureColor(color: string, defaultColor: string): string {
 	}
 	return color.toLowerCase();
 }
+
+/**
+ * Wraps some string value in quotes.
+ */
+export function quote(value: string): string {
+	return `"${value.replace(/\\/g, "\\\\").replace(/"/g, `\\"`)}"`;
+}

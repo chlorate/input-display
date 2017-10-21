@@ -20,7 +20,7 @@ export const AdvancedConfigComponent = connect([Store.Config], ({config}: Props)
 				className="form-control"
 				id="config-custom-css"
 				rows="8"
-				spellcheck="false"
+				spellCheck="false"
 				onInput={linkEvent(config, handleChange)}
 			>
 				{config.customCss}

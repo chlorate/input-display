@@ -35,7 +35,7 @@ export class AddWidgetFormComponent extends Component<Props, State> {
 					<label className="sr-only" for="config-add-widget">
 						Widget type
 					</label>
-					<div class="input-group">
+					<div className="input-group">
 						<select
 							className="form-control"
 							id="config-add-widget"
@@ -50,7 +50,7 @@ export class AddWidgetFormComponent extends Component<Props, State> {
 							<option value="">D-pad button</option>
 							<option value="">Analog stick</option>
 						</select>
-						<span class="input-group-btn">
+						<span className="input-group-btn">
 							<button className="btn btn-primary">
 								Add
 							</button>

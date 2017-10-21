@@ -13,7 +13,7 @@ interface Props {
  */
 export const PaletteFieldsetComponent = connect((props: Props) => (
 	<fieldset>
-		<div class="form-row">
+		<div className="form-row">
 			<ColorInputComponent
 				className="col"
 				id={`${props.id}-border`}
@@ -38,7 +38,7 @@ export const PaletteFieldsetComponent = connect((props: Props) => (
 				placeholder={props.palette.defaultLabel}
 				onChange={linkEvent(props.palette, handleChangeLabel)}
 			/>
-			<div class="col-6 col-spacer"></div>
+			<div className="col-6 col-spacer"></div>
 		</div>
 	</fieldset>
 ));

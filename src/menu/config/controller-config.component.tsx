@@ -17,7 +17,7 @@ export const ControllerConfigComponent = connect([Store.Config], ({config}: Prop
 	<section>
 		<DeviceSelectComponent />
 		<DpadMappingFieldsetComponent />
-		<div class="form-row">
+		<div className="form-row">
 			<NumberInputComponent
 				className="col m-0"
 				id="config-poll-rate"
@@ -29,9 +29,9 @@ export const ControllerConfigComponent = connect([Store.Config], ({config}: Prop
 				help={true}
 				onChange={linkEvent(config, handleChange)}
 			/>
-			<div class="col-6 col-spacer"></div>
-			<div class="col-2 col-spacer"></div>
-			<div class="col-1 col-spacer"></div>
+			<div className="col-6 col-spacer"></div>
+			<div className="col-2 col-spacer"></div>
+			<div className="col-1 col-spacer"></div>
 		</div>
 		<small className="form-text text-muted mb-3" id="config-poll-rate-help">
 			How often the controller's inputs are read.

@@ -78,7 +78,7 @@ export class EditWidgetFieldsetComponent extends Component<Props, State> {
 				<WidgetFieldsetComponent
 					widget={this.props.config.widgets[this.index]}
 				/>
-				<div class="form-group">
+				<div className="form-group">
 					{hasMultipleWidgets && this.index > 0 && [
 						<button
 							className="btn btn-secondary"

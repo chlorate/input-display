@@ -12,7 +12,7 @@ interface Props {
  * color or use the system color picker.
  */
 export const ColorInputComponent = (props: Props) => (
-	<div class={`form-group form-group-color ${props.className || ""}`}>
+	<div className={`form-group form-group-color ${props.className || ""}`}>
 		<label for={props.id}>
 			{props.label}
 		</label>
@@ -28,7 +28,7 @@ export const ColorInputComponent = (props: Props) => (
 				spellCheck="false"
 				onChange={props.onChange}
 			/>
-			<span class="input-group-addon">
+			<span className="input-group-addon">
 				<input
 					className="form-control-color"
 					type="color"

@@ -40,8 +40,8 @@ export const WidgetFieldsetComponent = connect(({widget}: Props) => (
 
 		{/* Nested rows make it so the fields wrap in pairs. */}
 		<div className="form-row">
-			<div class="col">
-				<div class="form-row flex-nowrap">
+			<div className="col">
+				<div className="form-row flex-nowrap">
 					<NumberInputComponent
 						className="col"
 						id="config-widget-x"
@@ -64,8 +64,8 @@ export const WidgetFieldsetComponent = connect(({widget}: Props) => (
 					/>
 				</div>
 			</div>
-			<div class="col">
-				<div class="form-row flex-nowrap">
+			<div className="col">
+				<div className="form-row flex-nowrap">
 					<NumberInputComponent
 						className="col"
 						id="config-widget-width"
@@ -102,8 +102,8 @@ export const WidgetFieldsetComponent = connect(({widget}: Props) => (
 				step={0.1}
 				onChange={linkEvent(widget, handleChangeBorderWidth)}
 			/>
-			<div class="col-6 col-spacer"></div>
-			<div class="col-3 col-spacer"></div>
+			<div className="col-6 col-spacer"></div>
+			<div className="col-3 col-spacer"></div>
 		</div>
 
 		<div className="form-row">

@@ -14,7 +14,7 @@ interface Props {
  */
 export const ColorConfigComponent = connect([Store.Config], ({config}: Props) => (
 	<section>
-		<div class="form-row">
+		<div className="form-row">
 			<ColorInputComponent
 				className="col"
 				id="config-background-color"
@@ -23,11 +23,11 @@ export const ColorConfigComponent = connect([Store.Config], ({config}: Props) =>
 				placeholder={DefaultColors.Background}
 				onChange={linkEvent(config, handleChange)}
 			/>
-			<div class="col-6"></div>
-			<div class="col-2"></div>
+			<div className="col-6"></div>
+			<div className="col-2"></div>
 		</div>
 
-		<h3 class="h5">
+		<h3 className="h5">
 			Button (unpressed)
 		</h3>
 		<PaletteFieldsetComponent
@@ -35,7 +35,7 @@ export const ColorConfigComponent = connect([Store.Config], ({config}: Props) =>
 			palette={config.buttonUnpressedPalette}
 		/>
 
-		<h3 class="h5">
+		<h3 className="h5">
 			Button (pressed)
 		</h3>
 		<PaletteFieldsetComponent
@@ -43,7 +43,7 @@ export const ColorConfigComponent = connect([Store.Config], ({config}: Props) =>
 			palette={config.buttonPressedPalette}
 		/>
 
-		<h3 class="h5">
+		<h3 className="h5">
 			Button (mashing + unpressed)
 		</h3>
 		<PaletteFieldsetComponent
@@ -51,7 +51,7 @@ export const ColorConfigComponent = connect([Store.Config], ({config}: Props) =>
 			palette={config.buttonMashingUnpressedPalette}
 		/>
 
-		<h3 class="h5">
+		<h3 className="h5">
 			Button (mashing + pressed)
 		</h3>
 		<PaletteFieldsetComponent

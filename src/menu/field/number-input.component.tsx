@@ -7,7 +7,8 @@ interface Props {
 	min: number;
 	max: number;
 	step?: number;
-	help?: string | boolean; // true if help is outside this component.
+	help?: string;
+	helpId?: string;
 	onChange;
 }
 
@@ -30,14 +31,14 @@ export const NumberInputComponent = (props: Props) => (
 				step={props.step}
 				placeholder={props.min}
 				required
-				aria-describedby={`${props.id}-addon ${props.help ? `${props.id}-help` : ""}`}
+				aria-describedby={`${props.id}-addon ${props.help ? `${props.id}-help` : ""} ${props.helpId || ""}`}
 				onChange={props.onChange}
 			/>
 			<span className="input-group-addon" id={`${props.id}-addon`}>
 				{props.suffix}
 			</span>
 		</div>
-		{typeof props.help === "string" &&
+		{props.help &&
 			<small className="form-text text-muted" id={`${props.id}-help`}>
 				{props.help}
 			</small>

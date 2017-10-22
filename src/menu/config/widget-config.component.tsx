@@ -29,6 +29,7 @@ export const WidgetConfigComponent = connect([Store.Config], ({config}: Props) =
 				value={config.mashSpeedThreshold}
 				min={minMashSpeedThreshold}
 				max={maxMashSpeedThreshold}
+				helpId="config-mash-speed-threshold-help"
 				onChange={linkEvent(config, handleChangeMashSpeedThreshold)}
 			/>
 			<div className="col-6 col-spacer"></div>
@@ -48,6 +49,7 @@ export const WidgetConfigComponent = connect([Store.Config], ({config}: Props) =
 				value={config.labelOffsetX}
 				min={minLabelOffset}
 				max={maxLabelOffset}
+				helpId="config-label-offset-help"
 				onChange={linkEvent(config, handleChangeLabelOffsetX)}
 			/>
 			<NumberInputComponent
@@ -58,6 +60,7 @@ export const WidgetConfigComponent = connect([Store.Config], ({config}: Props) =
 				value={config.labelOffsetY}
 				min={minLabelOffset}
 				max={maxLabelOffset}
+				helpId="config-label-offset-help"
 				onChange={linkEvent(config, handleChangeLabelOffsetY)}
 			/>
 			<div class="col-3 col-spacer"></div>

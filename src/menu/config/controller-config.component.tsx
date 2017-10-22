@@ -26,7 +26,7 @@ export const ControllerConfigComponent = connect([Store.Config], ({config}: Prop
 				value={config.pollRate}
 				min={minPollRate}
 				max={maxPollRate}
-				help={true}
+				helpId="config-poll-rate-help"
 				onChange={linkEvent(config, handleChange)}
 			/>
 			<div className="col-6 col-spacer"></div>

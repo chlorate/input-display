@@ -27,3 +27,10 @@ export function parseWidgetJSON(json: WidgetJSON): Widget {
 	widget.mashSpeedLabel = json.mashSpeedLabel;
 	return widget;
 }
+
+/**
+ * Returns a copy of a widget.
+ */
+export function cloneWidget(widget: Widget): Widget {
+	return parseWidgetJSON(widget.toJSON());
+}

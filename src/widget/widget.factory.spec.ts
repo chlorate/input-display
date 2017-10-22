@@ -2,24 +2,28 @@ import {NormalButtonReference} from "../config/normal-button-reference";
 import {ButtonType} from "../controller/json/button-json";
 import {WidgetType} from "./json/widget-json";
 import {LabelPosition} from "./label-position";
-import {parseWidgetJSON} from "./widget.factory";
+import {cloneWidget, parseWidgetJSON} from "./widget.factory";
+
+function makeJSON() {
+	return {
+		type: WidgetType.RoundButton,
+		name: "name",
+		x: 0,
+		y: 1,
+		width: 2,
+		height: 3,
+		borderWidth: 4,
+		nameLabel: LabelPosition.Above,
+		pressesLabel: LabelPosition.Below,
+		mashSpeedLabel: LabelPosition.Center,
+	};
+}
 
 describe("parseWidgetJSON", () => {
 	let json;
 
 	beforeEach(() => {
-		json = {
-			type: WidgetType.RoundButton,
-			name: "name",
-			x: 0,
-			y: 1,
-			width: 2,
-			height: 3,
-			borderWidth: 4,
-			nameLabel: LabelPosition.Above,
-			pressesLabel: LabelPosition.Below,
-			mashSpeedLabel: LabelPosition.Center,
-		};
+		json = makeJSON();
 	});
 
 	it("can create a RoundButtonWidget", () => {
@@ -43,5 +47,15 @@ describe("parseWidgetJSON", () => {
 		};
 		const widget = parseWidgetJSON(json);
 		expect(widget.button instanceof NormalButtonReference).toBe(true);
+	});
+});
+
+describe("cloneWidget", () => {
+	it("clones a widget", () => {
+		const json = makeJSON();
+		const widget = parseWidgetJSON(json);
+		const clone = cloneWidget(widget);
+		expect(clone).not.toBe(widget);
+		expect(clone.name).toBe(widget.name);
 	});
 });

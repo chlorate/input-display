@@ -28,16 +28,6 @@ describe("Controller", () => {
 		jasmine.clock().uninstall();
 	});
 
-	it("can return the gamepad's alias", () => {
-		expect(controller.alias).toBeUndefined();
-		spyOn(service, "getGamepads").and.returnValue([gamepad]);
-		controller.poll();
-		expect(controller.alias).toBeUndefined();
-		gamepad.id = "Unknown Gamepad (Vendor: 057e Product: 0306)";
-		jasmine.clock().tick(20);
-		expect(controller.alias).toBe("Wii Remote");
-	});
-
 	it("can return a JSON representation", () => {
 		spyOn(service, "getGamepads").and.returnValue([gamepad]);
 		controller.poll();
@@ -149,7 +139,6 @@ describe("Controller", () => {
 			spyOn(service, "getGamepads").and.returnValue([gamepad]);
 			controller.poll();
 			expect(controller.id).toBe("Test Gamepad");
-			expect(controller.alias).toBeUndefined();
 			expect(controller.mapping).toBe("standard");
 		});
 
@@ -159,7 +148,6 @@ describe("Controller", () => {
 			controller.poll();
 			jasmine.clock().tick(20);
 			expect(controller.id).toBeUndefined();
-			expect(controller.alias).toBeUndefined();
 			expect(controller.mapping).toBeUndefined();
 		});
 

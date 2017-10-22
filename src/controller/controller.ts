@@ -1,6 +1,6 @@
 import {observable} from "mobx";
 import {Config} from "../config/config";
-import {aliases, getGamepads} from "../gamepad/service";
+import {getGamepads} from "../gamepad/service";
 import {almostEqual} from "../math/util";
 import {secondToMilliseconds} from "../time/const";
 import {Axis} from "./axis";
@@ -47,10 +47,6 @@ export class Controller {
 
 	get id(): string | undefined {
 		return this._id;
-	}
-
-	get alias(): string | undefined {
-		return this.id !== undefined ? aliases[this.id] : undefined;
 	}
 
 	get mapping(): string | undefined {

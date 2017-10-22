@@ -1,15 +1,4 @@
 /**
- * Aliases for cryptic gamepad IDs.
- */
-export const aliases: {[id: string]: string} = {
-	// Firefox
-	"057e-0306-Unknown Gamepad": "Wii Remote",
-
-	// Chrome
-	"Unknown Gamepad (Vendor: 057e Product: 0306)": "Wii Remote",
-};
-
-/**
  * Returns an array of gamepads from the Gamepad API.
  */
 export function getGamepads(): Array<Gamepad | undefined> {
@@ -25,14 +14,13 @@ export function getGamepads(): Array<Gamepad | undefined> {
 }
 
 /**
- * Returns an array of gamepad IDs (or aliases) for all connected gamepads.
+ * Returns an array of gamepad IDs for all connected gamepads.
  */
 export function getGamepadIds(): Array<string | undefined> {
 	const ids: string[] = [];
 	getGamepads().forEach((gamepad, i) => {
 		if (gamepad) {
-			const id = gamepad.id;
-			ids[i] = aliases[id] ? aliases[id] : id;
+			ids[i] = gamepad.id;
 		}
 	});
 	return ids;

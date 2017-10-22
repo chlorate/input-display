@@ -27,12 +27,6 @@ export const ControllerComponent = connect([Store.Controller], ({controller}: Pr
 					<th>ID</th>
 					<td>{controller.id}</td>
 				</tr>
-				{controller.alias !== undefined &&
-					<tr>
-						<th>Alias</th>
-						<td>{controller.alias}</td>
-					</tr>
-				}
 				{controller.mapping !== undefined &&
 					<tr>
 						<th>Mapping</th>

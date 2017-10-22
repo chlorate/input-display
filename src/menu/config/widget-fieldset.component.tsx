@@ -31,7 +31,7 @@ export class WidgetFieldsetComponent extends Component<Props, {}> {
 
 	constructor(props: Props) {
 		super(props);
-		this.listener = () => this.focusName();
+		this.listener = () => this.selectName();
 	}
 
 	public componentDidMount(): void {
@@ -160,9 +160,9 @@ export class WidgetFieldsetComponent extends Component<Props, {}> {
 		);
 	}
 
-	private focusName() {
+	private selectName() {
 		if (this.nameInput) {
-			this.nameInput.focus();
+			this.nameInput.select();
 		}
 	}
 }

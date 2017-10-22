@@ -42,12 +42,10 @@ export class AddControlFormComponent extends Component<Props, State> {
 							value={this.state.type}
 							onChange={linkEvent(this, handleChange)}
 						>
-							<option value={ControlType.Ellipse}>Ellipse button</option>
-							<option value="">Square button</option>
-							<option value="">Angled button</option>
-							<option value="">Triangular button</option>
-							<option value="">Trigger button</option>
-							<option value="">D-pad button</option>
+							<option value={ControlType.Ellipse}>Button (circle/ellipse)</option>
+							<option value="">Button (square/rectangle)</option>
+							<option value="">Button (triangle)</option>
+							<option value="">Button (d-pad)</option>
 							<option value="">Analog stick</option>
 						</select>
 						<span className="input-group-btn">

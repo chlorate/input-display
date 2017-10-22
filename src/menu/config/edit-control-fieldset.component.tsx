@@ -68,9 +68,10 @@ export class EditControlFieldsetComponent extends Component<Props, State> {
 					>
 						{this.props.config.controls.map((control, i) => (
 							<option value={i}>
-								{`${i + 1} - `}
-								{control.name ? `${control.name} - ` : ""}
-								{control instanceof EllipseControl && "Ellipse button"}
+								{`${i + 1}. `}
+								{control instanceof EllipseControl && control.width === control.height && "Button (circle)"}
+								{control instanceof EllipseControl && control.width !== control.height && "Button (ellipse)"}
+								{control.name ? ` - ${control.name}` : ""}
 							</option>
 						))}
 					</select>

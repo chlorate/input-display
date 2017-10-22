@@ -79,12 +79,12 @@ export class DeviceSelectComponent extends Component<Props, State> {
 
 	private options(): any[] {
 		const out: any[] = this.state.ids.map((id, i) => (
-			<option value={i}>{i + 1} - {id}</option>
+			<option value={i}>{i + 1}. {id}</option>
 		));
 
 		const index = this.props.config.gamepadIndex;
 		if (!this.state.ids[index]) {
-			out.push(<option value={index}>{index + 1} - {notConnected}</option>);
+			out.push(<option value={index}>{index + 1}. {notConnected}</option>);
 		}
 
 		return out;

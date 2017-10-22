@@ -107,7 +107,7 @@ export class EditWidgetFieldsetComponent extends Component<Props, State> {
 						</button>
 					}
 					<button
-						className="btn btn-danger float-right"
+						className="btn btn-danger float-right ml-1"
 						onClick={linkEvent(this, handleClickDelete)}
 					>
 						Delete

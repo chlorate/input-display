@@ -7,7 +7,7 @@ import {clampIndex} from "../../math/util";
 import {Store} from "../../storage/store";
 import {RoundButtonWidget} from "../../widget/round-button-widget";
 import {Widget} from "../../widget/widget";
-import {Event} from "../config/event";
+import {Event} from "../event";
 import {WidgetFieldsetComponent} from "./widget-fieldset.component";
 
 interface Props {

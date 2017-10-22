@@ -3,4 +3,5 @@
  */
 export enum Event {
 	AddWidget = "addWidget",
+	NavigateTab = "navigateTab",
 }

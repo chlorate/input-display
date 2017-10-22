@@ -1,35 +1,38 @@
+import EventEmitter from "events";
 import createMemoryHistory from "history/createMemoryHistory";
 import Component from "inferno-component";
+import {connect} from "inferno-mobx";
 import {IndexRoute, Route, Router} from "inferno-router";
+import {Store} from "../storage/store";
 import {ConfigComponent} from "./config/config.component";
 import {ControllerComponent} from "./controller/controller.component";
+import {Event} from "./event";
 import {HelpComponent} from "./help/help.component";
 import {MenuButtonComponent} from "./menu-button.component";
 import {MenuCardComponent} from "./menu-card.component";
 
-interface State {
-	history;
+interface Props {
+	events: EventEmitter;
 }
 
 /**
  * Renders the menu. A router is used to navigate between tabs and closing the
  * menu.
  */
-export class MenuComponent extends Component<{}, State> {
-	public state: State;
+@connect([Store.Events])
+export class MenuComponent extends Component<Props, {}> {
+	private history;
 
-	constructor() {
-		super();
-		this.state = {
-			history: createMemoryHistory({
-				initialEntries: ["/config"],
-			}),
-		};
+	constructor(props: Props) {
+		super(props);
+		this.history = createMemoryHistory({
+			initialEntries: ["/config"],
+		});
 	}
 
 	public render() {
 		return (
-			<Router history={this.state.history}>
+			<Router history={this.history} onUpdate={() => this.handleUpdate()}>
 				<IndexRoute component={MenuButtonComponent} />
 				<Route component={MenuCardComponent}>
 					<Route path="/config" component={ConfigComponent} />
@@ -38,5 +41,9 @@ export class MenuComponent extends Component<{}, State> {
 				</Route>
 			</Router>
 		);
+	}
+
+	private handleUpdate(): void {
+		this.props.events.emit(Event.NavigateTab);
 	}
 }

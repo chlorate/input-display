@@ -5,11 +5,11 @@ import {connect} from "inferno-mobx";
 import {ButtonReference} from "../../config/button-reference";
 import {Store} from "../../storage/store";
 import {Widget} from "../../widget/widget";
+import {Event} from "../event";
 import {ButtonReferenceSelectComponent} from "../field/button-reference-select.component";
 import {LabelSelectComponent} from "../field/label-select.component";
 import {NumberInputComponent} from "../field/number-input.component";
 import {TextInputComponent} from "../field/text-input.component";
-import {Event} from "./event";
 
 import {
 	maxBorderWidth, maxHeight, maxNameLength, maxWidth, maxX, maxY,

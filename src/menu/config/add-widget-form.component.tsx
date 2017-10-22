@@ -6,7 +6,7 @@ import {Config} from "../../config/config";
 import {Store} from "../../storage/store";
 import {WidgetType} from "../../widget/json/widget-json";
 import {RoundButtonWidget} from "../../widget/round-button-widget";
-import {Event} from "../config/event";
+import {Event} from "../event";
 
 interface Props {
 	config: Config;

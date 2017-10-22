@@ -120,7 +120,7 @@ export class EditWidgetFieldsetComponent extends Component<Props, State> {
 	}
 }
 
-function handleChange(component: EditWidgetFieldsetComponent, event) {
+function handleChange(component: EditWidgetFieldsetComponent, event): void {
 	component.index = event.target.value;
 }
 
@@ -130,21 +130,21 @@ function handleClickClone(component: EditWidgetFieldsetComponent): void {
 	component.props.events.emit(Event.AddWidget);
 }
 
-function handleClickMoveUp(component: EditWidgetFieldsetComponent) {
+function handleClickMoveUp(component: EditWidgetFieldsetComponent): void {
 	swap(component.props.config.widgets, component.index - 1, component.index);
 	component.index--;
 }
 
-function handleClickMoveDown(component: EditWidgetFieldsetComponent) {
+function handleClickMoveDown(component: EditWidgetFieldsetComponent): void {
 	swap(component.props.config.widgets, component.index, component.index + 1);
 	component.index++;
 }
 
-function swap(widgets: Widget[], x: number, y: number) {
+function swap(widgets: Widget[], x: number, y: number): void {
 	[widgets[x], widgets[y]] = [widgets[y], widgets[x]];
 }
 
-function handleClickDelete(component: EditWidgetFieldsetComponent) {
+function handleClickDelete(component: EditWidgetFieldsetComponent): void {
 	const index = component.index;
 	if (component.index === component.props.config.widgets.length - 1) {
 		// Keep in bounds if deleting last widget.

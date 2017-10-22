@@ -62,7 +62,7 @@ export const ButtonReferenceSelectComponent = connect([Store.Controller], (props
 	);
 });
 
-function handleChange(props: Props, event) {
+function handleChange(props: Props, event): void {
 	let reference: ButtonReference | undefined;
 	if (event.target.value) {
 		const i = clampIndex(event.target.value);

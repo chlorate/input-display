@@ -37,6 +37,6 @@ interface EventProps {
 	index: number;
 }
 
-function handleClick(props: EventProps) {
+function handleClick(props: EventProps): void {
 	props.errors.splice(props.index, 1);
 }

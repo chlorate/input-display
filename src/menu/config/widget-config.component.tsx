@@ -88,7 +88,7 @@ export const WidgetConfigComponent = connect([Store.Config], ({config}: Props) =
 	</section>
 ));
 
-function handleChangeMashSpeedThreshold(config: Config, event) {
+function handleChangeMashSpeedThreshold(config: Config, event): void {
 	config.mashSpeedThreshold = event.target.value || defaultMashSpeedThreshold;
 }
 

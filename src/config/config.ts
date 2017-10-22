@@ -24,6 +24,9 @@ export const maxFontNameLength = 250;
 export const minFontSize = 1;
 export const maxFontSize = 2000;
 
+export const minLabelOffset = -500;
+export const maxLabelOffset = 500;
+
 export const maxCustomCssLength = 1000000;
 
 export enum DefaultColors {
@@ -65,6 +68,8 @@ export class Config {
 	@observable private _buttonMashingUnpressedPalette: Palette;
 	@observable private _buttonMashingPressedPalette: Palette;
 	@observable private _mashSpeedThreshold: number = 5;
+	@observable private _labelOffsetX: number = 0;
+	@observable private _labelOffsetY: number = 0;
 	@observable private _widgets: Widget[] = [];
 	@observable private _customCss: string = "";
 
@@ -183,6 +188,20 @@ export class Config {
 		this._mashSpeedThreshold = clampInt(threshold, minMashSpeedThreshold, maxMashSpeedThreshold);
 	}
 
+	get labelOffsetX(): number {
+		return this._labelOffsetX;
+	}
+	set labelOffsetX(offset: number) {
+		this._labelOffsetX = clampInt(offset, minLabelOffset, maxLabelOffset);
+	}
+
+	get labelOffsetY(): number {
+		return this._labelOffsetY;
+	}
+	set labelOffsetY(offset: number) {
+		this._labelOffsetY = clampInt(offset, minLabelOffset, maxLabelOffset);
+	}
+
 	get widgets(): Widget[] {
 		return this._widgets;
 	}
@@ -216,6 +235,8 @@ export class Config {
 			buttonMashingUnpressedPalette: this.buttonMashingUnpressedPalette.toJSON(),
 			buttonMashingPressedPalette: this.buttonMashingPressedPalette.toJSON(),
 			mashSpeedThreshold: this.mashSpeedThreshold,
+			labelOffsetX: this.labelOffsetX,
+			labelOffsetY: this.labelOffsetY,
 			widgets: this.widgets.map((widget) => widget.toJSON()),
 			customCss: this.customCss,
 		};
@@ -251,6 +272,8 @@ export class Config {
 		this.buttonMashingUnpressedPalette.loadJSON(json.buttonMashingUnpressedPalette);
 		this.buttonMashingPressedPalette.loadJSON(json.buttonMashingPressedPalette);
 		this.mashSpeedThreshold = json.mashSpeedThreshold;
+		this.labelOffsetX = json.labelOffsetX;
+		this.labelOffsetY = json.labelOffsetY;
 		this._widgets = json.widgets.map((widget) => parseWidgetJSON(widget));
 		this.customCss = json.customCss;
 

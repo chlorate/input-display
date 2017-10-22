@@ -1,10 +1,15 @@
 import {linkEvent} from "inferno";
 import {connect} from "inferno-mobx";
-import {Config, maxMashSpeedThreshold, minMashSpeedThreshold} from "../../config/config";
 import {Store} from "../../storage/store";
 import {NumberInputComponent} from "../field/number-input.component";
 import {AddWidgetFormComponent} from "./add-widget-form.component";
 import {EditWidgetFieldsetComponent} from "./edit-widget-fieldset.component";
+
+import {
+	Config,
+	maxLabelOffset, maxMashSpeedThreshold,
+	minLabelOffset, minMashSpeedThreshold,
+} from "../../config/config";
 
 interface Props {
 	config: Config;
@@ -34,6 +39,34 @@ export const WidgetConfigComponent = connect([Store.Config], ({config}: Props) =
 			and label are shown.
 		</small>
 
+		<div className="form-row">
+			<NumberInputComponent
+				className="col m-0"
+				id="config-label-offset-x"
+				label="Label offset X"
+				suffix="px"
+				value={config.labelOffsetX}
+				min={minLabelOffset}
+				max={maxLabelOffset}
+				onChange={linkEvent(config, handleChangeLabelOffsetX)}
+			/>
+			<NumberInputComponent
+				className="col m-0"
+				id="config-label-offset-y"
+				label="Label offset Y"
+				suffix="px"
+				value={config.labelOffsetY}
+				min={minLabelOffset}
+				max={maxLabelOffset}
+				onChange={linkEvent(config, handleChangeLabelOffsetY)}
+			/>
+			<div class="col-3 col-spacer"></div>
+			<div class="col-3 col-spacer"></div>
+		</div>
+		<small className="form-text text-muted mb-3" id="config-label-offset-help">
+			Adjust if labels appear off-center due to the display's font.
+		</small>
+
 		<h3 className="h5">
 			Add widget
 		</h3>
@@ -50,4 +83,12 @@ export const WidgetConfigComponent = connect([Store.Config], ({config}: Props) =
 
 function handleChangeMashSpeedThreshold(config: Config, event) {
 	config.mashSpeedThreshold = event.target.value;
+}
+
+function handleChangeLabelOffsetX(config: Config, event): void {
+	config.labelOffsetX = event.target.value;
+}
+
+function handleChangeLabelOffsetY(config: Config, event): void {
+	config.labelOffsetY = event.target.value;
 }

@@ -6,8 +6,10 @@ import {AxisReference} from "./axis-reference";
 
 import {
 	Config, DefaultColors,
-	maxCustomCssLength, maxFontNameLength, maxFontSize, maxHeight, maxMashSpeedThreshold, maxPollRate, maxWidth,
-	minFontSize, minHeight, minMashSpeedThreshold, minPollRate, minWidth,
+	maxCustomCssLength, maxFontNameLength, maxFontSize, maxHeight, maxLabelOffset,
+	maxMashSpeedThreshold, maxPollRate, maxWidth,
+	minFontSize, minHeight, minLabelOffset,
+	minMashSpeedThreshold, minPollRate, minWidth,
 } from "./config";
 
 describe("Config", () => {
@@ -95,6 +97,20 @@ describe("Config", () => {
 		expect(config.mashSpeedThreshold).toBe(maxMashSpeedThreshold);
 	});
 
+	it("should clamp label offset X", () => {
+		config.labelOffsetX = -5000;
+		expect(config.labelOffsetX).toBe(minLabelOffset);
+		config.labelOffsetX = 5000;
+		expect(config.labelOffsetX).toBe(maxLabelOffset);
+	});
+
+	it("should clamp label offset Y", () => {
+		config.labelOffsetY = -5000;
+		expect(config.labelOffsetY).toBe(minLabelOffset);
+		config.labelOffsetY = 5000;
+		expect(config.labelOffsetY).toBe(maxLabelOffset);
+	});
+
 	it("should truncate custom CSS", () => {
 		config.customCss = "x".repeat(1000001);
 		expect(config.customCss.length).toBe(maxCustomCssLength);
@@ -114,6 +130,8 @@ describe("Config", () => {
 		config.fontSize = 20;
 		config.backgroundColor = "#111111";
 		config.mashSpeedThreshold = 15;
+		config.labelOffsetX = 1;
+		config.labelOffsetY = -1;
 		config.widgets.push(new RoundButtonWidget());
 		config.customCss = "css";
 		expect(config.toJSON()).toEqual({
@@ -150,6 +168,8 @@ describe("Config", () => {
 				label: DefaultColors.ButtonMashingPressedLabel,
 			},
 			mashSpeedThreshold: 15,
+			labelOffsetX: 1,
+			labelOffsetY: -1,
 			widgets: [
 				{
 					type: WidgetType.RoundButton,
@@ -213,6 +233,8 @@ describe("Config", () => {
 					label: "#00000c",
 				},
 				mashSpeedThreshold: 15,
+				labelOffsetX: 1,
+				labelOffsetY: -1,
 				widgets: [
 					{
 						type: WidgetType.RoundButton,
@@ -249,6 +271,8 @@ describe("Config", () => {
 			expect(config.buttonMashingUnpressedPalette.border).toBe("#000007");
 			expect(config.buttonMashingPressedPalette.border).toBe("#00000a");
 			expect(config.mashSpeedThreshold).toBe(15);
+			expect(config.labelOffsetX).toBe(1);
+			expect(config.labelOffsetY).toBe(-1);
 			expect(config.widgets.length).toBe(1);
 			expect(config.widgets[0] instanceof RoundButtonWidget).toBe(true);
 			expect(config.customCss).toBe("css");

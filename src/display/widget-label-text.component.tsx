@@ -1,6 +1,10 @@
+import {connect} from "inferno-mobx";
+import {Config} from "../config/config";
+import {Store} from "../storage/store";
 import {Label} from "./label";
 
 interface Props {
+	config: Config;
 	labels: Label[];
 	x: number;
 	y: number;
@@ -17,17 +21,17 @@ interface Props {
  * A generic component for rendering widget labels at some position with certain
  * spacing and alignment.
  */
-export const WidgetLabelTextComponent = (props: Props) => (
+export const WidgetLabelTextComponent = connect([Store.Config], (props: Props) => (
 	<text
-		x={props.x}
-		y={props.y}
+		x={props.x + props.config.labelOffsetX}
+		y={props.y + props.config.labelOffsetY}
 		text-anchor={props.anchor}
 		dominant-baseline={props.baseline}
 	>
 		{props.labels.map((label, i) => (
 			<tspan
 				className={label.className}
-				x={props.spanX}
+				x={props.spanX ? props.spanX + props.config.labelOffsetX : undefined}
 				dx={i === 0 ? props.spanFirstShiftX : undefined}
 				dy={i === 0 ? props.spanFirstShiftY : props.spanShiftY}
 			>
@@ -35,4 +39,4 @@ export const WidgetLabelTextComponent = (props: Props) => (
 			</tspan>
 		))}
 	</text>
-);
+));

@@ -1,3 +1,4 @@
+import EventEmitter from "events";
 import {render} from "inferno";
 import Component from "inferno-component";
 import {Provider} from "inferno-mobx";
@@ -15,6 +16,7 @@ interface State {
 	config: Config;
 	controller: Controller;
 	errors: string[];
+	events: EventEmitter;
 }
 
 /**
@@ -32,6 +34,7 @@ class IndexComponent extends Component<{}, State> {
 			config,
 			controller: new Controller(config),
 			errors: observable([]),
+			events: new EventEmitter(),
 		};
 	}
 
@@ -69,6 +72,7 @@ class IndexComponent extends Component<{}, State> {
 				config={this.state.config}
 				controller={this.state.controller}
 				errors={this.state.errors}
+				events={this.state.events}
 			>
 				<section className="d-flex justify-content-between h-100">
 					<div className="display">

@@ -22,7 +22,7 @@ interface State {
 /**
  * A set of fields for selecting a widget to edit and editing it.
  */
-@connect([Store.Config])
+@connect([Store.Config, Store.Events])
 export class EditWidgetFieldsetComponent extends Component<Props, State> {
 	public state: State = {index: 0};
 	private listener: () => void;

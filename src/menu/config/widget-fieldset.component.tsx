@@ -3,6 +3,7 @@ import {linkEvent} from "inferno";
 import Component from "inferno-component";
 import {connect} from "inferno-mobx";
 import {ButtonReference} from "../../config/button-reference";
+import {Store} from "../../storage/store";
 import {Widget} from "../../widget/widget";
 import {ButtonReferenceSelectComponent} from "../field/button-reference-select.component";
 import {LabelSelectComponent} from "../field/label-select.component";
@@ -23,7 +24,7 @@ interface Props {
 /**
  * A set of fields for editing a widget.
  */
-@connect
+@connect([Store.Events])
 export class WidgetFieldsetComponent extends Component<Props, {}> {
 	private listener: () => void;
 	private nameInput?: HTMLInputElement;

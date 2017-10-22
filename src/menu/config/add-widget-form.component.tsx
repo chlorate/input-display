@@ -20,7 +20,7 @@ interface State {
 /**
  * A form for creating a new widget.
  */
-@connect([Store.Config])
+@connect([Store.Config, Store.Events])
 export class AddWidgetFormComponent extends Component<Props, State> {
 	public state: State = {type: WidgetType.RoundButton};
 

@@ -80,19 +80,21 @@ export class EditWidgetFieldsetComponent extends Component<Props, State> {
 					widget={this.props.config.widgets[this.index]}
 				/>
 				<div className="form-group">
-					{hasMultipleWidgets && this.index > 0 && [
+					{hasMultipleWidgets && [
 						<button
 							className="btn btn-secondary"
 							onClick={linkEvent(this, handleClickMoveUp)}
+							disabled={this.index <= 0}
 						>
 							Move up
 						</button>,
 						" ",
 					]}
-					{hasMultipleWidgets && this.index < this.props.config.widgets.length - 1 &&
+					{hasMultipleWidgets &&
 						<button
 							className="btn btn-secondary"
 							onClick={linkEvent(this, handleClickMoveDown)}
+							disabled={this.index >= this.props.config.widgets.length - 1}
 						>
 							Move down
 						</button>

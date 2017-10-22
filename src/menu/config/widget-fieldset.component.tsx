@@ -54,7 +54,7 @@ export class WidgetFieldsetComponent extends Component<Props, {}> {
 						label="Name"
 						value={widget.name}
 						maxLength={maxNameLength}
-						onChange={linkEvent(widget, handleChangeName)}
+						onInput={linkEvent(widget, handleInputName)}
 					/>
 					<ButtonReferenceSelectComponent
 						className="col-auto"
@@ -167,7 +167,7 @@ export class WidgetFieldsetComponent extends Component<Props, {}> {
 	}
 }
 
-function handleChangeName(widget: Widget, event): void {
+function handleInputName(widget: Widget, event): void {
 	widget.name = event.target.value;
 }
 

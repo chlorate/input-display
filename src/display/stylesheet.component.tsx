@@ -24,9 +24,9 @@ export const StylesheetComponent = connect([Store.Config], ({config}: Props) => 
 			}
 		`}
 		{paletteCss(config.buttonUnpressedPalette)}
-		{paletteCss(config.buttonPressedPalette, ".widget-button-pressed")}
-		{paletteCss(config.buttonMashingUnpressedPalette, ".widget-button-mashing")}
-		{paletteCss(config.buttonMashingPressedPalette, ".widget-button-mashing.widget-button-pressed")}
+		{paletteCss(config.buttonPressedPalette, ".control-button-pressed")}
+		{paletteCss(config.buttonMashingUnpressedPalette, ".control-button-mashing")}
+		{paletteCss(config.buttonMashingPressedPalette, ".control-button-mashing.control-button-pressed")}
 		{config.customCss}
 	</style>
 ));
@@ -34,11 +34,11 @@ export const StylesheetComponent = connect([Store.Config], ({config}: Props) => 
 function paletteCss(palette: Palette, selector?: string): string {
 	selector = selector || "";
 	return `
-		${selector} .widget-button {
+		${selector} .control-button {
 			stroke: ${palette.border};
 			fill: ${palette.fill};
 		}
-		${selector} .widget-label {
+		${selector} .control-label {
 			fill: ${palette.label};
 		}
 	`;

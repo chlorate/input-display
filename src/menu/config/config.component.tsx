@@ -6,10 +6,10 @@ import {loadFile, saveFile} from "../../storage/file";
 import {Store} from "../../storage/store";
 import {AdvancedConfigComponent} from "./advanced-config.component";
 import {ColorConfigComponent} from "./color-config.component";
+import {ControlConfigComponent} from "./control-config.component";
 import {ControllerConfigComponent} from "./controller-config.component";
 import {DisplayConfigComponent} from "./display-config.component";
 import {FontConfigComponent} from "./font-config.component";
-import {WidgetConfigComponent} from "./widget-config.component";
 
 interface Props {
 	config: Config;
@@ -104,9 +104,9 @@ export class ConfigComponent extends Component<Props, State> {
 				<ColorConfigComponent />
 
 				<h2 className="h4">
-					Widgets
+					Controls
 				</h2>
-				<WidgetConfigComponent />
+				<ControlConfigComponent />
 
 				<h2 className="h4">
 					Advanced

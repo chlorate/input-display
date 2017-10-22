@@ -1,21 +1,21 @@
 import {NormalButtonReference} from "../config/normal-button-reference";
 import {ButtonType} from "../controller/json/button-json";
-import {WidgetType} from "./json/widget-json";
+import {ControlType} from "./json/control-json";
 import {LabelPosition} from "./label-position";
 import {LabelReplacement} from "./label-replacement";
-import {RoundButtonWidget} from "./round-button-widget";
+import {RoundButtonControl} from "./round-button-control";
 
-describe("RoundButtonWidget", () => {
-	let widget;
+describe("RoundButtonControl", () => {
+	let control;
 
 	beforeEach(() => {
-		widget = new RoundButtonWidget();
+		control = new RoundButtonControl();
 	});
 
 	describe("toJSON", () => {
 		it("can return a JSON representation", () => {
-			expect(widget.toJSON()).toEqual({
-				type: WidgetType.RoundButton,
+			expect(control.toJSON()).toEqual({
+				type: ControlType.RoundButton,
 				name: "",
 				button: undefined,
 				x: 5,
@@ -30,8 +30,8 @@ describe("RoundButtonWidget", () => {
 		});
 
 		it("can include button reference", () => {
-			widget.button = new NormalButtonReference(1);
-			expect(widget.toJSON().button).toEqual({
+			control.button = new NormalButtonReference(1);
+			expect(control.toJSON().button).toEqual({
 				type: ButtonType.Normal,
 				index: 1,
 			});

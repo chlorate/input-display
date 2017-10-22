@@ -3,8 +3,8 @@ import {linkEvent} from "inferno";
 import Component from "inferno-component";
 import {connect} from "inferno-mobx";
 import {ButtonReference} from "../../config/button-reference";
+import {Control} from "../../control/control";
 import {Store} from "../../storage/store";
-import {Widget} from "../../widget/widget";
 import {Event} from "../event";
 import {ButtonReferenceSelectComponent} from "../field/button-reference-select.component";
 import {LabelSelectComponent} from "../field/label-select.component";
@@ -15,18 +15,18 @@ import {
 	defaultBorderWidth, defaultPosition, defaultSize,
 	maxBorderWidth, maxHeight, maxNameLength, maxWidth, maxX, maxY,
 	minBorderWidth, minHeight, minWidth, minX, minY,
-} from "../../widget/widget";
+} from "../../control/control";
 
 interface Props {
 	events: EventEmitter;
-	widget: Widget;
+	control: Control;
 }
 
 /**
- * A set of fields for editing a widget.
+ * A set of fields for editing a control.
  */
 @connect([Store.Events])
-export class WidgetFieldsetComponent extends Component<Props, {}> {
+export class ControlFieldsetComponent extends Component<Props, {}> {
 	private listener: () => void;
 	private nameInput?: HTMLInputElement;
 
@@ -36,32 +36,32 @@ export class WidgetFieldsetComponent extends Component<Props, {}> {
 	}
 
 	public componentDidMount(): void {
-		this.props.events.addListener(Event.AddWidget, this.listener);
+		this.props.events.addListener(Event.AddControl, this.listener);
 	}
 
 	public componentWillUnmount(): void {
-		this.props.events.removeListener(Event.AddWidget, this.listener);
+		this.props.events.removeListener(Event.AddControl, this.listener);
 	}
 
 	public render() {
-		const widget = this.props.widget;
+		const control = this.props.control;
 		return (
 			<fieldset>
 				<div className="form-row">
 					<TextInputComponent
 						className="col"
-						id="config-widget-name"
+						id="config-control-name"
 						inputRef={(input) => this.nameInput = input}
 						label="Name"
-						value={widget.name}
+						value={control.name}
 						maxLength={maxNameLength}
-						onInput={linkEvent(widget, handleInputName)}
+						onInput={linkEvent(control, handleInputName)}
 					/>
 					<ButtonReferenceSelectComponent
 						className="col-auto"
-						id="config-widget-button"
-						reference={widget.button}
-						onChange={linkEvent(widget, handleChangeButton)}
+						id="config-control-button"
+						reference={control.button}
+						onChange={linkEvent(control, handleChangeButton)}
 					/>
 				</div>
 
@@ -71,25 +71,25 @@ export class WidgetFieldsetComponent extends Component<Props, {}> {
 						<div className="form-row flex-nowrap">
 							<NumberInputComponent
 								className="col"
-								id="config-widget-x"
+								id="config-control-x"
 								label="X"
 								suffix="px"
-								value={widget.x}
+								value={control.x}
 								min={minX}
 								max={maxX}
 								placeholder={defaultPosition}
-								onChange={linkEvent(widget, handleChangeX)}
+								onChange={linkEvent(control, handleChangeX)}
 							/>
 							<NumberInputComponent
 								className="col"
-								id="config-widget-y"
+								id="config-control-y"
 								label="Y"
 								suffix="px"
-								value={widget.y}
+								value={control.y}
 								min={minY}
 								max={maxY}
 								placeholder={defaultPosition}
-								onChange={linkEvent(widget, handleChangeY)}
+								onChange={linkEvent(control, handleChangeY)}
 							/>
 						</div>
 					</div>
@@ -97,25 +97,25 @@ export class WidgetFieldsetComponent extends Component<Props, {}> {
 						<div className="form-row flex-nowrap">
 							<NumberInputComponent
 								className="col"
-								id="config-widget-width"
+								id="config-control-width"
 								label="Width"
 								suffix="px"
-								value={widget.width}
+								value={control.width}
 								min={minWidth}
 								max={maxWidth}
 								placeholder={defaultSize}
-								onChange={linkEvent(widget, handleChangeWidth)}
+								onChange={linkEvent(control, handleChangeWidth)}
 							/>
 							<NumberInputComponent
 								className="col"
-								id="config-widget-height"
+								id="config-control-height"
 								label="Height"
 								suffix="px"
-								value={widget.height}
+								value={control.height}
 								min={minHeight}
 								max={maxHeight}
 								placeholder={defaultSize}
-								onChange={linkEvent(widget, handleChangeHeight)}
+								onChange={linkEvent(control, handleChangeHeight)}
 							/>
 						</div>
 					</div>
@@ -124,15 +124,15 @@ export class WidgetFieldsetComponent extends Component<Props, {}> {
 				<div className="form-row">
 					<NumberInputComponent
 						className="col"
-						id="config-widget-border-width"
+						id="config-control-border-width"
 						label="Border width"
 						suffix="px"
-						value={widget.borderWidth}
+						value={control.borderWidth}
 						min={minBorderWidth}
 						max={maxBorderWidth}
 						step={0.1}
 						placeholder={defaultBorderWidth}
-						onChange={linkEvent(widget, handleChangeBorderWidth)}
+						onChange={linkEvent(control, handleChangeBorderWidth)}
 					/>
 					<div className="col-6 col-spacer"></div>
 					<div className="col-3 col-spacer"></div>
@@ -141,25 +141,25 @@ export class WidgetFieldsetComponent extends Component<Props, {}> {
 				<div className="form-row">
 					<LabelSelectComponent
 						className="col"
-						id="config-widget-name-label"
+						id="config-control-name-label"
 						label="Name label"
-						value={widget.nameLabel}
-						onChange={linkEvent(widget, handleChangeNameLabel)}
+						value={control.nameLabel}
+						onChange={linkEvent(control, handleChangeNameLabel)}
 					/>
 					<LabelSelectComponent
 						className="col"
-						id="config-widget-presses-label"
+						id="config-control-presses-label"
 						label="Press count label"
-						value={widget.pressesLabel}
-						onChange={linkEvent(widget, handleChangePressesLabel)}
+						value={control.pressesLabel}
+						onChange={linkEvent(control, handleChangePressesLabel)}
 					/>
 					<LabelSelectComponent
 						className="col"
-						id="config-widget-mash-speed-label"
+						id="config-control-mash-speed-label"
 						label="Mash speed label"
-						value={widget.mashSpeedLabel}
+						value={control.mashSpeedLabel}
 						replacement={true}
-						onChange={linkEvent(widget, handleChangeMashSpeedLabel)}
+						onChange={linkEvent(control, handleChangeMashSpeedLabel)}
 					/>
 				</div>
 			</fieldset>
@@ -173,42 +173,42 @@ export class WidgetFieldsetComponent extends Component<Props, {}> {
 	}
 }
 
-function handleInputName(widget: Widget, event): void {
-	widget.name = event.target.value;
+function handleInputName(control: Control, event): void {
+	control.name = event.target.value;
 }
 
-function handleChangeButton(widget: Widget, reference?: ButtonReference): void {
-	widget.button = reference;
+function handleChangeButton(control: Control, reference?: ButtonReference): void {
+	control.button = reference;
 }
 
-function handleChangeX(widget: Widget, event): void {
-	widget.x = event.target.value === "" ? defaultPosition : event.target.value;
+function handleChangeX(control: Control, event): void {
+	control.x = event.target.value === "" ? defaultPosition : event.target.value;
 }
 
-function handleChangeY(widget: Widget, event): void {
-	widget.y = event.target.value === "" ? defaultPosition : event.target.value;
+function handleChangeY(control: Control, event): void {
+	control.y = event.target.value === "" ? defaultPosition : event.target.value;
 }
 
-function handleChangeWidth(widget: Widget, event): void {
-	widget.width = event.target.value || defaultSize;
+function handleChangeWidth(control: Control, event): void {
+	control.width = event.target.value || defaultSize;
 }
 
-function handleChangeHeight(widget: Widget, event): void {
-	widget.height = event.target.value || defaultSize;
+function handleChangeHeight(control: Control, event): void {
+	control.height = event.target.value || defaultSize;
 }
 
-function handleChangeBorderWidth(widget: Widget, event): void {
-	widget.borderWidth = event.target.value === "" ? defaultBorderWidth : event.target.value;
+function handleChangeBorderWidth(control: Control, event): void {
+	control.borderWidth = event.target.value === "" ? defaultBorderWidth : event.target.value;
 }
 
-function handleChangeNameLabel(widget: Widget, event): void {
-	widget.nameLabel = event.target.value || undefined;
+function handleChangeNameLabel(control: Control, event): void {
+	control.nameLabel = event.target.value || undefined;
 }
 
-function handleChangePressesLabel(widget: Widget, event): void {
-	widget.pressesLabel = event.target.value || undefined;
+function handleChangePressesLabel(control: Control, event): void {
+	control.pressesLabel = event.target.value || undefined;
 }
 
-function handleChangeMashSpeedLabel(widget: Widget, event): void {
-	widget.mashSpeedLabel = event.target.value || undefined;
+function handleChangeMashSpeedLabel(control: Control, event): void {
+	control.mashSpeedLabel = event.target.value || undefined;
 }

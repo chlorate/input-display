@@ -1,7 +1,7 @@
-import {WidgetType} from "../widget/json/widget-json";
-import {LabelPosition} from "../widget/label-position";
-import {LabelReplacement} from "../widget/label-replacement";
-import {RoundButtonWidget} from "../widget/round-button-widget";
+import {ControlType} from "../control/json/control-json";
+import {LabelPosition} from "../control/label-position";
+import {LabelReplacement} from "../control/label-replacement";
+import {RoundButtonControl} from "../control/round-button-control";
 import {AxisReference} from "./axis-reference";
 
 import {
@@ -132,7 +132,7 @@ describe("Config", () => {
 		config.mashSpeedThreshold = 15;
 		config.labelOffsetX = 1;
 		config.labelOffsetY = -1;
-		config.widgets.push(new RoundButtonWidget());
+		config.controls.push(new RoundButtonControl());
 		config.customCss = "css";
 		expect(config.toJSON()).toEqual({
 			gamepadIndex: 1,
@@ -170,9 +170,9 @@ describe("Config", () => {
 			mashSpeedThreshold: 15,
 			labelOffsetX: 1,
 			labelOffsetY: -1,
-			widgets: [
+			controls: [
 				{
-					type: WidgetType.RoundButton,
+					type: ControlType.RoundButton,
 					name: "",
 					button: undefined,
 					x: 5,
@@ -235,9 +235,9 @@ describe("Config", () => {
 				mashSpeedThreshold: 15,
 				labelOffsetX: 1,
 				labelOffsetY: -1,
-				widgets: [
+				controls: [
 					{
-						type: WidgetType.RoundButton,
+						type: ControlType.RoundButton,
 						name: "name",
 						x: 0,
 						y: 1,
@@ -273,8 +273,8 @@ describe("Config", () => {
 			expect(config.mashSpeedThreshold).toBe(15);
 			expect(config.labelOffsetX).toBe(1);
 			expect(config.labelOffsetY).toBe(-1);
-			expect(config.widgets.length).toBe(1);
-			expect(config.widgets[0] instanceof RoundButtonWidget).toBe(true);
+			expect(config.controls.length).toBe(1);
+			expect(config.controls[0] instanceof RoundButtonControl).toBe(true);
 			expect(config.customCss).toBe("css");
 		});
 

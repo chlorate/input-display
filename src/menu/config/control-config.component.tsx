@@ -2,8 +2,8 @@ import {linkEvent} from "inferno";
 import {connect} from "inferno-mobx";
 import {Store} from "../../storage/store";
 import {NumberInputComponent} from "../field/number-input.component";
-import {AddWidgetFormComponent} from "./add-widget-form.component";
-import {EditWidgetFieldsetComponent} from "./edit-widget-fieldset.component";
+import {AddControlFormComponent} from "./add-control-form.component";
+import {EditControlFieldsetComponent} from "./edit-control-fieldset.component";
 
 import {
 	Config,
@@ -17,9 +17,9 @@ interface Props {
 }
 
 /**
- * A section within the Config tab related to widgets.
+ * A section within the Config tab related to controls.
  */
-export const WidgetConfigComponent = connect([Store.Config], ({config}: Props) => (
+export const ControlConfigComponent = connect([Store.Config], ({config}: Props) => (
 	<section className="mb-5">
 		<div className="form-row">
 			<NumberInputComponent
@@ -75,16 +75,16 @@ export const WidgetConfigComponent = connect([Store.Config], ({config}: Props) =
 		</small>
 
 		<h3 className="h5">
-			Add widget
+			Add control
 		</h3>
-		<AddWidgetFormComponent />
+		<AddControlFormComponent />
 
-		{config.widgets.length > 0 &&
+		{config.controls.length > 0 &&
 			<h3 className="h5">
-				Edit widget
+				Edit control
 			</h3>
 		}
-		<EditWidgetFieldsetComponent />
+		<EditControlFieldsetComponent />
 	</section>
 ));
 

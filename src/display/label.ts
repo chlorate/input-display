@@ -8,7 +8,7 @@ export interface Label {
 }
 
 export enum LabelClass {
-	Name = "widget-label-name",
-	Presses = "widget-label-presses",
-	MashSpeed = "widget-label-mash-speed",
+	Name = "control-label-name",
+	Presses = "control-label-presses",
+	MashSpeed = "control-label-mash-speed",
 }

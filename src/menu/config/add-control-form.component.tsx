@@ -3,9 +3,9 @@ import {linkEvent} from "inferno";
 import Component from "inferno-component";
 import {connect} from "inferno-mobx";
 import {Config} from "../../config/config";
+import {ControlType} from "../../control/json/control-json";
+import {RoundButtonControl} from "../../control/round-button-control";
 import {Store} from "../../storage/store";
-import {WidgetType} from "../../widget/json/widget-json";
-import {RoundButtonWidget} from "../../widget/round-button-widget";
 import {Event} from "../event";
 
 interface Props {
@@ -14,17 +14,17 @@ interface Props {
 }
 
 interface State {
-	type: WidgetType;
+	type: ControlType;
 }
 
 /**
- * A form for creating a new widget.
+ * A form for creating a new control.
  */
 @connect([Store.Config, Store.Events])
-export class AddWidgetFormComponent extends Component<Props, State> {
-	public state: State = {type: WidgetType.RoundButton};
+export class AddControlFormComponent extends Component<Props, State> {
+	public state: State = {type: ControlType.RoundButton};
 
-	set type(type: WidgetType) {
+	set type(type: ControlType) {
 		this.setState({type});
 	}
 
@@ -32,17 +32,17 @@ export class AddWidgetFormComponent extends Component<Props, State> {
 		return (
 			<form onSubmit={linkEvent(this, handleSubmit)}>
 				<div className="form-group">
-					<label className="sr-only" for="config-add-widget">
-						Widget type
+					<label className="sr-only" for="config-add-control">
+						Control type
 					</label>
 					<div className="input-group">
 						<select
 							className="form-control"
-							id="config-add-widget"
+							id="config-add-control"
 							value={this.state.type}
 							onChange={linkEvent(this, handleChange)}
 						>
-							<option value={WidgetType.RoundButton}>Round button</option>
+							<option value={ControlType.RoundButton}>Round button</option>
 							<option value="">Square button</option>
 							<option value="">Angled button</option>
 							<option value="">Triangular button</option>
@@ -62,16 +62,16 @@ export class AddWidgetFormComponent extends Component<Props, State> {
 	}
 }
 
-function handleChange(component: AddWidgetFormComponent, event): void {
+function handleChange(component: AddControlFormComponent, event): void {
 	component.type = event.target.value;
 }
 
-function handleSubmit(component: AddWidgetFormComponent, event): void {
+function handleSubmit(component: AddControlFormComponent, event): void {
 	event.preventDefault();
 	switch (component.state.type) {
-		case WidgetType.RoundButton:
-			component.props.config.widgets.push(new RoundButtonWidget());
+		case ControlType.RoundButton:
+			component.props.config.controls.push(new RoundButtonControl());
 			break;
 	}
-	component.props.events.emit(Event.AddWidget);
+	component.props.events.emit(Event.AddControl);
 }

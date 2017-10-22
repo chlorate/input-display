@@ -3,28 +3,28 @@ import {LabelPosition, sortedLabelPositions} from "../label-position";
 import {LabelReplacement, sortedLabelReplacements} from "../label-replacement";
 
 /**
- * Type values for distinguishing Widget subclass JSON representations.
+ * Type values for distinguishing Control subclass JSON representations.
  */
-export enum WidgetType {
+export enum ControlType {
 	RoundButton = "roundButton",
 }
 
 /**
- * JSON representations of all Widget subclasses.
+ * JSON representations of all Control subclasses.
  */
-export type WidgetJSON = RoundButtonWidgetJSON;
+export type ControlJSON = RoundButtonControlJSON;
 
 /**
- * A JSON representation of a RoundButtonWidget.
+ * A JSON representation of a RoundButtonControl.
  */
-export interface RoundButtonWidgetJSON extends BaseWidgetJSON {
-	type: WidgetType.RoundButton;
+export interface RoundButtonControlJSON extends BaseControlJSON {
+	type: ControlType.RoundButton;
 }
 
 /**
- * Common properties for all Widget JSON representations.
+ * Common properties for all Control JSON representations.
  */
-export interface BaseWidgetJSON {
+export interface BaseControlJSON {
 	name: string;
 	button?: ButtonReferenceJSON;
 	x: number;
@@ -38,9 +38,9 @@ export interface BaseWidgetJSON {
 }
 
 /**
- * Returns true if some value is a WidgetJSON object.
+ * Returns true if some value is a ControlJSON object.
  */
-export function isWidgetJSON(input: any): input is WidgetJSON {
+export function isControlJSON(input: any): input is ControlJSON {
 	return (
 		typeof input === "object" &&
 		typeof input.name === "string" &&
@@ -64,7 +64,7 @@ export function isWidgetJSON(input: any): input is WidgetJSON {
 			sortedLabelReplacements.indexOf(input.mashSpeedLabel) >= 0
 		) &&
 		(
-			input.type === WidgetType.RoundButton // || ...
+			input.type === ControlType.RoundButton // || ...
 		)
 	);
 }

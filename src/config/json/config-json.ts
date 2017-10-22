@@ -1,4 +1,4 @@
-import {isWidgetJSON, WidgetJSON} from "../../widget/json/widget-json";
+import {ControlJSON, isControlJSON} from "../../control/json/control-json";
 import {AxisReferenceJSON, isAxisReferenceJSON} from "./axis-reference-json";
 import {isPaletteJSON, PaletteJSON} from "./palette-json";
 
@@ -27,7 +27,7 @@ export interface ConfigJSON {
 	mashSpeedThreshold: number;
 	labelOffsetX: number;
 	labelOffsetY: number;
-	widgets: WidgetJSON[];
+	controls: ControlJSON[];
 	customCss: string;
 }
 
@@ -59,6 +59,6 @@ export function isConfigJSON(input: any): input is ConfigJSON {
 		typeof input.labelOffsetX === "number" &&
 		typeof input.labelOffsetY === "number" &&
 		typeof input.customCss === "string" &&
-		Array.isArray(input.widgets) && input.widgets.every((widget) => isWidgetJSON(widget))
+		Array.isArray(input.controls) && input.controls.every((control) => isControlJSON(control))
 	);
 }

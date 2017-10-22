@@ -1,6 +1,6 @@
 import {connect} from "inferno-mobx";
-import {LabelPosition, labelPositionNames, sortedLabelPositions} from "../../widget/label-position";
-import {LabelReplacement, labelReplacementNames, sortedLabelReplacements} from "../../widget/label-replacement";
+import {LabelPosition, labelPositionNames, sortedLabelPositions} from "../../control/label-position";
+import {LabelReplacement, labelReplacementNames, sortedLabelReplacements} from "../../control/label-replacement";
 
 interface Props {
 	className?: string;

@@ -1,5 +1,5 @@
+import {ControlType} from "../../control/json/control-json";
 import {ButtonType} from "../../controller/json/button-json";
-import {WidgetType} from "../../widget/json/widget-json";
 import {isConfigJSON} from "./config-json";
 
 describe("ConfigJSON", () => {
@@ -41,9 +41,9 @@ describe("ConfigJSON", () => {
 			mashSpeedThreshold: 15,
 			labelOffsetX: 1,
 			labelOffsetY: -1,
-			widgets: [
+			controls: [
 				{
-					type: WidgetType.RoundButton,
+					type: ControlType.RoundButton,
 					name: "",
 					button: {
 						type: ButtonType.Normal,
@@ -186,13 +186,13 @@ describe("ConfigJSON", () => {
 		expect(isConfigJSON(json)).toBe(false);
 	});
 
-	it("should return false if widgets is not an array", () => {
-		json.widgets = "bad";
+	it("should return false if controls is not an array", () => {
+		json.controls = "bad";
 		expect(isConfigJSON(json)).toBe(false);
 	});
 
-	it("should return false if widgets array does not contain a valid widget", () => {
-		json.widgets[0] = "bad";
+	it("should return false if controls array does not contain a valid control", () => {
+		json.controls[0] = "bad";
 		expect(isConfigJSON(json)).toBe(false);
 	});
 

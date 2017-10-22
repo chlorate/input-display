@@ -18,10 +18,10 @@ interface Props {
 }
 
 /**
- * A generic component for rendering widget labels at some position with certain
+ * A generic component for rendering control labels at some position with certain
  * spacing and alignment.
  */
-export const WidgetLabelTextComponent = connect([Store.Config], (props: Props) => (
+export const ControlLabelTextComponent = connect([Store.Config], (props: Props) => (
 	<text
 		x={props.x + props.config.labelOffsetX}
 		y={props.y + props.config.labelOffsetY}

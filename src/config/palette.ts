@@ -3,7 +3,7 @@ import {ensureColor} from "../css/util";
 import {PaletteJSON} from "./json/palette-json";
 
 /**
- * Defines a palette of widget colors for a particular button state.
+ * Defines a palette of control colors for a particular button state.
  */
 export class Palette {
 	@observable private _border: string;

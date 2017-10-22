@@ -1,8 +1,8 @@
 import {observable} from "mobx";
+import {Control} from "../control/control";
+import {parseControlJSON} from "../control/control.factory";
 import {ensureColor} from "../css/util";
 import {clampIndex, clampInt} from "../math/util";
-import {Widget} from "../widget/widget";
-import {parseWidgetJSON} from "../widget/widget.factory";
 import {AxisReference} from "./axis-reference";
 import {ConfigJSON, isConfigJSON} from "./json/config-json";
 import {Palette} from "./palette";
@@ -76,7 +76,7 @@ export class Config {
 	@observable private _mashSpeedThreshold: number = defaultMashSpeedThreshold;
 	@observable private _labelOffsetX: number = defaultLabelOffset;
 	@observable private _labelOffsetY: number = defaultLabelOffset;
-	@observable private _widgets: Widget[] = [];
+	@observable private _controls: Control[] = [];
 	@observable private _customCss: string = "";
 
 	constructor() {
@@ -208,8 +208,8 @@ export class Config {
 		this._labelOffsetY = clampInt(offset, minLabelOffset, maxLabelOffset);
 	}
 
-	get widgets(): Widget[] {
-		return this._widgets;
+	get controls(): Control[] {
+		return this._controls;
 	}
 
 	get customCss(): string {
@@ -243,7 +243,7 @@ export class Config {
 			mashSpeedThreshold: this.mashSpeedThreshold,
 			labelOffsetX: this.labelOffsetX,
 			labelOffsetY: this.labelOffsetY,
-			widgets: this.widgets.map((widget) => widget.toJSON()),
+			controls: this.controls.map((control) => control.toJSON()),
 			customCss: this.customCss,
 		};
 		if (this.dpadXAxis && this.dpadYAxis) {
@@ -280,7 +280,7 @@ export class Config {
 		this.mashSpeedThreshold = json.mashSpeedThreshold;
 		this.labelOffsetX = json.labelOffsetX;
 		this.labelOffsetY = json.labelOffsetY;
-		this._widgets = json.widgets.map((widget) => parseWidgetJSON(widget));
+		this._controls = json.controls.map((control) => parseControlJSON(control));
 		this.customCss = json.customCss;
 
 		if (json.dpadXAxis && json.dpadYAxis) {

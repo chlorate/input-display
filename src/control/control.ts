@@ -1,7 +1,7 @@
 import {observable} from "mobx";
 import {ButtonReference} from "../config/button-reference";
 import {clamp, clampInt} from "../math/util";
-import {WidgetJSON} from "./json/widget-json";
+import {ControlJSON} from "./json/control-json";
 import {LabelPosition} from "./label-position";
 import {LabelReplacement} from "./label-replacement";
 
@@ -26,7 +26,7 @@ export const defaultBorderWidth = 1.5;
 /**
  * An abstract component that is shown in the display.
  */
-export abstract class Widget {
+export abstract class Control {
 	@observable public button?: ButtonReference;
 	@observable public nameLabel?: LabelPosition = LabelPosition.Center;
 	@observable public pressesLabel?: LabelPosition;
@@ -104,5 +104,5 @@ export abstract class Widget {
 		return this.height + this.borderWidth / 2;
 	}
 
-	public abstract toJSON(): WidgetJSON;
+	public abstract toJSON(): ControlJSON;
 }

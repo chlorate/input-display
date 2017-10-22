@@ -1,6 +1,7 @@
 interface Props {
 	className?: string;
 	id: string;
+	inputRef?: (input: HTMLInputElement) => void;
 	label: string;
 	value: string;
 	maxLength: number;
@@ -20,6 +21,7 @@ export const TextInputComponent = (props: Props) => (
 			type="text"
 			className="form-control"
 			id={props.id}
+			ref={props.inputRef}
 			value={props.value}
 			maxLength={props.maxLength}
 			onChange={props.onChange}

@@ -76,6 +76,7 @@ export class EditWidgetFieldsetComponent extends Component<Props, State> {
 				</div>
 				<hr />
 				<WidgetFieldsetComponent
+					events={this.props.events}
 					widget={this.props.config.widgets[this.index]}
 				/>
 				<div className="form-group">

@@ -80,39 +80,37 @@ export class EditWidgetFieldsetComponent extends Component<Props, State> {
 					events={this.props.events}
 					widget={this.props.config.widgets[this.index]}
 				/>
-				<div className="form-group">
+				<button
+					className="btn btn-primary"
+					onClick={linkEvent(this, handleClickClone)}
+				>
+					Clone
+				</button>{" "}
+				{hasMultipleWidgets && [
 					<button
-						className="btn btn-primary"
-						onClick={linkEvent(this, handleClickClone)}
+						className="btn btn-secondary"
+						onClick={linkEvent(this, handleClickMoveUp)}
+						disabled={this.index <= 0}
 					>
-						Clone
-					</button>{" "}
-					{hasMultipleWidgets && [
-						<button
-							className="btn btn-secondary"
-							onClick={linkEvent(this, handleClickMoveUp)}
-							disabled={this.index <= 0}
-						>
-							Move up
-						</button>,
-						" ",
-					]}
-					{hasMultipleWidgets &&
-						<button
-							className="btn btn-secondary"
-							onClick={linkEvent(this, handleClickMoveDown)}
-							disabled={this.index >= this.props.config.widgets.length - 1}
-						>
-							Move down
-						</button>
-					}
+						Move up
+					</button>,
+					" ",
+				]}
+				{hasMultipleWidgets &&
 					<button
-						className="btn btn-danger float-right ml-1"
-						onClick={linkEvent(this, handleClickDelete)}
+						className="btn btn-secondary"
+						onClick={linkEvent(this, handleClickMoveDown)}
+						disabled={this.index >= this.props.config.widgets.length - 1}
 					>
-						Delete
+						Move down
 					</button>
-				</div>
+				}
+				<button
+					className="btn btn-danger float-right ml-1"
+					onClick={linkEvent(this, handleClickDelete)}
+				>
+					Delete
+				</button>
 			</fieldset>
 		);
 	}

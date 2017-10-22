@@ -14,7 +14,7 @@ interface Props {
  * A section within the Config tab for controller configuration.
  */
 export const ControllerConfigComponent = connect([Store.Config], ({config}: Props) => (
-	<section>
+	<section className="mb-5">
 		<DeviceSelectComponent />
 		<DpadMappingFieldsetComponent />
 		<div className="form-row">

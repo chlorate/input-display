@@ -13,7 +13,7 @@ interface Props {
  * A section within the Config tab for customizing the colors of the display.
  */
 export const ColorConfigComponent = connect([Store.Config], ({config}: Props) => (
-	<section>
+	<section className="mb-5">
 		<div className="form-row">
 			<ColorInputComponent
 				className="col"

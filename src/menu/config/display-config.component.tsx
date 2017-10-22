@@ -14,7 +14,7 @@ interface Props {
  * display.
  */
 export const DisplayConfigComponent = connect([Store.Config], ({config}: Props) => (
-	<fieldset>
+	<section className="mb-5">
 		<div className="form-row">
 			<NumberInputComponent
 				className="col"
@@ -40,14 +40,13 @@ export const DisplayConfigComponent = connect([Store.Config], ({config}: Props) 
 			<div className="col-2 col-spacer"></div>
 		</div>
 		<CheckboxInputComponent
-			className="mb-3"
 			id="config-display-outline"
 			label="Show outline"
 			checked={config.displayOutline}
 			help="Helps with cropping a window capture."
 			onClick={linkEvent(config, handleClickOutline)}
 		/>
-	</fieldset>
+	</section>
 ));
 
 function handleChangeWidth(config: Config, event): void {

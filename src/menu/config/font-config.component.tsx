@@ -14,7 +14,7 @@ interface Props {
  * A section within the Config tab for customizing the font used in the display.
  */
 export const FontConfigComponent = connect([Store.Config], ({config}: Props) => (
-	<section>
+	<section className="mb-5">
 		<div className="form-row">
 			<TextInputComponent
 				className="col"

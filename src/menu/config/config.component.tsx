@@ -83,32 +83,32 @@ export class ConfigComponent extends Component<Props, State> {
 					</div>
 				}
 
-				<h2 className="h4 mt-4">
+				<h2 className="h4">
 					Controller
 				</h2>
 				<ControllerConfigComponent />
 
-				<h2 className="h4 mt-4">
+				<h2 className="h4">
 					Display
 				</h2>
 				<DisplayConfigComponent />
 
-				<h2 className="h4 mt-4">
+				<h2 className="h4">
 					Font
 				</h2>
 				<FontConfigComponent />
 
-				<h2 className="h4 mt-4">
+				<h2 className="h4">
 					Colors
 				</h2>
 				<ColorConfigComponent />
 
-				<h2 className="h4 mt-4">
+				<h2 className="h4">
 					Widgets
 				</h2>
 				<WidgetConfigComponent />
 
-				<h2 className="h4 mt-4">
+				<h2 className="h4">
 					Advanced
 				</h2>
 				<AdvancedConfigComponent />

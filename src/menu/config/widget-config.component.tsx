@@ -19,7 +19,7 @@ interface Props {
  * A section within the Config tab related to widgets.
  */
 export const WidgetConfigComponent = connect([Store.Config], ({config}: Props) => (
-	<section>
+	<section className="mb-5">
 		<div className="form-row">
 			<NumberInputComponent
 				className="col m-0"

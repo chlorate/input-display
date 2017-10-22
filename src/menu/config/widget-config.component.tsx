@@ -7,6 +7,7 @@ import {EditWidgetFieldsetComponent} from "./edit-widget-fieldset.component";
 
 import {
 	Config,
+	defaultLabelOffset, defaultMashSpeedThreshold,
 	maxLabelOffset, maxMashSpeedThreshold,
 	minLabelOffset, minMashSpeedThreshold,
 } from "../../config/config";
@@ -29,6 +30,7 @@ export const WidgetConfigComponent = connect([Store.Config], ({config}: Props) =
 				value={config.mashSpeedThreshold}
 				min={minMashSpeedThreshold}
 				max={maxMashSpeedThreshold}
+				placeholder={defaultMashSpeedThreshold}
 				helpId="config-mash-speed-threshold-help"
 				onChange={linkEvent(config, handleChangeMashSpeedThreshold)}
 			/>
@@ -49,6 +51,7 @@ export const WidgetConfigComponent = connect([Store.Config], ({config}: Props) =
 				value={config.labelOffsetX}
 				min={minLabelOffset}
 				max={maxLabelOffset}
+				placeholder={defaultLabelOffset}
 				helpId="config-label-offset-help"
 				onChange={linkEvent(config, handleChangeLabelOffsetX)}
 			/>
@@ -60,6 +63,7 @@ export const WidgetConfigComponent = connect([Store.Config], ({config}: Props) =
 				value={config.labelOffsetY}
 				min={minLabelOffset}
 				max={maxLabelOffset}
+				placeholder={defaultLabelOffset}
 				helpId="config-label-offset-help"
 				onChange={linkEvent(config, handleChangeLabelOffsetY)}
 			/>
@@ -85,13 +89,13 @@ export const WidgetConfigComponent = connect([Store.Config], ({config}: Props) =
 ));
 
 function handleChangeMashSpeedThreshold(config: Config, event) {
-	config.mashSpeedThreshold = event.target.value;
+	config.mashSpeedThreshold = event.target.value || defaultMashSpeedThreshold;
 }
 
 function handleChangeLabelOffsetX(config: Config, event): void {
-	config.labelOffsetX = event.target.value;
+	config.labelOffsetX = event.target.value || defaultLabelOffset;
 }
 
 function handleChangeLabelOffsetY(config: Config, event): void {
-	config.labelOffsetY = event.target.value;
+	config.labelOffsetY = event.target.value || defaultLabelOffset;
 }

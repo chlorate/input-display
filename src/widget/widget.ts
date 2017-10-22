@@ -11,14 +11,17 @@ export const minX = 0;
 export const maxX = 3839;
 export const minY = 0;
 export const maxY = 2159;
+export const defaultPosition = 5;
 
 export const minWidth = 1;
 export const maxWidth = 3840;
 export const minHeight = 1;
 export const maxHeight = 2160;
+export const defaultSize = 24;
 
 export const minBorderWidth = 0;
 export const maxBorderWidth = 1000;
+export const defaultBorderWidth = 1.5;
 
 /**
  * An abstract component that is shown in the display.
@@ -29,11 +32,11 @@ export abstract class Widget {
 	@observable public pressesLabel?: LabelPosition;
 	@observable public mashSpeedLabel?: LabelPosition | LabelReplacement = LabelReplacement.Name;
 	@observable private _name: string = "";
-	@observable private _x: number = 5;
-	@observable private _y: number = 5;
-	@observable private _width: number = 24;
-	@observable private _height: number = 24;
-	@observable private _borderWidth: number = 1.5;
+	@observable private _x: number = defaultPosition;
+	@observable private _y: number = defaultPosition;
+	@observable private _width: number = defaultSize;
+	@observable private _height: number = defaultSize;
+	@observable private _borderWidth: number = defaultBorderWidth;
 
 	get name(): string {
 		return this._name;

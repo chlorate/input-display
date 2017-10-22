@@ -11,21 +11,27 @@ import {Palette} from "./palette";
 // https://developer.mozilla.org/en-US/docs/Web/API/WindowOrWorkerGlobalScope/setTimeout#Timeouts_throttled_to_>4ms
 export const minPollRate = 1;
 export const maxPollRate = 250;
-
-export const minMashSpeedThreshold = 1;
-export const maxMashSpeedThreshold = 30;
+export const defaultPollRate = 60;
 
 export const minWidth = 32;
 export const maxWidth = 3840;
+export const defaultWidth = 300;
 export const minHeight = 32;
 export const maxHeight = 2160;
+export const defaultHeight = 100;
 
 export const maxFontNameLength = 250;
 export const minFontSize = 1;
 export const maxFontSize = 2000;
+export const defaultFontSize = 16;
+
+export const minMashSpeedThreshold = 1;
+export const maxMashSpeedThreshold = 30;
+export const defaultMashSpeedThreshold = 5;
 
 export const minLabelOffset = -500;
 export const maxLabelOffset = 500;
+export const defaultLabelOffset = 0;
 
 export const maxCustomCssLength = 1000000;
 
@@ -57,19 +63,19 @@ export class Config {
 	@observable private _dpadAxisIndex?: number;
 	@observable private _dpadXAxis?: AxisReference;
 	@observable private _dpadYAxis?: AxisReference;
-	@observable private _pollRate: number = 60;
-	@observable private _displayWidth: number = 300;
-	@observable private _displayHeight: number = 100;
+	@observable private _pollRate: number = defaultPollRate;
+	@observable private _displayWidth: number = defaultWidth;
+	@observable private _displayHeight: number = defaultHeight;
 	@observable private _fontName: string = "";
-	@observable private _fontSize: number = 16;
+	@observable private _fontSize: number = defaultFontSize;
 	@observable private _backgroundColor: string = DefaultColors.Background;
 	@observable private _buttonUnpressedPalette: Palette;
 	@observable private _buttonPressedPalette: Palette;
 	@observable private _buttonMashingUnpressedPalette: Palette;
 	@observable private _buttonMashingPressedPalette: Palette;
-	@observable private _mashSpeedThreshold: number = 5;
-	@observable private _labelOffsetX: number = 0;
-	@observable private _labelOffsetY: number = 0;
+	@observable private _mashSpeedThreshold: number = defaultMashSpeedThreshold;
+	@observable private _labelOffsetX: number = defaultLabelOffset;
+	@observable private _labelOffsetY: number = defaultLabelOffset;
 	@observable private _widgets: Widget[] = [];
 	@observable private _customCss: string = "";
 

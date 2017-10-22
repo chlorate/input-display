@@ -12,6 +12,7 @@ import {NumberInputComponent} from "../field/number-input.component";
 import {TextInputComponent} from "../field/text-input.component";
 
 import {
+	defaultBorderWidth, defaultPosition, defaultSize,
 	maxBorderWidth, maxHeight, maxNameLength, maxWidth, maxX, maxY,
 	minBorderWidth, minHeight, minWidth, minX, minY,
 } from "../../widget/widget";
@@ -76,6 +77,7 @@ export class WidgetFieldsetComponent extends Component<Props, {}> {
 								value={widget.x}
 								min={minX}
 								max={maxX}
+								placeholder={defaultPosition}
 								onChange={linkEvent(widget, handleChangeX)}
 							/>
 							<NumberInputComponent
@@ -86,6 +88,7 @@ export class WidgetFieldsetComponent extends Component<Props, {}> {
 								value={widget.y}
 								min={minY}
 								max={maxY}
+								placeholder={defaultPosition}
 								onChange={linkEvent(widget, handleChangeY)}
 							/>
 						</div>
@@ -100,6 +103,7 @@ export class WidgetFieldsetComponent extends Component<Props, {}> {
 								value={widget.width}
 								min={minWidth}
 								max={maxWidth}
+								placeholder={defaultSize}
 								onChange={linkEvent(widget, handleChangeWidth)}
 							/>
 							<NumberInputComponent
@@ -110,6 +114,7 @@ export class WidgetFieldsetComponent extends Component<Props, {}> {
 								value={widget.height}
 								min={minHeight}
 								max={maxHeight}
+								placeholder={defaultSize}
 								onChange={linkEvent(widget, handleChangeHeight)}
 							/>
 						</div>
@@ -126,6 +131,7 @@ export class WidgetFieldsetComponent extends Component<Props, {}> {
 						min={minBorderWidth}
 						max={maxBorderWidth}
 						step={0.1}
+						placeholder={defaultBorderWidth}
 						onChange={linkEvent(widget, handleChangeBorderWidth)}
 					/>
 					<div className="col-6 col-spacer"></div>
@@ -176,23 +182,23 @@ function handleChangeButton(widget: Widget, reference?: ButtonReference): void {
 }
 
 function handleChangeX(widget: Widget, event): void {
-	widget.x = event.target.value;
+	widget.x = event.target.value === "" ? defaultPosition : event.target.value;
 }
 
 function handleChangeY(widget: Widget, event): void {
-	widget.y = event.target.value;
+	widget.y = event.target.value === "" ? defaultPosition : event.target.value;
 }
 
 function handleChangeWidth(widget: Widget, event): void {
-	widget.width = event.target.value;
+	widget.width = event.target.value || defaultSize;
 }
 
 function handleChangeHeight(widget: Widget, event): void {
-	widget.height = event.target.value;
+	widget.height = event.target.value || defaultSize;
 }
 
 function handleChangeBorderWidth(widget: Widget, event): void {
-	widget.borderWidth = event.target.value;
+	widget.borderWidth = event.target.value === "" ? defaultBorderWidth : event.target.value;
 }
 
 function handleChangeNameLabel(widget: Widget, event): void {

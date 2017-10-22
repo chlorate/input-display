@@ -1,6 +1,6 @@
 import {linkEvent} from "inferno";
 import {connect} from "inferno-mobx";
-import {Config, maxFontNameLength, maxFontSize, minFontSize} from "../../config/config";
+import {Config, defaultFontSize, maxFontNameLength, maxFontSize, minFontSize} from "../../config/config";
 import {Store} from "../../storage/store";
 import {CheckboxInputComponent} from "../field/checkbox-input.component";
 import {NumberInputComponent} from "../field/number-input.component";
@@ -32,6 +32,7 @@ export const FontConfigComponent = connect([Store.Config], ({config}: Props) => 
 				value={config.fontSize}
 				min={minFontSize}
 				max={maxFontSize}
+				placeholder={defaultFontSize}
 				onChange={linkEvent(config, handleChangeSize)}
 			/>
 		</div>
@@ -75,5 +76,5 @@ function handleClickShadow(config: Config, event): void {
 }
 
 function handleChangeSize(config: Config, event): void {
-	config.fontSize = event.target.value;
+	config.fontSize = event.target.value || defaultFontSize;
 }

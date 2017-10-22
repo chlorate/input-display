@@ -1,7 +1,7 @@
 import {observable} from "mobx";
 import {ButtonReference} from "../config/button-reference";
 import {clamp, clampInt} from "../math/util";
-import {ControlJSON} from "./json/control-json";
+import {BaseControlJSON, ControlJSON} from "./json/control-json";
 import {LabelPosition} from "./label-position";
 import {LabelReplacement} from "./label-replacement";
 
@@ -105,4 +105,19 @@ export abstract class Control {
 	}
 
 	public abstract toJSON(): ControlJSON;
+
+	protected toBaseJSON(): BaseControlJSON {
+		return {
+			name: this.name,
+			button: this.button ? this.button.toJSON() : undefined,
+			x: this.x,
+			y: this.y,
+			width: this.width,
+			height: this.height,
+			borderWidth: this.borderWidth,
+			nameLabel: this.nameLabel,
+			pressesLabel: this.pressesLabel,
+			mashSpeedLabel: this.mashSpeedLabel,
+		};
+	}
 }

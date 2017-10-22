@@ -1,4 +1,8 @@
-import {ControlJSON} from "./json/control-json";
+import {NormalButtonReference} from "../config/normal-button-reference";
+import {ButtonType} from "../controller/json/button-json";
+import {ControlJSON, ControlType} from "./json/control-json";
+import {LabelPosition} from "./label-position";
+import {LabelReplacement} from "./label-replacement";
 
 import {
 	Control,
@@ -8,7 +12,8 @@ import {
 
 class TestControl extends Control {
 	public toJSON(): ControlJSON {
-		throw new Error("not implemented");
+		const json = {type: ControlType.Ellipse};
+		return Object.assign(json, super.toBaseJSON()) as ControlJSON;
 	}
 }
 
@@ -89,5 +94,31 @@ describe("Control", () => {
 		control.height = 50;
 		control.borderWidth = 11;
 		expect(control.bottomY).toBe(55.5);
+	});
+
+	describe("toBaseJSON", () => {
+		it("can return a partial JSON representation", () => {
+			expect(control.toJSON()).toEqual({
+				type: ControlType.Ellipse,
+				name: "",
+				button: undefined,
+				x: 5,
+				y: 5,
+				width: 24,
+				height: 24,
+				borderWidth: 1.5,
+				nameLabel: LabelPosition.Center,
+				pressesLabel: undefined,
+				mashSpeedLabel: LabelReplacement.Name,
+			});
+		});
+
+		it("can include button reference", () => {
+			control.button = new NormalButtonReference(1);
+			expect(control.toJSON().button).toEqual({
+				type: ButtonType.Normal,
+				index: 1,
+			});
+		});
 	});
 });

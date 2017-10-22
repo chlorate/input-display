@@ -1,10 +1,12 @@
 import {NormalButtonReference} from "../config/normal-button-reference";
 import {ButtonType} from "../controller/json/button-json";
 import {cloneControl, parseControlJSON} from "./control.factory";
-import {ControlType} from "./json/control-json";
+import {EllipseControl} from "./ellipse-control";
+import {ControlJSON, ControlType} from "./json/control-json";
 import {LabelPosition} from "./label-position";
+import {RectangleControl} from "./rectangle-control";
 
-function makeJSON() {
+function makeJSON(): ControlJSON {
 	return {
 		type: ControlType.Ellipse,
 		name: "name",
@@ -28,6 +30,7 @@ describe("parseControlJSON", () => {
 
 	it("can create a EllipseControl", () => {
 		const control = parseControlJSON(json);
+		expect(control instanceof EllipseControl).toBe(true);
 		expect(control.name).toBe("name");
 		expect(control.button).toBeUndefined();
 		expect(control.x).toBe(0);
@@ -47,6 +50,12 @@ describe("parseControlJSON", () => {
 		};
 		const control = parseControlJSON(json);
 		expect(control.button instanceof NormalButtonReference).toBe(true);
+	});
+
+	it("can create a RectangleControl", () => {
+		json.type = ControlType.Rectangle;
+		const control = parseControlJSON(json);
+		expect(control instanceof RectangleControl).toBe(true);
 	});
 });
 

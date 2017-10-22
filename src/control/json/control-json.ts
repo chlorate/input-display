@@ -7,18 +7,26 @@ import {LabelReplacement, sortedLabelReplacements} from "../label-replacement";
  */
 export enum ControlType {
 	Ellipse = "ellipse",
+	Rectangle = "rectangle",
 }
 
 /**
  * JSON representations of all Control subclasses.
  */
-export type ControlJSON = EllipseControlJSON;
+export type ControlJSON = EllipseControlJSON | RectangleControlJSON;
 
 /**
  * A JSON representation of a EllipseControl.
  */
 export interface EllipseControlJSON extends BaseControlJSON {
 	type: ControlType.Ellipse;
+}
+
+/**
+ * A JSON representation of a RectangleControl.
+ */
+export interface RectangleControlJSON extends BaseControlJSON {
+	type: ControlType.Rectangle;
 }
 
 /**
@@ -64,7 +72,8 @@ export function isControlJSON(input: any): input is ControlJSON {
 			sortedLabelReplacements.indexOf(input.mashSpeedLabel) >= 0
 		) &&
 		(
-			input.type === ControlType.Ellipse // || ...
+			input.type === ControlType.Ellipse ||
+			input.type === ControlType.Rectangle
 		)
 	);
 }

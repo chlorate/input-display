@@ -5,6 +5,7 @@ import {connect} from "inferno-mobx";
 import {Config} from "../../config/config";
 import {EllipseControl} from "../../control/ellipse-control";
 import {ControlType} from "../../control/json/control-json";
+import {RectangleControl} from "../../control/rectangle-control";
 import {Store} from "../../storage/store";
 import {Event} from "../event";
 
@@ -43,7 +44,7 @@ export class AddControlFormComponent extends Component<Props, State> {
 							onChange={linkEvent(this, handleChange)}
 						>
 							<option value={ControlType.Ellipse}>Button (circle/ellipse)</option>
-							<option value="">Button (square/rectangle)</option>
+							<option value={ControlType.Rectangle}>Button (square/rectangle)</option>
 							<option value="">Button (triangle)</option>
 							<option value="">Button (d-pad)</option>
 							<option value="">Analog stick</option>
@@ -66,9 +67,14 @@ function handleChange(component: AddControlFormComponent, event): void {
 
 function handleSubmit(component: AddControlFormComponent, event): void {
 	event.preventDefault();
+
+	const controls = component.props.config.controls;
 	switch (component.state.type) {
 		case ControlType.Ellipse:
-			component.props.config.controls.push(new EllipseControl());
+			controls.push(new EllipseControl());
+			break;
+		case ControlType.Rectangle:
+			controls.push(new RectangleControl());
 			break;
 	}
 	component.props.events.emit(Event.AddControl);

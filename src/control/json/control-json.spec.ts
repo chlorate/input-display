@@ -6,17 +6,20 @@ import {ControlType, isControlJSON} from "./control-json";
 describe("isControlJSON", () => {
 	let json;
 
+	beforeEach(() => {
+		json = {
+			name: "name",
+			x: 1,
+			y: 2,
+			width: 3,
+			height: 4,
+			borderWidth: 5,
+		};
+	});
+
 	describe("EllipseControlJSON", () => {
 		beforeEach(() => {
-			json = {
-				type: ControlType.Ellipse,
-				name: "name",
-				x: 1,
-				y: 2,
-				width: 3,
-				height: 4,
-				borderWidth: 5,
-			};
+			json.type = ControlType.Ellipse;
 		});
 
 		it("should return true if only required properties are set", () => {
@@ -85,6 +88,13 @@ describe("isControlJSON", () => {
 		it("should return false if mashSpeedLabel is invalid", () => {
 			json.mashSpeedLabel = "bad";
 			expect(isControlJSON(json)).toBe(false);
+		});
+	});
+
+	describe("RectangleControlJSON", () => {
+		it("should return true if valid", () => {
+			json.type = ControlType.Rectangle;
+			expect(isControlJSON(json)).toBe(true);
 		});
 	});
 

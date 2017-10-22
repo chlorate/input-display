@@ -6,6 +6,7 @@ import {Config} from "../../config/config";
 import {Control} from "../../control/control";
 import {cloneControl} from "../../control/control.factory";
 import {EllipseControl} from "../../control/ellipse-control";
+import {RectangleControl} from "../../control/rectangle-control";
 import {clampIndex} from "../../math/util";
 import {Store} from "../../storage/store";
 import {Event} from "../event";
@@ -71,6 +72,8 @@ export class EditControlFieldsetComponent extends Component<Props, State> {
 								{`${i + 1}. `}
 								{control instanceof EllipseControl && control.width === control.height && "Button (circle)"}
 								{control instanceof EllipseControl && control.width !== control.height && "Button (ellipse)"}
+								{control instanceof RectangleControl && control.width === control.height && "Button (square)"}
+								{control instanceof RectangleControl && control.width !== control.height && "Button (rectangle)"}
 								{control.name ? ` - ${control.name}` : ""}
 							</option>
 						))}

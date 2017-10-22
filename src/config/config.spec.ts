@@ -1,7 +1,7 @@
+import {EllipseControl} from "../control/ellipse-control";
 import {ControlType} from "../control/json/control-json";
 import {LabelPosition} from "../control/label-position";
 import {LabelReplacement} from "../control/label-replacement";
-import {RoundButtonControl} from "../control/round-button-control";
 import {AxisReference} from "./axis-reference";
 
 import {
@@ -132,7 +132,7 @@ describe("Config", () => {
 		config.mashSpeedThreshold = 15;
 		config.labelOffsetX = 1;
 		config.labelOffsetY = -1;
-		config.controls.push(new RoundButtonControl());
+		config.controls.push(new EllipseControl());
 		config.customCss = "css";
 		expect(config.toJSON()).toEqual({
 			gamepadIndex: 1,
@@ -172,7 +172,7 @@ describe("Config", () => {
 			labelOffsetY: -1,
 			controls: [
 				{
-					type: ControlType.RoundButton,
+					type: ControlType.Ellipse,
 					name: "",
 					button: undefined,
 					x: 5,
@@ -237,7 +237,7 @@ describe("Config", () => {
 				labelOffsetY: -1,
 				controls: [
 					{
-						type: ControlType.RoundButton,
+						type: ControlType.Ellipse,
 						name: "name",
 						x: 0,
 						y: 1,
@@ -274,7 +274,7 @@ describe("Config", () => {
 			expect(config.labelOffsetX).toBe(1);
 			expect(config.labelOffsetY).toBe(-1);
 			expect(config.controls.length).toBe(1);
-			expect(config.controls[0] instanceof RoundButtonControl).toBe(true);
+			expect(config.controls[0] instanceof EllipseControl).toBe(true);
 			expect(config.customCss).toBe("css");
 		});
 

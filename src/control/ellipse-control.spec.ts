@@ -1,21 +1,21 @@
 import {NormalButtonReference} from "../config/normal-button-reference";
 import {ButtonType} from "../controller/json/button-json";
+import {EllipseControl} from "./ellipse-control";
 import {ControlType} from "./json/control-json";
 import {LabelPosition} from "./label-position";
 import {LabelReplacement} from "./label-replacement";
-import {RoundButtonControl} from "./round-button-control";
 
-describe("RoundButtonControl", () => {
+describe("EllipseControl", () => {
 	let control;
 
 	beforeEach(() => {
-		control = new RoundButtonControl();
+		control = new EllipseControl();
 	});
 
 	describe("toJSON", () => {
 		it("can return a JSON representation", () => {
 			expect(control.toJSON()).toEqual({
-				type: ControlType.RoundButton,
+				type: ControlType.Ellipse,
 				name: "",
 				button: undefined,
 				x: 5,

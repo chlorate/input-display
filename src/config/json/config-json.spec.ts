@@ -43,7 +43,7 @@ describe("ConfigJSON", () => {
 			labelOffsetY: -1,
 			controls: [
 				{
-					type: ControlType.RoundButton,
+					type: ControlType.Ellipse,
 					name: "",
 					button: {
 						type: ButtonType.Normal,

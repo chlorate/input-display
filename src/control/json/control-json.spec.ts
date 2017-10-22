@@ -6,10 +6,10 @@ import {ControlType, isControlJSON} from "./control-json";
 describe("isControlJSON", () => {
 	let json;
 
-	describe("RoundButtonControlJSON", () => {
+	describe("EllipseControlJSON", () => {
 		beforeEach(() => {
 			json = {
-				type: ControlType.RoundButton,
+				type: ControlType.Ellipse,
 				name: "name",
 				x: 1,
 				y: 2,

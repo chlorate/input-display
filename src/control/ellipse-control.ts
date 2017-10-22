@@ -1,16 +1,16 @@
 import {Control} from "./control";
-import {ControlType, RoundButtonControlJSON} from "./json/control-json";
+import {ControlType, EllipseControlJSON} from "./json/control-json";
 
 /**
  * A control that represents a button shaped like a circle or ellipse.
  */
-export class RoundButtonControl extends Control {
+export class EllipseControl extends Control {
 	/**
 	 * Returns a JSON representation of this control.
 	 */
-	public toJSON(): RoundButtonControlJSON {
+	public toJSON(): EllipseControlJSON {
 		return {
-			type: ControlType.RoundButton,
+			type: ControlType.Ellipse,
 			name: this.name,
 			button: this.button ? this.button.toJSON() : undefined,
 			x: this.x,

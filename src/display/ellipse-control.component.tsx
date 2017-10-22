@@ -1,5 +1,5 @@
 import {connect} from "inferno-mobx";
-import {RoundButtonControl} from "../control/round-button-control";
+import {EllipseControl} from "../control/ellipse-control";
 import {Controller} from "../controller/controller";
 import {Store} from "../storage/store";
 import {ControlGroupComponent} from "./control-group.component";
@@ -7,13 +7,13 @@ import {ControlLabelComponent} from "./control-label.component";
 
 interface Props {
 	controller: Controller;
-	control: RoundButtonControl;
+	control: EllipseControl;
 }
 
 /**
- * Draws a RoundButtonControl.
+ * Draws a EllipseControl.
  */
-export const RoundButtonControlComponent = connect([Store.Controller], ((props: Props) => {
+export const EllipseControlComponent = connect([Store.Controller], ((props: Props) => {
 	return (
 		<ControlGroupComponent control={props.control}>
 			<ellipse

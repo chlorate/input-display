@@ -6,7 +6,7 @@ import {LabelPosition} from "./label-position";
 
 function makeJSON() {
 	return {
-		type: ControlType.RoundButton,
+		type: ControlType.Ellipse,
 		name: "name",
 		x: 0,
 		y: 1,
@@ -26,7 +26,7 @@ describe("parseControlJSON", () => {
 		json = makeJSON();
 	});
 
-	it("can create a RoundButtonControl", () => {
+	it("can create a EllipseControl", () => {
 		const control = parseControlJSON(json);
 		expect(control.name).toBe("name");
 		expect(control.button).toBeUndefined();
@@ -40,7 +40,7 @@ describe("parseControlJSON", () => {
 		expect(control.mashSpeedLabel).toBe(LabelPosition.Center);
 	});
 
-	it("can create a RoundButtonControl with a button reference", () => {
+	it("can create a EllipseControl with a button reference", () => {
 		json.button = {
 			type: ButtonType.Normal,
 			index: 5,

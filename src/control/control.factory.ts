@@ -1,7 +1,7 @@
 import {parseButtonReferenceJSON} from "../config/button-reference.factory";
 import {Control} from "./control";
+import {EllipseControl} from "./ellipse-control";
 import {ControlJSON, ControlType} from "./json/control-json";
-import {RoundButtonControl} from "./round-button-control";
 
 /**
  * Creates a control from its JSON representation.
@@ -9,8 +9,8 @@ import {RoundButtonControl} from "./round-button-control";
 export function parseControlJSON(json: ControlJSON): Control {
 	let control: Control;
 	switch (json.type) {
-		case ControlType.RoundButton:
-			control = new RoundButtonControl();
+		case ControlType.Ellipse:
+			control = new EllipseControl();
 			break;
 		default:
 			throw new TypeError("invalid control JSON");

@@ -5,7 +5,7 @@ import {connect} from "inferno-mobx";
 import {Config} from "../../config/config";
 import {Control} from "../../control/control";
 import {cloneControl} from "../../control/control.factory";
-import {RoundButtonControl} from "../../control/round-button-control";
+import {EllipseControl} from "../../control/ellipse-control";
 import {clampIndex} from "../../math/util";
 import {Store} from "../../storage/store";
 import {Event} from "../event";
@@ -70,7 +70,7 @@ export class EditControlFieldsetComponent extends Component<Props, State> {
 							<option value={i}>
 								{`${i + 1} - `}
 								{control.name ? `${control.name} - ` : ""}
-								{control instanceof RoundButtonControl && "Round button"}
+								{control instanceof EllipseControl && "Ellipse button"}
 							</option>
 						))}
 					</select>

@@ -6,19 +6,19 @@ import {LabelReplacement, sortedLabelReplacements} from "../label-replacement";
  * Type values for distinguishing Control subclass JSON representations.
  */
 export enum ControlType {
-	RoundButton = "roundButton",
+	Ellipse = "ellipse",
 }
 
 /**
  * JSON representations of all Control subclasses.
  */
-export type ControlJSON = RoundButtonControlJSON;
+export type ControlJSON = EllipseControlJSON;
 
 /**
- * A JSON representation of a RoundButtonControl.
+ * A JSON representation of a EllipseControl.
  */
-export interface RoundButtonControlJSON extends BaseControlJSON {
-	type: ControlType.RoundButton;
+export interface EllipseControlJSON extends BaseControlJSON {
+	type: ControlType.Ellipse;
 }
 
 /**
@@ -64,7 +64,7 @@ export function isControlJSON(input: any): input is ControlJSON {
 			sortedLabelReplacements.indexOf(input.mashSpeedLabel) >= 0
 		) &&
 		(
-			input.type === ControlType.RoundButton // || ...
+			input.type === ControlType.Ellipse // || ...
 		)
 	);
 }

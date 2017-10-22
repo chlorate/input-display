@@ -1,8 +1,8 @@
 import {connect} from "inferno-mobx";
 import {Config} from "../config/config";
-import {RoundButtonControl} from "../control/round-button-control";
+import {EllipseControl} from "../control/ellipse-control";
 import {Store} from "../storage/store";
-import {RoundButtonControlComponent} from "./round-button-control.component";
+import {EllipseControlComponent} from "./ellipse-control.component";
 
 interface Props {
 	config: Config;
@@ -18,8 +18,8 @@ export const DisplayComponent = connect([Store.Config], ({config}: Props) => (
 		height={config.displayHeight}
 	>
 		{config.controls.map((control, i) => {
-			if (control instanceof RoundButtonControl) {
-				return <RoundButtonControlComponent control={control} />;
+			if (control instanceof EllipseControl) {
+				return <EllipseControlComponent control={control} />;
 			}
 		})}
 	</svg>

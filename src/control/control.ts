@@ -21,7 +21,7 @@ export const defaultSize = 24;
 
 export const minBorderWidth = 0;
 export const maxBorderWidth = 1000;
-export const defaultBorderWidth = 1.5;
+export const defaultBorderWidth = 1.25;
 
 /**
  * An abstract component that is shown in the display.

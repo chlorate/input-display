@@ -130,7 +130,7 @@ export class ControlFieldsetComponent extends Component<Props, {}> {
 						value={control.borderWidth}
 						min={minBorderWidth}
 						max={maxBorderWidth}
-						step={0.1}
+						step={0.25}
 						placeholder={defaultBorderWidth}
 						onChange={linkEvent(control, handleChangeBorderWidth)}
 					/>

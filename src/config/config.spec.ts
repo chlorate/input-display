@@ -179,7 +179,7 @@ describe("Config", () => {
 					y: 5,
 					width: 24,
 					height: 24,
-					borderWidth: 1.5,
+					borderWidth: 1.25,
 					nameLabel: LabelPosition.Center,
 					pressesLabel: undefined,
 					mashSpeedLabel: LabelReplacement.Name,

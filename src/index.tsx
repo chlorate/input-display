@@ -89,6 +89,9 @@ class IndexComponent extends Component<{}, State> {
 	}
 }
 
+// TODO: enable for development only
+useStrict(false);
+
 render(
 	<IndexComponent />,
 	document.getElementsByTagName("main")[0],

@@ -1,5 +1,6 @@
 import {linkEvent} from "inferno";
 import {connect} from "inferno-mobx";
+import {action} from "mobx";
 import {Palette} from "../../config/palette";
 import {ColorInputComponent} from "../field/color-input.component";
 
@@ -43,14 +44,14 @@ export const PaletteFieldsetComponent = connect((props: Props) => (
 	</fieldset>
 ));
 
-function handleChangeBorder(palette: Palette, event): void {
+const handleChangeBorder = action((palette: Palette, event): void => {
 	palette.border = event.target.value;
-}
+});
 
-function handleChangeFill(palette: Palette, event): void {
+const handleChangeFill = action((palette: Palette, event): void => {
 	palette.fill = event.target.value;
-}
+});
 
-function handleChangeLabel(palette: Palette, event): void {
+const handleChangeLabel = action((palette: Palette, event): void => {
 	palette.label = event.target.value;
-}
+});

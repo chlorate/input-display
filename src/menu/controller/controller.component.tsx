@@ -1,5 +1,6 @@
 import {linkEvent} from "inferno";
 import {connect} from "inferno-mobx";
+import {action} from "mobx";
 import {Controller} from "../../controller/controller";
 import {Store} from "../../storage/store";
 import {AxisRowComponent} from "./axis-row.component";
@@ -104,10 +105,10 @@ export const ControllerComponent = connect([Store.Controller], ({controller}: Pr
 	</section>
 ));
 
-function handleClickResetButtons(controller: Controller): void {
+const handleClickResetButtons = action((controller: Controller): void => {
 	controller.resetButtons();
-}
+});
 
-function handleClickResetAxes(controller: Controller): void {
+const handleClickResetAxes = action((controller: Controller): void => {
 	controller.resetAxes();
-}
+});

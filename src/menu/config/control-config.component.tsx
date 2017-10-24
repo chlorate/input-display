@@ -1,5 +1,6 @@
 import {linkEvent} from "inferno";
 import {connect} from "inferno-mobx";
+import {action} from "mobx";
 import {Store} from "../../storage/store";
 import {NumberInputComponent} from "../field/number-input.component";
 import {AddControlFormComponent} from "./add-control-form.component";
@@ -88,14 +89,14 @@ export const ControlConfigComponent = connect([Store.Config], ({config}: Props) 
 	</section>
 ));
 
-function handleChangeMashSpeedThreshold(config: Config, event): void {
+const handleChangeMashSpeedThreshold = action((config: Config, event): void => {
 	config.mashSpeedThreshold = event.target.value || defaultMashSpeedThreshold;
-}
+});
 
-function handleChangeLabelOffsetX(config: Config, event): void {
+const handleChangeLabelOffsetX = action((config: Config, event): void => {
 	config.labelOffsetX = event.target.value || defaultLabelOffset;
-}
+});
 
-function handleChangeLabelOffsetY(config: Config, event): void {
+const handleChangeLabelOffsetY = action((config: Config, event): void => {
 	config.labelOffsetY = event.target.value || defaultLabelOffset;
-}
+});

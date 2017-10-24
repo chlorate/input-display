@@ -1,5 +1,6 @@
 import {linkEvent} from "inferno";
 import {connect} from "inferno-mobx";
+import {action} from "mobx";
 import {AxisReference} from "../../config/axis-reference";
 import {AxisSelectComponent} from "./axis-select.component";
 
@@ -37,10 +38,10 @@ export const AxisReferenceSelectComponent = connect((props: Props) => (
 	</div>
 ));
 
-function handleChangeIndex(reference: AxisReference, event): void {
+const handleChangeIndex = action((reference: AxisReference, event): void => {
 	reference.index = event.target.value;
-}
+});
 
-function handleChangeInverted(reference: AxisReference, event): void {
+const handleChangeInverted = action((reference: AxisReference, event): void => {
 	reference.inverted = event.target.checked;
-}
+});

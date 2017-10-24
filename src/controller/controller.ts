@@ -1,4 +1,4 @@
-import {observable} from "mobx";
+import {action, observable} from "mobx";
 import {Config} from "../config/config";
 import {getGamepads} from "../gamepad/service";
 import {almostEqual} from "../math/util";
@@ -74,7 +74,7 @@ export class Controller {
 	/**
 	 * Assigns properties from a JSON representation of this controller.
 	 */
-	public loadJSON(json: any): void {
+	@action public loadJSON(json: any): void {
 		if (!isControllerJSON(json)) {
 			throw new TypeError("invalid controller JSON");
 		}
@@ -86,7 +86,7 @@ export class Controller {
 	/**
 	 * Clears all axes and re-reads them from the gamepad.
 	 */
-	public resetAxes(): void {
+	@action public resetAxes(): void {
 		this._axes = [];
 		this.update();
 	}
@@ -94,7 +94,7 @@ export class Controller {
 	/**
 	 * Clears all buttons and re-reads them from the gamepad.
 	 */
-	public resetButtons(): void {
+	@action public resetButtons(): void {
 		this._buttons = [];
 		this.update();
 	}
@@ -104,7 +104,7 @@ export class Controller {
 	 * state of the controller. The poll rate setting determines how often this
 	 * happens.
 	 */
-	public poll(): void {
+	@action public poll(): void {
 		this.update();
 
 		// setTimeout drifts a bit. Set the delay so the next call happens at
@@ -130,7 +130,7 @@ export class Controller {
 	 * Performs a full update of the controller state if the selected gamepad in
 	 * the config exists.
 	 */
-	private update(): void {
+	@action private update(): void {
 		const gamepads = getGamepads();
 		if (gamepads.length <= this.config.gamepadIndex) {
 			this.clearGamepad();
@@ -154,7 +154,7 @@ export class Controller {
 	/**
 	 * Clears the stored gamepad ID and mapping.
 	 */
-	private clearGamepad(): void {
+	@action private clearGamepad(): void {
 		this._id = undefined;
 		this._mapping = undefined;
 	}
@@ -162,7 +162,7 @@ export class Controller {
 	/**
 	 * Stores the gamepad ID and mapping.
 	 */
-	private updateGamepad(gamepad: Gamepad): void {
+	@action private updateGamepad(gamepad: Gamepad): void {
 		this._id = gamepad.id;
 		this._mapping = gamepad.mapping;
 	}
@@ -170,7 +170,7 @@ export class Controller {
 	/**
 	 * Reads all axis values, creating axes if necessary.
 	 */
-	private updateAxes(gamepad: Gamepad): void {
+	@action private updateAxes(gamepad: Gamepad): void {
 		// Ignore if all axes read zero which means the gamepad hasn't been
 		// fully activated yet.
 		const active = gamepad.axes.some((value) => value !== 0);
@@ -187,7 +187,7 @@ export class Controller {
 	/**
 	 * Reads all normal button pressed states, creating buttons if necessary.
 	 */
-	private updateButtons(gamepad: Gamepad): void {
+	@action private updateButtons(gamepad: Gamepad): void {
 		gamepad.buttons.forEach((gamepadButton, i) => {
 			const button = this.findOrCreateNormalButton(i);
 			button.pressed = gamepadButton.pressed;
@@ -198,7 +198,7 @@ export class Controller {
 	 * Finds and returns the normal button having a certain index, creating it
 	 * if necessary.
 	 */
-	private findOrCreateNormalButton(index: number): NormalButton {
+	@action private findOrCreateNormalButton(index: number): NormalButton {
 		// TODO: Array.find doesn't consider type guards:
 		// https://github.com/Microsoft/TypeScript/issues/18112
 		let button = this.buttons.find((b) => b instanceof NormalButton && b.index === index) as NormalButton | undefined;
@@ -214,7 +214,7 @@ export class Controller {
 	 * Reads the d-pad button pressed states from a selected axis if the d-pad
 	 * mapping is set to single axis. Creates d-pad buttons if necessary.
 	 */
-	private updateDpadSingleAxis(gamepad: Gamepad) {
+	@action private updateDpadSingleAxis(gamepad: Gamepad) {
 		if (this.config.dpadAxisIndex === undefined || this.axes.length <= this.config.dpadAxisIndex) {
 			return;
 		}
@@ -230,7 +230,7 @@ export class Controller {
 	 * Reads the d-pad button pressed states from selected axes if the d-pad
 	 * mapping is set to dual axes. Creates d-pad buttons if necessary.
 	 */
-	private updateDpadDualAxes(gamepad: Gamepad): void {
+	@action private updateDpadDualAxes(gamepad: Gamepad): void {
 		if (!this.config.dpadXAxis || !this.config.dpadYAxis) {
 			return;
 		}
@@ -258,7 +258,7 @@ export class Controller {
 	 * Finds and returns the d-pad button having a certain direction, creating
 	 * it if necessary.
 	 */
-	private findOrCreateDpadButton(direction: Direction): DpadButton {
+	@action private findOrCreateDpadButton(direction: Direction): DpadButton {
 		// TODO: Array.find doesn't consider type guards:
 		// https://github.com/Microsoft/TypeScript/issues/18112
 		let button = this.buttons.find((b) => b instanceof DpadButton && b.direction === direction) as DpadButton | undefined;
@@ -274,7 +274,7 @@ export class Controller {
 	 * Sorts the buttons if a new button was recently added. Normal buttons
 	 * first sorted by index, then d-pad buttons sorted by direction.
 	 */
-	private sortButtons(): void {
+	@action private sortButtons(): void {
 		if (this.sorted) {
 			return;
 		}

@@ -1,5 +1,6 @@
 import {linkEvent} from "inferno";
 import {connect} from "inferno-mobx";
+import {action} from "mobx";
 import {Config, DefaultColors} from "../../config/config";
 import {Store} from "../../storage/store";
 import {ColorInputComponent} from "../field/color-input.component";
@@ -61,6 +62,6 @@ export const ColorConfigComponent = connect([Store.Config], ({config}: Props) =>
 	</section>
 ));
 
-function handleChange(config: Config, event): void {
+const handleChange = action((config: Config, event): void => {
 	config.backgroundColor = event.target.value;
-}
+});

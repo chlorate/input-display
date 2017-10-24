@@ -1,5 +1,6 @@
 import {linkEvent} from "inferno";
 import {connect} from "inferno-mobx";
+import {action} from "mobx";
 import {Config, defaultFontSize, maxFontNameLength, maxFontSize, minFontSize} from "../../config/config";
 import {Store} from "../../storage/store";
 import {CheckboxInputComponent} from "../field/checkbox-input.component";
@@ -59,22 +60,22 @@ export const FontConfigComponent = connect([Store.Config], ({config}: Props) => 
 	</section>
 ));
 
-function handleInputName(config: Config, event): void {
+const handleInputName = action((config: Config, event): void => {
 	config.fontName = event.target.value;
-}
+});
 
-function handleClickBold(config: Config, event): void {
+const handleClickBold = action((config: Config, event): void => {
 	config.fontBold = event.target.checked;
-}
+});
 
-function handleClickItalic(config: Config, event): void {
+const handleClickItalic = action((config: Config, event): void => {
 	config.fontItalic = event.target.checked;
-}
+});
 
-function handleClickShadow(config: Config, event): void {
+const handleClickShadow = action((config: Config, event): void => {
 	config.fontShadow = event.target.checked;
-}
+});
 
-function handleChangeSize(config: Config, event): void {
+const handleChangeSize = action((config: Config, event): void => {
 	config.fontSize = event.target.value || defaultFontSize;
-}
+});

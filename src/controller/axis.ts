@@ -1,4 +1,4 @@
-import {observable} from "mobx";
+import {computed, observable} from "mobx";
 import {clamp} from "../math/util";
 import {AxisJSON} from "./json/axis-json";
 
@@ -43,7 +43,7 @@ export class Axis {
 		this.maxValue = Math.max(this.maxValue, value);
 	}
 
-	get invertedValue(): number {
+	@computed get invertedValue(): number {
 		return -this.value;
 	}
 

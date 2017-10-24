@@ -1,5 +1,6 @@
 import {linkEvent} from "inferno";
 import {connect} from "inferno-mobx";
+import {action} from "mobx";
 import {AxisReference} from "../../config/axis-reference";
 import {Config} from "../../config/config";
 import {Controller} from "../../controller/controller";
@@ -86,7 +87,7 @@ export const DpadMappingFieldsetComponent = connect([Store.Config, Store.Control
 	);
 });
 
-function handleChangeMapping(props: Props, event): void {
+const handleChangeMapping = action((props: Props, event): void => {
 	switch (event.target.value) {
 		case Mapping.Buttons:
 			props.config.clearDpadMapping();
@@ -102,8 +103,8 @@ function handleChangeMapping(props: Props, event): void {
 			);
 			break;
 	}
-}
+});
 
-function handleChangeIndex(config: Config, event): void {
+const handleChangeIndex = action((config: Config, event): void => {
 	config.dpadAxisIndex = event.target.value;
-}
+});

@@ -1,3 +1,4 @@
+import {computed} from "mobx";
 import {Button} from "./button";
 import {Direction} from "./direction";
 import {ButtonType, DpadButtonJSON} from "./json/button-json";
@@ -15,7 +16,7 @@ export class DpadButton extends Button {
 		this._direction = direction;
 	}
 
-	get name(): string {
+	@computed get name(): string {
 		return `D-pad ${this.direction}`;
 	}
 

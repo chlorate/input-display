@@ -1,5 +1,6 @@
 import {linkEvent} from "inferno";
 import {connect} from "inferno-mobx";
+import {action} from "mobx";
 import {Config, defaultHeight, defaultWidth, maxHeight, maxWidth, minHeight, minWidth} from "../../config/config";
 import {Store} from "../../storage/store";
 import {CheckboxInputComponent} from "../field/checkbox-input.component";
@@ -51,14 +52,14 @@ export const DisplayConfigComponent = connect([Store.Config], ({config}: Props) 
 	</section>
 ));
 
-function handleChangeWidth(config: Config, event): void {
+const handleChangeWidth = action((config: Config, event): void => {
 	config.displayWidth = event.target.value || defaultWidth;
-}
+});
 
-function handleChangeHeight(config: Config, event): void {
+const handleChangeHeight = action((config: Config, event): void => {
 	config.displayHeight = event.target.value || defaultHeight;
-}
+});
 
-function handleClickOutline(config: Config, event): void {
+const handleClickOutline = action((config: Config, event): void => {
 	config.displayOutline = event.target.checked;
-}
+});

@@ -1,6 +1,7 @@
 import {linkEvent} from "inferno";
 import Component from "inferno-component";
 import {connect} from "inferno-mobx";
+import {action} from "mobx";
 import {arraysEqual} from "../../array/util";
 import {Config} from "../../config/config";
 import {getGamepadIds} from "../../gamepad/service";
@@ -91,6 +92,6 @@ export class DeviceSelectComponent extends Component<Props, State> {
 	}
 }
 
-function handleChange(config: Config, event): void {
+const handleChange = action((config: Config, event): void => {
 	config.gamepadIndex = event.target.value;
-}
+});

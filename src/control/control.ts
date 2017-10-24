@@ -1,4 +1,4 @@
-import {observable} from "mobx";
+import {computed, observable} from "mobx";
 import {ButtonReference} from "../config/button-reference";
 import {clamp, clampInt} from "../math/util";
 import {BaseControlJSON, ControlJSON} from "./json/control-json";
@@ -80,27 +80,27 @@ export abstract class Control {
 		this._borderWidth = clamp(width, minBorderWidth, maxBorderWidth);
 	}
 
-	get leftX(): number {
+	@computed get leftX(): number {
 		return this.topY; // Same value.
 	}
 
-	get centerX(): number {
+	@computed get centerX(): number {
 		return this.width / 2;
 	}
 
-	get rightX(): number {
+	@computed get rightX(): number {
 		return this.width + this.borderWidth / 2;
 	}
 
-	get topY(): number {
+	@computed get topY(): number {
 		return -this.borderWidth / 2;
 	}
 
-	get centerY(): number {
+	@computed get centerY(): number {
 		return this.height / 2;
 	}
 
-	get bottomY(): number {
+	@computed get bottomY(): number {
 		return this.height + this.borderWidth / 2;
 	}
 

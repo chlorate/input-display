@@ -1,4 +1,4 @@
-import {observable} from "mobx";
+import {action, observable} from "mobx";
 import {ensureColor} from "../css/util";
 import {PaletteJSON} from "./json/palette-json";
 
@@ -66,7 +66,7 @@ export class Palette {
 	/**
 	 * Assigns properties from a JSON representation of a palette.
 	 */
-	public loadJSON(json: PaletteJSON): void {
+	@action public loadJSON(json: PaletteJSON): void {
 		this.border = json.border;
 		this.fill = json.fill;
 		this.label = json.label;

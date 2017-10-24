@@ -1,3 +1,4 @@
+import {computed} from "mobx";
 import {clampIndex} from "../math/util";
 import {Button} from "./button";
 import {ButtonType, NormalButtonJSON} from "./json/button-json";
@@ -16,7 +17,7 @@ export class NormalButton extends Button {
 		this._index = clampIndex(index);
 	}
 
-	get name(): string {
+	@computed get name(): string {
 		return `Button ${this.index + 1}`;
 	}
 

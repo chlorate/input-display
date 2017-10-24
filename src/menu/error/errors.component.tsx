@@ -1,5 +1,6 @@
 import {linkEvent} from "inferno";
 import {connect} from "inferno-mobx";
+import {action} from "mobx";
 import {Store} from "../../storage/store";
 
 interface Props {
@@ -37,6 +38,6 @@ interface EventProps {
 	index: number;
 }
 
-function handleClick(props: EventProps): void {
+const handleClick = action((props: EventProps): void => {
 	props.errors.splice(props.index, 1);
-}
+});

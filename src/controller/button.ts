@@ -1,4 +1,4 @@
-import {observable} from "mobx";
+import {action, computed, observable} from "mobx";
 import {clampInt} from "../math/util";
 import {secondToMilliseconds} from "../time/const";
 import {ButtonJSON} from "./json/button-json";
@@ -39,7 +39,7 @@ export abstract class Button {
 		this._presses = clampInt(presses, 0);
 	}
 
-	get mashSpeed(): number {
+	@computed get mashSpeed(): number {
 		return this.pressTimes.length;
 	}
 
@@ -55,7 +55,7 @@ export abstract class Button {
 	/**
 	 * Remove all press timestamps that are older than a certain time.
 	 */
-	private prunePressTimes(endTime: number) {
+	@action private prunePressTimes(endTime: number) {
 		while (this.pressTimes.length > 0 && this.pressTimes[0] <= endTime) {
 			this.pressTimes.shift();
 		}

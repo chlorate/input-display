@@ -1,5 +1,6 @@
 import {linkEvent} from "inferno";
 import {connect} from "inferno-mobx";
+import {action} from "mobx";
 import {Config} from "../../config/config";
 import {Store} from "../../storage/store";
 
@@ -29,6 +30,6 @@ export const AdvancedConfigComponent = connect([Store.Config], ({config}: Props)
 	</section>
 ));
 
-function handleChange(config: Config, event): void {
+const handleChange = action((config: Config, event): void => {
 	config.customCss = event.target.value;
-}
+});

@@ -2,6 +2,7 @@ import {EventEmitter} from "events";
 import {linkEvent} from "inferno";
 import Component from "inferno-component";
 import {connect} from "inferno-mobx";
+import {action} from "mobx";
 import {Config} from "../../config/config";
 import {Control} from "../../control/control";
 import {cloneControl} from "../../control/control.factory";
@@ -128,31 +129,31 @@ function handleChange(component: EditControlFieldsetComponent, event): void {
 	component.index = event.target.value;
 }
 
-function handleClickClone(component: EditControlFieldsetComponent): void {
+const handleClickClone = action((component: EditControlFieldsetComponent): void => {
 	const controls = component.props.config.controls;
 	controls.push(cloneControl(controls[component.index]));
 	component.props.events.emit(Event.AddControl);
-}
+});
 
-function handleClickMoveUp(component: EditControlFieldsetComponent): void {
+const handleClickMoveUp = action((component: EditControlFieldsetComponent): void => {
 	swap(component.props.config.controls, component.index - 1, component.index);
 	component.index--;
-}
+});
 
-function handleClickMoveDown(component: EditControlFieldsetComponent): void {
+const handleClickMoveDown = action((component: EditControlFieldsetComponent): void => {
 	swap(component.props.config.controls, component.index, component.index + 1);
 	component.index++;
-}
+});
 
-function swap(controls: Control[], x: number, y: number): void {
+const swap = action((controls: Control[], x: number, y: number): void => {
 	[controls[x], controls[y]] = [controls[y], controls[x]];
-}
+});
 
-function handleClickDelete(component: EditControlFieldsetComponent): void {
+const handleClickDelete = action((component: EditControlFieldsetComponent): void => {
 	const index = component.index;
 	if (component.index === component.props.config.controls.length - 1) {
 		// Keep in bounds if deleting last control.
 		component.index--;
 	}
 	component.props.config.controls.splice(index, 1);
-}
+});

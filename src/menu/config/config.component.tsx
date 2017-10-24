@@ -1,6 +1,7 @@
 import {linkEvent} from "inferno";
 import Component from "inferno-component";
 import {connect} from "inferno-mobx";
+import {action} from "mobx";
 import {Config} from "../../config/config";
 import {loadFile, saveFile} from "../../storage/file";
 import {Store} from "../../storage/store";
@@ -117,7 +118,7 @@ export class ConfigComponent extends Component<Props, State> {
 	}
 }
 
-function handleChangeFile(component: ConfigComponent): void {
+const handleChangeFile = action((component: ConfigComponent): void => {
 	if (component.fileInput && component.fileInput.files) {
 		loadFile(component.fileInput.files[0], component.props.config)
 			.catch((error: string) => {
@@ -130,7 +131,7 @@ function handleChangeFile(component: ConfigComponent): void {
 				}
 			});
 	}
-}
+});
 
 function handleClickOpen(component: ConfigComponent): void {
 	if (component.fileInput) {

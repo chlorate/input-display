@@ -2,6 +2,7 @@ import {EventEmitter} from "events";
 import {linkEvent} from "inferno";
 import Component from "inferno-component";
 import {connect} from "inferno-mobx";
+import {action} from "mobx";
 import {Config} from "../../config/config";
 import {EllipseControl} from "../../control/ellipse-control";
 import {ControlType} from "../../control/json/control-json";
@@ -65,7 +66,7 @@ function handleChange(component: AddControlFormComponent, event): void {
 	component.type = event.target.value;
 }
 
-function handleSubmit(component: AddControlFormComponent, event): void {
+const handleSubmit = action((component: AddControlFormComponent, event): void => {
 	event.preventDefault();
 
 	const controls = component.props.config.controls;
@@ -78,4 +79,4 @@ function handleSubmit(component: AddControlFormComponent, event): void {
 			break;
 	}
 	component.props.events.emit(Event.AddControl);
-}
+});

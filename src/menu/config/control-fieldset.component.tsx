@@ -2,6 +2,7 @@ import EventEmitter from "events";
 import {linkEvent} from "inferno";
 import Component from "inferno-component";
 import {connect} from "inferno-mobx";
+import {action} from "mobx";
 import {ButtonReference} from "../../config/button-reference";
 import {Control} from "../../control/control";
 import {Store} from "../../storage/store";
@@ -173,42 +174,42 @@ export class ControlFieldsetComponent extends Component<Props, {}> {
 	}
 }
 
-function handleInputName(control: Control, event): void {
+const handleInputName = action((control: Control, event): void => {
 	control.name = event.target.value;
-}
+});
 
-function handleChangeButton(control: Control, reference?: ButtonReference): void {
+const handleChangeButton = action((control: Control, reference?: ButtonReference): void => {
 	control.button = reference;
-}
+});
 
-function handleChangeX(control: Control, event): void {
+const handleChangeX = action((control: Control, event): void => {
 	control.x = event.target.value === "" ? defaultPosition : event.target.value;
-}
+});
 
-function handleChangeY(control: Control, event): void {
+const handleChangeY = action((control: Control, event): void => {
 	control.y = event.target.value === "" ? defaultPosition : event.target.value;
-}
+});
 
-function handleChangeWidth(control: Control, event): void {
+const handleChangeWidth = action((control: Control, event): void => {
 	control.width = event.target.value || defaultSize;
-}
+});
 
-function handleChangeHeight(control: Control, event): void {
+const handleChangeHeight = action((control: Control, event): void => {
 	control.height = event.target.value || defaultSize;
-}
+});
 
-function handleChangeBorderWidth(control: Control, event): void {
+const handleChangeBorderWidth = action((control: Control, event): void => {
 	control.borderWidth = event.target.value === "" ? defaultBorderWidth : event.target.value;
-}
+});
 
-function handleChangeNameLabel(control: Control, event): void {
+const handleChangeNameLabel = action((control: Control, event): void => {
 	control.nameLabel = event.target.value || undefined;
-}
+});
 
-function handleChangePressesLabel(control: Control, event): void {
+const handleChangePressesLabel = action((control: Control, event): void => {
 	control.pressesLabel = event.target.value || undefined;
-}
+});
 
-function handleChangeMashSpeedLabel(control: Control, event): void {
+const handleChangeMashSpeedLabel = action((control: Control, event): void => {
 	control.mashSpeedLabel = event.target.value || undefined;
-}
+});

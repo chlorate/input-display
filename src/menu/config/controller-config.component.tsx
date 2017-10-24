@@ -1,5 +1,6 @@
 import {linkEvent} from "inferno";
 import {connect} from "inferno-mobx";
+import {action} from "mobx";
 import {Config, defaultPollRate, maxPollRate, minPollRate} from "../../config/config";
 import {Store} from "../../storage/store";
 import {DeviceSelectComponent} from "../field/device-select.component";
@@ -40,6 +41,6 @@ export const ControllerConfigComponent = connect([Store.Config], ({config}: Prop
 	</section>
 ));
 
-function handleChange(config: Config, event): void {
+const handleChange = action((config: Config, event): void => {
 	config.pollRate = event.target.value || defaultPollRate;
-}
+});

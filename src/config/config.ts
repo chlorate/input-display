@@ -1,4 +1,4 @@
-import {observable} from "mobx";
+import {action, observable} from "mobx";
 import {Control} from "../control/control";
 import {parseControlJSON} from "../control/control.factory";
 import {ensureColor} from "../css/util";
@@ -256,7 +256,7 @@ export class Config {
 	/**
 	 * Assigns properties from a JSON representation of a config object.
 	 */
-	public loadJSON(json: any): void {
+	@action public loadJSON(json: any): void {
 		if (!isConfigJSON(json)) {
 			throw new TypeError("invalid config JSON");
 		}
@@ -295,7 +295,7 @@ export class Config {
 	 * Sets settings related to the d-pad dual axes mapping and clears all other
 	 * d-pad mapping settings to ensure only the one mapping is used.
 	 */
-	public setDpadDualAxes(x: AxisReference, y: AxisReference) {
+	@action public setDpadDualAxes(x: AxisReference, y: AxisReference) {
 		this.clearDpadMapping();
 		this._dpadXAxis = x;
 		this._dpadYAxis = y;
@@ -304,7 +304,7 @@ export class Config {
 	/**
 	 * Clears all settings related to d-pad mappings.
 	 */
-	public clearDpadMapping() {
+	@action public clearDpadMapping() {
 		this._dpadAxisIndex = undefined;
 		this._dpadXAxis = undefined;
 		this._dpadYAxis = undefined;

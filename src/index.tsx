@@ -2,7 +2,7 @@ import EventEmitter from "events";
 import {render} from "inferno";
 import Component from "inferno-component";
 import {Provider} from "inferno-mobx";
-import {observable} from "mobx";
+import {action, observable, useStrict} from "mobx";
 import {Config} from "./config/config";
 import {Controller} from "./controller/controller";
 import {DisplayComponent} from "./display/display.component";
@@ -38,7 +38,7 @@ class IndexComponent extends Component<{}, State> {
 		};
 	}
 
-	public componentDidMount(): void {
+	@action public componentDidMount(): void {
 		try {
 			loadLocalStorage(Store.Config, this.state.config);
 		} catch (exception) {

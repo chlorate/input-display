@@ -1,4 +1,4 @@
-import {observable} from "mobx";
+import {computed, observable} from "mobx";
 import {Button} from "../controller/button";
 import {Controller} from "../controller/controller";
 import {ButtonType} from "../controller/json/button-json";
@@ -18,7 +18,7 @@ export class NormalButtonReference extends ButtonReference {
 		this.index = index;
 	}
 
-	get name(): string {
+	@computed get name(): string {
 		return `Button ${this.index + 1}`;
 	}
 

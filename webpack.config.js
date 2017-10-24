@@ -49,6 +49,11 @@ module.exports = {
 		new TslintWebpackPlugin({
 			files: ["src/**/*.ts", "src/**/*.tsx"],
 		}),
+		new webpack.DefinePlugin({
+			env: {
+				development: process.env.DEVELOPMENT === "true" || false,
+			},
+		}),
 		new webpack.optimize.CommonsChunkPlugin({
 			name: "vendor",
 			minChunks: function(module) {

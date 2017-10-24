@@ -89,8 +89,9 @@ class IndexComponent extends Component<{}, State> {
 	}
 }
 
-// TODO: enable for development only
-useStrict(false);
+if (env.development) {
+	useStrict(true);
+}
 
 render(
 	<IndexComponent />,

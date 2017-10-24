@@ -28,7 +28,7 @@ export const RectangleControlComponent = connect(({control}: Props) => {
 					`H ${control.width - offset} ` +
 					`V ${control.height - offset} ` +
 					`H ${offset} ` +
-					`V ${offset}`
+					`Z`
 				}
 				stroke-width={control.borderWidth}
 			/>

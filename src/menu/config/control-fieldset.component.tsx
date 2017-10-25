@@ -5,6 +5,7 @@ import {connect} from "inferno-mobx";
 import {action} from "mobx";
 import {ButtonReference} from "../../config/button-reference";
 import {Control} from "../../control/control";
+import {defaultRotation, maxRotation, minRotation, RectangleControl} from "../../control/rectangle-control";
 import {Store} from "../../storage/store";
 import {Event} from "../event";
 import {ButtonReferenceSelectComponent} from "../field/button-reference-select.component";
@@ -46,6 +47,28 @@ export class ControlFieldsetComponent extends Component<Props, {}> {
 
 	public render() {
 		const control = this.props.control;
+
+		let extraInputs: any[] = [
+			<div className="col-6 col-spacer"></div>,
+			<div className="col-3 col-spacer"></div>,
+		];
+		if (control instanceof RectangleControl) {
+			extraInputs = [
+				<NumberInputComponent
+					className="col"
+					id="config-control-rotation"
+					label="Rotation"
+					suffix="°"
+					value={control.rotation}
+					min={minRotation}
+					max={maxRotation}
+					placeholder={defaultRotation}
+					onChange={linkEvent(control, handleChangeRotation)}
+				/>,
+				<div className="col-6 col-spacer"></div>,
+			];
+		}
+
 		return (
 			<fieldset>
 				<div className="form-row">
@@ -135,8 +158,7 @@ export class ControlFieldsetComponent extends Component<Props, {}> {
 						placeholder={defaultBorderWidth}
 						onChange={linkEvent(control, handleChangeBorderWidth)}
 					/>
-					<div className="col-6 col-spacer"></div>
-					<div className="col-3 col-spacer"></div>
+					{extraInputs}
 				</div>
 
 				<div className="form-row">
@@ -200,6 +222,10 @@ const handleChangeHeight = action((control: Control, event): void => {
 
 const handleChangeBorderWidth = action((control: Control, event): void => {
 	control.borderWidth = event.target.value === "" ? defaultBorderWidth : event.target.value;
+});
+
+const handleChangeRotation = action((control: RectangleControl, event): void => {
+	control.rotation = event.target.value || defaultRotation;
 });
 
 const handleChangeNameLabel = action((control: Control, event): void => {

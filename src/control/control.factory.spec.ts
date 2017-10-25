@@ -54,8 +54,12 @@ describe("parseControlJSON", () => {
 
 	it("can create a RectangleControl", () => {
 		json.type = ControlType.Rectangle;
+		json.rotation = 5;
 		const control = parseControlJSON(json);
 		expect(control instanceof RectangleControl).toBe(true);
+		if (control instanceof RectangleControl) {
+			expect(control.rotation).toBe(5);
+		}
 	});
 });
 

@@ -14,7 +14,9 @@ export function parseControlJSON(json: ControlJSON): Control {
 			control = new EllipseControl();
 			break;
 		case ControlType.Rectangle:
-			control = new RectangleControl();
+			const rectControl = new RectangleControl();
+			rectControl.rotation = json.rotation;
+			control = rectControl;
 			break;
 		default:
 			throw new TypeError("invalid control JSON");

@@ -27,6 +27,7 @@ export interface EllipseControlJSON extends BaseControlJSON {
  */
 export interface RectangleControlJSON extends BaseControlJSON {
 	type: ControlType.Rectangle;
+	rotation: number;
 }
 
 /**
@@ -73,7 +74,10 @@ export function isControlJSON(input: any): input is ControlJSON {
 		) &&
 		(
 			input.type === ControlType.Ellipse ||
-			input.type === ControlType.Rectangle
+			(
+				input.type === ControlType.Rectangle &&
+				typeof input.rotation === "number"
+			)
 		)
 	);
 }

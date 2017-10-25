@@ -31,6 +31,7 @@ export const RectangleControlComponent = connect(({control}: Props) => {
 					`Z`
 				}
 				stroke-width={control.borderWidth}
+				transform={`rotate(${control.rotation})`}
 			/>
 			<ControlLabelComponent control={control} />
 		</ControlGroupComponent>

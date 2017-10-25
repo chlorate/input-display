@@ -13,7 +13,7 @@ interface Props {
  */
 export const ColorInputComponent = (props: Props) => (
 	<div className={`form-group form-group-color ${props.className || ""}`}>
-		<label for={props.id}>
+		<label for={props.id} id={`${props.id}-label`}>
 			{props.label}
 		</label>
 		<div className="input-group">
@@ -34,6 +34,7 @@ export const ColorInputComponent = (props: Props) => (
 					type="color"
 					value={props.value}
 					required
+					aria-labelledby={`${props.id}-label`}
 					onInput={props.onChange}
 				/>
 			</span>

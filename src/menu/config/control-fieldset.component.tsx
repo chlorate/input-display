@@ -205,11 +205,11 @@ const handleChangeButton = action((control: Control, reference?: ButtonReference
 });
 
 const handleChangeX = action((control: Control, event): void => {
-	control.x = event.target.value === "" ? defaultPosition : event.target.value;
+	control.x = event.target.value || defaultPosition;
 });
 
 const handleChangeY = action((control: Control, event): void => {
-	control.y = event.target.value === "" ? defaultPosition : event.target.value;
+	control.y = event.target.value || defaultPosition;
 });
 
 const handleChangeWidth = action((control: Control, event): void => {
@@ -221,7 +221,7 @@ const handleChangeHeight = action((control: Control, event): void => {
 });
 
 const handleChangeBorderWidth = action((control: Control, event): void => {
-	control.borderWidth = event.target.value === "" ? defaultBorderWidth : event.target.value;
+	control.borderWidth = event.target.value || defaultBorderWidth;
 });
 
 const handleChangeRotation = action((control: RectangleControl, event): void => {

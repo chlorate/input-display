@@ -121,9 +121,9 @@ export class ConfigComponent extends Component<Props, State> {
 const handleChangeFile = action((component: ConfigComponent): void => {
 	if (component.fileInput && component.fileInput.files) {
 		loadFile(component.fileInput.files[0], component.props.config)
-			.catch((error: string) => {
+			.catch(action((error: string) => {
 				component.props.errors.push("Failed to open config file: " + error);
-			})
+			}))
 			.then(() => {
 				if (component.fileInput) {
 					// Deselect current file.

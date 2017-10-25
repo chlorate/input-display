@@ -81,7 +81,7 @@ export abstract class Control {
 	}
 
 	@computed get leftX(): number {
-		return this.topY; // Same value.
+		return this.getLeftX();
 	}
 
 	@computed get centerX(): number {
@@ -89,11 +89,11 @@ export abstract class Control {
 	}
 
 	@computed get rightX(): number {
-		return this.width + this.borderWidth / 2;
+		return this.getRightX();
 	}
 
 	@computed get topY(): number {
-		return -this.borderWidth / 2;
+		return this.getTopY();
 	}
 
 	@computed get centerY(): number {
@@ -101,10 +101,29 @@ export abstract class Control {
 	}
 
 	@computed get bottomY(): number {
-		return this.height + this.borderWidth / 2;
+		return this.getBottomY();
 	}
 
 	public abstract toJSON(): ControlJSON;
+
+	// These protected getters are for RectangleControl so it has access to the
+	// unrotated edge positions.
+
+	protected getLeftX(): number {
+		return this.getTopY(); // Same value.
+	}
+
+	protected getRightX(): number {
+		return this.width + this.borderWidth / 2;
+	}
+
+	protected getTopY(): number {
+		return -this.borderWidth / 2;
+	}
+
+	protected getBottomY(): number {
+		return this.height + this.borderWidth / 2;
+	}
 
 	protected toBaseJSON(): BaseControlJSON {
 		return {

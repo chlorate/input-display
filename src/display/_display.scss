@@ -1,10 +1,6 @@
 .display {
 	flex-shrink: 0;
 	padding: $spacer 0 $spacer $spacer;
-
-	path {
-		transform-origin: center;
-	}
 }
 
 .display-outline {

@@ -148,6 +148,7 @@ export class Controller {
 		this.updateButtons(gamepad);
 		this.updateDpadSingleAxis(gamepad);
 		this.updateDpadDualAxes(gamepad);
+		this.updateMashing();
 		this.sortButtons();
 	}
 
@@ -268,6 +269,16 @@ export class Controller {
 			this.sorted = false;
 		}
 		return button;
+	}
+
+	/**
+	 * Updates the mashing flag of all buttons based on the current mash speed
+	 * threshold in the config.
+	 */
+	@action private updateMashing(): void {
+		this.buttons.forEach((button) => {
+			button.mashing = button.mashSpeed >= this.config.mashSpeedThreshold;
+		});
 	}
 
 	/**

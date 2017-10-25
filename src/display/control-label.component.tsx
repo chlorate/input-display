@@ -121,7 +121,7 @@ export class ControlLabelComponent extends Component<Props, {}> {
 		}
 
 		let mashSpeedLabel: Label | undefined;
-		if (control.mashSpeedLabel && button && button.mashSpeed >= this.props.config.mashSpeedThreshold) {
+		if (control.mashSpeedLabel && button && button.mashing) {
 			mashSpeedLabel = {
 				className: LabelClass.MashSpeed,
 				text: `×${button.mashSpeed}`,

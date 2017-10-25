@@ -22,7 +22,7 @@ export const ControlGroupComponent = connect([Store.Config, Store.Controller], (
 	if (props.control.button) {
 		const button = props.control.button.resolve(props.controller);
 		if (button) {
-			if (button.mashSpeed >= props.config.mashSpeedThreshold) {
+			if (button.mashing) {
 				classNames.push("control-button-mashing");
 			}
 			if (button.pressed) {

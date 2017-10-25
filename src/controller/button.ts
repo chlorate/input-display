@@ -10,6 +10,7 @@ import {ButtonJSON} from "./json/button-json";
  * last second.
  */
 export abstract class Button {
+	@observable public mashing: boolean = false;
 	@observable private _pressed: boolean = false;
 	@observable private _presses: number = 0;
 	@observable private pressTimes: number[] = [];

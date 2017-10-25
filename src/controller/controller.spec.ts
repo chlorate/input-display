@@ -317,6 +317,24 @@ describe("Controller", () => {
 			});
 		}
 
+		it("should update button mashing flags", () => {
+			let now = 0;
+			spyOn(window.performance, "now").and.callFake(() => now);
+			spyOn(service, "getGamepads").and.returnValue([gamepad]);
+			config.pollRate = 10;
+			controller.poll();
+			for (let i = 0; i < 10; i++) {
+				gamepad.buttons[0].pressed = !gamepad.buttons[0].pressed;
+				now += 100;
+				jasmine.clock().tick(100);
+			}
+			expect(controller.buttons[0].mashing).toBe(true);
+			expect(controller.buttons[1].mashing).toBe(false);
+			now += 1000;
+			jasmine.clock().tick(1000);
+			expect(controller.buttons[0].mashing).toBe(false);
+		});
+
 		it("should sort buttons if new buttons are detected", () => {
 			config.dpadAxisIndex = 1;
 			spyOn(service, "getGamepads").and.returnValue([gamepad]);

@@ -81,7 +81,7 @@ export class DisplayComponent extends Component<Props, {}> {
 		if (button.pressed) {
 			z += 2;
 		}
-		if (button.mashSpeed >= this.props.config.mashSpeedThreshold) {
+		if (button.mashing) {
 			z++;
 		}
 		return z;

@@ -52,22 +52,20 @@ export const ControllerComponent = connect([Store.Controller], ({controller}: Pr
 			<p>No buttons detected.</p>
 		}
 		{controller.buttons.length > 0 &&
-			<div className="scroll">
-				<table className="table table-sm table-controller-buttons">
-					<thead>
-						<tr>
-							<th>Name</th>
-							<th className="text-center">Pressed</th>
-							<th className="text-right">Press count</th>
-							<th className="text-right">Mash speed</th>
-							<th className="text-right">Mash best</th>
-						</tr>
-					</thead>
-					<tbody>
-						{controller.buttons.map((button) => <ButtonRowComponent button={button} />)}
-					</tbody>
-				</table>
-			</div>
+			<table className="table table-sm table-controller-buttons">
+				<thead>
+					<tr>
+						<th>Name</th>
+						<th className="text-center">Pressed</th>
+						<th className="text-right">Press count</th>
+						<th className="text-right">Mash speed</th>
+						<th className="text-right">Mash best</th>
+					</tr>
+				</thead>
+				<tbody>
+					{controller.buttons.map((button) => <ButtonRowComponent button={button} />)}
+				</tbody>
+			</table>
 		}
 
 		<h2 className="h4">
@@ -85,22 +83,20 @@ export const ControllerComponent = connect([Store.Controller], ({controller}: Pr
 			<p className="m-0">No axes detected.</p>
 		}
 		{controller.axes.length > 0 &&
-			<div className="scroll m-0">
-				<table className="table table-sm table-controller-axes">
-					<thead>
-						<tr>
-							<th>Name</th>
-							<th className="text-right">Value</th>
-							<th className="text-right">Neutral</th>
-							<th className="text-right">Min</th>
-							<th className="text-right">Max</th>
-						</tr>
-					</thead>
-					<tbody>
-						{controller.axes.map((axis, i) => <AxisRowComponent axis={axis} index={i} />)}
-					</tbody>
-				</table>
-			</div>
+			<table className="table table-sm table-controller-axes m-0">
+				<thead>
+					<tr>
+						<th>Name</th>
+						<th className="text-right">Value</th>
+						<th className="text-right">Neutral</th>
+						<th className="text-right">Min</th>
+						<th className="text-right">Max</th>
+					</tr>
+				</thead>
+				<tbody>
+					{controller.axes.map((axis, i) => <AxisRowComponent axis={axis} index={i} />)}
+				</tbody>
+			</table>
 		}
 	</section>
 ));

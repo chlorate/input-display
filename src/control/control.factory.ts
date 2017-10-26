@@ -1,5 +1,6 @@
 import {parseButtonReferenceJSON} from "../config/button-reference.factory";
 import {Control} from "./control";
+import {DpadControl} from "./dpad-control";
 import {EllipseControl} from "./ellipse-control";
 import {ControlJSON, ControlType} from "./json/control-json";
 import {RectangleControl} from "./rectangle-control";
@@ -11,6 +12,11 @@ import {TriangleControl} from "./triangle-control";
 export function parseControlJSON(json: ControlJSON): Control {
 	let control: Control;
 	switch (json.type) {
+		case ControlType.Dpad:
+			const dpad = new DpadControl();
+			dpad.direction = json.direction;
+			control = dpad;
+			break;
 		case ControlType.Ellipse:
 			const ellipse = new EllipseControl();
 			ellipse.rotation = json.rotation;

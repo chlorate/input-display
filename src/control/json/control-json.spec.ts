@@ -1,4 +1,5 @@
 import {ButtonType} from "../../controller/json/button-json";
+import {Direction4} from "../../direction/direction4";
 import {Direction8} from "../../direction/direction8";
 import {LabelPosition} from "../label-position";
 import {LabelReplacement} from "../label-replacement";
@@ -18,10 +19,10 @@ describe("isControlJSON", () => {
 		};
 	});
 
-	describe("EllipseControlJSON", () => {
+	describe("DpadControlJSON", () => {
 		beforeEach(() => {
-			json.type = ControlType.Ellipse;
-			json.rotation = 6;
+			json.type = ControlType.Dpad;
+			json.direction = Direction4.Down;
 		});
 
 		it("should return true if only required properties are set", () => {
@@ -72,8 +73,8 @@ describe("isControlJSON", () => {
 			expect(isControlJSON(json)).toBe(false);
 		});
 
-		it("should return false if rotation is not numeric", () => {
-			json.rotation = "bad";
+		it("should return false if direction is not valid", () => {
+			json.direction = "bad";
 			expect(isControlJSON(json)).toBe(false);
 		});
 
@@ -94,6 +95,22 @@ describe("isControlJSON", () => {
 
 		it("should return false if mashSpeedLabel is invalid", () => {
 			json.mashSpeedLabel = "bad";
+			expect(isControlJSON(json)).toBe(false);
+		});
+	});
+
+	describe("EllipseControlJSON", () => {
+		beforeEach(() => {
+			json.type = ControlType.Ellipse;
+			json.rotation = 6;
+		});
+
+		it("should return true if valid", () => {
+			expect(isControlJSON(json)).toBe(true);
+		});
+
+		it("should return false if rotation is not numeric", () => {
+			json.rotation = "bad";
 			expect(isControlJSON(json)).toBe(false);
 		});
 	});

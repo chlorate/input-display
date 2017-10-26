@@ -1,4 +1,5 @@
 import {ButtonReferenceJSON, isButtonReferenceJSON} from "../../config/json/button-reference-json";
+import {Direction4, sortedDirection4s} from "../../direction/direction4";
 import {Direction8, sortedDirection8s} from "../../direction/direction8";
 import {LabelPosition, sortedLabelPositions} from "../label-position";
 import {LabelReplacement, sortedLabelReplacements} from "../label-replacement";
@@ -7,6 +8,7 @@ import {LabelReplacement, sortedLabelReplacements} from "../label-replacement";
  * Type values for distinguishing Control subclass JSON representations.
  */
 export enum ControlType {
+	Dpad = "dpad",
 	Ellipse = "ellipse",
 	Rectangle = "rectangle",
 	Triangle = "triangle",
@@ -15,7 +17,15 @@ export enum ControlType {
 /**
  * JSON representations of all Control subclasses.
  */
-export type ControlJSON = EllipseControlJSON | RectangleControlJSON | TriangleControlJSON;
+export type ControlJSON = DpadControlJSON | EllipseControlJSON | RectangleControlJSON | TriangleControlJSON;
+
+/**
+ * A JSON representation of a DpadControl.
+ */
+export interface DpadControlJSON extends BaseControlJSON {
+	type: ControlType.Dpad;
+	direction: Direction4;
+}
 
 /**
  * A JSON representation of a EllipseControl.
@@ -84,6 +94,10 @@ export function isControlJSON(input: any): input is ControlJSON {
 			sortedLabelReplacements.indexOf(input.mashSpeedLabel) >= 0
 		) &&
 		(
+			(
+				input.type === ControlType.Dpad &&
+				sortedDirection4s.indexOf(input.direction) >= 0
+			) ||
 			(
 				input.type === ControlType.Ellipse &&
 				typeof input.rotation === "number"

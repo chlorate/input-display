@@ -5,12 +5,14 @@ import {connect} from "inferno-mobx";
 import {action} from "mobx";
 import {ButtonReference} from "../../config/button-reference";
 import {Control} from "../../control/control";
+import {defaultDirection as defaultDpadDirection, DpadControl} from "../../control/dpad-control";
 import {EllipseControl} from "../../control/ellipse-control";
 import {defaultRotation, maxRotation, minRotation, RotatableControl} from "../../control/rotatable-control";
 import {defaultDirection as defaultTriangleDirection, TriangleControl} from "../../control/triangle-control";
 import {Store} from "../../storage/store";
 import {Event} from "../event";
 import {ButtonReferenceSelectComponent} from "../field/button-reference-select.component";
+import {Direction4SelectComponent} from "../field/direction4-select.component";
 import {Direction8SelectComponent} from "../field/direction8-select.component";
 import {LabelSelectComponent} from "../field/label-select.component";
 import {NumberInputComponent} from "../field/number-input.component";
@@ -53,6 +55,16 @@ export class ControlFieldsetComponent extends Component<Props, {}> {
 
 		const extraInputs: any[] = [];
 		const isCircle = control instanceof EllipseControl && control.width === control.height;
+		if (control instanceof DpadControl) {
+			extraInputs.push(
+				<Direction4SelectComponent
+					className="col"
+					id="config-control-direction"
+					direction={control.direction}
+					onChange={linkEvent(control, handleChangeDpadDirection)}
+				/>,
+			);
+		}
 		if (control instanceof RotatableControl && !isCircle) {
 			// Rotation won't have any effect if control is a circle.
 			extraInputs.push(
@@ -245,6 +257,10 @@ const handleChangeBorderWidth = action((control: Control, event): void => {
 
 const handleChangeRotation = action((control: RotatableControl, event): void => {
 	control.rotation = event.target.value || defaultRotation;
+});
+
+const handleChangeDpadDirection = action((control: DpadControl, event): void => {
+	control.direction = event.target.value || defaultDpadDirection;
 });
 
 const handleChangeTriangleDirection = action((control: TriangleControl, event): void => {

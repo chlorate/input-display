@@ -4,6 +4,7 @@ import Component from "inferno-component";
 import {connect} from "inferno-mobx";
 import {action} from "mobx";
 import {Config} from "../../config/config";
+import {DpadControl} from "../../control/dpad-control";
 import {EllipseControl} from "../../control/ellipse-control";
 import {ControlType} from "../../control/json/control-json";
 import {RectangleControl} from "../../control/rectangle-control";
@@ -48,7 +49,7 @@ export class AddControlFormComponent extends Component<Props, State> {
 							<option value={ControlType.Ellipse}>Button (circle/ellipse)</option>
 							<option value={ControlType.Rectangle}>Button (square/rectangle)</option>
 							<option value={ControlType.Triangle}>Button (triangle)</option>
-							<option value="">Button (d-pad)</option>
+							<option value={ControlType.Dpad}>Button (d-pad)</option>
 							<option value="">Analog stick</option>
 						</select>
 						<span className="input-group-btn">
@@ -72,6 +73,9 @@ const handleSubmit = action((component: AddControlFormComponent, event): void =>
 
 	const controls = component.props.config.controls;
 	switch (component.state.type) {
+		case ControlType.Dpad:
+			controls.push(new DpadControl());
+			break;
 		case ControlType.Ellipse:
 			controls.push(new EllipseControl());
 			break;

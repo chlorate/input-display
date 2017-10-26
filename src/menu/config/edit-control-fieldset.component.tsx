@@ -6,6 +6,7 @@ import {action} from "mobx";
 import {Config} from "../../config/config";
 import {Control} from "../../control/control";
 import {cloneControl} from "../../control/control.factory";
+import {DpadControl} from "../../control/dpad-control";
 import {EllipseControl} from "../../control/ellipse-control";
 import {RectangleControl} from "../../control/rectangle-control";
 import {TriangleControl} from "../../control/triangle-control";
@@ -72,6 +73,7 @@ export class EditControlFieldsetComponent extends Component<Props, State> {
 						{this.props.config.controls.map((control, i) => (
 							<option value={i}>
 								{`${i + 1}. `}
+								{control instanceof DpadControl && "Button (d-pad)"}
 								{control instanceof EllipseControl && control.width === control.height && "Button (circle)"}
 								{control instanceof EllipseControl && control.width !== control.height && "Button (ellipse)"}
 								{control instanceof RectangleControl && control.width === control.height && "Button (square)"}

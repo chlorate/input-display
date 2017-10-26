@@ -7,6 +7,8 @@ import {ButtonReference} from "../../config/button-reference";
 import {Control} from "../../control/control";
 import {EllipseControl} from "../../control/ellipse-control";
 import {defaultRotation, maxRotation, minRotation, RotatableControl} from "../../control/rotatable-control";
+import {defaultDirection as defaultTriangleDirection, TriangleControl} from "../../control/triangle-control";
+import {direction8Names, sortedDirection8s} from "../../direction/direction8";
 import {Store} from "../../storage/store";
 import {Event} from "../event";
 import {ButtonReferenceSelectComponent} from "../field/button-reference-select.component";
@@ -65,6 +67,25 @@ export class ControlFieldsetComponent extends Component<Props, {}> {
 					placeholder={defaultRotation}
 					onChange={linkEvent(control, handleChangeRotation)}
 				/>,
+			);
+		}
+		if (control instanceof TriangleControl) {
+			extraInputs.push(
+				<div class="form-group col">
+					<label for="config-control-triangle-direction">
+						Direction
+					</label>
+					<select
+						className="form-control"
+						id="config-control-triangle-direction"
+						value={control.direction}
+						onChange={linkEvent(control, handleChangeTriangleDirection)}
+					>
+						{sortedDirection8s.map((direction) => (
+							<option value={direction}>{direction8Names[direction]}</option>
+						))}
+					</select>
+				</div>,
 			);
 		}
 		switch (extraInputs.length) {
@@ -233,6 +254,10 @@ const handleChangeBorderWidth = action((control: Control, event): void => {
 
 const handleChangeRotation = action((control: RotatableControl, event): void => {
 	control.rotation = event.target.value || defaultRotation;
+});
+
+const handleChangeTriangleDirection = action((control: TriangleControl, event): void => {
+	control.direction = event.target.value || defaultTriangleDirection;
 });
 
 const handleChangeNameLabel = action((control: Control, event): void => {

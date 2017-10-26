@@ -25,3 +25,17 @@ export const sortedDirection8s: Direction8[] = [
 	Direction8.Left,
 	Direction8.UpLeft,
 ];
+
+/**
+ * Readable names for each cardinal and intermediate direction.
+ */
+export const direction8Names: {[key: string]: string} = {
+	[Direction8.Up]: "Up",
+	[Direction8.UpRight]: "Up right",
+	[Direction8.Right]: "Right",
+	[Direction8.DownRight]: "Down right",
+	[Direction8.Down]: "Down",
+	[Direction8.DownLeft]: "Down left",
+	[Direction8.Left]: "Left",
+	[Direction8.UpLeft]: "Up left",
+};

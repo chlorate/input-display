@@ -7,6 +7,7 @@ import {Config} from "../../config/config";
 import {EllipseControl} from "../../control/ellipse-control";
 import {ControlType} from "../../control/json/control-json";
 import {RectangleControl} from "../../control/rectangle-control";
+import {TriangleControl} from "../../control/triangle-control";
 import {Store} from "../../storage/store";
 import {Event} from "../event";
 
@@ -46,7 +47,7 @@ export class AddControlFormComponent extends Component<Props, State> {
 						>
 							<option value={ControlType.Ellipse}>Button (circle/ellipse)</option>
 							<option value={ControlType.Rectangle}>Button (square/rectangle)</option>
-							<option value="">Button (triangle)</option>
+							<option value={ControlType.Triangle}>Button (triangle)</option>
 							<option value="">Button (d-pad)</option>
 							<option value="">Analog stick</option>
 						</select>
@@ -76,6 +77,9 @@ const handleSubmit = action((component: AddControlFormComponent, event): void =>
 			break;
 		case ControlType.Rectangle:
 			controls.push(new RectangleControl());
+			break;
+		case ControlType.Triangle:
+			controls.push(new TriangleControl());
 			break;
 	}
 	component.props.events.emit(Event.AddControl);

@@ -46,19 +46,11 @@ export class DisplayComponent extends Component<Props, {}> {
 			>
 				{items.map((item) => {
 					if (item.control instanceof EllipseControl) {
-						return (
-							<EllipseControlComponent
-								key={item.key}
-								control={item.control}
-							/>
-						);
+						return <EllipseControlComponent key={item.key} control={item.control} />;
 					} else if (item.control instanceof RectangleControl) {
-						return (
-							<RectangleControlComponent
-								key={item.key}
-								control={item.control}
-							/>
-						);
+						return <RectangleControlComponent key={item.key} control={item.control} />;
+					} else if (item.control instanceof TriangleControl) {
+						return <TriangleControlComponent key={item.key} control={item.control} />;
 					}
 				})}
 			</svg>

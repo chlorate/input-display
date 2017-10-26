@@ -5,7 +5,7 @@ import {connect} from "inferno-mobx";
 import {action} from "mobx";
 import {ButtonReference} from "../../config/button-reference";
 import {Control} from "../../control/control";
-import {defaultRotation, maxRotation, minRotation, RectangleControl} from "../../control/rectangle-control";
+import {defaultRotation, maxRotation, minRotation, RotatableControl} from "../../control/rotatable-control";
 import {Store} from "../../storage/store";
 import {Event} from "../event";
 import {ButtonReferenceSelectComponent} from "../field/button-reference-select.component";
@@ -48,12 +48,9 @@ export class ControlFieldsetComponent extends Component<Props, {}> {
 	public render() {
 		const control = this.props.control;
 
-		let extraInputs: any[] = [
-			<div className="col-6 col-spacer"></div>,
-			<div className="col-3 col-spacer"></div>,
-		];
-		if (control instanceof RectangleControl) {
-			extraInputs = [
+		const extraInputs: any[] = [];
+		if (control instanceof RotatableControl) {
+			extraInputs.push(
 				<NumberInputComponent
 					className="col"
 					id="config-control-rotation"
@@ -65,8 +62,13 @@ export class ControlFieldsetComponent extends Component<Props, {}> {
 					placeholder={defaultRotation}
 					onChange={linkEvent(control, handleChangeRotation)}
 				/>,
-				<div className="col-6 col-spacer"></div>,
-			];
+			);
+		}
+		if (extraInputs.length < 2) {
+			extraInputs.push(<div className="col-6 col-spacer"></div>);
+		}
+		if (!extraInputs.length) {
+			extraInputs.push(<div className="col-3 col-spacer"></div>);
 		}
 
 		return (
@@ -224,7 +226,7 @@ const handleChangeBorderWidth = action((control: Control, event): void => {
 	control.borderWidth = event.target.value || defaultBorderWidth;
 });
 
-const handleChangeRotation = action((control: RectangleControl, event): void => {
+const handleChangeRotation = action((control: RotatableControl, event): void => {
 	control.rotation = event.target.value || defaultRotation;
 });
 

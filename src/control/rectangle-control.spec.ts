@@ -1,18 +1,12 @@
 import {ControlType} from "./json/control-json";
-import {defaultRotation, maxRotation, minRotation, RectangleControl} from "./rectangle-control";
+import {RectangleControl} from "./rectangle-control";
+import {defaultRotation} from "./rotatable-control";
 
 describe("RectangleControl", () => {
 	let control;
 
 	beforeEach(() => {
 		control = new RectangleControl();
-	});
-
-	it("should clamp rotation", () => {
-		control.rotation = -1000;
-		expect(control.rotation).toBe(minRotation);
-		control.rotation = 1000;
-		expect(control.rotation).toBe(maxRotation);
 	});
 
 	it("should account for rotation when getting edge positions", () => {
@@ -25,7 +19,7 @@ describe("RectangleControl", () => {
 		expect(control.bottomY).toBeCloseTo(16.49);
 	});
 
-	it("includes type in its JSON representation", () => {
+	it("can return a JSON representation", () => {
 		const json = control.toJSON();
 		expect(json.type).toBe(ControlType.Rectangle);
 		expect(json.rotation).toBe(defaultRotation);

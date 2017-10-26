@@ -106,7 +106,7 @@ export abstract class Control {
 
 	public abstract toJSON(): ControlJSON;
 
-	// These protected getters are for RectangleControl so it has access to the
+	// These protected getters are for RotatedControl so it has access to the
 	// unrotated edge positions.
 
 	protected getLeftX(): number {

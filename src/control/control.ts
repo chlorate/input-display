@@ -80,6 +80,15 @@ export abstract class Control {
 		this._borderWidth = clamp(width, minBorderWidth, maxBorderWidth);
 	}
 
+	@computed get nudge(): number {
+		// Improves sharpness of odd border widths (particularly 1px) by
+		// aligning the border with the pixel grid. Gradually increases from
+		// 0 to 0.5 for odd integer widths then back down to 0 for even integer
+		// widths.
+		const nudge = this.borderWidth % 2 / 2;
+		return nudge > 0.5 ? 1 - nudge : nudge;
+	}
+
 	@computed get leftX(): number {
 		return this.getLeftX();
 	}

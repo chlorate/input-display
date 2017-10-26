@@ -64,6 +64,21 @@ describe("Control", () => {
 		expect(control.borderWidth).toBe(maxBorderWidth);
 	});
 
+	it("can return a nudge value", () => {
+		control.borderWidth = 0;
+		expect(control.nudge).toBe(0);
+		control.borderWidth = 0.5;
+		expect(control.nudge).toBe(0.25);
+		control.borderWidth = 1;
+		expect(control.nudge).toBe(0.5);
+		control.borderWidth = 1.5;
+		expect(control.nudge).toBe(0.25);
+		control.borderWidth = 2;
+		expect(control.nudge).toBe(0);
+		control.borderWidth = 11;
+		expect(control.nudge).toBe(0.5);
+	});
+
 	it("can return x-position of control left", () => {
 		control.borderWidth = 11;
 		expect(control.leftX).toBe(-5.5);

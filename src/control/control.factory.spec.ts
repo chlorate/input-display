@@ -15,6 +15,7 @@ function makeJSON(): ControlJSON {
 		width: 2,
 		height: 3,
 		borderWidth: 4,
+		rotation: 5,
 		nameLabel: LabelPosition.Above,
 		pressesLabel: LabelPosition.Below,
 		mashSpeedLabel: LabelPosition.Center,
@@ -29,7 +30,7 @@ describe("parseControlJSON", () => {
 	});
 
 	it("can create a EllipseControl", () => {
-		const control = parseControlJSON(json);
+		const control = parseControlJSON(json) as EllipseControl;
 		expect(control instanceof EllipseControl).toBe(true);
 		expect(control.name).toBe("name");
 		expect(control.button).toBeUndefined();
@@ -38,6 +39,7 @@ describe("parseControlJSON", () => {
 		expect(control.width).toBe(2);
 		expect(control.height).toBe(3);
 		expect(control.borderWidth).toBe(4);
+		expect(control.rotation).toBe(5);
 		expect(control.nameLabel).toBe(LabelPosition.Above);
 		expect(control.pressesLabel).toBe(LabelPosition.Below);
 		expect(control.mashSpeedLabel).toBe(LabelPosition.Center);
@@ -54,12 +56,9 @@ describe("parseControlJSON", () => {
 
 	it("can create a RectangleControl", () => {
 		json.type = ControlType.Rectangle;
-		json.rotation = 5;
-		const control = parseControlJSON(json);
+		const control = parseControlJSON(json) as RectangleControl;
 		expect(control instanceof RectangleControl).toBe(true);
-		if (control instanceof RectangleControl) {
-			expect(control.rotation).toBe(5);
-		}
+		expect(control.rotation).toBe(5);
 	});
 });
 

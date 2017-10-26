@@ -19,6 +19,7 @@ export const EllipseControlComponent = connect(({control}: Props) => (
 			rx={control.centerX}
 			ry={control.centerY}
 			stroke-width={control.borderWidth}
+			transform={control.transform}
 		/>
 		<ControlLabelComponent control={control} />
 	</ControlGroupComponent>

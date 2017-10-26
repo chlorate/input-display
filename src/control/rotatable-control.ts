@@ -1,5 +1,5 @@
 import {computed, observable} from "mobx";
-import {Point} from "../math/point";
+import {Point, rotatePoints} from "../math/point";
 import {clampInt} from "../math/util";
 import {Control} from "./control";
 
@@ -44,4 +44,12 @@ export abstract class RotatableControl extends Control {
 	}
 
 	protected abstract getEdgePoints(): Point[];
+
+	/**
+	 * Rotates an array of points around this control's center point with its
+	 * current rotation.
+	 */
+	protected rotatePoints(points: Point[]) {
+		return rotatePoints(points, {x: this.centerX, y: this.centerY}, this.rotation);
+	}
 }

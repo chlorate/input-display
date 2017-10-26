@@ -11,12 +11,14 @@ export function parseControlJSON(json: ControlJSON): Control {
 	let control: Control;
 	switch (json.type) {
 		case ControlType.Ellipse:
-			control = new EllipseControl();
+			const ellipse = new EllipseControl();
+			ellipse.rotation = json.rotation;
+			control = ellipse;
 			break;
 		case ControlType.Rectangle:
-			const rectControl = new RectangleControl();
-			rectControl.rotation = json.rotation;
-			control = rectControl;
+			const rectangle = new RectangleControl();
+			rectangle.rotation = json.rotation;
+			control = rectangle;
 			break;
 		default:
 			throw new TypeError("invalid control JSON");

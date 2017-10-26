@@ -1,4 +1,4 @@
-import {Point, rotatePoints} from "../math/point";
+import {Point} from "../math/point";
 import {ControlType, RectangleControlJSON} from "./json/control-json";
 import {RotatableControl} from "./rotatable-control";
 
@@ -18,16 +18,14 @@ export class RectangleControl extends RotatableControl {
 	}
 
 	/**
-	 * Returns an array of points representing the corners of the controls after
-	 * rotation.
+	 * Returns an array of points for the corners of the rectangle.
 	 */
 	protected getEdgePoints(): Point[] {
-		const points = [
+		return this.rotatePoints([
 			{x: this.getLeftX(), y: this.getTopY()},
 			{x: this.getRightX(), y: this.getTopY()},
 			{x: this.getLeftX(), y: this.getBottomY()},
 			{x: this.getRightX(), y: this.getBottomY()},
-		];
-		return rotatePoints(points, {x: this.centerX, y: this.centerY}, this.rotation);
+		]);
 	}
 }

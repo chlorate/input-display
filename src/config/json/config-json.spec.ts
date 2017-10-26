@@ -54,6 +54,7 @@ describe("ConfigJSON", () => {
 					width: 0,
 					height: 0,
 					borderWidth: 0,
+					rotation: 0,
 				},
 			],
 			customCss: "css",

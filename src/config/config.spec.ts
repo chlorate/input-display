@@ -1,7 +1,9 @@
+import {defaultBorderWidth, defaultPosition, defaultSize} from "../control/control";
 import {EllipseControl} from "../control/ellipse-control";
 import {ControlType} from "../control/json/control-json";
 import {LabelPosition} from "../control/label-position";
 import {LabelReplacement} from "../control/label-replacement";
+import {defaultRotation} from "../control/rotatable-control";
 import {AxisReference} from "./axis-reference";
 
 import {
@@ -175,11 +177,12 @@ describe("Config", () => {
 					type: ControlType.Ellipse,
 					name: "",
 					button: undefined,
-					x: 5,
-					y: 5,
-					width: 24,
-					height: 24,
-					borderWidth: 1.25,
+					x: defaultPosition,
+					y: defaultPosition,
+					width: defaultSize,
+					height: defaultSize,
+					borderWidth: defaultBorderWidth,
+					rotation: defaultRotation,
 					nameLabel: LabelPosition.Center,
 					pressesLabel: undefined,
 					mashSpeedLabel: LabelReplacement.Name,
@@ -244,6 +247,7 @@ describe("Config", () => {
 						width: 2,
 						height: 3,
 						borderWidth: 4,
+						rotation: 5,
 					},
 				],
 				customCss: "css",

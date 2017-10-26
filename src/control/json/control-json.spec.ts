@@ -20,6 +20,7 @@ describe("isControlJSON", () => {
 	describe("EllipseControlJSON", () => {
 		beforeEach(() => {
 			json.type = ControlType.Ellipse;
+			json.rotation = 6;
 		});
 
 		it("should return true if only required properties are set", () => {
@@ -29,7 +30,7 @@ describe("isControlJSON", () => {
 		it("should return true if all valid, optional properties are set", () => {
 			json.button = {
 				type: ButtonType.Normal,
-				index: 6,
+				index: 7,
 			};
 			json.nameLabel = LabelPosition.Above;
 			json.pressesLabel = LabelPosition.Below;
@@ -67,6 +68,11 @@ describe("isControlJSON", () => {
 
 		it("should return false if border width is not numeric", () => {
 			json.borderWidth = "bad";
+			expect(isControlJSON(json)).toBe(false);
+		});
+
+		it("should return false if rotation is not numeric", () => {
+			json.rotation = "bad";
 			expect(isControlJSON(json)).toBe(false);
 		});
 

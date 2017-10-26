@@ -20,6 +20,7 @@ export type ControlJSON = EllipseControlJSON | RectangleControlJSON;
  */
 export interface EllipseControlJSON extends BaseControlJSON {
 	type: ControlType.Ellipse;
+	rotation: number;
 }
 
 /**
@@ -73,7 +74,10 @@ export function isControlJSON(input: any): input is ControlJSON {
 			sortedLabelReplacements.indexOf(input.mashSpeedLabel) >= 0
 		) &&
 		(
-			input.type === ControlType.Ellipse ||
+			(
+				input.type === ControlType.Ellipse &&
+				typeof input.rotation === "number"
+			) ||
 			(
 				input.type === ControlType.Rectangle &&
 				typeof input.rotation === "number"

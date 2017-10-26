@@ -8,7 +8,7 @@ interface Props {
 }
 
 /**
- * Draws a EllipseControl.
+ * Draws an EllipseControl.
  */
 export const EllipseControlComponent = connect(({control}: Props) => (
 	<ControlGroupComponent control={control}>
@@ -16,8 +16,8 @@ export const EllipseControlComponent = connect(({control}: Props) => (
 			className="control-button"
 			cx={control.centerX}
 			cy={control.centerY}
-			rx={control.centerX}
-			ry={control.centerY}
+			rx={control.centerX - control.nudge}
+			ry={control.centerY - control.nudge}
 			stroke-width={control.borderWidth}
 			transform={control.transform}
 		/>

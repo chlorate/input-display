@@ -4,9 +4,11 @@ import {Config} from "../config/config";
 import {Control} from "../control/control";
 import {EllipseControl} from "../control/ellipse-control";
 import {RectangleControl} from "../control/rectangle-control";
+import {TriangleControl} from "../control/triangle-control";
 import {Store} from "../storage/store";
 import {EllipseControlComponent} from "./ellipse-control.component";
 import {RectangleControlComponent} from "./rectangle-control.component";
+import {TriangleControlComponent} from "./triangle-control.component";
 
 interface Props {
 	config: Config;

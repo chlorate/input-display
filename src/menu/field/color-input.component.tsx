@@ -1,6 +1,6 @@
 interface Props {
 	className?: string;
-	id?: string;
+	id: string;
 	label: string;
 	value: string;
 	placeholder: string;

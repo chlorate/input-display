@@ -3,6 +3,7 @@ import {Control} from "./control";
 import {EllipseControl} from "./ellipse-control";
 import {ControlJSON, ControlType} from "./json/control-json";
 import {RectangleControl} from "./rectangle-control";
+import {TriangleControl} from "./triangle-control";
 
 /**
  * Creates a control from its JSON representation.
@@ -19,6 +20,11 @@ export function parseControlJSON(json: ControlJSON): Control {
 			const rectangle = new RectangleControl();
 			rectangle.rotation = json.rotation;
 			control = rectangle;
+			break;
+		case ControlType.Triangle:
+			const triangle = new TriangleControl();
+			triangle.direction = json.direction;
+			control = triangle;
 			break;
 		default:
 			throw new TypeError("invalid control JSON");

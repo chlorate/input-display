@@ -1,4 +1,5 @@
 import {ButtonReferenceJSON, isButtonReferenceJSON} from "../../config/json/button-reference-json";
+import {Direction8, sortedDirection8s} from "../../direction/direction8";
 import {LabelPosition, sortedLabelPositions} from "../label-position";
 import {LabelReplacement, sortedLabelReplacements} from "../label-replacement";
 
@@ -8,12 +9,13 @@ import {LabelReplacement, sortedLabelReplacements} from "../label-replacement";
 export enum ControlType {
 	Ellipse = "ellipse",
 	Rectangle = "rectangle",
+	Triangle = "triangle",
 }
 
 /**
  * JSON representations of all Control subclasses.
  */
-export type ControlJSON = EllipseControlJSON | RectangleControlJSON;
+export type ControlJSON = EllipseControlJSON | RectangleControlJSON | TriangleControlJSON;
 
 /**
  * A JSON representation of a EllipseControl.
@@ -29,6 +31,14 @@ export interface EllipseControlJSON extends BaseControlJSON {
 export interface RectangleControlJSON extends BaseControlJSON {
 	type: ControlType.Rectangle;
 	rotation: number;
+}
+
+/**
+ * A JSON representation of a TriangleControl.
+ */
+export interface TriangleControlJSON extends BaseControlJSON {
+	type: ControlType.Triangle;
+	direction: Direction8;
 }
 
 /**
@@ -81,6 +91,10 @@ export function isControlJSON(input: any): input is ControlJSON {
 			(
 				input.type === ControlType.Rectangle &&
 				typeof input.rotation === "number"
+			) ||
+			(
+				input.type === ControlType.Triangle &&
+				sortedDirection8s.indexOf(input.direction) >= 0
 			)
 		)
 	);

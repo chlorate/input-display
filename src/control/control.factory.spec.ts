@@ -1,10 +1,12 @@
 import {NormalButtonReference} from "../config/normal-button-reference";
 import {ButtonType} from "../controller/json/button-json";
+import {Direction8} from "../direction/direction8";
 import {cloneControl, parseControlJSON} from "./control.factory";
 import {EllipseControl} from "./ellipse-control";
 import {ControlJSON, ControlType} from "./json/control-json";
 import {LabelPosition} from "./label-position";
 import {RectangleControl} from "./rectangle-control";
+import {TriangleControl} from "./triangle-control";
 
 function makeJSON(): ControlJSON {
 	return {
@@ -59,6 +61,14 @@ describe("parseControlJSON", () => {
 		const control = parseControlJSON(json) as RectangleControl;
 		expect(control instanceof RectangleControl).toBe(true);
 		expect(control.rotation).toBe(5);
+	});
+
+	it("can create a TriangleControl", () => {
+		json.type = ControlType.Triangle;
+		json.direction = Direction8.Down;
+		const control = parseControlJSON(json) as TriangleControl;
+		expect(control instanceof TriangleControl).toBe(true);
+		expect(control.direction).toBe(Direction8.Down);
 	});
 });
 

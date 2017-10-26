@@ -1,4 +1,5 @@
 import {ButtonType} from "../../controller/json/button-json";
+import {Direction8} from "../../direction/direction8";
 import {LabelPosition} from "../label-position";
 import {LabelReplacement} from "../label-replacement";
 import {ControlType, isControlJSON} from "./control-json";
@@ -109,6 +110,22 @@ describe("isControlJSON", () => {
 
 		it("should return false if rotation is not numeric", () => {
 			json.rotation = "bad";
+			expect(isControlJSON(json)).toBe(false);
+		});
+	});
+
+	describe("TriangleControlJSON", () => {
+		beforeEach(() => {
+			json.type = ControlType.Triangle;
+			json.direction = Direction8.Down;
+		});
+
+		it("should return true if valid", () => {
+			expect(isControlJSON(json)).toBe(true);
+		});
+
+		it("should return false if direction is not valid", () => {
+			json.direction = "bad";
 			expect(isControlJSON(json)).toBe(false);
 		});
 	});

@@ -5,6 +5,7 @@ import {connect} from "inferno-mobx";
 import {action} from "mobx";
 import {ButtonReference} from "../../config/button-reference";
 import {Control} from "../../control/control";
+import {EllipseControl} from "../../control/ellipse-control";
 import {defaultRotation, maxRotation, minRotation, RotatableControl} from "../../control/rotatable-control";
 import {Store} from "../../storage/store";
 import {Event} from "../event";
@@ -49,7 +50,9 @@ export class ControlFieldsetComponent extends Component<Props, {}> {
 		const control = this.props.control;
 
 		const extraInputs: any[] = [];
-		if (control instanceof RotatableControl) {
+		const isCircle = control instanceof EllipseControl && control.width === control.height;
+		if (control instanceof RotatableControl && !isCircle) {
+			// Rotation won't have any effect if control is a circle.
 			extraInputs.push(
 				<NumberInputComponent
 					className="col"
@@ -64,11 +67,13 @@ export class ControlFieldsetComponent extends Component<Props, {}> {
 				/>,
 			);
 		}
-		if (extraInputs.length < 2) {
-			extraInputs.push(<div className="col-6 col-spacer"></div>);
-		}
-		if (!extraInputs.length) {
-			extraInputs.push(<div className="col-3 col-spacer"></div>);
+		switch (extraInputs.length) {
+			case 0:
+				extraInputs.push(<div className="col-6 col-spacer"></div>, <div className="col-3 col-spacer"></div>);
+				break;
+			case 1:
+				extraInputs.push(<div className="col-6 col-spacer"></div>);
+				break;
 		}
 
 		return (

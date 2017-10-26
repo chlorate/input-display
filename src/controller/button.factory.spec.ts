@@ -1,5 +1,5 @@
+import {Direction4} from "../direction/direction4";
 import {parseButtonJSON} from "./button.factory";
-import {Direction} from "./direction";
 import {ButtonType} from "./json/button-json";
 
 describe("parseButtonJSON", () => {
@@ -20,11 +20,11 @@ describe("parseButtonJSON", () => {
 	it("can create a DpadButton", () => {
 		button = parseButtonJSON({
 			type: ButtonType.Dpad,
-			direction: Direction.Up,
+			direction: Direction4.Up,
 			presses: 1,
 			bestMashSpeed: 2,
 		});
-		expect(button.direction).toBe(Direction.Up);
+		expect(button.direction).toBe(Direction4.Up);
 		expect(button.presses).toBe(1);
 		expect(button.bestMashSpeed).toBe(2);
 	});

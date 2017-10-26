@@ -1,4 +1,4 @@
-import {Direction} from "../direction";
+import {Direction4} from "../../direction/direction4";
 import {ButtonType, isButtonJSON} from "./button-json";
 
 describe("isButtonJSON", () => {
@@ -39,7 +39,7 @@ describe("isButtonJSON", () => {
 		beforeEach(() => {
 			json = {
 				type: ButtonType.Dpad,
-				direction: Direction.Up,
+				direction: Direction4.Up,
 				presses: 123,
 				bestMashSpeed: 30,
 			};

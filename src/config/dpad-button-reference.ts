@@ -1,9 +1,9 @@
 import {computed, observable} from "mobx";
 import {Button} from "../controller/button";
 import {Controller} from "../controller/controller";
-import {Direction} from "../controller/direction";
 import {DpadButton} from "../controller/dpad-button";
 import {ButtonType} from "../controller/json/button-json";
+import {Direction4} from "../direction/direction4";
 import {ButtonReference} from "./button-reference";
 import {DpadButtonReferenceJSON} from "./json/button-reference-json";
 
@@ -11,9 +11,9 @@ import {DpadButtonReferenceJSON} from "./json/button-reference-json";
  * A reference to a controller's d-pad button by its direction.
  */
 export class DpadButtonReference extends ButtonReference {
-	@observable public direction: Direction;
+	@observable public direction: Direction4;
 
-	constructor(direction: Direction) {
+	constructor(direction: Direction4) {
 		super();
 		this.direction = direction;
 	}

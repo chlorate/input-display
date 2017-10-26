@@ -1,5 +1,5 @@
-import {Direction, sortedDirections} from "../../controller/direction";
 import {ButtonType} from "../../controller/json/button-json";
+import {Direction4, sortedDirection4s} from "../../direction/direction4";
 
 /**
  * JSON representations of all ButtonReference subclasses.
@@ -19,7 +19,7 @@ export interface NormalButtonReferenceJSON {
  */
 export interface DpadButtonReferenceJSON {
 	type: ButtonType.Dpad;
-	direction: Direction;
+	direction: Direction4;
 }
 
 /**
@@ -30,7 +30,7 @@ export function isButtonReferenceJSON(input: any): input is ButtonReferenceJSON 
 		typeof input === "object" &&
 		(
 			(input.type === ButtonType.Normal && typeof input.index === "number") ||
-			(input.type === ButtonType.Dpad && sortedDirections.indexOf(input.direction) >= 0)
+			(input.type === ButtonType.Dpad && sortedDirection4s.indexOf(input.direction) >= 0)
 		)
 	);
 }

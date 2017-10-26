@@ -1,6 +1,6 @@
 import {Controller} from "../controller/controller";
-import {Direction} from "../controller/direction";
 import {ButtonType} from "../controller/json/button-json";
+import {Direction4} from "../direction/direction4";
 import {Config} from "./config";
 import {DpadButtonReference} from "./dpad-button-reference";
 
@@ -9,7 +9,7 @@ describe("DpadButtonReference", () => {
 	let controller;
 
 	beforeEach(() => {
-		reference = new DpadButtonReference(Direction.Down);
+		reference = new DpadButtonReference(Direction4.Down);
 
 		controller = new Controller(new Config());
 		controller.loadJSON({
@@ -23,13 +23,13 @@ describe("DpadButtonReference", () => {
 				},
 				{
 					type: ButtonType.Dpad,
-					direction: Direction.Up,
+					direction: Direction4.Up,
 					presses: 0,
 					bestMashSpeed: 0,
 				},
 				{
 					type: ButtonType.Dpad,
-					direction: Direction.Down,
+					direction: Direction4.Down,
 					presses: 0,
 					bestMashSpeed: 0,
 				},
@@ -44,7 +44,7 @@ describe("DpadButtonReference", () => {
 	it("can return a JSON representation", () => {
 		expect(reference.toJSON()).toEqual({
 			type: ButtonType.Dpad,
-			direction: Direction.Down,
+			direction: Direction4.Down,
 		});
 	});
 
@@ -54,7 +54,7 @@ describe("DpadButtonReference", () => {
 		});
 
 		it("should return undefined if no button was found", () => {
-			reference.direction = Direction.Left;
+			reference.direction = Direction4.Left;
 			expect(reference.resolve(controller)).toBeUndefined();
 		});
 	});

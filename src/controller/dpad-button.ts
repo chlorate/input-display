@@ -1,6 +1,6 @@
 import {computed} from "mobx";
+import {Direction4} from "../direction/direction4";
 import {Button} from "./button";
-import {Direction} from "./direction";
 import {ButtonType, DpadButtonJSON} from "./json/button-json";
 
 /**
@@ -9,9 +9,9 @@ import {ButtonType, DpadButtonJSON} from "./json/button-json";
  * It is uniquely identified by a direction.
  */
 export class DpadButton extends Button {
-	private _direction: Direction;
+	private _direction: Direction4;
 
-	constructor(direction: Direction) {
+	constructor(direction: Direction4) {
 		super();
 		this._direction = direction;
 	}
@@ -20,7 +20,7 @@ export class DpadButton extends Button {
 		return `D-pad ${this.direction}`;
 	}
 
-	get direction(): Direction {
+	get direction(): Direction4 {
 		return this._direction;
 	}
 

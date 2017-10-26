@@ -1,8 +1,8 @@
 import {AxisReference} from "../config/axis-reference";
 import {Config} from "../config/config";
+import {sortedDirection4s} from "../direction/direction4";
 import * as service from "../gamepad/service";
 import {Controller} from "./controller";
-import {sortedDirections} from "./direction";
 import {ButtonType} from "./json/button-json";
 
 describe("Controller", () => {
@@ -306,13 +306,13 @@ describe("Controller", () => {
 
 		function checkDpadButtonsExist() {
 			expect(controller.buttons.length).toBe(6);
-			sortedDirections.forEach((direction, i) => {
+			sortedDirection4s.forEach((direction, i) => {
 				expect(controller.buttons[i + 2].direction).toBe(direction);
 			});
 		}
 
 		function checkDpadButtonsPressed(pressed: boolean[]) {
-			sortedDirections.forEach((direction, i) => {
+			sortedDirection4s.forEach((direction, i) => {
 				expect(controller.buttons[i + 2].pressed).toBe(pressed[i]);
 			});
 		}

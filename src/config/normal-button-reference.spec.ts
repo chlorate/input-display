@@ -1,6 +1,6 @@
 import {Controller} from "../controller/controller";
-import {Direction} from "../controller/direction";
 import {ButtonType} from "../controller/json/button-json";
+import {Direction4} from "../direction/direction4";
 import {Config} from "./config";
 import {NormalButtonReference} from "./normal-button-reference";
 
@@ -23,7 +23,7 @@ describe("NormalButtonReference", () => {
 				},
 				{
 					type: ButtonType.Dpad,
-					direction: Direction.Up,
+					direction: Direction4.Up,
 					presses: 0,
 					bestMashSpeed: 0,
 				},

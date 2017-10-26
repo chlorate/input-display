@@ -1,12 +1,12 @@
 import {action, observable} from "mobx";
 import {Config} from "../config/config";
+import {Direction4, sortedDirection4s} from "../direction/direction4";
 import {getGamepads} from "../gamepad/service";
 import {almostEqual} from "../math/util";
 import {secondToMilliseconds} from "../time/const";
 import {Axis} from "./axis";
 import {Button} from "./button";
 import {parseButtonJSON} from "./button.factory";
-import {Direction, sortedDirections} from "./direction";
 import {DpadButton} from "./dpad-button";
 import {ControllerJSON, isControllerJSON} from "./json/controller-json";
 import {NormalButton} from "./normal-button";
@@ -16,10 +16,10 @@ import {NormalButton} from "./normal-button";
  * correspond to a direction being pressed.
  */
 const dpadAxisValues: {[id: string]: number[]} = {
-	[Direction.Up]: [1, -1, -5 / 7],
-	[Direction.Right]: [-5 / 7, -3 / 7, -1 / 7],
-	[Direction.Down]: [-1 / 7, 1 / 7, 3 / 7],
-	[Direction.Left]: [3 / 7, 5 / 7, 1],
+	[Direction4.Up]: [1, -1, -5 / 7],
+	[Direction4.Right]: [-5 / 7, -3 / 7, -1 / 7],
+	[Direction4.Down]: [-1 / 7, 1 / 7, 3 / 7],
+	[Direction4.Left]: [3 / 7, 5 / 7, 1],
 };
 
 /**
@@ -221,7 +221,7 @@ export class Controller {
 		}
 
 		const value = this.axes[this.config.dpadAxisIndex].value;
-		sortedDirections.forEach((direction) => {
+		sortedDirection4s.forEach((direction) => {
 			const button = this.findOrCreateDpadButton(direction);
 			button.pressed = dpadAxisValues[direction].some((v) => almostEqual(v, value));
 		});
@@ -242,16 +242,16 @@ export class Controller {
 			return;
 		}
 
-		const up = this.findOrCreateDpadButton(Direction.Up);
+		const up = this.findOrCreateDpadButton(Direction4.Up);
 		up.pressed = y <= -dpadAxisThreshold;
 
-		const right = this.findOrCreateDpadButton(Direction.Right);
+		const right = this.findOrCreateDpadButton(Direction4.Right);
 		right.pressed = x >= dpadAxisThreshold;
 
-		const down = this.findOrCreateDpadButton(Direction.Down);
+		const down = this.findOrCreateDpadButton(Direction4.Down);
 		down.pressed = y >= dpadAxisThreshold;
 
-		const left = this.findOrCreateDpadButton(Direction.Left);
+		const left = this.findOrCreateDpadButton(Direction4.Left);
 		left.pressed = x <= -dpadAxisThreshold;
 	}
 
@@ -259,7 +259,7 @@ export class Controller {
 	 * Finds and returns the d-pad button having a certain direction, creating
 	 * it if necessary.
 	 */
-	@action private findOrCreateDpadButton(direction: Direction): DpadButton {
+	@action private findOrCreateDpadButton(direction: Direction4): DpadButton {
 		// TODO: Array.find doesn't consider type guards:
 		// https://github.com/Microsoft/TypeScript/issues/18112
 		let button = this.buttons.find((b) => b instanceof DpadButton && b.direction === direction) as DpadButton | undefined;
@@ -296,7 +296,7 @@ export class Controller {
 			if (x instanceof NormalButton && y instanceof NormalButton) {
 				return x.index - y.index;
 			} else if (x instanceof DpadButton && y instanceof DpadButton) {
-				return sortedDirections.indexOf(x.direction) - sortedDirections.indexOf(y.direction);
+				return sortedDirection4s.indexOf(x.direction) - sortedDirection4s.indexOf(y.direction);
 			} else if (x instanceof NormalButton) {
 				return -1;
 			} else if (x instanceof DpadButton) {

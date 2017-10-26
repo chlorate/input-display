@@ -1,4 +1,4 @@
-import {Direction, sortedDirections} from "../direction";
+import {Direction4, sortedDirection4s} from "../../direction/direction4";
 
 /**
  * Type values for distinguishing Button subclass JSON representations.
@@ -26,7 +26,7 @@ export interface NormalButtonJSON extends BaseButtonJSON {
  */
 export interface DpadButtonJSON extends BaseButtonJSON {
 	type: ButtonType.Dpad;
-	direction: Direction;
+	direction: Direction4;
 }
 
 /**
@@ -47,7 +47,7 @@ export function isButtonJSON(input: any): input is ButtonJSON {
 		typeof input.bestMashSpeed === "number" &&
 		(
 			(input.type === ButtonType.Normal && typeof input.index === "number") ||
-			(input.type === ButtonType.Dpad && sortedDirections.indexOf(input.direction) >= 0)
+			(input.type === ButtonType.Dpad && sortedDirection4s.indexOf(input.direction) >= 0)
 		)
 	);
 }

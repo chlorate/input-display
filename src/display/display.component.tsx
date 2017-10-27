@@ -2,10 +2,12 @@ import Component from "inferno-component";
 import {connect} from "inferno-mobx";
 import {Config} from "../config/config";
 import {Control} from "../control/control";
+import {DpadControl} from "../control/dpad-control";
 import {EllipseControl} from "../control/ellipse-control";
 import {RectangleControl} from "../control/rectangle-control";
 import {TriangleControl} from "../control/triangle-control";
 import {Store} from "../storage/store";
+import {DpadControlComponent} from "./dpad-control.component";
 import {EllipseControlComponent} from "./ellipse-control.component";
 import {RectangleControlComponent} from "./rectangle-control.component";
 import {TriangleControlComponent} from "./triangle-control.component";
@@ -45,7 +47,9 @@ export class DisplayComponent extends Component<Props, {}> {
 				height={config.displayHeight}
 			>
 				{items.map((item) => {
-					if (item.control instanceof EllipseControl) {
+					if (item.control instanceof DpadControl) {
+						return <DpadControlComponent key={item.key} control={item.control} />;
+					} else if (item.control instanceof EllipseControl) {
 						return <EllipseControlComponent key={item.key} control={item.control} />;
 					} else if (item.control instanceof RectangleControl) {
 						return <RectangleControlComponent key={item.key} control={item.control} />;

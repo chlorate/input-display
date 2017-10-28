@@ -1,6 +1,7 @@
 import {computed, observable} from "mobx";
 import {Direction4} from "../direction/direction4";
-import {Control} from "./control";
+import {clamp} from "../math/util";
+import {Control, defaultBorderRadius, maxBorderRadius, minBorderRadius} from "./control";
 import {ControlType, DpadControlJSON} from "./json/control-json";
 
 export const defaultDirection = Direction4.Up;
@@ -31,50 +32,91 @@ const cornerFix = 0.01;
  */
 export class DpadControl extends Control {
 	@observable public direction: Direction4 = defaultDirection;
+	@observable private _borderRadius: number = defaultBorderRadius;
+
+	get borderRadius(): number {
+		return this._borderRadius;
+	}
+	set borderRadius(radius: number) {
+		this._borderRadius = clamp(radius, minBorderRadius, maxBorderRadius);
+	}
 
 	@computed public get path(): string {
-		// TODO: test
 		// As mentioned above, paths start very slightly before the side of the
 		// path without a border. This also conveniently avoids calculating the
 		// length of the rest of the path as there could be rounded borders
 		// which would change the length.
 		//
 		// The borderless edge is also not nudged so it appears sharp.
+		let leftX = this.nudge;
+		let rightX = this.width - this.nudge;
+		let topY = this.nudge;
+		let bottomY = this.height - this.nudge;
+		let curveX;
+		let leftCurveX;
+		let rightCurveX;
+		let curveY;
+		let topCurveY;
+		let bottomCurveY;
 		switch (this.direction) {
 			case Direction4.Up:
+				bottomY = this.height;
+				curveY = Math.min(topY + this.borderRadius, bottomY);
+				leftCurveX = Math.min(leftX + this.borderRadius, this.centerX);
+				rightCurveX = Math.max(rightX - this.borderRadius, this.centerX);
 				return (
-					`M ${this.nudge},${this.height - cornerFix} ` +
-					`V ${this.height} ` +
-					`H ${this.width - this.nudge} ` +
-					`V ${this.nudge} ` +
-					`H ${this.nudge} ` +
+					`M ${leftX},${bottomY - cornerFix} ` +
+					`V ${bottomY} ` +
+					`H ${rightX} ` +
+					`V ${curveY} ` +
+					`Q ${rightX},${topY} ${rightCurveX},${topY} ` +
+					`H ${leftCurveX} ` +
+					`Q ${leftX},${topY} ${leftX},${curveY} ` +
 					`Z`
 				);
 			case Direction4.Right:
+				leftX = 0;
+				curveX = Math.max(rightX - this.borderRadius, leftX);
+				topCurveY = Math.min(topY + this.borderRadius, this.centerY);
+				bottomCurveY = Math.max(bottomY - this.borderRadius, this.centerY);
 				return (
-					`M ${cornerFix},${this.nudge} ` +
-					`H 0 ` +
-					`V ${this.height - this.nudge} ` +
-					`H ${this.width - this.nudge} ` +
-					`V ${this.nudge} ` +
+					`M ${leftX + cornerFix},${topY} ` +
+					`H ${leftX} ` +
+					`V ${bottomY} ` +
+					`H ${curveX} ` +
+					`Q ${rightX},${bottomY} ${rightX},${bottomCurveY} ` +
+					`V ${topCurveY} ` +
+					`Q ${rightX},${topY} ${curveX},${topY} ` +
 					`Z`
 				);
 			case Direction4.Down:
+				topY = 0;
+				curveY = Math.max(bottomY - this.borderRadius, topY);
+				leftCurveX = Math.min(leftX + this.borderRadius, this.centerX);
+				rightCurveX = Math.max(rightX - this.borderRadius, this.centerX);
 				return (
-					`M ${this.nudge},${cornerFix} ` +
-					`V 0 ` +
-					`H ${this.width - this.nudge} ` +
-					`V ${this.height - this.nudge} ` +
-					`H ${this.nudge} ` +
+					`M ${leftX},${topY + cornerFix} ` +
+					`V ${topY} ` +
+					`H ${rightX} ` +
+					`V ${curveY} ` +
+					`Q ${rightX},${bottomY} ${rightCurveX},${bottomY} ` +
+					`H ${leftCurveX} ` +
+					`Q ${leftX},${bottomY} ${leftX},${curveY} ` +
 					`Z`
 				);
 			case Direction4.Left:
+				rightX = this.width;
+				curveX = Math.min(leftX + this.borderRadius, rightX);
+				topCurveY = Math.min(topY + this.borderRadius, this.centerY);
+				bottomCurveY = Math.max(bottomY - this.borderRadius, this.centerY);
 				return (
-					`M ${this.width - cornerFix},${this.nudge} ` +
-					`H ${this.width} ` +
-					`V ${this.height - this.nudge} ` +
-					`H ${this.nudge} ` +
-					`V ${this.nudge} ` +
+					`M ${rightX - cornerFix},${topY} ` +
+					`H ${rightX} ` +
+					`V ${bottomY} ` +
+					`H ${curveX} ` +
+					`Q ${leftX},${bottomY} ${leftX},${bottomCurveY} ` +
+					`V ${topCurveY} ` +
+					`Q ${leftX},${topY} ${curveX},${topY} ` +
 					`Z`
 				);
 			default:
@@ -109,6 +151,7 @@ export class DpadControl extends Control {
 	public toJSON(): DpadControlJSON {
 		const json = {
 			type: ControlType.Dpad,
+			borderRadius: this.borderRadius,
 			direction: this.direction,
 		};
 		return Object.assign(json, super.toBaseJSON()) as DpadControlJSON;

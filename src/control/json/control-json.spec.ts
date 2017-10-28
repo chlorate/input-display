@@ -22,6 +22,7 @@ describe("isControlJSON", () => {
 	describe("DpadControlJSON", () => {
 		beforeEach(() => {
 			json.type = ControlType.Dpad;
+			json.borderRadius = 6;
 			json.direction = Direction4.Down;
 		});
 
@@ -70,6 +71,11 @@ describe("isControlJSON", () => {
 
 		it("should return false if border width is not numeric", () => {
 			json.borderWidth = "bad";
+			expect(isControlJSON(json)).toBe(false);
+		});
+
+		it("should return false if border radius is not numeric", () => {
+			json.borderRadius = "bad";
 			expect(isControlJSON(json)).toBe(false);
 		});
 

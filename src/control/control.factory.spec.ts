@@ -19,6 +19,7 @@ function makeJSON(): ControlJSON {
 		width: 2,
 		height: 3,
 		borderWidth: 4,
+		borderRadius: 5,
 		direction: Direction4.Down,
 		nameLabel: LabelPosition.Above,
 		pressesLabel: LabelPosition.Below,
@@ -42,6 +43,7 @@ describe("parseControlJSON", () => {
 		expect(control.width).toBe(2);
 		expect(control.height).toBe(3);
 		expect(control.borderWidth).toBe(4);
+		expect(control.borderRadius).toBe(5);
 		expect(control.direction).toBe(Direction4.Down);
 		expect(control.nameLabel).toBe(LabelPosition.Above);
 		expect(control.pressesLabel).toBe(LabelPosition.Below);

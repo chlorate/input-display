@@ -23,6 +23,10 @@ export const minBorderWidth = 0;
 export const maxBorderWidth = 1000;
 export const defaultBorderWidth = 1.25;
 
+export const minBorderRadius = 0;
+export const maxBorderRadius = 1000;
+export const defaultBorderRadius = 0;
+
 /**
  * An abstract component that is shown in the display.
  */

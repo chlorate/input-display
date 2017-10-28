@@ -19,10 +19,12 @@ import {NumberInputComponent} from "../field/number-input.component";
 import {TextInputComponent} from "../field/text-input.component";
 
 import {
-	defaultBorderWidth, defaultPosition, defaultSize,
-	maxBorderWidth, maxHeight, maxNameLength, maxWidth, maxX, maxY,
-	minBorderWidth, minHeight, minWidth, minX, minY,
+	defaultBorderRadius, defaultBorderWidth, defaultPosition, defaultSize,
+	maxBorderRadius, maxBorderWidth, maxHeight, maxNameLength, maxWidth, maxX, maxY,
+	minBorderRadius, minBorderWidth, minHeight, minWidth, minX, minY,
 } from "../../control/control";
+
+const borderStep = 0.25;
 
 interface Props {
 	events: EventEmitter;
@@ -57,11 +59,17 @@ export class ControlFieldsetComponent extends Component<Props, {}> {
 		const isCircle = control instanceof EllipseControl && control.width === control.height;
 		if (control instanceof DpadControl) {
 			extraInputs.push(
-				<Direction4SelectComponent
+				<NumberInputComponent
 					className="col"
-					id="config-control-direction"
-					direction={control.direction}
-					onChange={linkEvent(control, handleChangeDpadDirection)}
+					id="config-control-border-radius"
+					label="Border radius"
+					suffix="px"
+					value={control.borderRadius}
+					min={minBorderRadius}
+					max={maxBorderRadius}
+					step={borderStep}
+					placeholder={defaultBorderRadius}
+					onChange={linkEvent(control, handleChangeBorderRadius)}
 				/>,
 			);
 		}
@@ -81,6 +89,16 @@ export class ControlFieldsetComponent extends Component<Props, {}> {
 				/>,
 			);
 		}
+		if (control instanceof DpadControl) {
+			extraInputs.push(
+				<Direction4SelectComponent
+					className="col"
+					id="config-control-direction"
+					direction={control.direction}
+					onChange={linkEvent(control, handleChangeDpadDirection)}
+				/>,
+			);
+		}
 		if (control instanceof TriangleControl) {
 			extraInputs.push(
 				<Direction8SelectComponent
@@ -91,12 +109,18 @@ export class ControlFieldsetComponent extends Component<Props, {}> {
 				/>,
 			);
 		}
+
+		const spacer3 = <div className="col-3 col-spacer"></div>;
+		const spacer6 = <div className="col-6 col-spacer"></div>;
 		switch (extraInputs.length) {
 			case 0:
-				extraInputs.push(<div className="col-6 col-spacer"></div>, <div className="col-3 col-spacer"></div>);
+				extraInputs.push(spacer6, spacer3);
 				break;
 			case 1:
-				extraInputs.push(<div className="col-6 col-spacer"></div>);
+				extraInputs.push(spacer6);
+				break;
+			case 2:
+				extraInputs.push(spacer3, spacer3);
 				break;
 		}
 
@@ -185,7 +209,7 @@ export class ControlFieldsetComponent extends Component<Props, {}> {
 						value={control.borderWidth}
 						min={minBorderWidth}
 						max={maxBorderWidth}
-						step={0.25}
+						step={borderStep}
 						placeholder={defaultBorderWidth}
 						onChange={linkEvent(control, handleChangeBorderWidth)}
 					/>
@@ -253,6 +277,10 @@ const handleChangeHeight = action((control: Control, event): void => {
 
 const handleChangeBorderWidth = action((control: Control, event): void => {
 	control.borderWidth = event.target.value || defaultBorderWidth;
+});
+
+const handleChangeBorderRadius = action((control: DpadControl, event): void => {
+	control.borderRadius = event.target.value || defaultBorderRadius;
 });
 
 const handleChangeRotation = action((control: RotatableControl, event): void => {

@@ -14,6 +14,7 @@ export function parseControlJSON(json: ControlJSON): Control {
 	switch (json.type) {
 		case ControlType.Dpad:
 			const dpad = new DpadControl();
+			dpad.borderRadius = json.borderRadius;
 			dpad.direction = json.direction;
 			control = dpad;
 			break;

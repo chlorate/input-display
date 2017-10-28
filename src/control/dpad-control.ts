@@ -83,7 +83,6 @@ export class DpadControl extends Control {
 	}
 
 	@computed public get strokeDashArray(): string {
-		// TODO: test
 		switch (this.direction) {
 			case Direction4.Up:
 			case Direction4.Down:

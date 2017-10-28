@@ -25,7 +25,7 @@ import {
 	minBorderWidth, minHeight, minRadius, minWidth, minX, minY,
 } from "../../control/control";
 
-const borderStep = 0.25;
+const borderWidthStep = 0.25;
 
 interface Props {
 	events: EventEmitter;
@@ -68,7 +68,6 @@ export class ControlFieldsetComponent extends Component<Props, {}> {
 					value={control.radius}
 					min={minRadius}
 					max={maxRadius}
-					step={borderStep}
 					placeholder={defaultRadius}
 					onChange={linkEvent(control, handleChangeRadius)}
 				/>,
@@ -84,7 +83,6 @@ export class ControlFieldsetComponent extends Component<Props, {}> {
 					value={control.topRadius}
 					min={minRadius}
 					max={maxRadius}
-					step={borderStep}
 					placeholder={defaultRadius}
 					onChange={linkEvent(control, handleChangeTopRadius)}
 				/>,
@@ -96,7 +94,6 @@ export class ControlFieldsetComponent extends Component<Props, {}> {
 					value={control.bottomRadius}
 					min={minRadius}
 					max={maxRadius}
-					step={borderStep}
 					placeholder={defaultRadius}
 					onChange={linkEvent(control, handleChangeBottomRadius)}
 				/>,
@@ -238,7 +235,7 @@ export class ControlFieldsetComponent extends Component<Props, {}> {
 						value={control.borderWidth}
 						min={minBorderWidth}
 						max={maxBorderWidth}
-						step={borderStep}
+						step={borderWidthStep}
 						placeholder={defaultBorderWidth}
 						onChange={linkEvent(control, handleChangeBorderWidth)}
 					/>

@@ -24,7 +24,7 @@ export type ControlJSON = DpadControlJSON | EllipseControlJSON | RectangleContro
  */
 export interface DpadControlJSON extends BaseControlJSON {
 	type: ControlType.Dpad;
-	borderRadius: number;
+	radius: number;
 	direction: Direction4;
 }
 
@@ -41,8 +41,8 @@ export interface EllipseControlJSON extends BaseControlJSON {
  */
 export interface RectangleControlJSON extends BaseControlJSON {
 	type: ControlType.Rectangle;
-	topBorderRadius: number;
-	bottomBorderRadius: number;
+	topRadius: number;
+	bottomRadius: number;
 	rotation: number;
 }
 
@@ -99,7 +99,7 @@ export function isControlJSON(input: any): input is ControlJSON {
 		(
 			(
 				input.type === ControlType.Dpad &&
-				typeof input.borderRadius === "number" &&
+				typeof input.radius === "number" &&
 				sortedDirection4s.indexOf(input.direction) >= 0
 			) ||
 			(
@@ -108,8 +108,8 @@ export function isControlJSON(input: any): input is ControlJSON {
 			) ||
 			(
 				input.type === ControlType.Rectangle &&
-				typeof input.topBorderRadius === "number" &&
-				typeof input.bottomBorderRadius === "number" &&
+				typeof input.topRadius === "number" &&
+				typeof input.bottomRadius === "number" &&
 				typeof input.rotation === "number"
 			) ||
 			(

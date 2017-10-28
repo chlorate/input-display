@@ -14,7 +14,7 @@ export function parseControlJSON(json: ControlJSON): Control {
 	switch (json.type) {
 		case ControlType.Dpad:
 			const dpad = new DpadControl();
-			dpad.borderRadius = json.borderRadius;
+			dpad.radius = json.radius;
 			dpad.direction = json.direction;
 			control = dpad;
 			break;
@@ -25,8 +25,8 @@ export function parseControlJSON(json: ControlJSON): Control {
 			break;
 		case ControlType.Rectangle:
 			const rectangle = new RectangleControl();
-			rectangle.topBorderRadius = json.topBorderRadius;
-			rectangle.bottomBorderRadius = json.bottomBorderRadius;
+			rectangle.topRadius = json.topRadius;
+			rectangle.bottomRadius = json.bottomRadius;
 			rectangle.rotation = json.rotation;
 			control = rectangle;
 			break;

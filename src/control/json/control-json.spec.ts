@@ -22,7 +22,7 @@ describe("isControlJSON", () => {
 	describe("DpadControlJSON", () => {
 		beforeEach(() => {
 			json.type = ControlType.Dpad;
-			json.borderRadius = 6;
+			json.radius = 6;
 			json.direction = Direction4.Down;
 		});
 
@@ -74,8 +74,8 @@ describe("isControlJSON", () => {
 			expect(isControlJSON(json)).toBe(false);
 		});
 
-		it("should return false if border radius is not numeric", () => {
-			json.borderRadius = "bad";
+		it("should return false if radius is not numeric", () => {
+			json.radius = "bad";
 			expect(isControlJSON(json)).toBe(false);
 		});
 
@@ -124,8 +124,8 @@ describe("isControlJSON", () => {
 	describe("RectangleControlJSON", () => {
 		beforeEach(() => {
 			json.type = ControlType.Rectangle;
-			json.topBorderRadius = 6;
-			json.bottomBorderRadius = 7;
+			json.topRadius = 6;
+			json.bottomRadius = 7;
 			json.rotation = 8;
 		});
 
@@ -133,13 +133,13 @@ describe("isControlJSON", () => {
 			expect(isControlJSON(json)).toBe(true);
 		});
 
-		it("should return false if topBorderRadius is not numeric", () => {
-			json.topBorderRadius = "bad";
+		it("should return false if topRadius is not numeric", () => {
+			json.topRadius = "bad";
 			expect(isControlJSON(json)).toBe(false);
 		});
 
-		it("should return false if bottomBorderRadius is not numeric", () => {
-			json.bottomBorderRadius = "bad";
+		it("should return false if bottomRadius is not numeric", () => {
+			json.bottomRadius = "bad";
 			expect(isControlJSON(json)).toBe(false);
 		});
 

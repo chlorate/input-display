@@ -20,9 +20,9 @@ import {NumberInputComponent} from "../field/number-input.component";
 import {TextInputComponent} from "../field/text-input.component";
 
 import {
-	defaultBorderRadius, defaultBorderWidth, defaultPosition, defaultSize,
-	maxBorderRadius, maxBorderWidth, maxHeight, maxNameLength, maxWidth, maxX, maxY,
-	minBorderRadius, minBorderWidth, minHeight, minWidth, minX, minY,
+	defaultBorderWidth, defaultPosition, defaultRadius, defaultSize,
+	maxBorderWidth, maxHeight, maxNameLength, maxRadius, maxWidth, maxX, maxY,
+	minBorderWidth, minHeight, minRadius, minWidth, minX, minY,
 } from "../../control/control";
 
 const borderStep = 0.25;
@@ -62,15 +62,15 @@ export class ControlFieldsetComponent extends Component<Props, {}> {
 			extraInputs.push(
 				<NumberInputComponent
 					className="col"
-					id="config-control-border-radius"
-					label="Border radius"
+					id="config-control-radius"
+					label="Radius"
 					suffix="px"
-					value={control.borderRadius}
-					min={minBorderRadius}
-					max={maxBorderRadius}
+					value={control.radius}
+					min={minRadius}
+					max={maxRadius}
 					step={borderStep}
-					placeholder={defaultBorderRadius}
-					onChange={linkEvent(control, handleChangeBorderRadius)}
+					placeholder={defaultRadius}
+					onChange={linkEvent(control, handleChangeRadius)}
 				/>,
 			);
 		}
@@ -78,27 +78,27 @@ export class ControlFieldsetComponent extends Component<Props, {}> {
 			extraInputs.push(
 				<NumberInputComponent
 					className="col"
-					id="config-control-top-border-radius"
+					id="config-control-top-radius"
 					label="Top radius"
 					suffix="px"
-					value={control.topBorderRadius}
-					min={minBorderRadius}
-					max={maxBorderRadius}
+					value={control.topRadius}
+					min={minRadius}
+					max={maxRadius}
 					step={borderStep}
-					placeholder={defaultBorderRadius}
-					onChange={linkEvent(control, handleChangeTopBorderRadius)}
+					placeholder={defaultRadius}
+					onChange={linkEvent(control, handleChangeTopRadius)}
 				/>,
 				<NumberInputComponent
 					className="col"
-					id="config-control-bottom-border-radius"
+					id="config-control-bottom-radius"
 					label="Bottom radius"
 					suffix="px"
-					value={control.bottomBorderRadius}
-					min={minBorderRadius}
-					max={maxBorderRadius}
+					value={control.bottomRadius}
+					min={minRadius}
+					max={maxRadius}
 					step={borderStep}
-					placeholder={defaultBorderRadius}
-					onChange={linkEvent(control, handleChangeBottomBorderRadius)}
+					placeholder={defaultRadius}
+					onChange={linkEvent(control, handleChangeBottomRadius)}
 				/>,
 			);
 		}
@@ -308,16 +308,16 @@ const handleChangeBorderWidth = action((control: Control, event): void => {
 	control.borderWidth = event.target.value || defaultBorderWidth;
 });
 
-const handleChangeBorderRadius = action((control: DpadControl, event): void => {
-	control.borderRadius = event.target.value || defaultBorderRadius;
+const handleChangeRadius = action((control: DpadControl, event): void => {
+	control.radius = event.target.value || defaultRadius;
 });
 
-const handleChangeTopBorderRadius = action((control: RectangleControl, event): void => {
-	control.topBorderRadius = event.target.value || defaultBorderRadius;
+const handleChangeTopRadius = action((control: RectangleControl, event): void => {
+	control.topRadius = event.target.value || defaultRadius;
 });
 
-const handleChangeBottomBorderRadius = action((control: RectangleControl, event): void => {
-	control.bottomBorderRadius = event.target.value || defaultBorderRadius;
+const handleChangeBottomRadius = action((control: RectangleControl, event): void => {
+	control.bottomRadius = event.target.value || defaultRadius;
 });
 
 const handleChangeRotation = action((control: RotatableControl, event): void => {

@@ -19,7 +19,7 @@ function makeJSON(): ControlJSON {
 		width: 2,
 		height: 3,
 		borderWidth: 4,
-		borderRadius: 5,
+		radius: 5,
 		direction: Direction4.Down,
 		nameLabel: LabelPosition.Above,
 		pressesLabel: LabelPosition.Below,
@@ -43,7 +43,7 @@ describe("parseControlJSON", () => {
 		expect(control.width).toBe(2);
 		expect(control.height).toBe(3);
 		expect(control.borderWidth).toBe(4);
-		expect(control.borderRadius).toBe(5);
+		expect(control.radius).toBe(5);
 		expect(control.direction).toBe(Direction4.Down);
 		expect(control.nameLabel).toBe(LabelPosition.Above);
 		expect(control.pressesLabel).toBe(LabelPosition.Below);
@@ -69,13 +69,13 @@ describe("parseControlJSON", () => {
 
 	it("can create a RectangleControl", () => {
 		json.type = ControlType.Rectangle;
-		json.topBorderRadius = 5;
-		json.bottomBorderRadius = 6;
+		json.topRadius = 5;
+		json.bottomRadius = 6;
 		json.rotation = 7;
 		const control = parseControlJSON(json) as RectangleControl;
 		expect(control instanceof RectangleControl).toBe(true);
-		expect(control.topBorderRadius).toBe(5);
-		expect(control.bottomBorderRadius).toBe(6);
+		expect(control.topRadius).toBe(5);
+		expect(control.bottomRadius).toBe(6);
 		expect(control.rotation).toBe(7);
 	});
 

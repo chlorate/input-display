@@ -1,7 +1,7 @@
 import {computed, observable} from "mobx";
 import {Direction4} from "../direction/direction4";
 import {clamp} from "../math/util";
-import {Control, defaultBorderRadius, maxBorderRadius, minBorderRadius} from "./control";
+import {Control, defaultRadius, maxRadius, minRadius} from "./control";
 import {ControlType, DpadControlJSON} from "./json/control-json";
 
 export const defaultDirection = Direction4.Up;
@@ -32,13 +32,13 @@ const cornerFix = 0.01;
  */
 export class DpadControl extends Control {
 	@observable public direction: Direction4 = defaultDirection;
-	@observable private _borderRadius: number = defaultBorderRadius;
+	@observable private _radius: number = defaultRadius;
 
-	get borderRadius(): number {
-		return this._borderRadius;
+	get radius(): number {
+		return this._radius;
 	}
-	set borderRadius(radius: number) {
-		this._borderRadius = clamp(radius, minBorderRadius, maxBorderRadius);
+	set radius(radius: number) {
+		this._radius = clamp(radius, minRadius, maxRadius);
 	}
 
 	@computed public get path(): string {
@@ -61,9 +61,9 @@ export class DpadControl extends Control {
 		switch (this.direction) {
 			case Direction4.Up:
 				bottomY = this.height;
-				curveY = Math.min(topY + this.borderRadius, bottomY);
-				leftCurveX = Math.min(leftX + this.borderRadius, this.centerX);
-				rightCurveX = Math.max(rightX - this.borderRadius, this.centerX);
+				curveY = Math.min(topY + this.radius, bottomY);
+				leftCurveX = Math.min(leftX + this.radius, this.centerX);
+				rightCurveX = Math.max(rightX - this.radius, this.centerX);
 				return (
 					`M ${leftX},${bottomY - cornerFix} ` +
 					`V ${bottomY} ` +
@@ -76,9 +76,9 @@ export class DpadControl extends Control {
 				);
 			case Direction4.Right:
 				leftX = 0;
-				curveX = Math.max(rightX - this.borderRadius, leftX);
-				topCurveY = Math.min(topY + this.borderRadius, this.centerY);
-				bottomCurveY = Math.max(bottomY - this.borderRadius, this.centerY);
+				curveX = Math.max(rightX - this.radius, leftX);
+				topCurveY = Math.min(topY + this.radius, this.centerY);
+				bottomCurveY = Math.max(bottomY - this.radius, this.centerY);
 				return (
 					`M ${leftX + cornerFix},${topY} ` +
 					`H ${leftX} ` +
@@ -91,9 +91,9 @@ export class DpadControl extends Control {
 				);
 			case Direction4.Down:
 				topY = 0;
-				curveY = Math.max(bottomY - this.borderRadius, topY);
-				leftCurveX = Math.min(leftX + this.borderRadius, this.centerX);
-				rightCurveX = Math.max(rightX - this.borderRadius, this.centerX);
+				curveY = Math.max(bottomY - this.radius, topY);
+				leftCurveX = Math.min(leftX + this.radius, this.centerX);
+				rightCurveX = Math.max(rightX - this.radius, this.centerX);
 				return (
 					`M ${leftX},${topY + cornerFix} ` +
 					`V ${topY} ` +
@@ -106,9 +106,9 @@ export class DpadControl extends Control {
 				);
 			case Direction4.Left:
 				rightX = this.width;
-				curveX = Math.min(leftX + this.borderRadius, rightX);
-				topCurveY = Math.min(topY + this.borderRadius, this.centerY);
-				bottomCurveY = Math.max(bottomY - this.borderRadius, this.centerY);
+				curveX = Math.min(leftX + this.radius, rightX);
+				topCurveY = Math.min(topY + this.radius, this.centerY);
+				bottomCurveY = Math.max(bottomY - this.radius, this.centerY);
 				return (
 					`M ${rightX - cornerFix},${topY} ` +
 					`H ${rightX} ` +
@@ -151,7 +151,7 @@ export class DpadControl extends Control {
 	public toJSON(): DpadControlJSON {
 		const json = {
 			type: ControlType.Dpad,
-			borderRadius: this.borderRadius,
+			radius: this.radius,
 			direction: this.direction,
 		};
 		return Object.assign(json, super.toBaseJSON()) as DpadControlJSON;

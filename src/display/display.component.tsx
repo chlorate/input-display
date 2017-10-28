@@ -1,19 +1,33 @@
+import {EventEmitter} from "events";
+import {linkEvent} from "inferno";
 import Component from "inferno-component";
 import {connect} from "inferno-mobx";
+import {action} from "mobx";
 import {Config} from "../config/config";
 import {Control} from "../control/control";
 import {DpadControl} from "../control/dpad-control";
 import {EllipseControl} from "../control/ellipse-control";
 import {RectangleControl} from "../control/rectangle-control";
 import {TriangleControl} from "../control/triangle-control";
+import {Controller} from "../controller/controller";
+import {Event} from "../menu/event";
 import {Store} from "../storage/store";
 import {DpadControlComponent} from "./dpad-control.component";
 import {EllipseControlComponent} from "./ellipse-control.component";
 import {RectangleControlComponent} from "./rectangle-control.component";
 import {TriangleControlComponent} from "./triangle-control.component";
 
+enum Key {
+	Up = 38,
+	Right = 39,
+	Down = 40,
+	Left = 37,
+}
+
 interface Props {
 	config: Config;
+	controller: Controller;
+	events: EventEmitter;
 }
 
 interface Item {
@@ -24,9 +38,35 @@ interface Item {
 
 /**
  * Draws the entire input display.
+ *
+ * This also implements drag-and-drop. When left-click is held on
+ * a ControlGroupComponent, its control is selected and can be moved with the
+ * mouse until the mouse button is released or the cursor leaves this component.
+ *
+ * When a control is selected, the arrow keys will also move the control by
+ * a pixel. Clicking outside of a ControlGroupComponent will deselect the
+ * current control.
  */
-@connect([Store.Config, Store.Controller])
+@connect([Store.Config, Store.Controller, Store.Events])
 export class DisplayComponent extends Component<Props, {}> {
+	public control?: Control;
+	public lastX?: number;
+	public lastY?: number;
+	private listener: (control: Control) => void;
+
+	constructor(props: Props) {
+		super(props);
+		this.listener = (control: Control) => this.control = control;
+	}
+
+	public componentDidMount(): void {
+		this.props.events.addListener(Event.SelectControl, this.listener);
+	}
+
+	public componentWillUnmount(): void {
+		this.props.events.removeListener(Event.SelectControl, this.listener);
+	}
+
 	public render() {
 		const config = this.props.config;
 
@@ -45,6 +85,13 @@ export class DisplayComponent extends Component<Props, {}> {
 				className={config.displayOutline ? "display-outline" : undefined}
 				width={config.displayWidth}
 				height={config.displayHeight}
+				tabindex="0"
+				onClick={linkEvent(this, handleClick)}
+				onKeyDown={linkEvent(this, handleKeyDown)}
+				onMouseDown={linkEvent(this, handleMouseDown)}
+				onMouseMove={linkEvent(this, handleMouseMove)}
+				onMouseUp={linkEvent(this, handleMouseLeaveOrUp)}
+				onMouseLeave={linkEvent(this, handleMouseLeaveOrUp)}
 			>
 				{items.map((item) => {
 					if (item.control instanceof DpadControl) {
@@ -85,3 +132,45 @@ export class DisplayComponent extends Component<Props, {}> {
 		return z;
 	}
 }
+
+function handleMouseDown(component: DisplayComponent, event): void {
+	component.lastX = event.clientX;
+	component.lastY = event.clientY;
+}
+
+const handleMouseMove = action((component: DisplayComponent, event): void => {
+	if (component.control && component.lastX !== undefined && component.lastY !== undefined) {
+		component.control.x += event.clientX - component.lastX;
+		component.control.y += event.clientY - component.lastY;
+		component.lastX = event.clientX;
+		component.lastY = event.clientY;
+	}
+});
+
+function handleClick(component: DisplayComponent): void {
+	component.control = undefined;
+}
+
+function handleMouseLeaveOrUp(component: DisplayComponent): void {
+	component.lastX = undefined;
+	component.lastY = undefined;
+}
+
+const handleKeyDown = action((component: DisplayComponent, event): void => {
+	if (component.control) {
+		switch (event.keyCode) {
+			case Key.Up:
+				component.control.y--;
+				break;
+			case Key.Right:
+				component.control.x++;
+				break;
+			case Key.Down:
+				component.control.y++;
+				break;
+			case Key.Left:
+				component.control.x--;
+				break;
+		}
+	}
+});

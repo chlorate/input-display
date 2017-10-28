@@ -1,12 +1,17 @@
+import {EventEmitter} from "events";
+import {linkEvent} from "inferno";
+import Component from "inferno-component";
 import {connect} from "inferno-mobx";
 import {Config} from "../config/config";
 import {Control} from "../control/control";
 import {Controller} from "../controller/controller";
+import {Event} from "../menu/event";
 import {Store} from "../storage/store";
 
 interface Props {
 	config: Config;
 	controller: Controller;
+	events: EventEmitter;
 	control: Control;
 	children;
 }
@@ -17,26 +22,45 @@ interface Props {
  * position. Class names are added for the control's index and its button state
  * which can be targeted with custom CSS.
  */
-export const ControlGroupComponent = connect([Store.Config, Store.Controller], (props: Props) => {
-	const classNames: string[] = [];
-	if (props.control.button) {
-		const button = props.control.button.resolve(props.controller);
-		if (button) {
-			if (button.mashing) {
-				classNames.push("control-button-mashing");
-			}
-			if (button.pressed) {
-				classNames.push("control-button-pressed");
+@connect([Store.Config, Store.Controller, Store.Events])
+export class ControlGroupComponent extends Component<Props, {}> {
+	public lastX?: number;
+	public lastY?: number;
+
+	public render() {
+		const control = this.props.control;
+
+		const classNames: string[] = [];
+		if (control.button) {
+			const button = control.button.resolve(this.props.controller);
+			if (button) {
+				if (button.mashing) {
+					classNames.push("control-button-mashing");
+				}
+				if (button.pressed) {
+					classNames.push("control-button-pressed");
+				}
 			}
 		}
-	}
 
-	return (
-		<g
-			className={`control-${props.config.controls.indexOf(props.control) + 1} ${classNames.join(" ")}`}
-			transform={`translate(${props.control.x} ${props.control.y})`}
-		>
-			{props.children}
-		</g>
-	);
-});
+		return (
+			<g
+				className={`control-${this.props.config.controls.indexOf(control) + 1} ${classNames.join(" ")}`}
+				transform={`translate(${control.x} ${control.y})`}
+				onClick={linkEvent(this, handleClick)}
+				onMouseDown={linkEvent(this, handleMouseDown)}
+			>
+				{this.props.children}
+			</g>
+		);
+	}
+}
+
+function handleClick(_, event): void {
+	// Prevent click from deselecting control in DisplayComponent.
+	event.stopPropagation();
+}
+
+function handleMouseDown(component: ControlGroupComponent, event): void {
+	component.props.events.emit(Event.SelectControl, component.props.control);
+}

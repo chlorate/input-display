@@ -4,4 +4,5 @@
 export enum Event {
 	AddControl = "addControl",
 	NavigateTab = "navigateTab",
+	SelectControl = "selectControl",
 }

@@ -1,6 +1,8 @@
 .display {
 	flex-shrink: 0;
+	cursor: default;
 	padding: $spacer 0 $spacer $spacer;
+	user-select: none;
 }
 
 .display-outline {

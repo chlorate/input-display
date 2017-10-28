@@ -198,14 +198,14 @@ export class Config {
 		return this._labelOffsetX;
 	}
 	set labelOffsetX(offset: number) {
-		this._labelOffsetX = clampInt(offset, minLabelOffset, maxLabelOffset);
+		this._labelOffsetX = clamp(offset, minLabelOffset, maxLabelOffset);
 	}
 
 	get labelOffsetY(): number {
 		return this._labelOffsetY;
 	}
 	set labelOffsetY(offset: number) {
-		this._labelOffsetY = clampInt(offset, minLabelOffset, maxLabelOffset);
+		this._labelOffsetY = clamp(offset, minLabelOffset, maxLabelOffset);
 	}
 
 	get controls(): Control[] {

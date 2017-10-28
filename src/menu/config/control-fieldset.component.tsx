@@ -56,8 +56,37 @@ export class ControlFieldsetComponent extends Component<Props, {}> {
 	public render() {
 		const control = this.props.control;
 
-		const extraInputs: any[] = [];
+		let extraInputs: any[] = [
+			<NumberInputComponent
+				className="col"
+				id="config-control-border-width"
+				label="Border width"
+				suffix="px"
+				value={control.borderWidth}
+				min={minBorderWidth}
+				max={maxBorderWidth}
+				step={borderWidthStep}
+				placeholder={defaultBorderWidth}
+				onChange={linkEvent(control, handleChangeBorderWidth)}
+			/>,
+		];
 		const isCircle = control instanceof EllipseControl && control.width === control.height;
+		if (control instanceof RotatableControl && !isCircle) {
+			// Rotation won't have any effect if control is a circle.
+			extraInputs.push(
+				<NumberInputComponent
+					className="col"
+					id="config-control-rotation"
+					label="Rotation"
+					suffix="°"
+					value={control.rotation}
+					min={minRotation}
+					max={maxRotation}
+					placeholder={defaultRotation}
+					onChange={linkEvent(control, handleChangeRotation)}
+				/>,
+			);
+		}
 		if (control instanceof DpadControl) {
 			extraInputs.push(
 				<NumberInputComponent
@@ -99,22 +128,6 @@ export class ControlFieldsetComponent extends Component<Props, {}> {
 				/>,
 			);
 		}
-		if (control instanceof RotatableControl && !isCircle) {
-			// Rotation won't have any effect if control is a circle.
-			extraInputs.push(
-				<NumberInputComponent
-					className="col"
-					id="config-control-rotation"
-					label="Rotation"
-					suffix="°"
-					value={control.rotation}
-					min={minRotation}
-					max={maxRotation}
-					placeholder={defaultRotation}
-					onChange={linkEvent(control, handleChangeRotation)}
-				/>,
-			);
-		}
 		if (control instanceof DpadControl) {
 			extraInputs.push(
 				<Direction4SelectComponent
@@ -139,14 +152,30 @@ export class ControlFieldsetComponent extends Component<Props, {}> {
 		const spacer3 = <div className="col-3 col-spacer"></div>;
 		const spacer6 = <div className="col-6 col-spacer"></div>;
 		switch (extraInputs.length) {
-			case 0:
+			case 1:
 				extraInputs.push(spacer6, spacer3);
 				break;
-			case 1:
+			case 2:
 				extraInputs.push(spacer6);
 				break;
-			case 2:
+			case 3:
 				extraInputs.push(spacer3, spacer3);
+				break;
+			case 4:
+				extraInputs = [
+					<div className="col">
+						<div className="form-row flex-nowrap">
+							{extraInputs[0] || spacer6}
+							{extraInputs[1] || spacer6}
+						</div>
+					</div>,
+					<div className="col">
+						<div className="form-row flex-nowrap">
+							{extraInputs[2] || spacer6}
+							{extraInputs[3] || spacer6}
+						</div>
+					</div>,
+				];
 				break;
 		}
 
@@ -227,18 +256,6 @@ export class ControlFieldsetComponent extends Component<Props, {}> {
 				</div>
 
 				<div className="form-row">
-					<NumberInputComponent
-						className="col"
-						id="config-control-border-width"
-						label="Border width"
-						suffix="px"
-						value={control.borderWidth}
-						min={minBorderWidth}
-						max={maxBorderWidth}
-						step={borderWidthStep}
-						placeholder={defaultBorderWidth}
-						onChange={linkEvent(control, handleChangeBorderWidth)}
-					/>
 					{extraInputs}
 				</div>
 

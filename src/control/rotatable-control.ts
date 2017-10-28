@@ -1,6 +1,6 @@
 import {computed, observable} from "mobx";
 import {Point, rotatePoints} from "../math/point";
-import {clampInt} from "../math/util";
+import {clamp} from "../math/util";
 import {Control} from "./control";
 
 export const minRotation = -360;
@@ -20,7 +20,7 @@ export abstract class RotatableControl extends Control {
 		return this._rotation;
 	}
 	set rotation(rotation: number) {
-		this._rotation = clampInt(rotation, minRotation, maxRotation);
+		this._rotation = clamp(rotation, minRotation, maxRotation);
 	}
 
 	@computed get transform(): string {

@@ -22,10 +22,9 @@ export const AdvancedConfigComponent = connect([Store.Config], ({config}: Props)
 				id="config-custom-css"
 				rows="8"
 				spellCheck="false"
+				value={config.customCss}
 				onInput={linkEvent(config, handleChange)}
-			>
-				{config.customCss}
-			</textarea>
+			/>
 		</div>
 	</section>
 ));

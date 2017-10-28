@@ -7,6 +7,7 @@ import {ButtonReference} from "../../config/button-reference";
 import {Control} from "../../control/control";
 import {defaultDirection as defaultDpadDirection, DpadControl} from "../../control/dpad-control";
 import {EllipseControl} from "../../control/ellipse-control";
+import {RectangleControl} from "../../control/rectangle-control";
 import {defaultRotation, maxRotation, minRotation, RotatableControl} from "../../control/rotatable-control";
 import {defaultDirection as defaultTriangleDirection, TriangleControl} from "../../control/triangle-control";
 import {Store} from "../../storage/store";
@@ -70,6 +71,34 @@ export class ControlFieldsetComponent extends Component<Props, {}> {
 					step={borderStep}
 					placeholder={defaultBorderRadius}
 					onChange={linkEvent(control, handleChangeBorderRadius)}
+				/>,
+			);
+		}
+		if (control instanceof RectangleControl) {
+			extraInputs.push(
+				<NumberInputComponent
+					className="col"
+					id="config-control-top-border-radius"
+					label="Top radius"
+					suffix="px"
+					value={control.topBorderRadius}
+					min={minBorderRadius}
+					max={maxBorderRadius}
+					step={borderStep}
+					placeholder={defaultBorderRadius}
+					onChange={linkEvent(control, handleChangeTopBorderRadius)}
+				/>,
+				<NumberInputComponent
+					className="col"
+					id="config-control-bottom-border-radius"
+					label="Bottom radius"
+					suffix="px"
+					value={control.bottomBorderRadius}
+					min={minBorderRadius}
+					max={maxBorderRadius}
+					step={borderStep}
+					placeholder={defaultBorderRadius}
+					onChange={linkEvent(control, handleChangeBottomBorderRadius)}
 				/>,
 			);
 		}
@@ -281,6 +310,14 @@ const handleChangeBorderWidth = action((control: Control, event): void => {
 
 const handleChangeBorderRadius = action((control: DpadControl, event): void => {
 	control.borderRadius = event.target.value || defaultBorderRadius;
+});
+
+const handleChangeTopBorderRadius = action((control: RectangleControl, event): void => {
+	control.topBorderRadius = event.target.value || defaultBorderRadius;
+});
+
+const handleChangeBottomBorderRadius = action((control: RectangleControl, event): void => {
+	control.bottomBorderRadius = event.target.value || defaultBorderRadius;
 });
 
 const handleChangeRotation = action((control: RotatableControl, event): void => {

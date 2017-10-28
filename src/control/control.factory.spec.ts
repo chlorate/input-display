@@ -69,10 +69,14 @@ describe("parseControlJSON", () => {
 
 	it("can create a RectangleControl", () => {
 		json.type = ControlType.Rectangle;
-		json.rotation = 5;
+		json.topBorderRadius = 5;
+		json.bottomBorderRadius = 6;
+		json.rotation = 7;
 		const control = parseControlJSON(json) as RectangleControl;
 		expect(control instanceof RectangleControl).toBe(true);
-		expect(control.rotation).toBe(5);
+		expect(control.topBorderRadius).toBe(5);
+		expect(control.bottomBorderRadius).toBe(6);
+		expect(control.rotation).toBe(7);
 	});
 
 	it("can create a TriangleControl", () => {

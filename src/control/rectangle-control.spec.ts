@@ -1,3 +1,4 @@
+import {defaultBorderRadius, maxBorderRadius, minBorderRadius} from "./control";
 import {ControlType} from "./json/control-json";
 import {RectangleControl} from "./rectangle-control";
 import {defaultRotation} from "./rotatable-control";
@@ -7,6 +8,20 @@ describe("RectangleControl", () => {
 
 	beforeEach(() => {
 		control = new RectangleControl();
+	});
+
+	it("should clamp top border radius", () => {
+		control.topBorderRadius = -5000;
+		expect(control.topBorderRadius).toBe(minBorderRadius);
+		control.topBorderRadius = 5000;
+		expect(control.topBorderRadius).toBe(maxBorderRadius);
+	});
+
+	it("should clamp bottom border radius", () => {
+		control.bottomBorderRadius = -5000;
+		expect(control.bottomBorderRadius).toBe(minBorderRadius);
+		control.bottomBorderRadius = 5000;
+		expect(control.bottomBorderRadius).toBe(maxBorderRadius);
 	});
 
 	it("should account for rotation when getting edge positions", () => {
@@ -22,6 +37,8 @@ describe("RectangleControl", () => {
 	it("can return a JSON representation", () => {
 		const json = control.toJSON();
 		expect(json.type).toBe(ControlType.Rectangle);
+		expect(json.topBorderRadius).toBe(defaultBorderRadius);
+		expect(json.bottomBorderRadius).toBe(defaultBorderRadius);
 		expect(json.rotation).toBe(defaultRotation);
 	});
 });

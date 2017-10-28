@@ -124,11 +124,23 @@ describe("isControlJSON", () => {
 	describe("RectangleControlJSON", () => {
 		beforeEach(() => {
 			json.type = ControlType.Rectangle;
-			json.rotation = 5;
+			json.topBorderRadius = 6;
+			json.bottomBorderRadius = 7;
+			json.rotation = 8;
 		});
 
 		it("should return true if valid", () => {
 			expect(isControlJSON(json)).toBe(true);
+		});
+
+		it("should return false if topBorderRadius is not numeric", () => {
+			json.topBorderRadius = "bad";
+			expect(isControlJSON(json)).toBe(false);
+		});
+
+		it("should return false if bottomBorderRadius is not numeric", () => {
+			json.bottomBorderRadius = "bad";
+			expect(isControlJSON(json)).toBe(false);
 		});
 
 		it("should return false if rotation is not numeric", () => {

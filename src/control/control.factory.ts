@@ -25,6 +25,8 @@ export function parseControlJSON(json: ControlJSON): Control {
 			break;
 		case ControlType.Rectangle:
 			const rectangle = new RectangleControl();
+			rectangle.topBorderRadius = json.topBorderRadius;
+			rectangle.bottomBorderRadius = json.bottomBorderRadius;
 			rectangle.rotation = json.rotation;
 			control = rectangle;
 			break;

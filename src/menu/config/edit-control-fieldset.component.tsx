@@ -10,9 +10,9 @@ import {DpadControl} from "../../control/dpad-control";
 import {EllipseControl} from "../../control/ellipse-control";
 import {RectangleControl} from "../../control/rectangle-control";
 import {TriangleControl} from "../../control/triangle-control";
+import {Event} from "../../event";
 import {clampIndex} from "../../math/util";
 import {Store} from "../../storage/store";
-import {Event} from "../event";
 import {ControlFieldsetComponent} from "./control-fieldset.component";
 
 interface Props {

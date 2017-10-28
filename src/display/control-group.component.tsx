@@ -5,7 +5,7 @@ import {connect} from "inferno-mobx";
 import {Config} from "../config/config";
 import {Control} from "../control/control";
 import {Controller} from "../controller/controller";
-import {Event} from "../menu/event";
+import {Event} from "../event";
 import {Store} from "../storage/store";
 
 interface Props {

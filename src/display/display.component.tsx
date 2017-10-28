@@ -10,7 +10,7 @@ import {EllipseControl} from "../control/ellipse-control";
 import {RectangleControl} from "../control/rectangle-control";
 import {TriangleControl} from "../control/triangle-control";
 import {Controller} from "../controller/controller";
-import {Event} from "../menu/event";
+import {Event} from "../event";
 import {Store} from "../storage/store";
 import {DpadControlComponent} from "./dpad-control.component";
 import {EllipseControlComponent} from "./ellipse-control.component";

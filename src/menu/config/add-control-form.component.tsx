@@ -9,8 +9,8 @@ import {EllipseControl} from "../../control/ellipse-control";
 import {ControlType} from "../../control/json/control-json";
 import {RectangleControl} from "../../control/rectangle-control";
 import {TriangleControl} from "../../control/triangle-control";
+import {Event} from "../../event";
 import {Store} from "../../storage/store";
-import {Event} from "../event";
 
 interface Props {
 	config: Config;

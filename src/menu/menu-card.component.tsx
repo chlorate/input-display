@@ -2,8 +2,8 @@ import EventEmitter from "events";
 import Component from "inferno-component";
 import {connect} from "inferno-mobx";
 import {Link} from "inferno-router";
+import {Event} from "../event";
 import {Store} from "../storage/store";
-import {Event} from "./event";
 
 interface Props {
 	events: EventEmitter;

@@ -62,5 +62,5 @@ function handleClick(_, event): void {
 }
 
 function handleMouseDown(component: ControlGroupComponent, event): void {
-	component.props.events.emit(Event.SelectControl, component.props.control);
+	component.props.events.emit(Event.SelectControl, component.props.control, event.clientX, event.clientY);
 }

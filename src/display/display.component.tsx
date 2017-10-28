@@ -52,11 +52,15 @@ export class DisplayComponent extends Component<Props, {}> {
 	public control?: Control;
 	public lastX?: number;
 	public lastY?: number;
-	private listener: (control: Control) => void;
+	private listener: (control: Control, x: number, y: number) => void;
 
 	constructor(props: Props) {
 		super(props);
-		this.listener = (control: Control) => this.control = control;
+		this.listener = (control: Control, x: number, y: number) => {
+			this.control = control;
+			this.lastX = x;
+			this.lastY = y;
+		};
 	}
 
 	public componentDidMount(): void {
@@ -88,7 +92,6 @@ export class DisplayComponent extends Component<Props, {}> {
 				tabindex="0"
 				onClick={linkEvent(this, handleClick)}
 				onKeyDown={linkEvent(this, handleKeyDown)}
-				onMouseDown={linkEvent(this, handleMouseDown)}
 				onMouseMove={linkEvent(this, handleMouseMove)}
 				onMouseUp={linkEvent(this, handleMouseLeaveOrUp)}
 				onMouseLeave={linkEvent(this, handleMouseLeaveOrUp)}
@@ -131,11 +134,6 @@ export class DisplayComponent extends Component<Props, {}> {
 		}
 		return z;
 	}
-}
-
-function handleMouseDown(component: DisplayComponent, event): void {
-	component.lastX = event.clientX;
-	component.lastY = event.clientY;
 }
 
 const handleMouseMove = action((component: DisplayComponent, event): void => {

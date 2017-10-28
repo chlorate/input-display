@@ -2,7 +2,7 @@ import {action, observable} from "mobx";
 import {Control} from "../control/control";
 import {parseControlJSON} from "../control/control.factory";
 import {ensureColor} from "../css/util";
-import {clampIndex, clampInt} from "../math/util";
+import {clamp, clampIndex, clampInt} from "../math/util";
 import {AxisReference} from "./axis-reference";
 import {ConfigJSON, isConfigJSON} from "./json/config-json";
 import {Palette} from "./palette";
@@ -161,7 +161,7 @@ export class Config {
 		return this._fontSize;
 	}
 	set fontSize(size: number) {
-		this._fontSize = clampInt(size, minFontSize, maxFontSize);
+		this._fontSize = clamp(size, minFontSize, maxFontSize);
 	}
 
 	get backgroundColor(): string {

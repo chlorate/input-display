@@ -14,13 +14,7 @@ export const RectangleControlComponent = connect(({control}: Props) => (
 	<ControlGroupComponent control={control}>
 		<path
 			className="control-button"
-			d={
-				`M ${control.nudge},${control.nudge} ` +
-				`H ${control.width - control.nudge} ` +
-				`V ${control.height - control.nudge} ` +
-				`H ${control.nudge} ` +
-				`Z`
-			}
+			d={control.path}
 			stroke-width={control.borderWidth}
 			transform={control.transform}
 		/>

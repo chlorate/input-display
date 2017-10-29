@@ -59,6 +59,22 @@ export const ColorConfigComponent = connect([Store.Config], ({config}: Props) =>
 			id="config-button-mashing-pressed-palette"
 			palette={config.buttonMashingPressedPalette}
 		/>
+
+		<h3 className="h5">
+			Analog stick (neutral)
+		</h3>
+		<PaletteFieldsetComponent
+			id="config-axis-neutral-palette"
+			palette={config.axisNeutralPalette}
+		/>
+
+		<h3 className="h5">
+			Analog stick (moved)
+		</h3>
+		<PaletteFieldsetComponent
+			id="config-axis-moved-palette"
+			palette={config.axisMovedPalette}
+		/>
 	</section>
 ));
 

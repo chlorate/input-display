@@ -2,11 +2,12 @@ import {linkEvent} from "inferno";
 import {connect} from "inferno-mobx";
 import {action} from "mobx";
 import {ButtonPalette} from "../../config/button-palette";
+import {Palette} from "../../config/palette";
 import {ColorInputComponent} from "../field/color-input.component";
 
 interface Props {
 	id: string;
-	palette: ButtonPalette;
+	palette: Palette;
 }
 
 /**
@@ -31,24 +32,29 @@ export const PaletteFieldsetComponent = connect((props: Props) => (
 				placeholder={props.palette.defaultFill}
 				onChange={linkEvent(props.palette, handleChangeFill)}
 			/>
-			<ColorInputComponent
-				className="col"
-				id={`${props.id}-label`}
-				label="Label"
-				value={props.palette.label}
-				placeholder={props.palette.defaultLabel}
-				onChange={linkEvent(props.palette, handleChangeLabel)}
-			/>
-			<div className="col-6 col-spacer"></div>
+			{!(props.palette instanceof ButtonPalette) &&
+				<div className="form-group-color col col-spacer"></div>
+			}
+			{props.palette instanceof ButtonPalette && [
+				<ColorInputComponent
+					className="col"
+					id={`${props.id}-label`}
+					label="Label"
+					value={props.palette.label}
+					placeholder={props.palette.defaultLabel}
+					onChange={linkEvent(props.palette, handleChangeLabel)}
+				/>,
+				<div className="col-6 col-spacer"></div>,
+			]}
 		</div>
 	</fieldset>
 ));
 
-const handleChangeBorder = action((palette: ButtonPalette, event): void => {
+const handleChangeBorder = action((palette: Palette, event): void => {
 	palette.border = event.target.value;
 });
 
-const handleChangeFill = action((palette: ButtonPalette, event): void => {
+const handleChangeFill = action((palette: Palette, event): void => {
 	palette.fill = event.target.value;
 });
 

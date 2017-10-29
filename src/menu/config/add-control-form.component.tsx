@@ -4,6 +4,7 @@ import Component from "inferno-component";
 import {connect} from "inferno-mobx";
 import {action} from "mobx";
 import {Config} from "../../config/config";
+import {CircleStickControl} from "../../control/circle-stick-control";
 import {DpadButtonControl} from "../../control/dpad-button-control";
 import {EllipseButtonControl} from "../../control/ellipse-button-control";
 import {ControlType} from "../../control/json/control-json";
@@ -85,6 +86,9 @@ const handleSubmit = action((component: AddControlFormComponent, event): void =>
 			break;
 		case ControlType.TriangleButton:
 			controls.push(new TriangleButtonControl());
+			break;
+		case ControlType.CircleStick:
+			controls.push(new CircleStickControl());
 			break;
 	}
 	component.props.events.emit(Event.AddControl);

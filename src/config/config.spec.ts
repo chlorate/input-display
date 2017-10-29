@@ -169,6 +169,14 @@ describe("Config", () => {
 				fill: DefaultColors.ButtonMashingPressedFill,
 				label: DefaultColors.ButtonMashingPressedLabel,
 			},
+			axisNeutralPalette: {
+				border: DefaultColors.AxisNeutralBorder,
+				fill: DefaultColors.AxisNeutralFill,
+			},
+			axisMovedPalette: {
+				border: DefaultColors.AxisMovedBorder,
+				fill: DefaultColors.AxisMovedFill,
+			},
 			mashSpeedThreshold: 15,
 			labelOffsetX: 1,
 			labelOffsetY: -1,
@@ -235,6 +243,14 @@ describe("Config", () => {
 					fill: "#00000b",
 					label: "#00000c",
 				},
+				axisNeutralPalette: {
+					border: "#00000d",
+					fill: "#00000e",
+				},
+				axisMovedPalette: {
+					border: "#00000f",
+					fill: "#000010",
+				},
 				mashSpeedThreshold: 15,
 				labelOffsetX: 1,
 				labelOffsetY: -1,
@@ -274,6 +290,8 @@ describe("Config", () => {
 			expect(config.buttonPressedPalette.border).toBe("#000004");
 			expect(config.buttonMashingUnpressedPalette.border).toBe("#000007");
 			expect(config.buttonMashingPressedPalette.border).toBe("#00000a");
+			expect(config.axisNeutralPalette.border).toBe("#00000d");
+			expect(config.axisMovedPalette.border).toBe("#00000f");
 			expect(config.mashSpeedThreshold).toBe(15);
 			expect(config.labelOffsetX).toBe(1);
 			expect(config.labelOffsetY).toBe(-1);

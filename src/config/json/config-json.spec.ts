@@ -38,6 +38,14 @@ describe("ConfigJSON", () => {
 				fill: "#00000b",
 				label: "#00000c",
 			},
+			axisNeutralPalette: {
+				border: "#00000d",
+				fill: "#00000e",
+			},
+			axisMovedPalette: {
+				border: "#00000f",
+				fill: "#000010",
+			},
 			mashSpeedThreshold: 15,
 			labelOffsetX: 1,
 			labelOffsetY: -1,
@@ -152,23 +160,33 @@ describe("ConfigJSON", () => {
 		expect(isConfigJSON(json)).toBe(false);
 	});
 
-	it("should return false if buttonUnpressedPalette is not a PaletteJSON object", () => {
+	it("should return false if buttonUnpressedPalette is not a ButtonPaletteJSON object", () => {
 		json.buttonUnpressedPalette = "bad";
 		expect(isConfigJSON(json)).toBe(false);
 	});
 
-	it("should return false if buttonPressedPalette is not a PaletteJSON object", () => {
+	it("should return false if buttonPressedPalette is not a ButtonPaletteJSON object", () => {
 		json.buttonPressedPalette = "bad";
 		expect(isConfigJSON(json)).toBe(false);
 	});
 
-	it("should return false if buttonMashingUnpressedPalette is not a PaletteJSON object", () => {
+	it("should return false if buttonMashingUnpressedPalette is not a ButtonPaletteJSON object", () => {
 		json.buttonMashingUnpressedPalette = "bad";
 		expect(isConfigJSON(json)).toBe(false);
 	});
 
-	it("should return false if buttonMashingPressedPalette is not a PaletteJSON", () => {
+	it("should return false if buttonMashingPressedPalette is not a ButtonPaletteJSON", () => {
 		json.buttonMashingPressedPalette = "bad";
+		expect(isConfigJSON(json)).toBe(false);
+	});
+
+	it("should return false if axisNeutralPalette is not a PaletteJSON object", () => {
+		json.axisNeutralPalette = "bad";
+		expect(isConfigJSON(json)).toBe(false);
+	});
+
+	it("should return false if axisMovedPalette is not a PaletteJSON object", () => {
+		json.axisMovedPalette = "bad";
 		expect(isConfigJSON(json)).toBe(false);
 	});
 

@@ -1,6 +1,7 @@
 import {ControlJSON, isControlJSON} from "../../control/json/control-json";
 import {AxisReferenceJSON, isAxisReferenceJSON} from "./axis-reference-json";
 import {ButtonPaletteJSON, isButtonPaletteJSON} from "./button-palette-json";
+import {isPaletteJSON, PaletteJSON} from "./palette-json";
 
 /**
  * A JSON representation of a Config object.
@@ -24,6 +25,8 @@ export interface ConfigJSON {
 	buttonPressedPalette: ButtonPaletteJSON;
 	buttonMashingUnpressedPalette: ButtonPaletteJSON;
 	buttonMashingPressedPalette: ButtonPaletteJSON;
+	axisNeutralPalette: PaletteJSON;
+	axisMovedPalette: PaletteJSON;
 	mashSpeedThreshold: number;
 	labelOffsetX: number;
 	labelOffsetY: number;
@@ -55,6 +58,8 @@ export function isConfigJSON(input: any): input is ConfigJSON {
 		isButtonPaletteJSON(input.buttonPressedPalette) &&
 		isButtonPaletteJSON(input.buttonMashingUnpressedPalette) &&
 		isButtonPaletteJSON(input.buttonMashingPressedPalette) &&
+		isPaletteJSON(input.axisNeutralPalette) &&
+		isPaletteJSON(input.axisMovedPalette) &&
 		typeof input.mashSpeedThreshold === "number" &&
 		typeof input.labelOffsetX === "number" &&
 		typeof input.labelOffsetY === "number" &&

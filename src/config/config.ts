@@ -6,6 +6,7 @@ import {clamp, clampIndex, clampInt} from "../math/util";
 import {AxisReference} from "./axis-reference";
 import {ButtonPalette} from "./button-palette";
 import {ConfigJSON, isConfigJSON} from "./json/config-json";
+import {Palette} from "./palette";
 
 // 4 ms is the smallest delay:
 // https://developer.mozilla.org/en-US/docs/Web/API/WindowOrWorkerGlobalScope/setTimeout#Timeouts_throttled_to_>4ms
@@ -49,6 +50,10 @@ export enum DefaultColors {
 	ButtonMashingPressedBorder = "#ef8b48",
 	ButtonMashingPressedFill = "#813c0e",
 	ButtonMashingPressedLabel = "#ffd4b8",
+	AxisNeutralBorder = "#565f67",
+	AxisNeutralFill = "#1c1f21",
+	AxisMovedBorder = "#469fef",
+	AxisMovedFill = "#0e5280",
 }
 
 /**
@@ -73,6 +78,8 @@ export class Config {
 	@observable private _buttonPressedPalette: ButtonPalette;
 	@observable private _buttonMashingUnpressedPalette: ButtonPalette;
 	@observable private _buttonMashingPressedPalette: ButtonPalette;
+	@observable private _axisNeutralPalette: Palette;
+	@observable private _axisMovedPalette: Palette;
 	@observable private _mashSpeedThreshold: number = defaultMashSpeedThreshold;
 	@observable private _labelOffsetX: number = defaultLabelOffset;
 	@observable private _labelOffsetY: number = defaultLabelOffset;
@@ -99,6 +106,14 @@ export class Config {
 			DefaultColors.ButtonMashingPressedBorder,
 			DefaultColors.ButtonMashingPressedFill,
 			DefaultColors.ButtonMashingPressedLabel,
+		);
+		this._axisNeutralPalette = new Palette(
+			DefaultColors.AxisNeutralBorder,
+			DefaultColors.AxisNeutralFill,
+		);
+		this._axisMovedPalette = new Palette(
+			DefaultColors.AxisMovedBorder,
+			DefaultColors.AxisMovedFill,
 		);
 	}
 
@@ -187,6 +202,14 @@ export class Config {
 		return this._buttonMashingPressedPalette;
 	}
 
+	get axisNeutralPalette(): Palette {
+		return this._axisNeutralPalette;
+	}
+
+	get axisMovedPalette(): Palette {
+		return this._axisMovedPalette;
+	}
+
 	get mashSpeedThreshold(): number {
 		return this._mashSpeedThreshold;
 	}
@@ -240,6 +263,8 @@ export class Config {
 			buttonPressedPalette: this.buttonPressedPalette.toJSON(),
 			buttonMashingUnpressedPalette: this.buttonMashingUnpressedPalette.toJSON(),
 			buttonMashingPressedPalette: this.buttonMashingPressedPalette.toJSON(),
+			axisNeutralPalette: this.axisNeutralPalette.toJSON(),
+			axisMovedPalette: this.axisMovedPalette.toJSON(),
 			mashSpeedThreshold: this.mashSpeedThreshold,
 			labelOffsetX: this.labelOffsetX,
 			labelOffsetY: this.labelOffsetY,
@@ -277,6 +302,8 @@ export class Config {
 		this.buttonPressedPalette.loadJSON(json.buttonPressedPalette);
 		this.buttonMashingUnpressedPalette.loadJSON(json.buttonMashingUnpressedPalette);
 		this.buttonMashingPressedPalette.loadJSON(json.buttonMashingPressedPalette);
+		this.axisNeutralPalette.loadJSON(json.axisNeutralPalette);
+		this.axisMovedPalette.loadJSON(json.axisMovedPalette);
 		this.mashSpeedThreshold = json.mashSpeedThreshold;
 		this.labelOffsetX = json.labelOffsetX;
 		this.labelOffsetY = json.labelOffsetY;

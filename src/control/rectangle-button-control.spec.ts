@@ -107,7 +107,7 @@ describe("RectangleButtonControl", () => {
 
 	it("can return a JSON representation", () => {
 		const json = control.toJSON();
-		expect(json.type).toBe(ControlType.Rectangle);
+		expect(json.type).toBe(ControlType.RectangleButton);
 		expect(json.topRadius).toBe(defaultRadius);
 		expect(json.bottomRadius).toBe(defaultRadius);
 		expect(json.rotation).toBe(defaultRotation);

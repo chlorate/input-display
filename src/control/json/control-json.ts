@@ -8,10 +8,10 @@ import {LabelReplacement, sortedLabelReplacements} from "../label-replacement";
  * Type values for distinguishing Control subclass JSON representations.
  */
 export enum ControlType {
-	Dpad = "dpad",
-	Ellipse = "ellipse",
-	Rectangle = "rectangle",
-	Triangle = "triangle",
+	DpadButton = "dpadButton",
+	EllipseButton = "ellipseButton",
+	RectangleButton = "rectangleButton",
+	TriangleButton = "triangleButton",
 }
 
 /**
@@ -28,7 +28,7 @@ export type ControlJSON = (
  * A JSON representation of a DpadButtonControl.
  */
 export interface DpadButtonControlJSON extends BaseButtonControlJSON {
-	type: ControlType.Dpad;
+	type: ControlType.DpadButton;
 	radius: number;
 	direction: Direction4;
 }
@@ -37,7 +37,7 @@ export interface DpadButtonControlJSON extends BaseButtonControlJSON {
  * A JSON representation of a EllipseButtonControl.
  */
 export interface EllipseButtonControlJSON extends BaseButtonControlJSON {
-	type: ControlType.Ellipse;
+	type: ControlType.EllipseButton;
 	rotation: number;
 }
 
@@ -45,7 +45,7 @@ export interface EllipseButtonControlJSON extends BaseButtonControlJSON {
  * A JSON representation of a RectangleButtonControl.
  */
 export interface RectangleButtonControlJSON extends BaseButtonControlJSON {
-	type: ControlType.Rectangle;
+	type: ControlType.RectangleButton;
 	topRadius: number;
 	bottomRadius: number;
 	rotation: number;
@@ -55,7 +55,7 @@ export interface RectangleButtonControlJSON extends BaseButtonControlJSON {
  * A JSON representation of a TriangleButtonControl.
  */
 export interface TriangleButtonControlJSON extends BaseButtonControlJSON {
-	type: ControlType.Triangle;
+	type: ControlType.TriangleButton;
 	direction: Direction8;
 }
 
@@ -109,22 +109,22 @@ export function isControlJSON(input: any): input is ControlJSON {
 		) &&
 		(
 			(
-				input.type === ControlType.Dpad &&
+				input.type === ControlType.DpadButton &&
 				typeof input.radius === "number" &&
 				sortedDirection4s.indexOf(input.direction) >= 0
 			) ||
 			(
-				input.type === ControlType.Ellipse &&
+				input.type === ControlType.EllipseButton &&
 				typeof input.rotation === "number"
 			) ||
 			(
-				input.type === ControlType.Rectangle &&
+				input.type === ControlType.RectangleButton &&
 				typeof input.topRadius === "number" &&
 				typeof input.bottomRadius === "number" &&
 				typeof input.rotation === "number"
 			) ||
 			(
-				input.type === ControlType.Triangle &&
+				input.type === ControlType.TriangleButton &&
 				sortedDirection8s.indexOf(input.direction) >= 0
 			)
 		)

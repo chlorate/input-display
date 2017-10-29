@@ -79,7 +79,7 @@ export class TriangleButtonControl extends ButtonControl {
 	 */
 	public toJSON(): TriangleButtonControlJSON {
 		const json = {
-			type: ControlType.Triangle,
+			type: ControlType.TriangleButton,
 			direction: this.direction,
 		};
 		return Object.assign(json, super.toBaseJSON()) as TriangleButtonControlJSON;

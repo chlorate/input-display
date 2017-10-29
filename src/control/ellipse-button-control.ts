@@ -11,7 +11,7 @@ export class EllipseButtonControl extends RotatableButtonControl {
 	 */
 	public toJSON(): EllipseButtonControlJSON {
 		const json = {
-			type: ControlType.Ellipse,
+			type: ControlType.EllipseButton,
 			rotation: this.rotation,
 		};
 		return Object.assign(json, super.toBaseJSON()) as EllipseButtonControlJSON;

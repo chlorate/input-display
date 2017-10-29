@@ -72,7 +72,7 @@ export class RectangleButtonControl extends RotatableButtonControl {
 	 */
 	public toJSON(): RectangleButtonControlJSON {
 		const json = {
-			type: ControlType.Rectangle,
+			type: ControlType.RectangleButton,
 			topRadius: this.topRadius,
 			bottomRadius: this.bottomRadius,
 			rotation: this.rotation,

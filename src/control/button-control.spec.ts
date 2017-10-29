@@ -3,7 +3,7 @@ import {ControlJSON, ControlType} from "./json/control-json";
 
 class TestControl extends ButtonControl {
 	public toJSON(): ControlJSON {
-		const json = {type: ControlType.Ellipse};
+		const json = {type: ControlType.EllipseButton};
 		return Object.assign(json, super.toBaseJSON()) as ControlJSON;
 	}
 }

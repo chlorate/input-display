@@ -31,7 +31,7 @@ describe("EllipseButtonControl", () => {
 
 	it("can return a JSON representation", () => {
 		const json = control.toJSON();
-		expect(json.type).toBe(ControlType.Ellipse);
+		expect(json.type).toBe(ControlType.EllipseButton);
 		expect(json.rotation).toBe(defaultRotation);
 	});
 });

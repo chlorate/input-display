@@ -21,7 +21,7 @@ describe("isControlJSON", () => {
 
 	describe("DpadButtonControlJSON", () => {
 		beforeEach(() => {
-			json.type = ControlType.Dpad;
+			json.type = ControlType.DpadButton;
 			json.radius = 6;
 			json.direction = Direction4.Down;
 		});
@@ -107,7 +107,7 @@ describe("isControlJSON", () => {
 
 	describe("EllipseButtonControlJSON", () => {
 		beforeEach(() => {
-			json.type = ControlType.Ellipse;
+			json.type = ControlType.EllipseButton;
 			json.rotation = 6;
 		});
 
@@ -123,7 +123,7 @@ describe("isControlJSON", () => {
 
 	describe("RectangleButtonControlJSON", () => {
 		beforeEach(() => {
-			json.type = ControlType.Rectangle;
+			json.type = ControlType.RectangleButton;
 			json.topRadius = 6;
 			json.bottomRadius = 7;
 			json.rotation = 8;
@@ -151,7 +151,7 @@ describe("isControlJSON", () => {
 
 	describe("TriangleButtonControlJSON", () => {
 		beforeEach(() => {
-			json.type = ControlType.Triangle;
+			json.type = ControlType.TriangleButton;
 			json.direction = Direction8.Down;
 		});
 

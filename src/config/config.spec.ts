@@ -183,7 +183,7 @@ describe("Config", () => {
 			labelOffsetY: -1,
 			controls: [
 				{
-					type: ControlType.Ellipse,
+					type: ControlType.EllipseButton,
 					name: "",
 					button: undefined,
 					x: defaultPosition,
@@ -257,7 +257,7 @@ describe("Config", () => {
 				labelOffsetY: -1,
 				controls: [
 					{
-						type: ControlType.Ellipse,
+						type: ControlType.EllipseButton,
 						name: "name",
 						x: 0,
 						y: 1,

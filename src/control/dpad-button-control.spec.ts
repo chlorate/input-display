@@ -130,7 +130,7 @@ describe("DpadButtonControl", () => {
 
 	it("can return a JSON representation", () => {
 		const json = control.toJSON();
-		expect(json.type).toBe(ControlType.Dpad);
+		expect(json.type).toBe(ControlType.DpadButton);
 		expect(json.radius).toBe(defaultRadius);
 		expect(json.direction).toBe(defaultDirection);
 	});

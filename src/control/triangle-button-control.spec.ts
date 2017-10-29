@@ -59,7 +59,7 @@ describe("TriangleButtonControl", () => {
 
 	it("can return a JSON representation", () => {
 		const json = control.toJSON();
-		expect(json.type).toBe(ControlType.Triangle);
+		expect(json.type).toBe(ControlType.TriangleButton);
 		expect(json.direction).toBe(defaultDirection);
 	});
 });

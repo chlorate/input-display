@@ -151,7 +151,7 @@ export class DpadButtonControl extends ButtonControl {
 	 */
 	public toJSON(): DpadButtonControlJSON {
 		const json = {
-			type: ControlType.Dpad,
+			type: ControlType.DpadButton,
 			radius: this.radius,
 			direction: this.direction,
 		};

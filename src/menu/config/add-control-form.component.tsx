@@ -26,7 +26,7 @@ interface State {
  */
 @connect([Store.Config, Store.Events])
 export class AddControlFormComponent extends Component<Props, State> {
-	public state: State = {type: ControlType.Ellipse};
+	public state: State = {type: ControlType.EllipseButton};
 
 	set type(type: ControlType) {
 		this.setState({type});
@@ -46,10 +46,10 @@ export class AddControlFormComponent extends Component<Props, State> {
 							value={this.state.type}
 							onChange={linkEvent(this, handleChange)}
 						>
-							<option value={ControlType.Ellipse}>Button (circle/ellipse)</option>
-							<option value={ControlType.Rectangle}>Button (square/rectangle)</option>
-							<option value={ControlType.Triangle}>Button (triangle)</option>
-							<option value={ControlType.Dpad}>Button (d-pad)</option>
+							<option value={ControlType.EllipseButton}>Button (circle/ellipse)</option>
+							<option value={ControlType.RectangleButton}>Button (square/rectangle)</option>
+							<option value={ControlType.TriangleButton}>Button (triangle)</option>
+							<option value={ControlType.DpadButton}>Button (d-pad)</option>
 							<option value="">Analog stick</option>
 						</select>
 						<span className="input-group-btn">
@@ -73,16 +73,16 @@ const handleSubmit = action((component: AddControlFormComponent, event): void =>
 
 	const controls = component.props.config.controls;
 	switch (component.state.type) {
-		case ControlType.Dpad:
+		case ControlType.DpadButton:
 			controls.push(new DpadButtonControl());
 			break;
-		case ControlType.Ellipse:
+		case ControlType.EllipseButton:
 			controls.push(new EllipseButtonControl());
 			break;
-		case ControlType.Rectangle:
+		case ControlType.RectangleButton:
 			controls.push(new RectangleButtonControl());
 			break;
-		case ControlType.Triangle:
+		case ControlType.TriangleButton:
 			controls.push(new TriangleButtonControl());
 			break;
 	}

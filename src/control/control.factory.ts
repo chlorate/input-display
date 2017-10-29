@@ -13,25 +13,25 @@ import {TriangleButtonControl} from "./triangle-button-control";
 export function parseControlJSON(json: ControlJSON): Control {
 	let control: Control;
 	switch (json.type) {
-		case ControlType.Dpad:
+		case ControlType.DpadButton:
 			const dpad = new DpadButtonControl();
 			dpad.radius = json.radius;
 			dpad.direction = json.direction;
 			control = dpad;
 			break;
-		case ControlType.Ellipse:
+		case ControlType.EllipseButton:
 			const ellipse = new EllipseButtonControl();
 			ellipse.rotation = json.rotation;
 			control = ellipse;
 			break;
-		case ControlType.Rectangle:
+		case ControlType.RectangleButton:
 			const rectangle = new RectangleButtonControl();
 			rectangle.topRadius = json.topRadius;
 			rectangle.bottomRadius = json.bottomRadius;
 			rectangle.rotation = json.rotation;
 			control = rectangle;
 			break;
-		case ControlType.Triangle:
+		case ControlType.TriangleButton:
 			const triangle = new TriangleButtonControl();
 			triangle.direction = json.direction;
 			control = triangle;

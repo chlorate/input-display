@@ -30,7 +30,7 @@ class TestControl extends Control {
 
 	public toJSON(): ControlJSON {
 		const json = {
-			type: ControlType.Ellipse,
+			type: ControlType.EllipseButton,
 			width: 10,
 			height: 10,
 		};
@@ -107,7 +107,7 @@ describe("Control", () => {
 	describe("toBaseJSON", () => {
 		it("can return a partial JSON representation", () => {
 			expect(control.toJSON()).toEqual({
-				type: ControlType.Ellipse,
+				type: ControlType.EllipseButton,
 				name: "",
 				button: undefined,
 				x: defaultPosition,

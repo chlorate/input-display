@@ -51,7 +51,7 @@ describe("ConfigJSON", () => {
 			labelOffsetY: -1,
 			controls: [
 				{
-					type: ControlType.Ellipse,
+					type: ControlType.EllipseButton,
 					name: "",
 					button: {
 						type: ButtonType.Normal,

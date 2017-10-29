@@ -1,7 +1,7 @@
 KARMA=node_modules/.bin/karma
 NCU=node_modules/.bin/ncu
 WEBPACK=node_modules/.bin/webpack
-WEBPACK_DEV_SERVER=node_modules/.bin/webpack-dev-server -d --host 0.0.0.0
+WEBPACK_DEV_SERVER=node_modules/.bin/webpack-dev-server
 
 .PHONY: build
 build: node_modules
@@ -14,7 +14,11 @@ test: node_modules
 
 .PHONY: watch
 watch: node_modules
-	DEVELOPMENT=true $(WEBPACK_DEV_SERVER) & $(KARMA) start & wait
+	DEVELOPMENT=true $(WEBPACK_DEV_SERVER) -d --host 0.0.0.0
+
+.PHONY: watch-test
+watch-test: node_modules
+	$(KARMA) start
 
 .PHONY: clean
 clean: 

@@ -13,15 +13,15 @@ describe("isControlJSON", () => {
 			name: "name",
 			x: 1,
 			y: 2,
-			width: 3,
-			height: 4,
-			borderWidth: 5,
+			borderWidth: 3,
 		};
 	});
 
 	describe("DpadButtonControlJSON", () => {
 		beforeEach(() => {
 			json.type = ControlType.DpadButton;
+			json.width = 4;
+			json.height = 5;
 			json.radius = 6;
 			json.direction = Direction4.Down;
 		});
@@ -108,6 +108,8 @@ describe("isControlJSON", () => {
 	describe("EllipseButtonControlJSON", () => {
 		beforeEach(() => {
 			json.type = ControlType.EllipseButton;
+			json.width = 4;
+			json.height = 5;
 			json.rotation = 6;
 		});
 
@@ -124,6 +126,8 @@ describe("isControlJSON", () => {
 	describe("RectangleButtonControlJSON", () => {
 		beforeEach(() => {
 			json.type = ControlType.RectangleButton;
+			json.width = 4;
+			json.height = 5;
 			json.topRadius = 6;
 			json.bottomRadius = 7;
 			json.rotation = 8;
@@ -152,6 +156,8 @@ describe("isControlJSON", () => {
 	describe("TriangleButtonControlJSON", () => {
 		beforeEach(() => {
 			json.type = ControlType.TriangleButton;
+			json.width = 4;
+			json.height = 5;
 			json.direction = Direction8.Down;
 		});
 
@@ -168,8 +174,8 @@ describe("isControlJSON", () => {
 	describe("CircleStickControlJSON", () => {
 		beforeEach(() => {
 			json.type = ControlType.CircleStick;
-			json.outerSize = 6;
-			json.innerSize = 7;
+			json.outerSize = 4;
+			json.innerSize = 5;
 		});
 
 		it("should return true if valid without axis references", () => {
@@ -212,8 +218,8 @@ describe("isControlJSON", () => {
 	describe("OctagonStickControlJSON", () => {
 		beforeEach(() => {
 			json.type = ControlType.OctagonStick;
-			json.outerSize = 6;
-			json.innerSize = 7;
+			json.outerSize = 4;
+			json.innerSize = 5;
 		});
 
 		it("should return true if valid", () => {

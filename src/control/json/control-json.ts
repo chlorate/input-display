@@ -116,12 +116,12 @@ export interface BaseControlJSON {
 export function isControlJSON(input: any): input is ControlJSON {
 	return (
 		typeof input === "object" &&
+
+		// Control properties
 		typeof input.name === "string" &&
 		(input.button === undefined || isButtonReferenceJSON(input.button)) &&
 		typeof input.x === "number" &&
 		typeof input.y === "number" &&
-		typeof input.width === "number" &&
-		typeof input.height === "number" &&
 		typeof input.borderWidth === "number" &&
 		(
 			input.nameLabel === undefined ||
@@ -136,6 +136,36 @@ export function isControlJSON(input: any): input is ControlJSON {
 			sortedLabelPositions.indexOf(input.mashSpeedLabel) >= 0 ||
 			sortedLabelReplacements.indexOf(input.mashSpeedLabel) >= 0
 		) &&
+
+		// Button control properties
+		(
+			(
+				typeof input.width === "number" &&
+				typeof input.height === "number"
+			) ||
+			(
+				input.type !== ControlType.DpadButton &&
+				input.type !== ControlType.EllipseButton &&
+				input.type !== ControlType.RectangleButton &&
+				input.type !== ControlType.TriangleButton
+			)
+		) &&
+
+		// Stick control properties
+		(
+			(
+				(input.xAxis === undefined || isAxisReferenceJSON(input.xAxis)) &&
+				(input.yAxis === undefined || isAxisReferenceJSON(input.yAxis)) &&
+				typeof input.outerSize === "number" &&
+				typeof input.innerSize === "number"
+			) ||
+			(
+				input.type !== ControlType.CircleStick &&
+				input.type !== ControlType.OctagonStick
+			)
+		) &&
+
+		// Control subclass type and properties
 		(
 			(
 				input.type === ControlType.DpadButton &&
@@ -156,13 +186,8 @@ export function isControlJSON(input: any): input is ControlJSON {
 				input.type === ControlType.TriangleButton &&
 				sortedDirection8s.indexOf(input.direction) >= 0
 			) ||
-			(
-				(input.type === ControlType.CircleStick || input.type === ControlType.OctagonStick) &&
-				(input.xAxis === undefined || isAxisReferenceJSON(input.xAxis)) &&
-				(input.yAxis === undefined || isAxisReferenceJSON(input.yAxis)) &&
-				typeof input.outerSize === "number" &&
-				typeof input.innerSize === "number"
-			)
+			input.type === ControlType.CircleStick ||
+			input.type === ControlType.OctagonStick
 		)
 	);
 }

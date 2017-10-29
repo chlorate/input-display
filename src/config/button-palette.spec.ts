@@ -1,10 +1,10 @@
-import {Palette} from "./palette";
+import {ButtonPalette} from "./button-palette";
 
-describe("Palette", () => {
+describe("ButtonPalette", () => {
 	let palette;
 
 	beforeEach(() => {
-		palette = new Palette("#111111", "#222222", "#333333");
+		palette = new ButtonPalette("#111111", "#222222", "#333333");
 	});
 
 	it("should reset border color if not valid", () => {

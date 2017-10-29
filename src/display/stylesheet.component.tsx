@@ -1,6 +1,6 @@
 import {connect} from "inferno-mobx";
+import {ButtonPalette} from "../config/button-palette";
 import {Config} from "../config/config";
-import {Palette} from "../config/palette";
 import {quote} from "../css/util";
 import {Store} from "../storage/store";
 
@@ -31,7 +31,7 @@ export const StylesheetComponent = connect([Store.Config], ({config}: Props) => 
 	</style>
 ));
 
-function paletteCss(palette: Palette, selector?: string): string {
+function paletteCss(palette: ButtonPalette, selector?: string): string {
 	selector = selector || "";
 	return `
 		${selector} .control-button {

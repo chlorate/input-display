@@ -1,6 +1,6 @@
 import {ControlJSON, isControlJSON} from "../../control/json/control-json";
 import {AxisReferenceJSON, isAxisReferenceJSON} from "./axis-reference-json";
-import {isPaletteJSON, PaletteJSON} from "./palette-json";
+import {ButtonPaletteJSON, isButtonPaletteJSON} from "./button-palette-json";
 
 /**
  * A JSON representation of a Config object.
@@ -20,10 +20,10 @@ export interface ConfigJSON {
 	fontShadow: boolean;
 	fontSize: number;
 	backgroundColor: string;
-	buttonUnpressedPalette: PaletteJSON;
-	buttonPressedPalette: PaletteJSON;
-	buttonMashingUnpressedPalette: PaletteJSON;
-	buttonMashingPressedPalette: PaletteJSON;
+	buttonUnpressedPalette: ButtonPaletteJSON;
+	buttonPressedPalette: ButtonPaletteJSON;
+	buttonMashingUnpressedPalette: ButtonPaletteJSON;
+	buttonMashingPressedPalette: ButtonPaletteJSON;
 	mashSpeedThreshold: number;
 	labelOffsetX: number;
 	labelOffsetY: number;
@@ -51,10 +51,10 @@ export function isConfigJSON(input: any): input is ConfigJSON {
 		typeof input.fontShadow === "boolean" &&
 		typeof input.fontSize === "number" &&
 		typeof input.backgroundColor === "string" &&
-		isPaletteJSON(input.buttonUnpressedPalette) &&
-		isPaletteJSON(input.buttonPressedPalette) &&
-		isPaletteJSON(input.buttonMashingUnpressedPalette) &&
-		isPaletteJSON(input.buttonMashingPressedPalette) &&
+		isButtonPaletteJSON(input.buttonUnpressedPalette) &&
+		isButtonPaletteJSON(input.buttonPressedPalette) &&
+		isButtonPaletteJSON(input.buttonMashingUnpressedPalette) &&
+		isButtonPaletteJSON(input.buttonMashingPressedPalette) &&
 		typeof input.mashSpeedThreshold === "number" &&
 		typeof input.labelOffsetX === "number" &&
 		typeof input.labelOffsetY === "number" &&

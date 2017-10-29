@@ -1,6 +1,6 @@
-import {isPaletteJSON} from "./palette-json";
+import {isButtonPaletteJSON} from "./button-palette-json";
 
-describe("isPaletteJSON", () => {
+describe("isButtonPaletteJSON", () => {
 	let json;
 
 	beforeEach(() => {
@@ -12,21 +12,21 @@ describe("isPaletteJSON", () => {
 	});
 
 	it("should return true if valid", () => {
-		expect(isPaletteJSON(json)).toBe(true);
+		expect(isButtonPaletteJSON(json)).toBe(true);
 	});
 
 	it("should return false if border is not a string", () => {
 		json.border = 123;
-		expect(isPaletteJSON(json)).toBe(false);
+		expect(isButtonPaletteJSON(json)).toBe(false);
 	});
 
 	it("should return false if fill is not a string", () => {
 		json.fill = 123;
-		expect(isPaletteJSON(json)).toBe(false);
+		expect(isButtonPaletteJSON(json)).toBe(false);
 	});
 
 	it("should return false if label is not a string", () => {
 		json.label = 123;
-		expect(isPaletteJSON(json)).toBe(false);
+		expect(isButtonPaletteJSON(json)).toBe(false);
 	});
 });

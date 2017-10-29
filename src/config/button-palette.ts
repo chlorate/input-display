@@ -1,11 +1,11 @@
 import {action, observable} from "mobx";
 import {ensureColor} from "../css/util";
-import {PaletteJSON} from "./json/palette-json";
+import {ButtonPaletteJSON} from "./json/button-palette-json";
 
 /**
  * Defines a palette of control colors for a particular button state.
  */
-export class Palette {
+export class ButtonPalette {
 	@observable private _border: string;
 	@observable private _fill: string;
 	@observable private _label: string;
@@ -55,7 +55,7 @@ export class Palette {
 	/**
 	 * Returns a JSON representation of this palette.
 	 */
-	public toJSON(): PaletteJSON {
+	public toJSON(): ButtonPaletteJSON {
 		return {
 			border: this.border,
 			fill: this.fill,
@@ -66,7 +66,7 @@ export class Palette {
 	/**
 	 * Assigns properties from a JSON representation of a palette.
 	 */
-	@action public loadJSON(json: PaletteJSON): void {
+	@action public loadJSON(json: ButtonPaletteJSON): void {
 		this.border = json.border;
 		this.fill = json.fill;
 		this.label = json.label;

@@ -4,8 +4,8 @@ import {parseControlJSON} from "../control/control.factory";
 import {ensureColor} from "../css/util";
 import {clamp, clampIndex, clampInt} from "../math/util";
 import {AxisReference} from "./axis-reference";
+import {ButtonPalette} from "./button-palette";
 import {ConfigJSON, isConfigJSON} from "./json/config-json";
-import {Palette} from "./palette";
 
 // 4 ms is the smallest delay:
 // https://developer.mozilla.org/en-US/docs/Web/API/WindowOrWorkerGlobalScope/setTimeout#Timeouts_throttled_to_>4ms
@@ -69,10 +69,10 @@ export class Config {
 	@observable private _fontName: string = "";
 	@observable private _fontSize: number = defaultFontSize;
 	@observable private _backgroundColor: string = DefaultColors.Background;
-	@observable private _buttonUnpressedPalette: Palette;
-	@observable private _buttonPressedPalette: Palette;
-	@observable private _buttonMashingUnpressedPalette: Palette;
-	@observable private _buttonMashingPressedPalette: Palette;
+	@observable private _buttonUnpressedPalette: ButtonPalette;
+	@observable private _buttonPressedPalette: ButtonPalette;
+	@observable private _buttonMashingUnpressedPalette: ButtonPalette;
+	@observable private _buttonMashingPressedPalette: ButtonPalette;
 	@observable private _mashSpeedThreshold: number = defaultMashSpeedThreshold;
 	@observable private _labelOffsetX: number = defaultLabelOffset;
 	@observable private _labelOffsetY: number = defaultLabelOffset;
@@ -80,22 +80,22 @@ export class Config {
 	@observable private _customCss: string = "";
 
 	constructor() {
-		this._buttonUnpressedPalette = new Palette(
+		this._buttonUnpressedPalette = new ButtonPalette(
 			DefaultColors.ButtonUnpressedBorder,
 			DefaultColors.ButtonUnpressedFill,
 			DefaultColors.ButtonUnpressedLabel,
 		);
-		this._buttonPressedPalette = new Palette(
+		this._buttonPressedPalette = new ButtonPalette(
 			DefaultColors.ButtonPressedBorder,
 			DefaultColors.ButtonPressedFill,
 			DefaultColors.ButtonPressedLabel,
 		);
-		this._buttonMashingUnpressedPalette = new Palette(
+		this._buttonMashingUnpressedPalette = new ButtonPalette(
 			DefaultColors.ButtonMashingUnpressedBorder,
 			DefaultColors.ButtonMashingUnpressedFill,
 			DefaultColors.ButtonMashingUnpressedLabel,
 		);
-		this._buttonMashingPressedPalette = new Palette(
+		this._buttonMashingPressedPalette = new ButtonPalette(
 			DefaultColors.ButtonMashingPressedBorder,
 			DefaultColors.ButtonMashingPressedFill,
 			DefaultColors.ButtonMashingPressedLabel,
@@ -171,19 +171,19 @@ export class Config {
 		this._backgroundColor = ensureColor(color, DefaultColors.Background);
 	}
 
-	get buttonUnpressedPalette(): Palette {
+	get buttonUnpressedPalette(): ButtonPalette {
 		return this._buttonUnpressedPalette;
 	}
 
-	get buttonPressedPalette(): Palette {
+	get buttonPressedPalette(): ButtonPalette {
 		return this._buttonPressedPalette;
 	}
 
-	get buttonMashingUnpressedPalette(): Palette {
+	get buttonMashingUnpressedPalette(): ButtonPalette {
 		return this._buttonMashingUnpressedPalette;
 	}
 
-	get buttonMashingPressedPalette(): Palette {
+	get buttonMashingPressedPalette(): ButtonPalette {
 		return this._buttonMashingPressedPalette;
 	}
 

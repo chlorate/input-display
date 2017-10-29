@@ -1,7 +1,8 @@
 import {computed, observable} from "mobx";
 import {Direction4} from "../direction/direction4";
 import {clamp} from "../math/util";
-import {Control, defaultRadius, maxRadius, minRadius} from "./control";
+import {ButtonControl} from "./button-control";
+import {defaultRadius, maxRadius, minRadius} from "./control";
 import {ControlType, DpadControlJSON} from "./json/control-json";
 
 export const defaultDirection = Direction4.Up;
@@ -30,7 +31,7 @@ const cornerFix = 0.01;
 /**
  * A control that represents a d-pad button.
  */
-export class DpadControl extends Control {
+export class DpadControl extends ButtonControl {
 	@observable public direction: Direction4 = defaultDirection;
 	@observable private _radius: number = defaultRadius;
 

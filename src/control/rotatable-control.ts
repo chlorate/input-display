@@ -1,7 +1,7 @@
 import {computed, observable} from "mobx";
 import {Point, rotatePoints} from "../math/point";
 import {clamp} from "../math/util";
-import {Control} from "./control";
+import {ButtonControl} from "./button-control";
 
 export const minRotation = -360;
 export const maxRotation = 360;
@@ -13,7 +13,7 @@ export const defaultRotation = 0;
  * Subclasses must implement getEdgePoints to return an array of points that
  * exist along the edge of the rotated control.
  */
-export abstract class RotatableControl extends Control {
+export abstract class RotatableControl extends ButtonControl {
 	@observable private _rotation: number = defaultRotation;
 
 	get rotation(): number {

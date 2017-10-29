@@ -1,6 +1,6 @@
 import {computed, observable} from "mobx";
 import {Direction8} from "../direction/direction8";
-import {Control} from "./control";
+import {ButtonControl} from "./button-control";
 import {ControlType, TriangleControlJSON} from "./json/control-json";
 
 export const defaultDirection = Direction8.Up;
@@ -8,7 +8,7 @@ export const defaultDirection = Direction8.Up;
 /**
  * A control that represents a button shaped like a triangle.
  */
-export class TriangleControl extends Control {
+export class TriangleControl extends ButtonControl {
 	@observable public direction: Direction8 = defaultDirection;
 
 	@computed get path(): string {

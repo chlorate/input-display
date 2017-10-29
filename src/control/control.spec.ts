@@ -6,14 +6,43 @@ import {LabelReplacement} from "./label-replacement";
 
 import {
 	Control,
-	maxBorderWidth, maxHeight, maxNameLength, maxWidth, maxX, maxY,
-	minBorderWidth, minHeight, minWidth, minX, minY,
+	defaultBorderWidth, defaultPosition,
+	maxBorderWidth, maxNameLength, maxX, maxY,
+	minBorderWidth, minX, minY,
 } from "./control";
 
 class TestControl extends Control {
+	public get centerX(): number {
+		throw new Error("not implemented");
+	}
+
+	public get rightX(): number {
+		throw new Error("not implemented");
+	}
+
+	public get centerY(): number {
+		throw new Error("not implemented");
+	}
+
+	public get bottomY(): number {
+		throw new Error("not implemented");
+	}
+
 	public toJSON(): ControlJSON {
-		const json = {type: ControlType.Ellipse};
+		const json = {
+			type: ControlType.Ellipse,
+			width: 10,
+			height: 10,
+		};
 		return Object.assign(json, super.toBaseJSON()) as ControlJSON;
+	}
+
+	protected getRightX(): number {
+		throw new Error("not implemented");
+	}
+
+	protected getBottomY(): number {
+		throw new Error("not implemented");
 	}
 }
 
@@ -43,20 +72,6 @@ describe("Control", () => {
 		expect(control.y).toBe(maxY);
 	});
 
-	it("should clamp width", () => {
-		control.width = -1;
-		expect(control.width).toBe(minWidth);
-		control.width = 5000;
-		expect(control.width).toBe(maxWidth);
-	});
-
-	it("should clamp height", () => {
-		control.height = -1;
-		expect(control.height).toBe(minHeight);
-		control.height = 5000;
-		expect(control.height).toBe(maxHeight);
-	});
-
 	it("should clamp border width", () => {
 		control.borderWidth = -1;
 		expect(control.borderWidth).toBe(minBorderWidth);
@@ -84,31 +99,9 @@ describe("Control", () => {
 		expect(control.leftX).toBe(-5.5);
 	});
 
-	it("can return x-position of control center", () => {
-		control.width = 100;
-		expect(control.centerX).toBe(50);
-	});
-
-	it("can return x-position of control right", () => {
-		control.width = 50;
-		control.borderWidth = 11;
-		expect(control.rightX).toBe(55.5);
-	});
-
 	it("can return y-position of control top", () => {
 		control.borderWidth = 11;
 		expect(control.topY).toBe(-5.5);
-	});
-
-	it("can return y-position of control center", () => {
-		control.height = 50;
-		expect(control.centerY).toBe(25);
-	});
-
-	it("can return y-position of control bottom", () => {
-		control.height = 50;
-		control.borderWidth = 11;
-		expect(control.bottomY).toBe(55.5);
 	});
 
 	describe("toBaseJSON", () => {
@@ -117,11 +110,11 @@ describe("Control", () => {
 				type: ControlType.Ellipse,
 				name: "",
 				button: undefined,
-				x: 5,
-				y: 5,
-				width: 24,
-				height: 24,
-				borderWidth: 1.25,
+				x: defaultPosition,
+				y: defaultPosition,
+				width: 10,
+				height: 10,
+				borderWidth: defaultBorderWidth,
 				nameLabel: LabelPosition.Center,
 				pressesLabel: undefined,
 				mashSpeedLabel: LabelReplacement.Name,

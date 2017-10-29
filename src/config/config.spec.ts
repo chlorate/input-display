@@ -1,4 +1,5 @@
-import {defaultBorderWidth, defaultPosition, defaultSize} from "../control/control";
+import {defaultSize} from "../control/button-control";
+import {defaultBorderWidth, defaultPosition} from "../control/control";
 import {EllipseControl} from "../control/ellipse-control";
 import {ControlType} from "../control/json/control-json";
 import {LabelPosition} from "../control/label-position";

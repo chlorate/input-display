@@ -4,6 +4,7 @@ import Component from "inferno-component";
 import {connect} from "inferno-mobx";
 import {action} from "mobx";
 import {ButtonReference} from "../../config/button-reference";
+import {ButtonControl, defaultSize, maxHeight, maxWidth, minHeight, minWidth} from "../../control/button-control";
 import {Control} from "../../control/control";
 import {defaultDirection as defaultDpadDirection, DpadControl} from "../../control/dpad-control";
 import {EllipseControl} from "../../control/ellipse-control";
@@ -20,9 +21,9 @@ import {NumberInputComponent} from "../field/number-input.component";
 import {TextInputComponent} from "../field/text-input.component";
 
 import {
-	defaultBorderWidth, defaultPosition, defaultRadius, defaultSize,
-	maxBorderWidth, maxHeight, maxNameLength, maxRadius, maxWidth, maxX, maxY,
-	minBorderWidth, minHeight, minRadius, minWidth, minX, minY,
+	defaultBorderWidth, defaultPosition, defaultRadius,
+	maxBorderWidth, maxNameLength, maxRadius, maxX, maxY,
+	minBorderWidth, minRadius, minX, minY,
 } from "../../control/control";
 
 const borderWidthStep = 0.25;
@@ -229,28 +230,30 @@ export class ControlFieldsetComponent extends Component<Props, {}> {
 					</div>
 					<div className="col">
 						<div className="form-row flex-nowrap">
-							<NumberInputComponent
-								className="col"
-								id="config-control-width"
-								label="Width"
-								suffix="px"
-								value={control.width}
-								min={minWidth}
-								max={maxWidth}
-								placeholder={defaultSize}
-								onChange={linkEvent(control, handleChangeWidth)}
-							/>
-							<NumberInputComponent
-								className="col"
-								id="config-control-height"
-								label="Height"
-								suffix="px"
-								value={control.height}
-								min={minHeight}
-								max={maxHeight}
-								placeholder={defaultSize}
-								onChange={linkEvent(control, handleChangeHeight)}
-							/>
+							{control instanceof ButtonControl && [
+								<NumberInputComponent
+									className="col"
+									id="config-control-width"
+									label="Width"
+									suffix="px"
+									value={control.width}
+									min={minWidth}
+									max={maxWidth}
+									placeholder={defaultSize}
+									onChange={linkEvent(control, handleChangeWidth)}
+								/>,
+								<NumberInputComponent
+									className="col"
+									id="config-control-height"
+									label="Height"
+									suffix="px"
+									value={control.height}
+									min={minHeight}
+									max={maxHeight}
+									placeholder={defaultSize}
+									onChange={linkEvent(control, handleChangeHeight)}
+								/>,
+							]}
 						</div>
 					</div>
 				</div>
@@ -310,11 +313,11 @@ const handleChangeY = action((control: Control, event): void => {
 	control.y = event.target.value || defaultPosition;
 });
 
-const handleChangeWidth = action((control: Control, event): void => {
+const handleChangeWidth = action((control: ButtonControl, event): void => {
 	control.width = event.target.value || defaultSize;
 });
 
-const handleChangeHeight = action((control: Control, event): void => {
+const handleChangeHeight = action((control: ButtonControl, event): void => {
 	control.height = event.target.value || defaultSize;
 });
 

@@ -13,12 +13,6 @@ export const minY = 0;
 export const maxY = 2159;
 export const defaultPosition = 5;
 
-export const minWidth = 1;
-export const maxWidth = 3840;
-export const minHeight = 1;
-export const maxHeight = 2160;
-export const defaultSize = 24;
-
 export const minBorderWidth = 0;
 export const maxBorderWidth = 1000;
 export const defaultBorderWidth = 1.25;
@@ -38,8 +32,6 @@ export abstract class Control {
 	@observable private _name: string = "";
 	@observable private _x: number = defaultPosition;
 	@observable private _y: number = defaultPosition;
-	@observable private _width: number = defaultSize;
-	@observable private _height: number = defaultSize;
 	@observable private _borderWidth: number = defaultBorderWidth;
 
 	get name(): string {
@@ -63,20 +55,6 @@ export abstract class Control {
 		this._y = clampInt(y, minY, maxY);
 	}
 
-	get width(): number {
-		return this._width;
-	}
-	set width(width: number) {
-		this._width = clampInt(width, minWidth, maxWidth);
-	}
-
-	get height(): number {
-		return this._height;
-	}
-	set height(height: number) {
-		this._height = clampInt(height, minHeight, maxHeight);
-	}
-
 	get borderWidth(): number {
 		return this._borderWidth;
 	}
@@ -97,25 +75,15 @@ export abstract class Control {
 		return this.getLeftX();
 	}
 
-	@computed get centerX(): number {
-		return this.width / 2;
-	}
-
-	@computed get rightX(): number {
-		return this.getRightX();
-	}
+	public abstract get centerX(): number;
+	public abstract get rightX(): number;
 
 	@computed get topY(): number {
 		return this.getTopY();
 	}
 
-	@computed get centerY(): number {
-		return this.height / 2;
-	}
-
-	@computed get bottomY(): number {
-		return this.getBottomY();
-	}
+	public abstract get centerY(): number;
+	public abstract get bottomY(): number;
 
 	public abstract toJSON(): ControlJSON;
 
@@ -126,17 +94,13 @@ export abstract class Control {
 		return this.getTopY(); // Same value.
 	}
 
-	protected getRightX(): number {
-		return this.width + this.borderWidth / 2;
-	}
+	protected abstract getRightX(): number;
 
 	protected getTopY(): number {
 		return -this.borderWidth / 2;
 	}
 
-	protected getBottomY(): number {
-		return this.height + this.borderWidth / 2;
-	}
+	protected abstract getBottomY(): number;
 
 	protected toBaseJSON(): BaseControlJSON {
 		return {
@@ -144,8 +108,6 @@ export abstract class Control {
 			button: this.button ? this.button.toJSON() : undefined,
 			x: this.x,
 			y: this.y,
-			width: this.width,
-			height: this.height,
 			borderWidth: this.borderWidth,
 			nameLabel: this.nameLabel,
 			pressesLabel: this.pressesLabel,

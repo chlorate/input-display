@@ -22,7 +22,7 @@ export type ControlJSON = DpadControlJSON | EllipseControlJSON | RectangleContro
 /**
  * A JSON representation of a DpadControl.
  */
-export interface DpadControlJSON extends BaseControlJSON {
+export interface DpadControlJSON extends BaseButtonControlJSON {
 	type: ControlType.Dpad;
 	radius: number;
 	direction: Direction4;
@@ -31,7 +31,7 @@ export interface DpadControlJSON extends BaseControlJSON {
 /**
  * A JSON representation of a EllipseControl.
  */
-export interface EllipseControlJSON extends BaseControlJSON {
+export interface EllipseControlJSON extends BaseButtonControlJSON {
 	type: ControlType.Ellipse;
 	rotation: number;
 }
@@ -39,7 +39,7 @@ export interface EllipseControlJSON extends BaseControlJSON {
 /**
  * A JSON representation of a RectangleControl.
  */
-export interface RectangleControlJSON extends BaseControlJSON {
+export interface RectangleControlJSON extends BaseButtonControlJSON {
 	type: ControlType.Rectangle;
 	topRadius: number;
 	bottomRadius: number;
@@ -49,9 +49,17 @@ export interface RectangleControlJSON extends BaseControlJSON {
 /**
  * A JSON representation of a TriangleControl.
  */
-export interface TriangleControlJSON extends BaseControlJSON {
+export interface TriangleControlJSON extends BaseButtonControlJSON {
 	type: ControlType.Triangle;
 	direction: Direction8;
+}
+
+/**
+ * Common properties for all ButtonControl JSON representations.
+ */
+export interface BaseButtonControlJSON extends BaseControlJSON {
+	width: number;
+	height: number;
 }
 
 /**
@@ -62,8 +70,6 @@ export interface BaseControlJSON {
 	button?: ButtonReferenceJSON;
 	x: number;
 	y: number;
-	width: number;
-	height: number;
 	borderWidth: number;
 	nameLabel?: LabelPosition;
 	pressesLabel?: LabelPosition;

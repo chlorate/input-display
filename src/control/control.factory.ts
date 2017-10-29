@@ -1,4 +1,5 @@
 import {parseButtonReferenceJSON} from "../config/button-reference.factory";
+import {ButtonControl} from "./button-control";
 import {Control} from "./control";
 import {DpadControl} from "./dpad-control";
 import {EllipseControl} from "./ellipse-control";
@@ -42,12 +43,14 @@ export function parseControlJSON(json: ControlJSON): Control {
 	control.button = json.button ? parseButtonReferenceJSON(json.button) : undefined;
 	control.x = json.x;
 	control.y = json.y;
-	control.width = json.width;
-	control.height = json.height;
 	control.borderWidth = json.borderWidth;
 	control.nameLabel = json.nameLabel;
 	control.pressesLabel = json.pressesLabel;
 	control.mashSpeedLabel = json.mashSpeedLabel;
+	if (control instanceof ButtonControl) {
+		control.width = json.width;
+		control.height = json.height;
+	}
 	return control;
 }
 

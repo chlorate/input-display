@@ -1,16 +1,16 @@
 import {connect} from "inferno-mobx";
-import {EllipseControl} from "../control/ellipse-control";
+import {EllipseButtonControl} from "../control/ellipse-button-control";
 import {ControlGroupComponent} from "./control-group.component";
 import {ControlLabelComponent} from "./control-label.component";
 
 interface Props {
-	control: EllipseControl;
+	control: EllipseButtonControl;
 }
 
 /**
- * Draws an EllipseControl.
+ * Draws an EllipseButtonControl.
  */
-export const EllipseControlComponent = connect(({control}: Props) => (
+export const EllipseButtonControlComponent = connect(({control}: Props) => (
 	<ControlGroupComponent control={control}>
 		<ellipse
 			className="control-button"

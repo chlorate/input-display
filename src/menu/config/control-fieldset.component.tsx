@@ -7,7 +7,7 @@ import {ButtonReference} from "../../config/button-reference";
 import {ButtonControl, defaultSize, maxHeight, maxWidth, minHeight, minWidth} from "../../control/button-control";
 import {Control} from "../../control/control";
 import {defaultDirection as defaultDpadDirection, DpadButtonControl} from "../../control/dpad-button-control";
-import {EllipseControl} from "../../control/ellipse-control";
+import {EllipseButtonControl} from "../../control/ellipse-button-control";
 import {RectangleControl} from "../../control/rectangle-control";
 import {defaultDirection as defaultTriangleDirection, TriangleControl} from "../../control/triangle-control";
 import {Event} from "../../event";
@@ -74,7 +74,7 @@ export class ControlFieldsetComponent extends Component<Props, {}> {
 				onChange={linkEvent(control, handleChangeBorderWidth)}
 			/>,
 		];
-		const isCircle = control instanceof EllipseControl && control.width === control.height;
+		const isCircle = control instanceof EllipseButtonControl && control.width === control.height;
 		if (control instanceof RotatableButtonControl && !isCircle) {
 			// Rotation won't have any effect if control is a circle.
 			extraInputs.push(

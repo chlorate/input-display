@@ -1,20 +1,20 @@
 import {Point} from "../math/point";
-import {ControlType, EllipseControlJSON} from "./json/control-json";
+import {ControlType, EllipseButtonControlJSON} from "./json/control-json";
 import {RotatableButtonControl} from "./rotatable-button-control";
 
 /**
  * A control that represents a button shaped like a circle or ellipse.
  */
-export class EllipseControl extends RotatableButtonControl {
+export class EllipseButtonControl extends RotatableButtonControl {
 	/**
 	 * Returns a JSON representation of this control.
 	 */
-	public toJSON(): EllipseControlJSON {
+	public toJSON(): EllipseButtonControlJSON {
 		const json = {
 			type: ControlType.Ellipse,
 			rotation: this.rotation,
 		};
-		return Object.assign(json, super.toBaseJSON()) as EllipseControlJSON;
+		return Object.assign(json, super.toBaseJSON()) as EllipseButtonControlJSON;
 	}
 
 	/**

@@ -105,7 +105,7 @@ describe("isControlJSON", () => {
 		});
 	});
 
-	describe("EllipseControlJSON", () => {
+	describe("EllipseButtonControlJSON", () => {
 		beforeEach(() => {
 			json.type = ControlType.Ellipse;
 			json.rotation = 6;

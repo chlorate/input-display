@@ -17,7 +17,7 @@ export enum ControlType {
 /**
  * JSON representations of all Control subclasses.
  */
-export type ControlJSON = DpadButtonControlJSON | EllipseControlJSON | RectangleControlJSON | TriangleControlJSON;
+export type ControlJSON = DpadButtonControlJSON | EllipseButtonControlJSON | RectangleControlJSON | TriangleControlJSON;
 
 /**
  * A JSON representation of a DpadButtonControl.
@@ -29,9 +29,9 @@ export interface DpadButtonControlJSON extends BaseButtonControlJSON {
 }
 
 /**
- * A JSON representation of a EllipseControl.
+ * A JSON representation of a EllipseButtonControl.
  */
-export interface EllipseControlJSON extends BaseButtonControlJSON {
+export interface EllipseButtonControlJSON extends BaseButtonControlJSON {
 	type: ControlType.Ellipse;
 	rotation: number;
 }

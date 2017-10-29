@@ -1,12 +1,12 @@
-import {EllipseControl} from "./ellipse-control";
+import {EllipseButtonControl} from "./ellipse-button-control";
 import {ControlType} from "./json/control-json";
 import {defaultRotation} from "./rotatable-button-control";
 
-describe("EllipseControl", () => {
+describe("EllipseButtonControl", () => {
 	let control;
 
 	beforeEach(() => {
-		control = new EllipseControl();
+		control = new EllipseButtonControl();
 	});
 
 	describe("edge positions", () => {

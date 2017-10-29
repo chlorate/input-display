@@ -4,7 +4,7 @@ import {Direction4} from "../direction/direction4";
 import {Direction8} from "../direction/direction8";
 import {cloneControl, parseControlJSON} from "./control.factory";
 import {DpadButtonControl} from "./dpad-button-control";
-import {EllipseControl} from "./ellipse-control";
+import {EllipseButtonControl} from "./ellipse-button-control";
 import {ControlJSON, ControlType} from "./json/control-json";
 import {LabelPosition} from "./label-position";
 import {RectangleControl} from "./rectangle-control";
@@ -59,11 +59,11 @@ describe("parseControlJSON", () => {
 		expect(control.button instanceof NormalButtonReference).toBe(true);
 	});
 
-	it("can create a EllipseControl", () => {
+	it("can create a EllipseButtonControl", () => {
 		json.type = ControlType.Ellipse;
 		json.rotation = 5;
-		const control = parseControlJSON(json) as EllipseControl;
-		expect(control instanceof EllipseControl).toBe(true);
+		const control = parseControlJSON(json) as EllipseButtonControl;
+		expect(control instanceof EllipseButtonControl).toBe(true);
 		expect(control.rotation).toBe(5);
 	});
 

@@ -9,7 +9,6 @@ import {Control} from "../../control/control";
 import {defaultDirection as defaultDpadDirection, DpadControl} from "../../control/dpad-control";
 import {EllipseControl} from "../../control/ellipse-control";
 import {RectangleControl} from "../../control/rectangle-control";
-import {defaultRotation, maxRotation, minRotation, RotatableControl} from "../../control/rotatable-control";
 import {defaultDirection as defaultTriangleDirection, TriangleControl} from "../../control/triangle-control";
 import {Event} from "../../event";
 import {Store} from "../../storage/store";
@@ -25,6 +24,10 @@ import {
 	maxBorderWidth, maxNameLength, maxRadius, maxX, maxY,
 	minBorderWidth, minRadius, minX, minY,
 } from "../../control/control";
+
+import {
+	defaultRotation, maxRotation, minRotation, RotatableButtonControl,
+} from "../../control/rotatable-button-control";
 
 const borderWidthStep = 0.25;
 
@@ -72,7 +75,7 @@ export class ControlFieldsetComponent extends Component<Props, {}> {
 			/>,
 		];
 		const isCircle = control instanceof EllipseControl && control.width === control.height;
-		if (control instanceof RotatableControl && !isCircle) {
+		if (control instanceof RotatableButtonControl && !isCircle) {
 			// Rotation won't have any effect if control is a circle.
 			extraInputs.push(
 				<NumberInputComponent
@@ -337,7 +340,7 @@ const handleChangeBottomRadius = action((control: RectangleControl, event): void
 	control.bottomRadius = event.target.value || defaultRadius;
 });
 
-const handleChangeRotation = action((control: RotatableControl, event): void => {
+const handleChangeRotation = action((control: RotatableButtonControl, event): void => {
 	control.rotation = event.target.value || defaultRotation;
 });
 

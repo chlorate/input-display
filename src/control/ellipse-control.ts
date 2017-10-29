@@ -1,11 +1,11 @@
 import {Point} from "../math/point";
 import {ControlType, EllipseControlJSON} from "./json/control-json";
-import {RotatableControl} from "./rotatable-control";
+import {RotatableButtonControl} from "./rotatable-button-control";
 
 /**
  * A control that represents a button shaped like a circle or ellipse.
  */
-export class EllipseControl extends RotatableControl {
+export class EllipseControl extends RotatableButtonControl {
 	/**
 	 * Returns a JSON representation of this control.
 	 */

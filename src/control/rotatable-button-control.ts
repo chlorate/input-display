@@ -13,7 +13,7 @@ export const defaultRotation = 0;
  * Subclasses must implement getEdgePoints to return an array of points that
  * exist along the edge of the rotated control.
  */
-export abstract class RotatableControl extends ButtonControl {
+export abstract class RotatableButtonControl extends ButtonControl {
 	@observable private _rotation: number = defaultRotation;
 
 	get rotation(): number {

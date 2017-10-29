@@ -1,6 +1,6 @@
 import {EllipseControl} from "./ellipse-control";
 import {ControlType} from "./json/control-json";
-import {defaultRotation} from "./rotatable-control";
+import {defaultRotation} from "./rotatable-button-control";
 
 describe("EllipseControl", () => {
 	let control;

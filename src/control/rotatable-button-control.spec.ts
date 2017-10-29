@@ -1,8 +1,8 @@
 import {Point} from "../math/point";
 import {ControlJSON} from "./json/control-json";
-import {maxRotation, minRotation, RotatableControl} from "./rotatable-control";
+import {maxRotation, minRotation, RotatableButtonControl} from "./rotatable-button-control";
 
-class TestControl extends RotatableControl {
+class TestControl extends RotatableButtonControl {
 	public toJSON(): ControlJSON {
 		throw new Error("not implemented");
 	}
@@ -12,7 +12,7 @@ class TestControl extends RotatableControl {
 	}
 }
 
-describe("RotatableControl", () => {
+describe("RotatableButtonControl", () => {
 	let control;
 
 	beforeEach(() => {

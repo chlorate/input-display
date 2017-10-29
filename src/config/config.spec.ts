@@ -4,7 +4,7 @@ import {EllipseControl} from "../control/ellipse-control";
 import {ControlType} from "../control/json/control-json";
 import {LabelPosition} from "../control/label-position";
 import {LabelReplacement} from "../control/label-replacement";
-import {defaultRotation} from "../control/rotatable-control";
+import {defaultRotation} from "../control/rotatable-button-control";
 import {AxisReference} from "./axis-reference";
 
 import {

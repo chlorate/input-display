@@ -1,7 +1,7 @@
 import {defaultRadius, maxRadius, minRadius} from "./control";
 import {ControlType} from "./json/control-json";
 import {RectangleControl} from "./rectangle-control";
-import {defaultRotation} from "./rotatable-control";
+import {defaultRotation} from "./rotatable-button-control";
 
 describe("RectangleControl", () => {
 	let control;

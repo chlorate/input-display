@@ -3,12 +3,12 @@ import {Point} from "../math/point";
 import {clamp} from "../math/util";
 import {defaultRadius, maxRadius, minRadius} from "./control";
 import {ControlType, RectangleControlJSON} from "./json/control-json";
-import {RotatableControl} from "./rotatable-control";
+import {RotatableButtonControl} from "./rotatable-button-control";
 
 /**
  * A control that represents a button shaped like a square or rectangle.
  */
-export class RectangleControl extends RotatableControl {
+export class RectangleControl extends RotatableButtonControl {
 	@observable private _topRadius: number = defaultRadius;
 	@observable private _bottomRadius: number = defaultRadius;
 

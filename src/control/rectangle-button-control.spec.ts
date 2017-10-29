@@ -10,6 +10,17 @@ describe("RectangleButtonControl", () => {
 		control = new RectangleButtonControl();
 	});
 
+	describe("type", () => {
+		it("returns square if width and height are equal", () => {
+			expect(control.type).toBe("Button (square)");
+		});
+
+		it("returns rectangle otherwise", () => {
+			control.width = control.height + 1;
+			expect(control.type).toBe("Button (rectangle)");
+		});
+	});
+
 	it("should clamp top border radius", () => {
 		control.topRadius = -5000;
 		expect(control.topRadius).toBe(minRadius);

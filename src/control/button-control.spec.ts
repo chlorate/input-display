@@ -2,6 +2,10 @@ import {ButtonControl, defaultSize, maxHeight, maxWidth, minHeight, minWidth} fr
 import {ControlJSON, ControlType} from "./json/control-json";
 
 class TestControl extends ButtonControl {
+	get type(): string {
+		throw new Error("not implemented");
+	}
+
 	public toJSON(): ControlJSON {
 		const json = {type: ControlType.EllipseButton};
 		return Object.assign(json, super.toBaseJSON()) as ControlJSON;

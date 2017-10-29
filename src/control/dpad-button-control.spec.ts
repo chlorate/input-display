@@ -13,6 +13,10 @@ describe("DpadButtonControl", () => {
 		control.borderWidth = 1;
 	});
 
+	it("can return its type", () => {
+		expect(control.type).toBe("Button (d-pad)");
+	});
+
 	it("should clamp radius", () => {
 		control.radius = -5000;
 		expect(control.radius).toBe(minRadius);

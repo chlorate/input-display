@@ -12,6 +12,10 @@ export class RectangleButtonControl extends RotatableButtonControl {
 	@observable private _topRadius: number = defaultRadius;
 	@observable private _bottomRadius: number = defaultRadius;
 
+	@computed get type(): string {
+		return `Button (${this.width === this.height ? "square" : "rectangle"})`;
+	}
+
 	get topRadius(): number {
 		return this._topRadius;
 	}

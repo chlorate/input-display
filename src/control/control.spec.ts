@@ -12,19 +12,23 @@ import {
 } from "./control";
 
 class TestControl extends Control {
-	public get centerX(): number {
+	get type(): string {
 		throw new Error("not implemented");
 	}
 
-	public get rightX(): number {
+	get centerX(): number {
 		throw new Error("not implemented");
 	}
 
-	public get centerY(): number {
+	get rightX(): number {
 		throw new Error("not implemented");
 	}
 
-	public get bottomY(): number {
+	get centerY(): number {
+		throw new Error("not implemented");
+	}
+
+	get bottomY(): number {
 		throw new Error("not implemented");
 	}
 

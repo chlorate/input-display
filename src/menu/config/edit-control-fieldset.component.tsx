@@ -6,10 +6,6 @@ import {action} from "mobx";
 import {Config} from "../../config/config";
 import {Control} from "../../control/control";
 import {cloneControl} from "../../control/control.factory";
-import {DpadButtonControl} from "../../control/dpad-button-control";
-import {EllipseButtonControl} from "../../control/ellipse-button-control";
-import {RectangleButtonControl} from "../../control/rectangle-button-control";
-import {TriangleButtonControl} from "../../control/triangle-button-control";
 import {Event} from "../../event";
 import {clampIndex} from "../../math/util";
 import {Store} from "../../storage/store";
@@ -72,14 +68,7 @@ export class EditControlFieldsetComponent extends Component<Props, State> {
 					>
 						{this.props.config.controls.map((control, i) => (
 							<option value={i}>
-								{`${i + 1}. `}
-								{control instanceof DpadButtonControl && "Button (d-pad)"}
-								{control instanceof EllipseButtonControl && control.width === control.height && "Button (circle)"}
-								{control instanceof EllipseButtonControl && control.width !== control.height && "Button (ellipse)"}
-								{control instanceof RectangleButtonControl && control.width === control.height && "Button (square)"}
-								{control instanceof RectangleButtonControl && control.width !== control.height && "Button (rectangle)"}
-								{control instanceof TriangleButtonControl && "Button (triangle)"}
-								{control.name ? ` - ${control.name}` : ""}
+								{`${i + 1}. ${control.type} ${control.name ? `- ${control.name}` : ""}`}
 							</option>
 						))}
 					</select>

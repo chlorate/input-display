@@ -1,3 +1,4 @@
+import {computed} from "mobx";
 import {Point} from "../math/point";
 import {ControlType, EllipseButtonControlJSON} from "./json/control-json";
 import {RotatableButtonControl} from "./rotatable-button-control";
@@ -6,6 +7,10 @@ import {RotatableButtonControl} from "./rotatable-button-control";
  * A control that represents a button shaped like a circle or ellipse.
  */
 export class EllipseButtonControl extends RotatableButtonControl {
+	@computed get type(): string {
+		return `Button (${this.width === this.height ? "circle" : "ellipse"})`;
+	}
+
 	/**
 	 * Returns a JSON representation of this control.
 	 */

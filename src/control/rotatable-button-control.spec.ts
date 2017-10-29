@@ -3,6 +3,10 @@ import {ControlJSON} from "./json/control-json";
 import {maxRotation, minRotation, RotatableButtonControl} from "./rotatable-button-control";
 
 class TestControl extends RotatableButtonControl {
+	get type(): string {
+		throw new Error("not implemented");
+	}
+
 	public toJSON(): ControlJSON {
 		throw new Error("not implemented");
 	}

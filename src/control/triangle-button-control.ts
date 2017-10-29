@@ -11,6 +11,10 @@ export const defaultDirection = Direction8.Up;
 export class TriangleButtonControl extends ButtonControl {
 	@observable public direction: Direction8 = defaultDirection;
 
+	get type(): string {
+		return "Button (triangle)";
+	}
+
 	@computed get path(): string {
 		switch (this.direction) {
 			case Direction8.Up:

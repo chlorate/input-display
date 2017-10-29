@@ -10,6 +10,10 @@ describe("TriangleButtonControl", () => {
 		control.borderWidth = 1;
 	});
 
+	it("can return its type", () => {
+		expect(control.type).toBe("Button (triangle)");
+	});
+
 	describe("path", () => {
 		it("returns a path when direction is up", () => {
 			control.direction = Direction8.Up;

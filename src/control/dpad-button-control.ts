@@ -35,6 +35,10 @@ export class DpadButtonControl extends ButtonControl {
 	@observable public direction: Direction4 = defaultDirection;
 	@observable private _radius: number = defaultRadius;
 
+	get type(): string {
+		return "Button (d-pad)";
+	}
+
 	get radius(): number {
 		return this._radius;
 	}

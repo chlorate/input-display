@@ -34,6 +34,8 @@ export abstract class Control {
 	@observable private _y: number = defaultPosition;
 	@observable private _borderWidth: number = defaultBorderWidth;
 
+	abstract get type(): string;
+
 	get name(): string {
 		return this._name;
 	}

@@ -9,6 +9,17 @@ describe("EllipseButtonControl", () => {
 		control = new EllipseButtonControl();
 	});
 
+	describe("type", () => {
+		it("returns circle if width and height are equal", () => {
+			expect(control.type).toBe("Button (circle)");
+		});
+
+		it("returns ellipse otherwise", () => {
+			control.width = control.height + 1;
+			expect(control.type).toBe("Button (ellipse)");
+		});
+	});
+
 	describe("edge positions", () => {
 		it("should ignore rotation if circle", () => {
 			control.rotation = 10;

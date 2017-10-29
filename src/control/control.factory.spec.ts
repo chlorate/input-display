@@ -1,7 +1,9 @@
+import {AxisReference} from "../config/axis-reference";
 import {NormalButtonReference} from "../config/normal-button-reference";
 import {ButtonType} from "../controller/json/button-json";
 import {Direction4} from "../direction/direction4";
 import {Direction8} from "../direction/direction8";
+import {CircleStickControl} from "./circle-stick-control";
 import {cloneControl, parseControlJSON} from "./control.factory";
 import {DpadButtonControl} from "./dpad-button-control";
 import {EllipseButtonControl} from "./ellipse-button-control";
@@ -34,29 +36,31 @@ describe("parseControlJSON", () => {
 		json = makeJSON();
 	});
 
-	it("can create a DpadButtonControl", () => {
-		const control = parseControlJSON(json) as DpadButtonControl;
-		expect(control.name).toBe("name");
-		expect(control.button).toBeUndefined();
-		expect(control.x).toBe(0);
-		expect(control.y).toBe(1);
-		expect(control.width).toBe(2);
-		expect(control.height).toBe(3);
-		expect(control.borderWidth).toBe(4);
-		expect(control.radius).toBe(5);
-		expect(control.direction).toBe(Direction4.Down);
-		expect(control.nameLabel).toBe(LabelPosition.Above);
-		expect(control.pressesLabel).toBe(LabelPosition.Below);
-		expect(control.mashSpeedLabel).toBe(LabelPosition.Center);
-	});
+	describe("DpadButtonControl", () => {
+		it("can be created", () => {
+			const control = parseControlJSON(json) as DpadButtonControl;
+			expect(control.name).toBe("name");
+			expect(control.button).toBeUndefined();
+			expect(control.x).toBe(0);
+			expect(control.y).toBe(1);
+			expect(control.width).toBe(2);
+			expect(control.height).toBe(3);
+			expect(control.borderWidth).toBe(4);
+			expect(control.radius).toBe(5);
+			expect(control.direction).toBe(Direction4.Down);
+			expect(control.nameLabel).toBe(LabelPosition.Above);
+			expect(control.pressesLabel).toBe(LabelPosition.Below);
+			expect(control.mashSpeedLabel).toBe(LabelPosition.Center);
+		});
 
-	it("can create a control with a button reference", () => {
-		json.button = {
-			type: ButtonType.Normal,
-			index: 5,
-		};
-		const control = parseControlJSON(json);
-		expect(control.button instanceof NormalButtonReference).toBe(true);
+		it("can be created with a button reference", () => {
+			json.button = {
+				type: ButtonType.Normal,
+				index: 5,
+			};
+			const control = parseControlJSON(json);
+			expect(control.button instanceof NormalButtonReference).toBe(true);
+		});
 	});
 
 	it("can create a EllipseButtonControl", () => {
@@ -85,6 +89,42 @@ describe("parseControlJSON", () => {
 		const control = parseControlJSON(json) as TriangleButtonControl;
 		expect(control instanceof TriangleButtonControl).toBe(true);
 		expect(control.direction).toBe(Direction8.Down);
+	});
+
+	describe("CircleStickControl", () => {
+		beforeEach(() => {
+			json.type = ControlType.CircleStick;
+			json.outerSize = 5;
+			json.innerSize = 6;
+		});
+
+		it("can be created", () => {
+			const control = parseControlJSON(json) as CircleStickControl;
+			expect(control.xAxis).toBeUndefined();
+			expect(control.yAxis).toBeUndefined();
+			expect(control.outerSize).toBe(5);
+			expect(control.innerSize).toBe(6);
+		});
+
+		it("can be created with axis references", () => {
+			json.xAxis = {
+				index: 0,
+				inverted: false,
+			};
+			json.yAxis = {
+				index: 1,
+				inverted: true,
+			};
+			const control = parseControlJSON(json) as CircleStickControl;
+			expect(control.xAxis instanceof AxisReference).toBe(true);
+			expect(control.yAxis instanceof AxisReference).toBe(true);
+			if (control.xAxis) {
+				expect(control.xAxis.index).toBe(0);
+			}
+			if (control.yAxis) {
+				expect(control.yAxis.index).toBe(1);
+			}
+		});
 	});
 });
 

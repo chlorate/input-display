@@ -1,10 +1,13 @@
+import {AxisReference} from "../config/axis-reference";
 import {parseButtonReferenceJSON} from "../config/button-reference.factory";
 import {ButtonControl} from "./button-control";
+import {CircleStickControl} from "./circle-stick-control";
 import {Control} from "./control";
 import {DpadButtonControl} from "./dpad-button-control";
 import {EllipseButtonControl} from "./ellipse-button-control";
-import {ControlJSON, ControlType} from "./json/control-json";
+import {BaseButtonControlJSON, BaseStickControlJSON, ControlJSON, ControlType} from "./json/control-json";
 import {RectangleButtonControl} from "./rectangle-button-control";
+import {StickControl} from "./stick-control";
 import {TriangleButtonControl} from "./triangle-button-control";
 
 /**
@@ -15,17 +18,20 @@ export function parseControlJSON(json: ControlJSON): Control {
 	switch (json.type) {
 		case ControlType.DpadButton:
 			const dpad = new DpadButtonControl();
+			loadButtonJSON(json, dpad);
 			dpad.radius = json.radius;
 			dpad.direction = json.direction;
 			control = dpad;
 			break;
 		case ControlType.EllipseButton:
 			const ellipse = new EllipseButtonControl();
+			loadButtonJSON(json, ellipse);
 			ellipse.rotation = json.rotation;
 			control = ellipse;
 			break;
 		case ControlType.RectangleButton:
 			const rectangle = new RectangleButtonControl();
+			loadButtonJSON(json, rectangle);
 			rectangle.topRadius = json.topRadius;
 			rectangle.bottomRadius = json.bottomRadius;
 			rectangle.rotation = json.rotation;
@@ -33,8 +39,14 @@ export function parseControlJSON(json: ControlJSON): Control {
 			break;
 		case ControlType.TriangleButton:
 			const triangle = new TriangleButtonControl();
+			loadButtonJSON(json, triangle);
 			triangle.direction = json.direction;
 			control = triangle;
+			break;
+		case ControlType.CircleStick:
+			const circle = new CircleStickControl();
+			loadStickJSON(json, circle);
+			control = circle;
 			break;
 		default:
 			throw new TypeError("invalid control JSON");
@@ -47,11 +59,19 @@ export function parseControlJSON(json: ControlJSON): Control {
 	control.nameLabel = json.nameLabel;
 	control.pressesLabel = json.pressesLabel;
 	control.mashSpeedLabel = json.mashSpeedLabel;
-	if (control instanceof ButtonControl) {
-		control.width = json.width;
-		control.height = json.height;
-	}
 	return control;
+}
+
+function loadButtonJSON(json: BaseButtonControlJSON, control: ButtonControl) {
+	control.width = json.width;
+	control.height = json.height;
+}
+
+function loadStickJSON(json: BaseStickControlJSON, control: StickControl) {
+	control.xAxis = json.xAxis ? AxisReference.fromJSON(json.xAxis) : undefined;
+	control.yAxis = json.yAxis ? AxisReference.fromJSON(json.yAxis) : undefined;
+	control.outerSize = json.outerSize;
+	control.innerSize = json.innerSize;
 }
 
 /**

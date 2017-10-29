@@ -1,36 +1,18 @@
 import {action, observable} from "mobx";
 import {ensureColor} from "../css/util";
 import {ButtonPaletteJSON} from "./json/button-palette-json";
+import {Palette} from "./palette";
 
 /**
  * Defines a palette of control colors for a particular button state.
  */
-export class ButtonPalette {
-	@observable private _border: string;
-	@observable private _fill: string;
+export class ButtonPalette extends Palette {
 	@observable private _label: string;
-	private _defaultBorder: string;
-	private _defaultFill: string;
 	private _defaultLabel: string;
 
 	constructor(defaultBorder: string, defaultFill: string, defaultLabel: string) {
-		this._border = this._defaultBorder = defaultBorder;
-		this._fill = this._defaultFill = defaultFill;
+		super(defaultBorder, defaultFill);
 		this._label = this._defaultLabel = defaultLabel;
-	}
-
-	get border(): string {
-		return this._border;
-	}
-	set border(border: string) {
-		this._border = ensureColor(border, this.defaultBorder);
-	}
-
-	get fill(): string {
-		return this._fill;
-	}
-	set fill(fill: string) {
-		this._fill = ensureColor(fill, this.defaultFill);
 	}
 
 	get label(): string {
@@ -38,14 +20,6 @@ export class ButtonPalette {
 	}
 	set label(label: string) {
 		this._label = ensureColor(label, this.defaultLabel);
-	}
-
-	get defaultBorder(): string {
-		return this._defaultBorder;
-	}
-
-	get defaultFill(): string {
-		return this._defaultFill;
 	}
 
 	get defaultLabel(): string {
@@ -56,19 +30,14 @@ export class ButtonPalette {
 	 * Returns a JSON representation of this palette.
 	 */
 	public toJSON(): ButtonPaletteJSON {
-		return {
-			border: this.border,
-			fill: this.fill,
-			label: this.label,
-		};
+		return Object.assign({label: this.label}, super.toJSON());
 	}
 
 	/**
 	 * Assigns properties from a JSON representation of a palette.
 	 */
 	@action public loadJSON(json: ButtonPaletteJSON): void {
-		this.border = json.border;
-		this.fill = json.fill;
+		super.loadJSON(json);
 		this.label = json.label;
 	}
 }

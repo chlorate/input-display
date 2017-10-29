@@ -1,9 +1,9 @@
+import {isPaletteJSON, PaletteJSON} from "./palette-json";
+
 /**
  * A JSON representation of a ButtonPalette.
  */
-export interface ButtonPaletteJSON {
-	border: string;
-	fill: string;
+export interface ButtonPaletteJSON extends PaletteJSON {
 	label: string;
 }
 
@@ -12,9 +12,7 @@ export interface ButtonPaletteJSON {
  */
 export function isButtonPaletteJSON(input: any): input is ButtonPaletteJSON {
 	return (
-		typeof input === "object" &&
-		typeof input.border === "string" &&
-		typeof input.fill === "string" &&
+		isPaletteJSON(input as object) &&
 		typeof input.label === "string"
 	);
 }

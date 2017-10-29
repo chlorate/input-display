@@ -15,6 +15,10 @@ describe("isButtonPaletteJSON", () => {
 		expect(isButtonPaletteJSON(json)).toBe(true);
 	});
 
+	it("should return false if not an object", () => {
+		expect(isButtonPaletteJSON("bad")).toBe(false);
+	});
+
 	it("should return false if border is not a string", () => {
 		json.border = 123;
 		expect(isButtonPaletteJSON(json)).toBe(false);

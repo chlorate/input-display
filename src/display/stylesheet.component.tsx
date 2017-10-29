@@ -1,6 +1,7 @@
 import {connect} from "inferno-mobx";
 import {ButtonPalette} from "../config/button-palette";
 import {Config} from "../config/config";
+import {Palette} from "../config/palette";
 import {quote} from "../css/util";
 import {Store} from "../storage/store";
 
@@ -23,15 +24,17 @@ export const StylesheetComponent = connect([Store.Config], ({config}: Props) => 
 				font-size: ${config.fontSize}px;
 			}
 		`}
-		{paletteCss(config.buttonUnpressedPalette)}
-		{paletteCss(config.buttonPressedPalette, ".control-button-pressed")}
-		{paletteCss(config.buttonMashingUnpressedPalette, ".control-button-mashing")}
-		{paletteCss(config.buttonMashingPressedPalette, ".control-button-mashing.control-button-pressed")}
+		{buttonPaletteCss(config.buttonUnpressedPalette)}
+		{buttonPaletteCss(config.buttonPressedPalette, ".control-button-pressed")}
+		{buttonPaletteCss(config.buttonMashingUnpressedPalette, ".control-button-mashing")}
+		{buttonPaletteCss(config.buttonMashingPressedPalette, ".control-button-mashing.control-button-pressed")}
+		{axisPaletteCss(config.axisNeutralPalette)}
+		{axisPaletteCss(config.axisMovedPalette, ".control-axis-moved")}
 		{config.customCss}
 	</style>
 ));
 
-function paletteCss(palette: ButtonPalette, selector?: string): string {
+function buttonPaletteCss(palette: ButtonPalette, selector?: string): string {
 	selector = selector || "";
 	return `
 		${selector} .control-button {
@@ -40,6 +43,16 @@ function paletteCss(palette: ButtonPalette, selector?: string): string {
 		}
 		${selector} .control-label {
 			fill: ${palette.label};
+		}
+	`;
+}
+
+function axisPaletteCss(palette: Palette, selector?: string): string {
+	selector = selector || "";
+	return `
+		${selector} .control-axis {
+			stroke: ${palette.border};
+			fill: ${palette.fill};
 		}
 	`;
 }

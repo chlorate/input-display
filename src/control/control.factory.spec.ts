@@ -7,7 +7,7 @@ import {DpadButtonControl} from "./dpad-button-control";
 import {EllipseButtonControl} from "./ellipse-button-control";
 import {ControlJSON, ControlType} from "./json/control-json";
 import {LabelPosition} from "./label-position";
-import {RectangleControl} from "./rectangle-control";
+import {RectangleButtonControl} from "./rectangle-button-control";
 import {TriangleControl} from "./triangle-control";
 
 function makeJSON(): ControlJSON {
@@ -67,13 +67,13 @@ describe("parseControlJSON", () => {
 		expect(control.rotation).toBe(5);
 	});
 
-	it("can create a RectangleControl", () => {
+	it("can create a RectangleButtonControl", () => {
 		json.type = ControlType.Rectangle;
 		json.topRadius = 5;
 		json.bottomRadius = 6;
 		json.rotation = 7;
-		const control = parseControlJSON(json) as RectangleControl;
-		expect(control instanceof RectangleControl).toBe(true);
+		const control = parseControlJSON(json) as RectangleButtonControl;
+		expect(control instanceof RectangleButtonControl).toBe(true);
 		expect(control.topRadius).toBe(5);
 		expect(control.bottomRadius).toBe(6);
 		expect(control.rotation).toBe(7);

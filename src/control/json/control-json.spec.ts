@@ -121,7 +121,7 @@ describe("isControlJSON", () => {
 		});
 	});
 
-	describe("RectangleControlJSON", () => {
+	describe("RectangleButtonControlJSON", () => {
 		beforeEach(() => {
 			json.type = ControlType.Rectangle;
 			json.topRadius = 6;

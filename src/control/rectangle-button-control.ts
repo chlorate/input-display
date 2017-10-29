@@ -2,13 +2,13 @@ import {computed, observable} from "mobx";
 import {Point} from "../math/point";
 import {clamp} from "../math/util";
 import {defaultRadius, maxRadius, minRadius} from "./control";
-import {ControlType, RectangleControlJSON} from "./json/control-json";
+import {ControlType, RectangleButtonControlJSON} from "./json/control-json";
 import {RotatableButtonControl} from "./rotatable-button-control";
 
 /**
  * A control that represents a button shaped like a square or rectangle.
  */
-export class RectangleControl extends RotatableButtonControl {
+export class RectangleButtonControl extends RotatableButtonControl {
 	@observable private _topRadius: number = defaultRadius;
 	@observable private _bottomRadius: number = defaultRadius;
 
@@ -70,14 +70,14 @@ export class RectangleControl extends RotatableButtonControl {
 	/**
 	 * Returns a JSON representation of this control.
 	 */
-	public toJSON(): RectangleControlJSON {
+	public toJSON(): RectangleButtonControlJSON {
 		const json = {
 			type: ControlType.Rectangle,
 			topRadius: this.topRadius,
 			bottomRadius: this.bottomRadius,
 			rotation: this.rotation,
 		};
-		return Object.assign(json, super.toBaseJSON()) as RectangleControlJSON;
+		return Object.assign(json, super.toBaseJSON()) as RectangleButtonControlJSON;
 	}
 
 	/**

@@ -8,7 +8,7 @@ import {ButtonControl, defaultSize, maxHeight, maxWidth, minHeight, minWidth} fr
 import {Control} from "../../control/control";
 import {defaultDirection as defaultDpadDirection, DpadButtonControl} from "../../control/dpad-button-control";
 import {EllipseButtonControl} from "../../control/ellipse-button-control";
-import {RectangleControl} from "../../control/rectangle-control";
+import {RectangleButtonControl} from "../../control/rectangle-button-control";
 import {defaultDirection as defaultTriangleDirection, TriangleControl} from "../../control/triangle-control";
 import {Event} from "../../event";
 import {Store} from "../../storage/store";
@@ -106,7 +106,7 @@ export class ControlFieldsetComponent extends Component<Props, {}> {
 				/>,
 			);
 		}
-		if (control instanceof RectangleControl) {
+		if (control instanceof RectangleButtonControl) {
 			extraInputs.push(
 				<NumberInputComponent
 					className="col"
@@ -332,11 +332,11 @@ const handleChangeRadius = action((control: DpadButtonControl, event): void => {
 	control.radius = event.target.value || defaultRadius;
 });
 
-const handleChangeTopRadius = action((control: RectangleControl, event): void => {
+const handleChangeTopRadius = action((control: RectangleButtonControl, event): void => {
 	control.topRadius = event.target.value || defaultRadius;
 });
 
-const handleChangeBottomRadius = action((control: RectangleControl, event): void => {
+const handleChangeBottomRadius = action((control: RectangleButtonControl, event): void => {
 	control.bottomRadius = event.target.value || defaultRadius;
 });
 

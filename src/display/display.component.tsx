@@ -7,14 +7,14 @@ import {Config} from "../config/config";
 import {Control} from "../control/control";
 import {DpadButtonControl} from "../control/dpad-button-control";
 import {EllipseButtonControl} from "../control/ellipse-button-control";
-import {RectangleControl} from "../control/rectangle-control";
+import {RectangleButtonControl} from "../control/rectangle-button-control";
 import {TriangleControl} from "../control/triangle-control";
 import {Controller} from "../controller/controller";
 import {Event} from "../event";
 import {Store} from "../storage/store";
 import {DpadButtonControlComponent} from "./dpad-button-control.component";
 import {EllipseButtonControlComponent} from "./ellipse-button-control.component";
-import {RectangleControlComponent} from "./rectangle-control.component";
+import {RectangleButtonControlComponent} from "./rectangle-button-control.component";
 import {TriangleControlComponent} from "./triangle-control.component";
 
 enum Key {
@@ -101,8 +101,8 @@ export class DisplayComponent extends Component<Props, {}> {
 						return <DpadButtonControlComponent key={item.key} control={item.control} />;
 					} else if (item.control instanceof EllipseButtonControl) {
 						return <EllipseButtonControlComponent key={item.key} control={item.control} />;
-					} else if (item.control instanceof RectangleControl) {
-						return <RectangleControlComponent key={item.key} control={item.control} />;
+					} else if (item.control instanceof RectangleButtonControl) {
+						return <RectangleButtonControlComponent key={item.key} control={item.control} />;
 					} else if (item.control instanceof TriangleControl) {
 						return <TriangleControlComponent key={item.key} control={item.control} />;
 					}

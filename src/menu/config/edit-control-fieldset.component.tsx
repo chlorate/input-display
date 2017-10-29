@@ -8,7 +8,7 @@ import {Control} from "../../control/control";
 import {cloneControl} from "../../control/control.factory";
 import {DpadButtonControl} from "../../control/dpad-button-control";
 import {EllipseButtonControl} from "../../control/ellipse-button-control";
-import {RectangleControl} from "../../control/rectangle-control";
+import {RectangleButtonControl} from "../../control/rectangle-button-control";
 import {TriangleControl} from "../../control/triangle-control";
 import {Event} from "../../event";
 import {clampIndex} from "../../math/util";
@@ -76,8 +76,8 @@ export class EditControlFieldsetComponent extends Component<Props, State> {
 								{control instanceof DpadButtonControl && "Button (d-pad)"}
 								{control instanceof EllipseButtonControl && control.width === control.height && "Button (circle)"}
 								{control instanceof EllipseButtonControl && control.width !== control.height && "Button (ellipse)"}
-								{control instanceof RectangleControl && control.width === control.height && "Button (square)"}
-								{control instanceof RectangleControl && control.width !== control.height && "Button (rectangle)"}
+								{control instanceof RectangleButtonControl && control.width === control.height && "Button (square)"}
+								{control instanceof RectangleButtonControl && control.width !== control.height && "Button (rectangle)"}
 								{control instanceof TriangleControl && "Button (triangle)"}
 								{control.name ? ` - ${control.name}` : ""}
 							</option>

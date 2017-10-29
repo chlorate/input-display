@@ -1,16 +1,16 @@
 import {connect} from "inferno-mobx";
-import {RectangleControl} from "../control/rectangle-control";
+import {RectangleButtonControl} from "../control/rectangle-button-control";
 import {ControlGroupComponent} from "./control-group.component";
 import {ControlLabelComponent} from "./control-label.component";
 
 interface Props {
-	control: RectangleControl;
+	control: RectangleButtonControl;
 }
 
 /**
- * Draws a RectangleControl.
+ * Draws a RectangleButtonControl.
  */
-export const RectangleControlComponent = connect(({control}: Props) => (
+export const RectangleButtonControlComponent = connect(({control}: Props) => (
 	<ControlGroupComponent control={control}>
 		<path
 			className="control-button"

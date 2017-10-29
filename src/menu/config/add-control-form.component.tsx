@@ -7,7 +7,7 @@ import {Config} from "../../config/config";
 import {DpadButtonControl} from "../../control/dpad-button-control";
 import {EllipseButtonControl} from "../../control/ellipse-button-control";
 import {ControlType} from "../../control/json/control-json";
-import {RectangleControl} from "../../control/rectangle-control";
+import {RectangleButtonControl} from "../../control/rectangle-button-control";
 import {TriangleControl} from "../../control/triangle-control";
 import {Event} from "../../event";
 import {Store} from "../../storage/store";
@@ -80,7 +80,7 @@ const handleSubmit = action((component: AddControlFormComponent, event): void =>
 			controls.push(new EllipseButtonControl());
 			break;
 		case ControlType.Rectangle:
-			controls.push(new RectangleControl());
+			controls.push(new RectangleButtonControl());
 			break;
 		case ControlType.Triangle:
 			controls.push(new TriangleControl());

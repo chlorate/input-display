@@ -1,13 +1,13 @@
 import {defaultRadius, maxRadius, minRadius} from "./control";
 import {ControlType} from "./json/control-json";
-import {RectangleControl} from "./rectangle-control";
+import {RectangleButtonControl} from "./rectangle-button-control";
 import {defaultRotation} from "./rotatable-button-control";
 
-describe("RectangleControl", () => {
+describe("RectangleButtonControl", () => {
 	let control;
 
 	beforeEach(() => {
-		control = new RectangleControl();
+		control = new RectangleButtonControl();
 	});
 
 	it("should clamp top border radius", () => {

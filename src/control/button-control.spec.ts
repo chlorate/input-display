@@ -33,26 +33,19 @@ describe("ButtonControl", () => {
 		expect(control.height).toBe(maxHeight);
 	});
 
-	it("can return x-position of control center", () => {
-		control.width = 100;
-		expect(control.centerX).toBe(50);
+	it("can return position of control center", () => {
+		control.width = 50;
+		control.height = 100;
+		expect(control.centerX).toBe(25);
+		expect(control.centerY).toBe(50);
 	});
 
-	it("can return x-position of control right", () => {
+	it("can return positions of control bottom and right side", () => {
 		control.width = 50;
+		control.height = 100;
 		control.borderWidth = 11;
 		expect(control.rightX).toBe(55.5);
-	});
-
-	it("can return y-position of control center", () => {
-		control.height = 50;
-		expect(control.centerY).toBe(25);
-	});
-
-	it("can return y-position of control bottom", () => {
-		control.height = 50;
-		control.borderWidth = 11;
-		expect(control.bottomY).toBe(55.5);
+		expect(control.bottomY).toBe(105.5);
 	});
 
 	it("can return a partial JSON representation", () => {

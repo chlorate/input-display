@@ -3,7 +3,7 @@ import {Direction4} from "../direction/direction4";
 import {clamp} from "../math/util";
 import {ButtonControl} from "./button-control";
 import {defaultRadius, maxRadius, minRadius} from "./control";
-import {ControlType, DpadControlJSON} from "./json/control-json";
+import {ControlType, DpadButtonControlJSON} from "./json/control-json";
 
 export const defaultDirection = Direction4.Up;
 
@@ -31,7 +31,7 @@ const cornerFix = 0.01;
 /**
  * A control that represents a d-pad button.
  */
-export class DpadControl extends ButtonControl {
+export class DpadButtonControl extends ButtonControl {
 	@observable public direction: Direction4 = defaultDirection;
 	@observable private _radius: number = defaultRadius;
 
@@ -149,12 +149,12 @@ export class DpadControl extends ButtonControl {
 	/**
 	 * Returns a JSON representation of this control.
 	 */
-	public toJSON(): DpadControlJSON {
+	public toJSON(): DpadButtonControlJSON {
 		const json = {
 			type: ControlType.Dpad,
 			radius: this.radius,
 			direction: this.direction,
 		};
-		return Object.assign(json, super.toBaseJSON()) as DpadControlJSON;
+		return Object.assign(json, super.toBaseJSON()) as DpadButtonControlJSON;
 	}
 }

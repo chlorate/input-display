@@ -6,7 +6,7 @@ import {action} from "mobx";
 import {ButtonReference} from "../../config/button-reference";
 import {ButtonControl, defaultSize, maxHeight, maxWidth, minHeight, minWidth} from "../../control/button-control";
 import {Control} from "../../control/control";
-import {defaultDirection as defaultDpadDirection, DpadControl} from "../../control/dpad-control";
+import {defaultDirection as defaultDpadDirection, DpadButtonControl} from "../../control/dpad-button-control";
 import {EllipseControl} from "../../control/ellipse-control";
 import {RectangleControl} from "../../control/rectangle-control";
 import {defaultDirection as defaultTriangleDirection, TriangleControl} from "../../control/triangle-control";
@@ -91,7 +91,7 @@ export class ControlFieldsetComponent extends Component<Props, {}> {
 				/>,
 			);
 		}
-		if (control instanceof DpadControl) {
+		if (control instanceof DpadButtonControl) {
 			extraInputs.push(
 				<NumberInputComponent
 					className="col"
@@ -132,7 +132,7 @@ export class ControlFieldsetComponent extends Component<Props, {}> {
 				/>,
 			);
 		}
-		if (control instanceof DpadControl) {
+		if (control instanceof DpadButtonControl) {
 			extraInputs.push(
 				<Direction4SelectComponent
 					className="col"
@@ -328,7 +328,7 @@ const handleChangeBorderWidth = action((control: Control, event): void => {
 	control.borderWidth = event.target.value || defaultBorderWidth;
 });
 
-const handleChangeRadius = action((control: DpadControl, event): void => {
+const handleChangeRadius = action((control: DpadButtonControl, event): void => {
 	control.radius = event.target.value || defaultRadius;
 });
 
@@ -344,7 +344,7 @@ const handleChangeRotation = action((control: RotatableButtonControl, event): vo
 	control.rotation = event.target.value || defaultRotation;
 });
 
-const handleChangeDpadDirection = action((control: DpadControl, event): void => {
+const handleChangeDpadDirection = action((control: DpadButtonControl, event): void => {
 	control.direction = event.target.value || defaultDpadDirection;
 });
 

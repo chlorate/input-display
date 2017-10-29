@@ -1,13 +1,13 @@
 import {Direction4} from "../direction/direction4";
 import {defaultRadius, maxRadius, minRadius} from "./control";
-import {defaultDirection, DpadControl} from "./dpad-control";
+import {defaultDirection, DpadButtonControl} from "./dpad-button-control";
 import {ControlType} from "./json/control-json";
 
-describe("DpadControl", () => {
+describe("DpadButtonControl", () => {
 	let control;
 
 	beforeEach(() => {
-		control = new DpadControl();
+		control = new DpadButtonControl();
 		control.width = 20;
 		control.height = 10;
 		control.borderWidth = 1;

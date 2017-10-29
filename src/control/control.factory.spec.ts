@@ -3,7 +3,7 @@ import {ButtonType} from "../controller/json/button-json";
 import {Direction4} from "../direction/direction4";
 import {Direction8} from "../direction/direction8";
 import {cloneControl, parseControlJSON} from "./control.factory";
-import {DpadControl} from "./dpad-control";
+import {DpadButtonControl} from "./dpad-button-control";
 import {EllipseControl} from "./ellipse-control";
 import {ControlJSON, ControlType} from "./json/control-json";
 import {LabelPosition} from "./label-position";
@@ -34,8 +34,8 @@ describe("parseControlJSON", () => {
 		json = makeJSON();
 	});
 
-	it("can create a DpadControl", () => {
-		const control = parseControlJSON(json) as DpadControl;
+	it("can create a DpadButtonControl", () => {
+		const control = parseControlJSON(json) as DpadButtonControl;
 		expect(control.name).toBe("name");
 		expect(control.button).toBeUndefined();
 		expect(control.x).toBe(0);

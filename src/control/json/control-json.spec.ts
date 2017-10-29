@@ -19,7 +19,7 @@ describe("isControlJSON", () => {
 		};
 	});
 
-	describe("DpadControlJSON", () => {
+	describe("DpadButtonControlJSON", () => {
 		beforeEach(() => {
 			json.type = ControlType.Dpad;
 			json.radius = 6;

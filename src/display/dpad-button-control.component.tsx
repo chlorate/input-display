@@ -1,16 +1,16 @@
 import {connect} from "inferno-mobx";
-import {DpadControl} from "../control/dpad-control";
+import {DpadButtonControl} from "../control/dpad-button-control";
 import {ControlGroupComponent} from "./control-group.component";
 import {ControlLabelComponent} from "./control-label.component";
 
 interface Props {
-	control: DpadControl;
+	control: DpadButtonControl;
 }
 
 /**
- * Draws a DpadControl.
+ * Draws a DpadButtonControl.
  */
-export const DpadControlComponent = connect(({control}: Props) => (
+export const DpadButtonControlComponent = connect(({control}: Props) => (
 	<ControlGroupComponent control={control}>
 		<path
 			className="control-button"

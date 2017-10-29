@@ -4,7 +4,7 @@ import Component from "inferno-component";
 import {connect} from "inferno-mobx";
 import {action} from "mobx";
 import {Config} from "../../config/config";
-import {DpadControl} from "../../control/dpad-control";
+import {DpadButtonControl} from "../../control/dpad-button-control";
 import {EllipseControl} from "../../control/ellipse-control";
 import {ControlType} from "../../control/json/control-json";
 import {RectangleControl} from "../../control/rectangle-control";
@@ -74,7 +74,7 @@ const handleSubmit = action((component: AddControlFormComponent, event): void =>
 	const controls = component.props.config.controls;
 	switch (component.state.type) {
 		case ControlType.Dpad:
-			controls.push(new DpadControl());
+			controls.push(new DpadButtonControl());
 			break;
 		case ControlType.Ellipse:
 			controls.push(new EllipseControl());

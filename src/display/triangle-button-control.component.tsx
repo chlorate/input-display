@@ -1,16 +1,16 @@
 import {connect} from "inferno-mobx";
-import {TriangleControl} from "../control/triangle-control";
+import {TriangleButtonControl} from "../control/triangle-button-control";
 import {ControlGroupComponent} from "./control-group.component";
 import {ControlLabelComponent} from "./control-label.component";
 
 interface Props {
-	control: TriangleControl;
+	control: TriangleButtonControl;
 }
 
 /**
- * Draws a TriangleControl.
+ * Draws a TriangleButtonControl.
  */
-export const TriangleControlComponent = connect(({control}: Props) => (
+export const TriangleButtonControlComponent = connect(({control}: Props) => (
 	<ControlGroupComponent control={control}>
 		<path
 			className="control-button"

@@ -9,7 +9,6 @@ import {Control} from "../../control/control";
 import {defaultDirection as defaultDpadDirection, DpadButtonControl} from "../../control/dpad-button-control";
 import {EllipseButtonControl} from "../../control/ellipse-button-control";
 import {RectangleButtonControl} from "../../control/rectangle-button-control";
-import {defaultDirection as defaultTriangleDirection, TriangleControl} from "../../control/triangle-control";
 import {Event} from "../../event";
 import {Store} from "../../storage/store";
 import {ButtonReferenceSelectComponent} from "../field/button-reference-select.component";
@@ -28,6 +27,10 @@ import {
 import {
 	defaultRotation, maxRotation, minRotation, RotatableButtonControl,
 } from "../../control/rotatable-button-control";
+
+import {
+	defaultDirection as defaultTriangleDirection, TriangleButtonControl,
+} from "../../control/triangle-button-control";
 
 const borderWidthStep = 0.25;
 
@@ -142,7 +145,7 @@ export class ControlFieldsetComponent extends Component<Props, {}> {
 				/>,
 			);
 		}
-		if (control instanceof TriangleControl) {
+		if (control instanceof TriangleButtonControl) {
 			extraInputs.push(
 				<Direction8SelectComponent
 					className="col"
@@ -348,7 +351,7 @@ const handleChangeDpadDirection = action((control: DpadButtonControl, event): vo
 	control.direction = event.target.value || defaultDpadDirection;
 });
 
-const handleChangeTriangleDirection = action((control: TriangleControl, event): void => {
+const handleChangeTriangleDirection = action((control: TriangleButtonControl, event): void => {
 	control.direction = event.target.value || defaultTriangleDirection;
 });
 

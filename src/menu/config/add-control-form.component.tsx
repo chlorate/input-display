@@ -8,7 +8,7 @@ import {DpadButtonControl} from "../../control/dpad-button-control";
 import {EllipseButtonControl} from "../../control/ellipse-button-control";
 import {ControlType} from "../../control/json/control-json";
 import {RectangleButtonControl} from "../../control/rectangle-button-control";
-import {TriangleControl} from "../../control/triangle-control";
+import {TriangleButtonControl} from "../../control/triangle-button-control";
 import {Event} from "../../event";
 import {Store} from "../../storage/store";
 
@@ -83,7 +83,7 @@ const handleSubmit = action((component: AddControlFormComponent, event): void =>
 			controls.push(new RectangleButtonControl());
 			break;
 		case ControlType.Triangle:
-			controls.push(new TriangleControl());
+			controls.push(new TriangleButtonControl());
 			break;
 	}
 	component.props.events.emit(Event.AddControl);

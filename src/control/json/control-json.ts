@@ -21,7 +21,7 @@ export type ControlJSON = (
 	DpadButtonControlJSON |
 	EllipseButtonControlJSON |
 	RectangleButtonControlJSON |
-	TriangleControlJSON
+	TriangleButtonControlJSON
 );
 
 /**
@@ -52,9 +52,9 @@ export interface RectangleButtonControlJSON extends BaseButtonControlJSON {
 }
 
 /**
- * A JSON representation of a TriangleControl.
+ * A JSON representation of a TriangleButtonControl.
  */
-export interface TriangleControlJSON extends BaseButtonControlJSON {
+export interface TriangleButtonControlJSON extends BaseButtonControlJSON {
 	type: ControlType.Triangle;
 	direction: Direction8;
 }

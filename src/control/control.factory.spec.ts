@@ -8,7 +8,7 @@ import {EllipseButtonControl} from "./ellipse-button-control";
 import {ControlJSON, ControlType} from "./json/control-json";
 import {LabelPosition} from "./label-position";
 import {RectangleButtonControl} from "./rectangle-button-control";
-import {TriangleControl} from "./triangle-control";
+import {TriangleButtonControl} from "./triangle-button-control";
 
 function makeJSON(): ControlJSON {
 	return {
@@ -79,11 +79,11 @@ describe("parseControlJSON", () => {
 		expect(control.rotation).toBe(7);
 	});
 
-	it("can create a TriangleControl", () => {
+	it("can create a TriangleButtonControl", () => {
 		json.type = ControlType.Triangle;
 		json.direction = Direction8.Down;
-		const control = parseControlJSON(json) as TriangleControl;
-		expect(control instanceof TriangleControl).toBe(true);
+		const control = parseControlJSON(json) as TriangleButtonControl;
+		expect(control instanceof TriangleButtonControl).toBe(true);
 		expect(control.direction).toBe(Direction8.Down);
 	});
 });

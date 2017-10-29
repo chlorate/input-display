@@ -8,14 +8,14 @@ import {Control} from "../control/control";
 import {DpadButtonControl} from "../control/dpad-button-control";
 import {EllipseButtonControl} from "../control/ellipse-button-control";
 import {RectangleButtonControl} from "../control/rectangle-button-control";
-import {TriangleControl} from "../control/triangle-control";
+import {TriangleButtonControl} from "../control/triangle-button-control";
 import {Controller} from "../controller/controller";
 import {Event} from "../event";
 import {Store} from "../storage/store";
 import {DpadButtonControlComponent} from "./dpad-button-control.component";
 import {EllipseButtonControlComponent} from "./ellipse-button-control.component";
 import {RectangleButtonControlComponent} from "./rectangle-button-control.component";
-import {TriangleControlComponent} from "./triangle-control.component";
+import {TriangleButtonControlComponent} from "./triangle-button-control.component";
 
 enum Key {
 	Up = 38,
@@ -103,8 +103,8 @@ export class DisplayComponent extends Component<Props, {}> {
 						return <EllipseButtonControlComponent key={item.key} control={item.control} />;
 					} else if (item.control instanceof RectangleButtonControl) {
 						return <RectangleButtonControlComponent key={item.key} control={item.control} />;
-					} else if (item.control instanceof TriangleControl) {
-						return <TriangleControlComponent key={item.key} control={item.control} />;
+					} else if (item.control instanceof TriangleButtonControl) {
+						return <TriangleButtonControlComponent key={item.key} control={item.control} />;
 					}
 				})}
 			</svg>

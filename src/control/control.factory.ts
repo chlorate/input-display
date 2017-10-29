@@ -5,7 +5,7 @@ import {DpadButtonControl} from "./dpad-button-control";
 import {EllipseButtonControl} from "./ellipse-button-control";
 import {ControlJSON, ControlType} from "./json/control-json";
 import {RectangleButtonControl} from "./rectangle-button-control";
-import {TriangleControl} from "./triangle-control";
+import {TriangleButtonControl} from "./triangle-button-control";
 
 /**
  * Creates a control from its JSON representation.
@@ -32,7 +32,7 @@ export function parseControlJSON(json: ControlJSON): Control {
 			control = rectangle;
 			break;
 		case ControlType.Triangle:
-			const triangle = new TriangleControl();
+			const triangle = new TriangleButtonControl();
 			triangle.direction = json.direction;
 			control = triangle;
 			break;

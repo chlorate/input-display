@@ -1,12 +1,12 @@
 import {Direction8} from "../direction/direction8";
 import {ControlType} from "./json/control-json";
-import {defaultDirection, TriangleControl} from "./triangle-control";
+import {defaultDirection, TriangleButtonControl} from "./triangle-button-control";
 
-describe("TriangleControl", () => {
+describe("TriangleButtonControl", () => {
 	let control;
 
 	beforeEach(() => {
-		control = new TriangleControl();
+		control = new TriangleButtonControl();
 		control.borderWidth = 1;
 	});
 

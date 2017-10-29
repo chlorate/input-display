@@ -149,7 +149,7 @@ describe("isControlJSON", () => {
 		});
 	});
 
-	describe("TriangleControlJSON", () => {
+	describe("TriangleButtonControlJSON", () => {
 		beforeEach(() => {
 			json.type = ControlType.Triangle;
 			json.direction = Direction8.Down;

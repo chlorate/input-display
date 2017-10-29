@@ -50,7 +50,8 @@ export class AddControlFormComponent extends Component<Props, State> {
 							<option value={ControlType.RectangleButton}>Button (square/rectangle)</option>
 							<option value={ControlType.TriangleButton}>Button (triangle)</option>
 							<option value={ControlType.DpadButton}>Button (d-pad)</option>
-							<option value="">Analog stick</option>
+							<option value={ControlType.CircleStick}>Analog stick (circle)</option>
+							<option value={ControlType.OctagonStick}>Analog stick (octagon)</option>
 						</select>
 						<span className="input-group-btn">
 							<button className="btn btn-primary">

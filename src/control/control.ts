@@ -77,15 +77,21 @@ export abstract class Control {
 		return this.getLeftX();
 	}
 
-	public abstract get centerX(): number;
-	public abstract get rightX(): number;
+	abstract get centerX(): number;
+
+	@computed get rightX(): number {
+		return this.getRightX();
+	}
 
 	@computed get topY(): number {
 		return this.getTopY();
 	}
 
-	public abstract get centerY(): number;
-	public abstract get bottomY(): number;
+	abstract get centerY(): number;
+
+	@computed get bottomY(): number {
+		return this.getBottomY();
+	}
 
 	public abstract toJSON(): ControlJSON;
 

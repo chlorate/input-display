@@ -34,16 +34,8 @@ export abstract class ButtonControl extends Control {
 		return this.width / 2;
 	}
 
-	@computed get rightX(): number {
-		return this.getRightX();
-	}
-
 	@computed get centerY(): number {
 		return this.height / 2;
-	}
-
-	@computed get bottomY(): number {
-		return this.getBottomY();
 	}
 
 	protected getRightX(): number {

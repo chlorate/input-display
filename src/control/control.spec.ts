@@ -20,15 +20,7 @@ class TestControl extends Control {
 		throw new Error("not implemented");
 	}
 
-	get rightX(): number {
-		throw new Error("not implemented");
-	}
-
 	get centerY(): number {
-		throw new Error("not implemented");
-	}
-
-	get bottomY(): number {
 		throw new Error("not implemented");
 	}
 

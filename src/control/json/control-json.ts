@@ -1,3 +1,4 @@
+import {AxisReferenceJSON, isAxisReferenceJSON} from "../../config/json/axis-reference-json";
 import {ButtonReferenceJSON, isButtonReferenceJSON} from "../../config/json/button-reference-json";
 import {Direction4, sortedDirection4s} from "../../direction/direction4";
 import {Direction8, sortedDirection8s} from "../../direction/direction8";
@@ -12,6 +13,8 @@ export enum ControlType {
 	EllipseButton = "ellipseButton",
 	RectangleButton = "rectangleButton",
 	TriangleButton = "triangleButton",
+	CircleStick = "circleStick",
+	OctagonStick = "octagonStick",
 }
 
 /**
@@ -21,7 +24,9 @@ export type ControlJSON = (
 	DpadButtonControlJSON |
 	EllipseButtonControlJSON |
 	RectangleButtonControlJSON |
-	TriangleButtonControlJSON
+	TriangleButtonControlJSON |
+	CircleStickControlJSON |
+	OctagonStickControlJSON
 );
 
 /**
@@ -65,6 +70,30 @@ export interface TriangleButtonControlJSON extends BaseButtonControlJSON {
 export interface BaseButtonControlJSON extends BaseControlJSON {
 	width: number;
 	height: number;
+}
+
+/**
+ * A JSON representation of a CircleStickControl.
+ */
+export interface CircleStickControlJSON extends BaseStickControlJSON {
+	type: ControlType.CircleStick;
+}
+
+/**
+ * A JSON representation of an OctagonStickControl.
+ */
+export interface OctagonStickControlJSON extends BaseStickControlJSON {
+	type: ControlType.OctagonStick;
+}
+
+/**
+ * Common properties for all StickControl JSON representations.
+ */
+export interface BaseStickControlJSON extends BaseControlJSON {
+	xAxis?: AxisReferenceJSON;
+	yAxis?: AxisReferenceJSON;
+	outerSize: number;
+	innerSize: number;
 }
 
 /**
@@ -126,6 +155,13 @@ export function isControlJSON(input: any): input is ControlJSON {
 			(
 				input.type === ControlType.TriangleButton &&
 				sortedDirection8s.indexOf(input.direction) >= 0
+			) ||
+			(
+				(input.type === ControlType.CircleStick || input.type === ControlType.OctagonStick) &&
+				(input.xAxis === undefined || isAxisReferenceJSON(input.xAxis)) &&
+				(input.yAxis === undefined || isAxisReferenceJSON(input.yAxis)) &&
+				typeof input.outerSize === "number" &&
+				typeof input.innerSize === "number"
 			)
 		)
 	);

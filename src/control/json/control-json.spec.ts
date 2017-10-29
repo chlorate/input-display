@@ -165,6 +165,62 @@ describe("isControlJSON", () => {
 		});
 	});
 
+	describe("CircleStickControlJSON", () => {
+		beforeEach(() => {
+			json.type = ControlType.CircleStick;
+			json.outerSize = 6;
+			json.innerSize = 7;
+		});
+
+		it("should return true if valid without axis references", () => {
+			expect(isControlJSON(json)).toBe(true);
+		});
+
+		it("should return true if valid with axis referecens", () => {
+			json.xAxis = {
+				index: 0,
+				inverted: false,
+			};
+			json.yAxis = {
+				index: 1,
+				inverted: true,
+			};
+			expect(isControlJSON(json)).toBe(true);
+		});
+
+		it("should return false if xAxis is not an AxisReference", () => {
+			json.xAxis = "bad";
+			expect(isControlJSON(json)).toBe(false);
+		});
+
+		it("should return false if yAxis is not an AxisReference", () => {
+			json.yAxis = "bad";
+			expect(isControlJSON(json)).toBe(false);
+		});
+
+		it("should return false if outerSize is not numeric", () => {
+			json.outerSize = "bad";
+			expect(isControlJSON(json)).toBe(false);
+		});
+
+		it("should return false if innerSize is not numeric", () => {
+			json.innerSize = "bad";
+			expect(isControlJSON(json)).toBe(false);
+		});
+	});
+
+	describe("OctagonStickControlJSON", () => {
+		beforeEach(() => {
+			json.type = ControlType.OctagonStick;
+			json.outerSize = 6;
+			json.innerSize = 7;
+		});
+
+		it("should return true if valid", () => {
+			expect(isControlJSON(json)).toBe(true);
+		});
+	});
+
 	it("should return false if not an object", () => {
 		expect(isControlJSON("bad")).toBe(false);
 	});

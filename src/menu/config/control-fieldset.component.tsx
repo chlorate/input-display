@@ -3,14 +3,17 @@ import {linkEvent} from "inferno";
 import Component from "inferno-component";
 import {connect} from "inferno-mobx";
 import {action} from "mobx";
+import {AxisReference} from "../../config/axis-reference";
 import {ButtonReference} from "../../config/button-reference";
 import {ButtonControl, defaultSize, maxHeight, maxWidth, minHeight, minWidth} from "../../control/button-control";
 import {Control} from "../../control/control";
 import {defaultDirection as defaultDpadDirection, DpadButtonControl} from "../../control/dpad-button-control";
 import {EllipseButtonControl} from "../../control/ellipse-button-control";
 import {RectangleButtonControl} from "../../control/rectangle-button-control";
+import {defaultInnerSize, defaultOuterSize, maxSize, minSize, StickControl} from "../../control/stick-control";
 import {Event} from "../../event";
 import {Store} from "../../storage/store";
+import {AxisReferenceSelectComponent} from "../field/axis-reference-select.component";
 import {ButtonReferenceSelectComponent} from "../field/button-reference-select.component";
 import {Direction4SelectComponent} from "../field/direction4-select.component";
 import {Direction8SelectComponent} from "../field/direction8-select.component";
@@ -206,6 +209,25 @@ export class ControlFieldsetComponent extends Component<Props, {}> {
 					/>
 				</div>
 
+				{control instanceof StickControl &&
+					<div className="form-row">
+						<AxisReferenceSelectComponent
+							className="col"
+							id="config-control-x-axis"
+							label="X axis"
+							reference={control.xAxis}
+							onChange={linkEvent(control, handleChangeXAxis)}
+						/>
+						<AxisReferenceSelectComponent
+							className="col"
+							id="config-control-y-axis"
+							label="Y axis"
+							reference={control.yAxis}
+							onChange={linkEvent(control, handleChangeYAxis)}
+						/>
+					</div>
+				}
+
 				{/* Nested rows make it so the fields wrap in pairs. */}
 				<div className="form-row">
 					<div className="col">
@@ -258,6 +280,30 @@ export class ControlFieldsetComponent extends Component<Props, {}> {
 									max={maxHeight}
 									placeholder={defaultSize}
 									onChange={linkEvent(control, handleChangeHeight)}
+								/>,
+							]}
+							{control instanceof StickControl && [
+								<NumberInputComponent
+									className="col"
+									id="config-control-outer-size"
+									label="Outer size"
+									suffix="px"
+									value={control.outerSize}
+									min={minSize}
+									max={maxSize}
+									placeholder={defaultOuterSize}
+									onChange={linkEvent(control, handleChangeOuterSize)}
+								/>,
+								<NumberInputComponent
+									className="col"
+									id="config-control-inner-size"
+									label="Inner size"
+									suffix="px"
+									value={control.innerSize}
+									min={minSize}
+									max={maxSize}
+									placeholder={defaultInnerSize}
+									onChange={linkEvent(control, handleChangeInnerSize)}
 								/>,
 							]}
 						</div>
@@ -325,6 +371,22 @@ const handleChangeWidth = action((control: ButtonControl, event): void => {
 
 const handleChangeHeight = action((control: ButtonControl, event): void => {
 	control.height = event.target.value || defaultSize;
+});
+
+const handleChangeOuterSize = action((control: StickControl, event): void => {
+	control.outerSize = event.target.value || defaultOuterSize;
+});
+
+const handleChangeInnerSize = action((control: StickControl, event): void => {
+	control.innerSize = event.target.value || defaultInnerSize;
+});
+
+const handleChangeXAxis = action((control: StickControl, reference?: AxisReference): void => {
+	control.xAxis = reference;
+});
+
+const handleChangeYAxis = action((control: StickControl, reference?: AxisReference): void => {
+	control.yAxis = reference;
 });
 
 const handleChangeBorderWidth = action((control: Control, event): void => {

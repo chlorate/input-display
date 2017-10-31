@@ -83,7 +83,7 @@ export class DisplayComponent extends Component<Props, {}> {
 			zIndex: this.zIndex(control),
 			control,
 		}));
-		items.sort((x: Item, y: Item) => x.zIndex - y.zIndex);
+		items.sort((x: Item, y: Item) => x.zIndex - y.zIndex || x.key - y.key);
 
 		return (
 			<svg

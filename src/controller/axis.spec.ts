@@ -30,15 +30,6 @@ describe("Axis", () => {
 		expect(axis.invertedValue).toBe(-0.123);
 	});
 
-	it("can return a JSON representation", () => {
-		rotate();
-		expect(axis.toJSON()).toEqual({
-			neutralValue: 0,
-			minValue: -1,
-			maxValue: 1,
-		});
-	});
-
 	describe("neutralValue", () => {
 		it("should store first value as neutral value", () => {
 			axis.value = 0.123;
@@ -94,6 +85,60 @@ describe("Axis", () => {
 			axis.minValue = -0.2;
 			axis.maxValue = -0.3;
 			expect(axis.maxValue).toBe(-0.2);
+		});
+	});
+
+	describe("moved", () => {
+		beforeEach(() => {
+			axis.neutralValue = 0.1;
+			axis.minValue = -0.5;
+			axis.maxValue = 0.6;
+		});
+
+		it("should not be moved if neutral value is undefined", () => {
+			axis.value = -0.5;
+			axis.neutralValue = undefined;
+			expect(axis.moved).toBe(false);
+		});
+
+		it("should not be moved if minimum value is undefined", () => {
+			axis.value = -0.5;
+			axis.minValue = undefined;
+			expect(axis.moved).toBe(false);
+		});
+
+		it("should not be moved if maximum value is undefined", () => {
+			axis.value = 0.6;
+			axis.maxValue = undefined;
+			expect(axis.moved).toBe(false);
+		});
+
+		it("should not be moved if less than threshold", () => {
+			expect(axis.moved).toBe(false);
+			axis.value = 0.1;
+			expect(axis.moved).toBe(false);
+			axis.value = 0.18;
+			expect(axis.moved).toBe(false);
+		});
+
+		it("should be moved if at least the threshold", () => {
+			axis.value = -0.5;
+			expect(axis.moved).toBe(true);
+			axis.value = -0.1;
+			expect(axis.moved).toBe(true);
+			axis.value = 0.2;
+			expect(axis.moved).toBe(true);
+			axis.value = 0.6;
+			expect(axis.moved).toBe(true);
+		});
+	});
+
+	it("can return a JSON representation", () => {
+		rotate();
+		expect(axis.toJSON()).toEqual({
+			neutralValue: 0,
+			minValue: -1,
+			maxValue: 1,
 		});
 	});
 });

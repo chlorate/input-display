@@ -3,6 +3,12 @@ import {clamp} from "../math/util";
 import {AxisJSON} from "./json/axis-json";
 
 /**
+ * How far from neutral an axis value has to be to be consider moved (as
+ * a percentage between 0 and 1).
+ */
+const movedThreshold = 0.2;
+
+/**
  * A controller axis. Stores its current value, neutral value, and range of
  * possible values. The first value recorded is set as the neutral value. The
  * minimum and maximum values are updated as the value changes.
@@ -66,6 +72,21 @@ export class Axis {
 	}
 	set maxValue(value: number | undefined) {
 		this._maxValue = value === undefined ? value : clamp(value, this.neutralValue || this.minValue);
+	}
+
+	@computed get moved(): boolean {
+		if (this.neutralValue === undefined) {
+			return false;
+		}
+
+		const normalizedValue = this.value - this.neutralValue;
+		if (this.minValue !== undefined && this.value < this.neutralValue) {
+			return normalizedValue / (this.minValue - this.neutralValue) >= movedThreshold;
+		}
+		if (this.maxValue !== undefined && this.value > this.neutralValue) {
+			return normalizedValue / (this.maxValue - this.neutralValue) >= movedThreshold;
+		}
+		return false;
 	}
 
 	/**

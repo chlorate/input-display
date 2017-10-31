@@ -2,7 +2,8 @@
  * Events for communicating between components.
  */
 export enum Event {
-	AddControl = "addControl",
 	NavigateTab = "navigateTab",
+	LoadConfig = "loadConfig",
+	AddControl = "addControl",
 	SelectControl = "selectControl",
 }

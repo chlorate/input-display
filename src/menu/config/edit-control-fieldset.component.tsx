@@ -26,11 +26,13 @@ interface State {
 @connect([Store.Config, Store.Events])
 export class EditControlFieldsetComponent extends Component<Props, State> {
 	public state: State = {index: 0};
-	private listener: () => void;
+	private loadListener: () => void;
+	private addListener: () => void;
 
 	constructor(props: Props, state: State) {
 		super(props, state);
-		this.listener = () => this.selectLast();
+		this.loadListener = () => this.selectFirst();
+		this.addListener = () => this.selectLast();
 	}
 
 	get index(): number {
@@ -41,15 +43,17 @@ export class EditControlFieldsetComponent extends Component<Props, State> {
 	}
 
 	public componentDidMount(): void {
-		this.props.events.addListener(Event.AddControl, this.listener);
+		this.props.events.addListener(Event.LoadConfig, this.loadListener);
+		this.props.events.addListener(Event.AddControl, this.addListener);
 	}
 
 	public componentWillUnmount(): void {
-		this.props.events.removeListener(Event.AddControl, this.listener);
+		this.props.events.removeListener(Event.LoadConfig, this.loadListener);
+		this.props.events.removeListener(Event.AddControl, this.addListener);
 	}
 
 	public render() {
-		if (!this.props.config.controls.length) {
+		if (this.index >= this.props.config.controls.length) {
 			return;
 		}
 
@@ -75,7 +79,6 @@ export class EditControlFieldsetComponent extends Component<Props, State> {
 				</div>
 				<hr />
 				<ControlFieldsetComponent
-					events={this.props.events}
 					control={this.props.config.controls[this.index]}
 				/>
 				<button
@@ -113,6 +116,16 @@ export class EditControlFieldsetComponent extends Component<Props, State> {
 		);
 	}
 
+	/**
+	 * Selects the first control.
+	 */
+	private selectFirst(): void {
+		this.index = 0;
+	}
+
+	/**
+	 * Selects the last control.
+	 */
 	private selectLast(): void {
 		this.index = this.props.config.controls.length - 1;
 	}

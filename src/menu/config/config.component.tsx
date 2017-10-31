@@ -1,8 +1,10 @@
+import {EventEmitter} from "events";
 import {linkEvent} from "inferno";
 import Component from "inferno-component";
 import {connect} from "inferno-mobx";
 import {action} from "mobx";
 import {Config} from "../../config/config";
+import {Event} from "../../event";
 import {loadFile, saveFile} from "../../storage/file";
 import {Store} from "../../storage/store";
 import {AdvancedConfigComponent} from "./advanced-config.component";
@@ -15,6 +17,7 @@ import {FontConfigComponent} from "./font-config.component";
 interface Props {
 	config: Config;
 	errors: string[];
+	events: EventEmitter;
 }
 
 interface State {
@@ -25,7 +28,7 @@ interface State {
  * Contents of the Config tab. Provides fields for configuring the controller
  * and input display.
  */
-@connect([Store.Config, Store.Errors])
+@connect([Store.Config, Store.Errors, Store.Events])
 export class ConfigComponent extends Component<Props, State> {
 	public state: State = {};
 	public fileInput?: HTMLInputElement;
@@ -122,6 +125,9 @@ const handleChangeFile = action((component: ConfigComponent): void => {
 	if (component.fileInput && component.fileInput.files) {
 		component.saveUrl = undefined;
 		loadFile(component.fileInput.files[0], component.props.config)
+			.then(() => {
+				component.props.events.emit(Event.LoadConfig);
+			})
 			.catch(action((error: string) => {
 				component.props.errors.push("Failed to open config file: " + error);
 			}))

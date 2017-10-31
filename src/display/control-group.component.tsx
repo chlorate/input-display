@@ -4,6 +4,7 @@ import Component from "inferno-component";
 import {connect} from "inferno-mobx";
 import {Config} from "../config/config";
 import {Control} from "../control/control";
+import {StickControl} from "../control/stick-control";
 import {Controller} from "../controller/controller";
 import {Event} from "../event";
 import {Store} from "../storage/store";
@@ -31,15 +32,20 @@ export class ControlGroupComponent extends Component<Props, {}> {
 		const control = this.props.control;
 
 		const classNames: string[] = [];
+		if (control instanceof StickControl) {
+			const xAxis = control.xAxis ? control.xAxis.resolveAxis(this.props.controller) : undefined;
+			const yAxis = control.yAxis ? control.yAxis.resolveAxis(this.props.controller) : undefined;
+			if ((xAxis && xAxis.moved) || (yAxis && yAxis.moved)) {
+				classNames.push("control-axis-moved");
+			}
+		}
 		if (control.button) {
 			const button = control.button.resolve(this.props.controller);
-			if (button) {
-				if (button.mashing) {
-					classNames.push("control-button-mashing");
-				}
-				if (button.pressed) {
-					classNames.push("control-button-pressed");
-				}
+			if (button && button.mashing) {
+				classNames.push("control-button-mashing");
+			}
+			if (button && button.pressed) {
+				classNames.push("control-button-pressed");
 			}
 		}
 

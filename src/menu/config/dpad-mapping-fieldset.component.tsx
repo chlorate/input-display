@@ -74,12 +74,14 @@ export const DpadMappingFieldsetComponent = connect([Store.Config, Store.Control
 						id="config-dpad-x-axis"
 						label="D-pad X axis"
 						reference={props.config.dpadXAxis}
+						required={true}
 					/>
 					<AxisReferenceSelectComponent
 						className="col"
 						id="config-dpad-y-axis"
 						label="D-pad Y axis"
 						reference={props.config.dpadYAxis}
+						required={true}
 					/>
 				</div>
 			}

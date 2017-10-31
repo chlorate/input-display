@@ -19,6 +19,7 @@ export const AxisIndexSelectComponent = (props: Props) => (
 		<AxisSelectComponent
 			id={props.id}
 			value={props.value}
+			required={true}
 			onChange={props.onChange}
 		/>
 	</div>

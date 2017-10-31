@@ -5,7 +5,8 @@ import {Store} from "../../storage/store";
 interface Props {
 	controller: Controller;
 	id: string;
-	value: number;
+	value?: number;
+	required?: boolean;
 	onChange: any;
 }
 
@@ -17,14 +18,17 @@ export const AxisSelectComponent = connect([Store.Controller], (props: Props) =>
 	<select
 		className="form-control"
 		id={props.id}
-		value={props.value}
+		value={props.value !== undefined ? props.value : ""}
 		required
 		onChange={props.onChange}
 	>
+		{(!props.required || props.value === undefined) &&
+			<option value="">None</option>
+		}
 		{props.controller.axes.map((axis, i) => (
 			<option value={i}>Axis {i + 1}</option>
 		))}
-		{props.value >= props.controller.axes.length &&
+		{props.value !== undefined && props.value >= props.controller.axes.length &&
 			<option value={props.value}>Axis {props.value + 1}</option>
 		}
 	</select>

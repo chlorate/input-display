@@ -4,6 +4,7 @@ import Component from "inferno-component";
 import {connect} from "inferno-mobx";
 import {action} from "mobx";
 import {Config} from "../config/config";
+import {CircleStickControl} from "../control/circle-stick-control";
 import {Control} from "../control/control";
 import {DpadButtonControl} from "../control/dpad-button-control";
 import {EllipseButtonControl} from "../control/ellipse-button-control";
@@ -12,6 +13,7 @@ import {TriangleButtonControl} from "../control/triangle-button-control";
 import {Controller} from "../controller/controller";
 import {Event} from "../event";
 import {Store} from "../storage/store";
+import {CircleStickControlComponent} from "./circle-stick-control.component";
 import {DpadButtonControlComponent} from "./dpad-button-control.component";
 import {EllipseButtonControlComponent} from "./ellipse-button-control.component";
 import {RectangleButtonControlComponent} from "./rectangle-button-control.component";
@@ -105,6 +107,8 @@ export class DisplayComponent extends Component<Props, {}> {
 						return <RectangleButtonControlComponent key={item.key} control={item.control} />;
 					} else if (item.control instanceof TriangleButtonControl) {
 						return <TriangleButtonControlComponent key={item.key} control={item.control} />;
+					} else if (item.control instanceof CircleStickControl) {
+						return <CircleStickControlComponent key={item.key} control={item.control} />;
 					}
 				})}
 			</svg>

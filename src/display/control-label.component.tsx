@@ -15,6 +15,8 @@ interface Props {
 	config: Config;
 	controller: Controller;
 	control: Control;
+	centerX: number;
+	centerY: number;
 }
 
 interface Labels {
@@ -70,11 +72,11 @@ export class ControlLabelComponent extends Component<Props, {}> {
 				{positionedLabels[LabelPosition.Center].length > 0 &&
 					<ControlLabelTextComponent
 						labels={positionedLabels[LabelPosition.Center]}
-						x={control.centerX}
-						y={control.centerY}
+						x={this.props.centerX}
+						y={this.props.centerY}
 						anchor="middle"
 						baseline="central"
-						spanX={control.centerX}
+						spanX={this.props.centerX}
 						spanFirstShiftY={`${-lineHeight * (positionedLabels[LabelPosition.Center].length - 1) / 2}em`}
 						spanShiftY={`${lineHeight}em`}
 					/>

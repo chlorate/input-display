@@ -1,7 +1,6 @@
 import {connect} from "inferno-mobx";
 import {DpadButtonControl} from "../control/dpad-button-control";
-import {ControlGroupComponent} from "./control-group.component";
-import {ControlLabelComponent} from "./control-label.component";
+import {ButtonControlComponent} from "./button-control.component";
 
 interface Props {
 	control: DpadButtonControl;
@@ -11,13 +10,12 @@ interface Props {
  * Draws a DpadButtonControl.
  */
 export const DpadButtonControlComponent = connect(({control}: Props) => (
-	<ControlGroupComponent control={control}>
+	<ButtonControlComponent control={control}>
 		<path
 			className="control-button"
 			d={control.path}
 			stroke-width={control.borderWidth}
 			stroke-dasharray={control.strokeDashArray}
 		/>
-		<ControlLabelComponent control={control} />
-	</ControlGroupComponent>
+	</ButtonControlComponent>
 ));

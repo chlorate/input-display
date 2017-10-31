@@ -1,7 +1,6 @@
 import {connect} from "inferno-mobx";
 import {EllipseButtonControl} from "../control/ellipse-button-control";
-import {ControlGroupComponent} from "./control-group.component";
-import {ControlLabelComponent} from "./control-label.component";
+import {ButtonControlComponent} from "./button-control.component";
 
 interface Props {
 	control: EllipseButtonControl;
@@ -11,7 +10,7 @@ interface Props {
  * Draws an EllipseButtonControl.
  */
 export const EllipseButtonControlComponent = connect(({control}: Props) => (
-	<ControlGroupComponent control={control}>
+	<ButtonControlComponent control={control}>
 		<ellipse
 			className="control-button"
 			cx={control.centerX}
@@ -21,6 +20,5 @@ export const EllipseButtonControlComponent = connect(({control}: Props) => (
 			stroke-width={control.borderWidth}
 			transform={control.transform}
 		/>
-		<ControlLabelComponent control={control} />
-	</ControlGroupComponent>
+	</ButtonControlComponent>
 ));

@@ -38,7 +38,7 @@ class IndexComponent extends Component<{}, State> {
 		};
 	}
 
-	@action public componentDidMount(): void {
+	@action public componentWillMount(): void {
 		try {
 			loadLocalStorage(Store.Config, this.state.config);
 		} catch (exception) {

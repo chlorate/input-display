@@ -7,7 +7,7 @@ import {BaseStickControlJSON} from "./json/control-json";
 export const minSize = 1;
 export const maxSize = 2160;
 export const defaultOuterSize = 50;
-export const defaultInnerSize = 24;
+export const defaultInnerSize = 30;
 
 /**
  * An abstract control that represents an analog stick.

@@ -120,6 +120,7 @@ export class ConfigComponent extends Component<Props, State> {
 
 const handleChangeFile = action((component: ConfigComponent): void => {
 	if (component.fileInput && component.fileInput.files) {
+		component.saveUrl = undefined;
 		loadFile(component.fileInput.files[0], component.props.config)
 			.catch(action((error: string) => {
 				component.props.errors.push("Failed to open config file: " + error);

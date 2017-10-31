@@ -8,6 +8,7 @@ import {CircleStickControl} from "../control/circle-stick-control";
 import {Control} from "../control/control";
 import {DpadButtonControl} from "../control/dpad-button-control";
 import {EllipseButtonControl} from "../control/ellipse-button-control";
+import {OctagonStickControl} from "../control/octagon-stick-control";
 import {RectangleButtonControl} from "../control/rectangle-button-control";
 import {TriangleButtonControl} from "../control/triangle-button-control";
 import {Controller} from "../controller/controller";
@@ -16,6 +17,7 @@ import {Store} from "../storage/store";
 import {CircleStickControlComponent} from "./circle-stick-control.component";
 import {DpadButtonControlComponent} from "./dpad-button-control.component";
 import {EllipseButtonControlComponent} from "./ellipse-button-control.component";
+import {OctagonStickControlComponent} from "./octagon-stick-control.component";
 import {RectangleButtonControlComponent} from "./rectangle-button-control.component";
 import {TriangleButtonControlComponent} from "./triangle-button-control.component";
 
@@ -109,6 +111,8 @@ export class DisplayComponent extends Component<Props, {}> {
 						return <TriangleButtonControlComponent key={item.key} control={item.control} />;
 					} else if (item.control instanceof CircleStickControl) {
 						return <CircleStickControlComponent key={item.key} control={item.control} />;
+					} else if (item.control instanceof OctagonStickControl) {
+						return <OctagonStickControlComponent key={item.key} control={item.control} />;
 					}
 				})}
 			</svg>

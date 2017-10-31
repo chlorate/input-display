@@ -6,6 +6,7 @@ import {Control} from "./control";
 import {DpadButtonControl} from "./dpad-button-control";
 import {EllipseButtonControl} from "./ellipse-button-control";
 import {BaseButtonControlJSON, BaseStickControlJSON, ControlJSON, ControlType} from "./json/control-json";
+import {OctagonStickControl} from "./octagon-stick-control";
 import {RectangleButtonControl} from "./rectangle-button-control";
 import {StickControl} from "./stick-control";
 import {TriangleButtonControl} from "./triangle-button-control";
@@ -47,6 +48,11 @@ export function parseControlJSON(json: ControlJSON): Control {
 			const circle = new CircleStickControl();
 			loadStickJSON(json, circle);
 			control = circle;
+			break;
+		case ControlType.OctagonStick:
+			const octagon = new OctagonStickControl();
+			loadStickJSON(json, octagon);
+			control = octagon;
 			break;
 		default:
 			throw new TypeError("invalid control JSON");

@@ -9,6 +9,7 @@ import {DpadButtonControl} from "./dpad-button-control";
 import {EllipseButtonControl} from "./ellipse-button-control";
 import {ControlJSON, ControlType} from "./json/control-json";
 import {LabelPosition} from "./label-position";
+import {OctagonStickControl} from "./octagon-stick-control";
 import {RectangleButtonControl} from "./rectangle-button-control";
 import {TriangleButtonControl} from "./triangle-button-control";
 
@@ -100,6 +101,7 @@ describe("parseControlJSON", () => {
 
 		it("can be created", () => {
 			const control = parseControlJSON(json) as CircleStickControl;
+			expect(control instanceof CircleStickControl).toBe(true);
 			expect(control.xAxis).toBeUndefined();
 			expect(control.yAxis).toBeUndefined();
 			expect(control.outerSize).toBe(5);
@@ -125,6 +127,16 @@ describe("parseControlJSON", () => {
 				expect(control.yAxis.index).toBe(1);
 			}
 		});
+	});
+
+	it("can create an OctagonStickControl", () => {
+		json.type = ControlType.OctagonStick;
+		json.outerSize = 5;
+		json.innerSize = 6;
+		const control = parseControlJSON(json) as OctagonStickControl;
+		expect(control instanceof OctagonStickControl).toBe(true);
+		expect(control.outerSize).toBe(5);
+		expect(control.innerSize).toBe(6);
 	});
 });
 

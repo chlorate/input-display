@@ -8,6 +8,7 @@ import {CircleStickControl} from "../../control/circle-stick-control";
 import {DpadButtonControl} from "../../control/dpad-button-control";
 import {EllipseButtonControl} from "../../control/ellipse-button-control";
 import {ControlType} from "../../control/json/control-json";
+import {OctagonStickControl} from "../../control/octagon-stick-control";
 import {RectangleButtonControl} from "../../control/rectangle-button-control";
 import {TriangleButtonControl} from "../../control/triangle-button-control";
 import {Event} from "../../event";
@@ -89,6 +90,9 @@ const handleSubmit = action((component: AddControlFormComponent, event): void =>
 			break;
 		case ControlType.CircleStick:
 			controls.push(new CircleStickControl());
+			break;
+		case ControlType.OctagonStick:
+			controls.push(new OctagonStickControl());
 			break;
 	}
 	component.props.events.emit(Event.AddControl);

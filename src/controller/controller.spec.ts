@@ -2,6 +2,7 @@ import {AxisReference} from "../config/axis-reference";
 import {Config} from "../config/config";
 import {sortedDirection4s} from "../direction/direction4";
 import * as service from "../gamepad/service";
+import {MockAnimationFrame} from "../test/animation-frame";
 import {Controller} from "./controller";
 import {ButtonType} from "./json/button-json";
 
@@ -9,6 +10,8 @@ describe("Controller", () => {
 	let config;
 	let controller;
 	let gamepad;
+	let mockAnimationFrame;
+	let now;
 
 	beforeEach(() => {
 		config = new Config();
@@ -20,12 +23,13 @@ describe("Controller", () => {
 			buttons: [{pressed: false}, {pressed: true}],
 		};
 
-		jasmine.clock().install();
-	});
+		mockAnimationFrame = new MockAnimationFrame();
+		spyOn(window, "requestAnimationFrame").and.callFake((callback: FrameRequestCallback) => (
+			mockAnimationFrame.request(callback)
+		));
 
-	afterEach(() => {
-		controller.stopPoll();
-		jasmine.clock().uninstall();
+		now = 0;
+		spyOn(window.performance, "now").and.callFake(() => now);
 	});
 
 	it("can return a JSON representation", () => {
@@ -114,17 +118,13 @@ describe("Controller", () => {
 
 	describe("poll", () => {
 		it("should update according to the poll rate", () => {
-			let now = 0;
-			spyOn(window.performance, "now").and.callFake(() => now);
 			spyOn(service, "getGamepads").and.returnValue([gamepad]);
 			config.pollRate = 1;
 			controller.poll();
 			expect(service.getGamepads).toHaveBeenCalledTimes(1);
-			now += 900;
-			jasmine.clock().tick(900);
+			mockAnimationFrame.tick(59);
 			expect(service.getGamepads).toHaveBeenCalledTimes(1);
-			now += 200;
-			jasmine.clock().tick(200);
+			mockAnimationFrame.tick(1);
 			expect(service.getGamepads).toHaveBeenCalledTimes(2);
 		});
 
@@ -143,10 +143,9 @@ describe("Controller", () => {
 		});
 
 		it("should clear gamepad data if controller is disconnected", () => {
-			spyOn(window.performance, "now").and.returnValue(0);
 			spyOn(service, "getGamepads").and.returnValues([gamepad], []);
 			controller.poll();
-			jasmine.clock().tick(20);
+			mockAnimationFrame.tick(1);
 			expect(controller.id).toBeUndefined();
 			expect(controller.mapping).toBeUndefined();
 		});
@@ -173,7 +172,7 @@ describe("Controller", () => {
 			});
 
 			gamepad.axes[0] = 0.3;
-			jasmine.clock().tick(20);
+			mockAnimationFrame.tick(1);
 			expect(controller.axes[0].value).toBe(0.3);
 		});
 
@@ -187,7 +186,7 @@ describe("Controller", () => {
 			});
 
 			gamepad.buttons[0].pressed = true;
-			jasmine.clock().tick(20);
+			mockAnimationFrame.tick(1);
 			expect(controller.buttons[0].pressed).toBe(true);
 		});
 
@@ -242,7 +241,7 @@ describe("Controller", () => {
 			].forEach((test) => {
 				it(`should have expected directions pressed when axis value is ${test.value}`, () => {
 					gamepad.axes[1] = test.value;
-					jasmine.clock().tick(20);
+					mockAnimationFrame.tick(1);
 					checkDpadButtonsPressed(test.pressed);
 				});
 			});
@@ -291,7 +290,7 @@ describe("Controller", () => {
 				it(`should have expected directions pressed when axis values are (${test.x}, ${test.y})`, () => {
 					gamepad.axes[0] = test.x;
 					gamepad.axes[1] = test.y;
-					jasmine.clock().tick(20);
+					mockAnimationFrame.tick(1);
 					checkDpadButtonsPressed(test.pressed);
 				});
 			});
@@ -318,20 +317,18 @@ describe("Controller", () => {
 		}
 
 		it("should update button mashing flags", () => {
-			let now = 0;
-			spyOn(window.performance, "now").and.callFake(() => now);
 			spyOn(service, "getGamepads").and.returnValue([gamepad]);
 			config.pollRate = 10;
 			controller.poll();
 			for (let i = 0; i < 10; i++) {
 				gamepad.buttons[0].pressed = !gamepad.buttons[0].pressed;
 				now += 100;
-				jasmine.clock().tick(100);
+				mockAnimationFrame.tick(6);
 			}
 			expect(controller.buttons[0].mashing).toBe(true);
 			expect(controller.buttons[1].mashing).toBe(false);
-			now += 1000;
-			jasmine.clock().tick(1000);
+			now += 100;
+			mockAnimationFrame.tick(6);
 			expect(controller.buttons[0].mashing).toBe(false);
 		});
 
@@ -340,7 +337,7 @@ describe("Controller", () => {
 			spyOn(service, "getGamepads").and.returnValue([gamepad]);
 			controller.poll();
 			gamepad.buttons.push({pressed: false});
-			jasmine.clock().tick(20);
+			mockAnimationFrame.tick(1);
 			expect(controller.buttons.map((button) => button.name)).toEqual([
 				"Button 1",
 				"Button 2",

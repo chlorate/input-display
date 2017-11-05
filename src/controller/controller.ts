@@ -38,8 +38,9 @@ export class Controller {
 	@observable private _mapping?: string;
 	@observable private _axes: Axis[] = [];
 	@observable private _buttons: Button[] = [];
-	private timeout?: number;
 	private sorted: boolean = true;
+	private lastUpdated: number = -secondToMilliseconds;
+	private requestId?: number;
 
 	constructor(config: Config) {
 		this.config = config;
@@ -105,24 +106,27 @@ export class Controller {
 	 * happens.
 	 */
 	@action public poll(): void {
-		this.update();
-
-		// setTimeout drifts a bit. Set the delay so the next call happens at
-		// a multiple of the poll rate. For example, if the poll rate is 60 Hz
-		// and this current call happened 1/3 through a frame, set the delay to
-		// 2/3 of a frame so the next call approximately happens at the
-		// beginning of the next frame.
-		let delay = secondToMilliseconds / this.config.pollRate;
-		delay = delay - window.performance.now() % delay;
-		this.timeout = setTimeout(() => this.poll(), delay);
+		const poller = (now: number) => {
+			const interval = secondToMilliseconds / this.config.pollRate;
+			const delta = now - this.lastUpdated;
+			if (delta >= interval) {
+				// Round the timestamp down to the nearest multiple of interval
+				// so that any drift won't accumulate and lower the frame rate.
+				// Source: https://gist.github.com/addyosmani/5434533
+				this.lastUpdated = now - (delta % interval);
+				this.update();
+			}
+			this.requestId = requestAnimationFrame(poller);
+		};
+		poller(performance.now());
 	}
 
 	/**
 	 * Stops polling the Gamepad API.
 	 */
 	public stopPoll(): void {
-		if (this.timeout !== undefined) {
-			clearTimeout(this.timeout);
+		if (this.requestId !== undefined) {
+			cancelAnimationFrame(this.requestId);
 		}
 	}
 

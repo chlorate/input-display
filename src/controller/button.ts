@@ -22,7 +22,7 @@ export abstract class Button {
 		return this._pressed;
 	}
 	set pressed(pressed: boolean) {
-		const now = window.performance.now();
+		const now = performance.now();
 		if (pressed && !this.pressed) {
 			this.pressTimes.push(now);
 			this._presses++;

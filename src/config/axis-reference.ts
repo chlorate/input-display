@@ -45,23 +45,10 @@ export class AxisReference {
 	 * Finds and returns the axis of a controller that this reference points to.
 	 * If no axis was found, this returns undefined.
 	 */
-	public resolveAxis(controller: Controller): Axis | undefined {
+	public resolve(controller: Controller): Axis | undefined {
 		if (this.index >= controller.axes.length) {
 			return undefined;
 		}
 		return controller.axes[this.index];
-	}
-
-	/**
-	 * Finds the axis of a controller that this reference points to and returns
-	 * its value (or its inverted value if this reference is inverted). If no
-	 * axis was found, this returns undefined.
-	 */
-	public resolveValue(controller: Controller): number | undefined {
-		const axis = this.resolveAxis(controller);
-		if (!axis) {
-			return undefined;
-		}
-		return this.inverted ? axis.invertedValue : axis.value;
 	}
 }

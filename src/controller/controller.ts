@@ -240,23 +240,26 @@ export class Controller {
 			return;
 		}
 
-		const x = this.config.dpadXAxis.resolveValue(this);
-		const y = this.config.dpadYAxis.resolveValue(this);
-		if (x === undefined || y === undefined) {
+		const xAxis = this.config.dpadXAxis.resolve(this);
+		const yAxis = this.config.dpadYAxis.resolve(this);
+		if (xAxis === undefined || yAxis === undefined) {
 			return;
 		}
 
 		const up = this.findOrCreateDpadButton(Direction4.Up);
-		up.pressed = y <= -dpadAxisThreshold;
-
 		const right = this.findOrCreateDpadButton(Direction4.Right);
-		right.pressed = x >= dpadAxisThreshold;
-
 		const down = this.findOrCreateDpadButton(Direction4.Down);
-		down.pressed = y >= dpadAxisThreshold;
-
 		const left = this.findOrCreateDpadButton(Direction4.Left);
-		left.pressed = x <= -dpadAxisThreshold;
+
+		const xNegative = xAxis.value <= -dpadAxisThreshold;
+		const xPositive = xAxis.value >= dpadAxisThreshold;
+		left.pressed = this.config.dpadXAxis.inverted ? xPositive : xNegative;
+		right.pressed = this.config.dpadXAxis.inverted ? xNegative : xPositive;
+
+		const yNegative = yAxis.value <= -dpadAxisThreshold;
+		const yPositive = yAxis.value >= dpadAxisThreshold;
+		up.pressed = this.config.dpadYAxis.inverted ? yPositive : yNegative;
+		down.pressed = this.config.dpadYAxis.inverted ? yNegative : yPositive;
 	}
 
 	/**

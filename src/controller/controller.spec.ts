@@ -269,22 +269,27 @@ describe("Controller", () => {
 				{
 					x: 0, y: 0,
 					pressed: [false, false, false, false],
+					invertedPressed: [false, false, false, false],
 				},
 				{
 					x: 0, y: -1,
 					pressed: [true, false, false, false],
+					invertedPressed: [false, false, true, false],
 				},
 				{
 					x: 1, y: 0,
 					pressed: [false, true, false, false],
+					invertedPressed: [false, false, false, true],
 				},
 				{
 					x: 0, y: 1,
 					pressed: [false, false, true, false],
+					invertedPressed: [true, false, false, false],
 				},
 				{
 					x: -1, y: 0,
 					pressed: [false, false, false, true],
+					invertedPressed: [false, true, false, false],
 				},
 			].forEach((test) => {
 				it(`should have expected directions pressed when axis values are (${test.x}, ${test.y})`, () => {
@@ -292,6 +297,11 @@ describe("Controller", () => {
 					gamepad.axes[1] = test.y;
 					mockAnimationFrame.tick(1);
 					checkDpadButtonsPressed(test.pressed);
+
+					config.dpadXAxis.inverted = true;
+					config.dpadYAxis.inverted = true;
+					mockAnimationFrame.tick(1);
+					checkDpadButtonsPressed(test.invertedPressed);
 				});
 			});
 		});

@@ -82,7 +82,7 @@ export abstract class StickControl extends Control {
 			return center;
 		}
 
-		const axis = reference.resolveAxis(controller);
+		const axis = reference.resolve(controller);
 		if (!axis || axis.neutralValue === undefined) {
 			return center;
 		}

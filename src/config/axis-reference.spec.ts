@@ -45,30 +45,14 @@ describe("AxisReference", () => {
 		});
 	});
 
-	describe("resolveAxis", () => {
+	describe("resolve", () => {
 		it("should return the axis if found", () => {
-			expect(reference.resolveAxis(controller)).toBe(controller.axes[1]);
+			expect(reference.resolve(controller)).toBe(controller.axes[1]);
 		});
 
 		it("should return undefined if no axis was found", () => {
 			reference.index = 2;
-			expect(reference.resolveAxis(controller)).toBeUndefined();
-		});
-	});
-
-	describe("resolveValue", () => {
-		it("should return the value when the axis is found and the reference is not inverted", () => {
-			expect(reference.resolveValue(controller)).toBe(0.2);
-		});
-
-		it("should return the inverted value when the axis is found and the reference is inverted", () => {
-			reference.inverted = true;
-			expect(reference.resolveValue(controller)).toBe(-0.2);
-		});
-
-		it("should return undefined if no axis was found", () => {
-			reference.index = 2;
-			expect(reference.resolveValue(controller)).toBeUndefined();
+			expect(reference.resolve(controller)).toBeUndefined();
 		});
 	});
 });

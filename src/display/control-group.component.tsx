@@ -33,8 +33,8 @@ export class ControlGroupComponent extends Component<Props, {}> {
 
 		const classNames: string[] = [];
 		if (control instanceof StickControl) {
-			const xAxis = control.xAxis ? control.xAxis.resolveAxis(this.props.controller) : undefined;
-			const yAxis = control.yAxis ? control.yAxis.resolveAxis(this.props.controller) : undefined;
+			const xAxis = control.xAxis ? control.xAxis.resolve(this.props.controller) : undefined;
+			const yAxis = control.yAxis ? control.yAxis.resolve(this.props.controller) : undefined;
 			if ((xAxis && xAxis.moved) || (yAxis && yAxis.moved)) {
 				classNames.push("control-axis-moved");
 			}

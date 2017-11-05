@@ -5,6 +5,7 @@ import {Store} from "../../storage/store";
 import {NumberInputComponent} from "../field/number-input.component";
 import {AddControlFormComponent} from "./add-control-form.component";
 import {EditControlFieldsetComponent} from "./edit-control-fieldset.component";
+import {EditControlsFieldsetComponent} from "./edit-controls-fieldset.component";
 
 import {
 	Config,
@@ -86,6 +87,13 @@ export const ControlConfigComponent = connect([Store.Config], ({config}: Props) 
 			</h3>
 		}
 		<EditControlFieldsetComponent />
+
+		{config.controls.length > 1 && [
+			<h3 className="h5">
+				Edit all controls
+			</h3>,
+			<EditControlsFieldsetComponent />,
+		]}
 	</section>
 ));
 

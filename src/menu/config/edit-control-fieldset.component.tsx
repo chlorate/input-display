@@ -81,37 +81,39 @@ export class EditControlFieldsetComponent extends Component<Props, State> {
 				<ControlFieldsetComponent
 					control={this.props.config.controls[this.index]}
 				/>
-				<button
-					className="btn btn-primary"
-					onClick={linkEvent(this, handleClickClone)}
-				>
-					Clone
-				</button>{" "}
-				{hasMultipleControls && [
+				<div class="form-group">
 					<button
-						className="btn btn-secondary"
-						onClick={linkEvent(this, handleClickMoveUp)}
-						disabled={this.index <= 0}
+						className="btn btn-primary"
+						onClick={linkEvent(this, handleClickClone)}
 					>
-						Move up
-					</button>,
-					" ",
-				]}
-				{hasMultipleControls &&
+						Clone
+					</button>{" "}
+					{hasMultipleControls && [
+						<button
+							className="btn btn-secondary"
+							onClick={linkEvent(this, handleClickMoveUp)}
+							disabled={this.index <= 0}
+						>
+							Move up
+						</button>,
+						" ",
+					]}
+					{hasMultipleControls &&
+						<button
+							className="btn btn-secondary"
+							onClick={linkEvent(this, handleClickMoveDown)}
+							disabled={this.index >= this.props.config.controls.length - 1}
+						>
+							Move down
+						</button>
+					}
 					<button
-						className="btn btn-secondary"
-						onClick={linkEvent(this, handleClickMoveDown)}
-						disabled={this.index >= this.props.config.controls.length - 1}
+						className="btn btn-danger float-right ml-1"
+						onClick={linkEvent(this, handleClickDelete)}
 					>
-						Move down
+						Delete
 					</button>
-				}
-				<button
-					className="btn btn-danger float-right ml-1"
-					onClick={linkEvent(this, handleClickDelete)}
-				>
-					Delete
-				</button>
+				</div>
 			</fieldset>
 		);
 	}

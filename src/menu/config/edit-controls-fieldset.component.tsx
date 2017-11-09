@@ -32,46 +32,30 @@ export class EditControlsFieldsetComponent extends Component<Props, {}> {
 						<label>
 							X
 						</label>
-						<div className="input-group">
-							<span className="input-group-btn">
-								<button
-									className="btn btn-primary"
-									onClick={linkEvent(this, handleClickLeft)}
-								>
+						<div className="btn-toolbar">
+							<div class="btn-group">
+								<button className="btn btn-primary" onClick={linkEvent(this, handleClickLeft)}>
 									Left
 								</button>
-							</span>
-							<span className="input-group-btn">
-								<button
-									className="btn btn-primary"
-									onClick={linkEvent(this, handleClickRight)}
-								>
+								<button className="btn btn-primary" onClick={linkEvent(this, handleClickRight)}>
 									Right
 								</button>
-							</span>
+							</div>
 						</div>
 					</div>
 					<div className="form-group col-auto">
 						<label>
 							Y
 						</label>
-						<div className="input-group">
-							<span className="input-group-btn">
-								<button
-									className="btn btn-primary"
-									onClick={linkEvent(this, handleClickUp)}
-								>
+						<div className="btn-toolbar">
+							<div className="btn-group">
+								<button className="btn btn-primary" onClick={linkEvent(this, handleClickUp)}>
 									Up
 								</button>
-							</span>
-							<span className="input-group-btn">
-								<button
-									className="btn btn-primary"
-									onClick={linkEvent(this, handleClickDown)}
-								>
+								<button className="btn btn-primary" onClick={linkEvent(this, handleClickDown)}>
 									Down
 								</button>
-							</span>
+							</div>
 						</div>
 					</div>
 				</div>

@@ -72,7 +72,11 @@ export class ConfigComponent extends Component<Props, State> {
 				</div>
 
 				{this.state.saveUrl &&
-					<div className="alert alert-success" role="alert">
+					<div className="alert alert-success alert-dismissible" role="alert">
+						Right-click and "Save link as":{" "}
+						<a href={this.state.saveUrl} download={`${Store.Config}.json`}>
+							{Store.Config}.json
+						</a>
 						<button
 							className="close"
 							aria-label="Close"
@@ -80,10 +84,6 @@ export class ConfigComponent extends Component<Props, State> {
 						>
 							<span aria-hidden="true">×</span>
 						</button>
-						Right-click and "Save link as":{" "}
-						<a href={this.state.saveUrl} download={`${Store.Config}.json`}>
-							{Store.Config}.json
-						</a>
 					</div>
 				}
 

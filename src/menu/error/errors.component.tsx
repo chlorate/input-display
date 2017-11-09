@@ -18,7 +18,8 @@ export const ErrorsComponent = connect([Store.Errors], ({errors}: Props) => {
 	return (
 		<div className="errors scroll">
 			{errors.map((error, i) => (
-				<div className="alert alert-warning">
+				<div className="alert alert-warning alert-dismissible">
+					{error}
 					<button
 						className="close"
 						aria-label="Dismiss"
@@ -26,7 +27,6 @@ export const ErrorsComponent = connect([Store.Errors], ({errors}: Props) => {
 					>
 						<span aria-hidden="true">×</span>
 					</button>
-					{error}
 				</div>
 			))}
 		</div>

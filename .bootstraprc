@@ -13,6 +13,7 @@ styles:
   nav: true
 
   alert: true
+  button-group: true
   buttons: true
   card: true
   close: true

@@ -9,3 +9,8 @@
 .col-spacer {
 	margin-top: -1px;
 }
+
+.nav-item .close {
+	margin-top: -$card-spacer-y / 2;
+	padding: $nav-link-padding-y $nav-link-padding-x;
+}

@@ -2,7 +2,7 @@
 bootstrapVersion: 4
 extractStyles: true
 preBootstrapCustomizations: node_modules/bootstrap-theme/src/pre-bootstrap.scss
-appStyles: src/index.scss
+appStyles: src/app.scss
 
 styleLoaders:
   - style

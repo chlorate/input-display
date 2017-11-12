@@ -1,7 +1,7 @@
 {
 	"name": "input-display",
 	"private": true,
-	"version": "0.0.0",
+	"version": "1.0.0",
 	"dependencies": {
 		"inferno": "3.10.1",
 		"inferno-component": "3.10.1",

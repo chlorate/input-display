@@ -25,6 +25,11 @@ export const HelpComponent = () => (
 					Browser and controller compatibility
 				</a>
 			</li>
+			<li>
+				<a href="https://github.com/chlorate/input-display/wiki/Sample-controller-layouts" target="_blank">
+					Sample controller layouts
+				</a>
+			</li>
 		</ul>
 	</section>
 );

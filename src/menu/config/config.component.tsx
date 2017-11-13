@@ -5,6 +5,7 @@ import {connect} from "inferno-mobx";
 import {action} from "mobx";
 import {Config} from "../../config/config";
 import {Event} from "../../event";
+import {isObs} from "../../obs/util";
 import {loadFile, saveFile} from "../../storage/file";
 import {Store} from "../../storage/store";
 import {AdvancedConfigComponent} from "./advanced-config.component";
@@ -22,6 +23,7 @@ interface Props {
 
 interface State {
 	saveUrl?: string;
+	exportData?: string;
 }
 
 /**
@@ -62,13 +64,24 @@ export class ConfigComponent extends Component<Props, State> {
 					>
 						Open
 					</button>{" "}
-					<button
-						type="button"
-						className="btn btn-primary"
-						onClick={linkEvent(this, handleClickSave)}
-					>
-						Save
-					</button>
+					{!isObs() &&
+						<button
+							type="button"
+							className="btn btn-primary"
+							onClick={linkEvent(this, handleClickSave)}
+						>
+							Save
+						</button>
+					}
+					{isObs() &&
+						<button
+							type="button"
+							className="btn btn-primary"
+							onClick={linkEvent(this, handleClickExport)}
+						>
+							Export
+						</button>
+					}
 				</div>
 
 				{this.state.saveUrl &&
@@ -81,6 +94,30 @@ export class ConfigComponent extends Component<Props, State> {
 							className="close"
 							aria-label="Close"
 							onClick={linkEvent(this, handleClickCloseSave)}
+						>
+							<span aria-hidden="true">×</span>
+						</button>
+					</div>
+				}
+				{this.state.exportData &&
+					<div className="alert alert-success alert-dismissible" role="alert">
+						<p>
+							OBS Browser Source does not support file downloads.
+							Copy and paste the following into a config.json
+							file:
+						</p>
+						<input
+							type="text"
+							className="form-control"
+							value={this.state.exportData}
+							readonly
+							onClick={linkEvent(undefined, handleFocusExportData)}
+							onFocus={linkEvent(undefined, handleFocusExportData)}
+						/>
+						<button
+							className="close"
+							aria-label="Close"
+							onClick={linkEvent(this, handleClickCloseExport)}
 						>
 							<span aria-hidden="true">×</span>
 						</button>
@@ -152,4 +189,16 @@ function handleClickSave(component: ConfigComponent): void {
 
 function handleClickCloseSave(component: ConfigComponent): void {
 	component.saveUrl = undefined;
+}
+
+function handleClickExport(component: ConfigComponent): void {
+	component.setState({exportData: JSON.stringify(component.props.config)});
+}
+
+function handleFocusExportData(_, event): void {
+	event.target.select();
+}
+
+function handleClickCloseExport(component: ConfigComponent): void {
+	component.setState({exportData: undefined});
 }

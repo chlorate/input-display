@@ -90,9 +90,7 @@ class IndexComponent extends Component<{}, State> {
 	}
 }
 
-if (env.development) {
-	useStrict(true);
-}
+useStrict(env.development);
 
 render(
 	<IndexComponent />,

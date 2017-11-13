@@ -7,6 +7,7 @@ import {Config} from "./config/config";
 import {Controller} from "./controller/controller";
 import {DisplayComponent} from "./display/display.component";
 import {StylesheetComponent} from "./display/stylesheet.component";
+import {supportsGamepadApi} from "./gamepad/service";
 import {ErrorsComponent} from "./menu/error/errors.component";
 import {MenuComponent} from "./menu/menu.component";
 import {loadLocalStorage, saveLocalStorage} from "./storage/local";
@@ -59,10 +60,10 @@ class IndexComponent extends Component<{}, State> {
 	}
 
 	public render() {
-		if (!navigator.getGamepads) {
+		if (!supportsGamepadApi()) {
 			return (
 				<div className="alert alert-danger text-center m-3" role="alert">
-					Your browser doesn't support the Gamepad API.
+					This browser doesn't support the Gamepad API.
 				</div>
 			);
 		}

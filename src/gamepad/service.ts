@@ -1,4 +1,11 @@
 /**
+ * Returns true if the browser supports the Gamepad API.
+ */
+export function supportsGamepadApi(): boolean {
+	return navigator.getGamepads !== undefined;
+}
+
+/**
  * Returns an array of gamepads from the Gamepad API.
  */
 export function getGamepads(): Array<Gamepad | undefined> {

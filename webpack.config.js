@@ -1,7 +1,7 @@
 const path = require("path");
 const webpack = require("webpack");
-const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const StylelintWebpackPlugin = require("stylelint-webpack-plugin");
 const TslintWebpackPlugin = require("tslint-webpack-plugin");
 
@@ -38,10 +38,25 @@ module.exports = {
 			},
 		],
 	},
+	optimization: {
+		splitChunks: {
+			chunks(chunk) {
+				return chunk.name !== "styles";
+			},
+			cacheGroups: {
+				vendor: {
+					name: "vendor",
+					test: /[\\/]node_modules[\\/]/,
+				},
+			},
+		},
+	},
 	plugins: [
-		new ExtractTextPlugin("[name].[contenthash].css"),
 		new HtmlWebpackPlugin({
 			template: "src/index.html",
+		}),
+		new MiniCssExtractPlugin({
+			filename: "[name].[contenthash].css",
 		}),
 		new StylelintWebpackPlugin(),
 		new TslintWebpackPlugin({
@@ -50,16 +65,6 @@ module.exports = {
 		new webpack.DefinePlugin({
 			env: {
 				development: process.env.DEVELOPMENT === "true" || false,
-			},
-		}),
-		new webpack.optimize.CommonsChunkPlugin({
-			name: "vendor",
-			minChunks: function(module) {
-				return (
-					module.context &&
-					module.context.indexOf("node_modules") >= 0 &&
-					!/(bootstrap|css|style)-loader/.test(module.context)
-				);
 			},
 		}),
 	],

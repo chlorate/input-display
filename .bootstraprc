@@ -5,7 +5,6 @@ preBootstrapCustomizations: node_modules/bootstrap-theme/src/pre-bootstrap.scss
 appStyles: src/app.scss
 
 styleLoaders:
-  - style
   - css
   - sass
 

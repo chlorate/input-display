@@ -89,7 +89,7 @@ export class DisplayComponent extends Component<Props, {}> {
 
 		return (
 			<svg
-				hasKeyedChildren
+				$HasKeyedChildren
 				className={config.displayOutline ? "display-outline" : undefined}
 				width={config.displayWidth}
 				height={config.displayHeight}

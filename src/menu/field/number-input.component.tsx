@@ -18,7 +18,7 @@ interface Props {
  */
 export const NumberInputComponent = (props: Props) => (
 	<div className={`form-group form-group-number ${props.className || ""}`}>
-		<label for={props.id}>
+		<label htmlFor={props.id}>
 			{props.label}
 		</label>
 		<div className="input-group">
@@ -30,7 +30,7 @@ export const NumberInputComponent = (props: Props) => (
 				min={props.min}
 				max={props.max}
 				step={props.step}
-				placeholder={props.placeholder}
+				placeholder={props.placeholder !== undefined ? `${props.placeholder}` : undefined}
 				required
 				aria-describedby={`${props.id}-addon ${props.help ? `${props.id}-help` : ""} ${props.helpId || ""}`}
 				onChange={props.onChange}

@@ -17,7 +17,10 @@ export function loadFile(file: File, obj: Loader): Promise<string> {
 			resolve();
 		};
 		reader.onerror = () => {
-			reject(reader.error.toString());
+			if (reader.error) {
+				reject(reader.error.toString());
+			}
+			reject("unknown FileReader error");
 		};
 		reader.readAsText(file);
 	});

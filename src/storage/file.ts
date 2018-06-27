@@ -5,7 +5,7 @@ import {Loader, Saver} from "./interface";
  * object to read. Returns a promise that is resolved if successful or rejected
  * with an error string.
  */
-export function loadFile(file: File, obj: Loader): Promise<string> {
+export function loadFile(file: File, obj: Loader): Promise<void> {
 	return new Promise((resolve, reject) => {
 		const reader = new FileReader();
 		reader.onload = () => {

@@ -1,7 +1,7 @@
 import {EventEmitter} from "events";
 import {linkEvent} from "inferno";
 import Component from "inferno-component";
-import {connect} from "inferno-mobx";
+import {inject, observer} from "inferno-mobx";
 import {action} from "mobx";
 import {Config} from "../config/config";
 import {CircleStickControl} from "../control/circle-stick-control";
@@ -51,7 +51,8 @@ interface Item {
  * a pixel. Clicking outside of a ControlGroupComponent will deselect the
  * current control.
  */
-@connect([Store.Config, Store.Controller, Store.Events])
+@inject(Store.Config, Store.Controller, Store.Events)
+@observer
 export class DisplayComponent extends Component<Props, {}> {
 	public control?: Control;
 	public lastX?: number;
@@ -93,7 +94,7 @@ export class DisplayComponent extends Component<Props, {}> {
 				className={config.displayOutline ? "display-outline" : undefined}
 				width={config.displayWidth}
 				height={config.displayHeight}
-				tabindex="0"
+				tabIndex={0}
 				onClick={linkEvent(this, handleClick)}
 				onKeyDown={linkEvent(this, handleKeyDown)}
 				onMouseMove={linkEvent(this, handleMouseMove)}

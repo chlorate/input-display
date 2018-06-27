@@ -14,7 +14,7 @@ interface Props {
  */
 export const TextInputComponent = (props: Props) => (
 	<div className={`form-group ${props.className || ""}`}>
-		<label for={props.id}>
+		<label htmlFor={props.id}>
 			{props.label}
 		</label>
 		<input

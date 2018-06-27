@@ -2,7 +2,7 @@ import EventEmitter from "events";
 import {render} from "inferno";
 import Component from "inferno-component";
 import {Provider} from "inferno-mobx";
-import {action, observable, useStrict} from "mobx";
+import {action, configure, observable} from "mobx";
 import {Config} from "./config/config";
 import {Controller} from "./controller/controller";
 import {DisplayComponent} from "./display/display.component";
@@ -90,7 +90,9 @@ class IndexComponent extends Component<{}, State> {
 	}
 }
 
-useStrict(env.development);
+configure({
+	enforceActions: "strict",
+});
 
 render(
 	<IndexComponent />,

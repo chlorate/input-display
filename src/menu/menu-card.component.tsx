@@ -1,13 +1,16 @@
 import EventEmitter from "events";
-import Component from "inferno-component";
-import {connect} from "inferno-mobx";
-import {Link} from "inferno-router";
+import {Component} from "inferno";
+import {inject} from "inferno-mobx";
+import {NavLink} from "inferno-router";
 import {Event} from "../event";
 import {Store} from "../storage/store";
 
 interface Props {
+	children: JSX.Element[];
+}
+
+interface InjectedProps extends Props {
 	events: EventEmitter;
-	children;
 }
 
 const links = [
@@ -28,10 +31,14 @@ const links = [
 /**
  * The outer layout and navigation for the menu.
  */
-@connect([Store.Events])
+@inject(Store.Events)
 export class MenuCardComponent extends Component<Props, {}> {
-	private scrollDiv?: HTMLDivElement;
+	private scrollDiv: HTMLDivElement | null = null;
 	private listener: () => void;
+
+	private get injected(): InjectedProps {
+		return this.props as InjectedProps;
+	}
 
 	constructor(props: Props) {
 		super(props);
@@ -39,36 +46,43 @@ export class MenuCardComponent extends Component<Props, {}> {
 	}
 
 	public componentDidMount(): void {
-		this.props.events.addListener(Event.NavigateTab, this.listener);
+		this.injected.events.addListener(Event.NavigateTab, this.listener);
 	}
 
 	public componentWillUnmount(): void {
-		this.props.events.removeListener(Event.NavigateTab, this.listener);
+		this.injected.events.removeListener(Event.NavigateTab, this.listener);
 	}
 
-	public render() {
+	public render(): JSX.Element {
+		const items = links.map((link) => (
+			<li className="nav-item">
+				<NavLink
+					to={link.path}
+					className="nav-link"
+					activeClassName="active"
+				>
+					{link.name}
+				</NavLink>
+			</li>
+		));
+		items.push(
+			<li className="nav-item ml-auto">
+				<NavLink to="/" className="close" aria-label="Close">
+					<span aria-hidden="true">×</span>
+				</NavLink>
+			</li>,
+		);
+
 		return (
 			<div className="card">
 				<div className="card-header">
-					<ul className="nav nav-tabs card-header-tabs">
-						{links.map((link) => (
-							<li className="nav-item">
-								<Link to={link.path} className="nav-link" activeClassName="active">
-									{link.name}
-								</Link>
-							</li>
-						))}
-						<li className="nav-item ml-auto">
-							<Link to="/" className="close" aria-label="Close">
-								<span aria-hidden="true">×</span>
-							</Link>
-						</li>
-					</ul>
+					<ul className="nav nav-tabs card-header-tabs">{items}</ul>
 				</div>
-				<div className="card-scroll" ref={(div) => this.scrollDiv = div}>
-					<div className="card-body">
-						{this.props.children}
-					</div>
+				<div
+					className="card-scroll"
+					ref={(div) => (this.scrollDiv = div)}
+				>
+					<div className="card-body">{this.props.children}</div>
 				</div>
 			</div>
 		);

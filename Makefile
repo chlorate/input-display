@@ -30,7 +30,8 @@ clean-deps:
 
 .PHONY: upgrade
 upgrade:
-	$(NCU) --upgrade
+	# Waiting on inferno-mobx to use latest mobx
+	$(NCU) --upgrade --reject mobx
 
 node_modules: package.json
 	npm install

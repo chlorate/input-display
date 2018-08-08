@@ -28,7 +28,7 @@ enum Key {
 	Left = 37,
 }
 
-interface Props {
+interface InjectedProps {
 	config: Config;
 	controller: Controller;
 	events: EventEmitter;
@@ -53,13 +53,17 @@ interface Item {
  */
 @inject(Store.Config, Store.Controller, Store.Events)
 @observer
-export class DisplayComponent extends Component<Props, {}> {
+export class DisplayComponent extends Component {
 	public control?: Control;
 	public lastX?: number;
 	public lastY?: number;
 	private listener: (control: Control, x: number, y: number) => void;
 
-	constructor(props: Props) {
+	private get injected(): InjectedProps {
+		return this.props as InjectedProps;
+	}
+
+	constructor(props: {}) {
 		super(props);
 		this.listener = (control: Control, x: number, y: number) => {
 			this.control = control;
@@ -69,15 +73,15 @@ export class DisplayComponent extends Component<Props, {}> {
 	}
 
 	public componentDidMount(): void {
-		this.props.events.addListener(Event.SelectControl, this.listener);
+		this.injected.events.addListener(Event.SelectControl, this.listener);
 	}
 
 	public componentWillUnmount(): void {
-		this.props.events.removeListener(Event.SelectControl, this.listener);
+		this.injected.events.removeListener(Event.SelectControl, this.listener);
 	}
 
 	public render() {
-		const config = this.props.config;
+		const config = this.injected.config;
 
 		// Sort controls so pressed and mashing controls are drawn above
 		// unpressed controls.
@@ -129,7 +133,7 @@ export class DisplayComponent extends Component<Props, {}> {
 			return 0;
 		}
 
-		const button = control.button.resolve(this.props.controller);
+		const button = control.button.resolve(this.injected.controller);
 		if (!button) {
 			return 0;
 		}

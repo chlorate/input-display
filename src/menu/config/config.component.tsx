@@ -1,7 +1,6 @@
 import {EventEmitter} from "events";
-import {linkEvent} from "inferno";
-import Component from "inferno-component";
-import {connect} from "inferno-mobx";
+import {Component, linkEvent} from "inferno";
+import {inject} from "inferno-mobx";
 import {action} from "mobx";
 import {Config} from "../../config/config";
 import {Event} from "../../event";
@@ -15,7 +14,7 @@ import {ControllerConfigComponent} from "./controller-config.component";
 import {DisplayConfigComponent} from "./display-config.component";
 import {FontConfigComponent} from "./font-config.component";
 
-interface Props {
+interface InjectedProps {
 	config: Config;
 	errors: string[];
 	events: EventEmitter;
@@ -30,10 +29,14 @@ interface State {
  * Contents of the Config tab. Provides fields for configuring the controller
  * and input display.
  */
-@connect([Store.Config, Store.Errors, Store.Events])
-export class ConfigComponent extends Component<Props, State> {
+@inject(Store.Config, Store.Errors, Store.Events)
+export class ConfigComponent extends Component<{}, State> {
 	public state: State = {};
-	public fileInput?: HTMLInputElement;
+	public fileInput: HTMLInputElement | null = null;
+
+	public get injected(): InjectedProps {
+		return this.props as InjectedProps;
+	}
 
 	set saveUrl(url: string | undefined) {
 		if (this.state.saveUrl) {
@@ -110,7 +113,7 @@ export class ConfigComponent extends Component<Props, State> {
 							type="text"
 							className="form-control"
 							value={this.state.exportData}
-							readonly
+							readOnly
 							onClick={linkEvent(undefined, handleFocusExportData)}
 							onFocus={linkEvent(undefined, handleFocusExportData)}
 						/>
@@ -161,12 +164,12 @@ export class ConfigComponent extends Component<Props, State> {
 const handleChangeFile = action((component: ConfigComponent): void => {
 	if (component.fileInput && component.fileInput.files) {
 		component.saveUrl = undefined;
-		loadFile(component.fileInput.files[0], component.props.config)
+		loadFile(component.fileInput.files[0], component.injected.config)
 			.then(() => {
-				component.props.events.emit(Event.LoadConfig);
+				component.injected.events.emit(Event.LoadConfig);
 			})
 			.catch(action((error: string) => {
-				component.props.errors.push("Failed to open config file: " + error);
+				component.injected.errors.push("Failed to open config file: " + error);
 			}))
 			.then(() => {
 				if (component.fileInput) {
@@ -184,7 +187,7 @@ function handleClickOpen(component: ConfigComponent): void {
 }
 
 function handleClickSave(component: ConfigComponent): void {
-	component.saveUrl = saveFile(component.props.config);
+	component.saveUrl = saveFile(component.injected.config);
 }
 
 function handleClickCloseSave(component: ConfigComponent): void {
@@ -192,7 +195,7 @@ function handleClickCloseSave(component: ConfigComponent): void {
 }
 
 function handleClickExport(component: ConfigComponent): void {
-	component.setState({exportData: JSON.stringify(component.props.config)});
+	component.setState({exportData: JSON.stringify(component.injected.config)});
 }
 
 function handleFocusExportData(_, event): void {

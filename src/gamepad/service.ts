@@ -13,8 +13,9 @@ export function getGamepads(): Array<Gamepad | undefined> {
 	const out: Array<Gamepad | undefined> = [];
 	const gamepads = navigator.getGamepads();
 	for (let i = 0; i < gamepads.length; i++) {
-		if (gamepads[i]) {
-			out[i] = gamepads[i];
+		const gamepad = gamepads[i];
+		if (gamepad) {
+			out[i] = gamepad;
 		}
 	}
 	return out;

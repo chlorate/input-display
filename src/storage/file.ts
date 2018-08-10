@@ -9,6 +9,15 @@ export function loadFile(file: File, obj: Loader): Promise<void> {
 	return new Promise((resolve, reject) => {
 		const reader = new FileReader();
 		reader.onload = () => {
+			if (reader.result === null) {
+				reject("FileReader result was null");
+				return;
+			}
+			if (reader.result instanceof ArrayBuffer) {
+				reject("FileReader result is an ArrayBuffer; expected a string");
+				return;
+			}
+
 			try {
 				obj.loadJSON(JSON.parse(reader.result));
 			} catch (exception) {

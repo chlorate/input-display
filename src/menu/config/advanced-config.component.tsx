@@ -14,7 +14,7 @@ interface Props {
 export const AdvancedConfigComponent = connect([Store.Config], ({config}: Props) => (
 	<section>
 		<div className="form-group m-0">
-			<label for="config-custom-css">
+			<label htmlFor="config-custom-css">
 				Custom CSS
 			</label>
 			<textarea

@@ -61,7 +61,7 @@ export class EditControlFieldsetComponent extends Component<Props, State> {
 		return (
 			<fieldset>
 				<div className="form-group">
-					<label className="sr-only" for="config-edit-control">
+					<label className="sr-only" htmlFor="config-edit-control">
 						Control to edit
 					</label>
 					<select

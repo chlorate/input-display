@@ -58,7 +58,7 @@ export class DeviceSelectComponent extends Component<Props, State> {
 	public render() {
 		return (
 			<div className="form-group">
-				<label for="config-controller">
+				<label htmlFor="config-controller">
 					Device
 				</label>
 				<select

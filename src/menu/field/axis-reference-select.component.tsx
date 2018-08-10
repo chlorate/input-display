@@ -28,7 +28,7 @@ interface LinkedEvent {
  */
 export const AxisReferenceSelectComponent = connect((props: Props) => (
 	<div className={`form-group form-group-axis-reference ${props.className || ""}`}>
-		<label for={props.id}>
+		<label htmlFor={props.id}>
 			{props.label}
 		</label>
 		<div className="input-group">

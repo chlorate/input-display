@@ -12,7 +12,7 @@ interface Props {
  */
 export const Direction4SelectComponent = (props: Props) => (
 	<div class={`form-group form-group-direction4 ${props.className || ""}`}>
-		<label for={props.id}>
+		<label htmlFor={props.id}>
 			Direction
 		</label>
 		<select

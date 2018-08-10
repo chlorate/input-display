@@ -38,7 +38,7 @@ export class AddControlFormComponent extends Component<Props, State> {
 		return (
 			<form onSubmit={linkEvent(this, handleSubmit)}>
 				<div className="form-group">
-					<label className="sr-only" for="config-add-control">
+					<label className="sr-only" htmlFor="config-add-control">
 						Control type
 					</label>
 					<div className="input-group">

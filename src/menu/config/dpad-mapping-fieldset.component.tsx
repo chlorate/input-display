@@ -39,7 +39,7 @@ export const DpadMappingFieldsetComponent = connect([Store.Config, Store.Control
 	return (
 		<fieldset>
 			<div className="form-group">
-				<label for="config-dpad-mapping">
+				<label htmlFor="config-dpad-mapping">
 					D-pad mapping
 				</label>
 				<select

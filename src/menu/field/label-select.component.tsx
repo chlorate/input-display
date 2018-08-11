@@ -15,9 +15,9 @@ interface Props {
  * A dropdown for selecting a position of a label.
  */
 export const LabelSelectComponent = observer((props: Props) => {
-	var classSuffix = props.replacement ? "replacement" : "position";
+	const classSuffix = props.replacement ? "replacement" : "position";
 
-	var options = [<option value="">Hidden</option>];
+	const options = [<option value="">Hidden</option>];
 	if (props.replacement) {
 		sortedLabelReplacements.forEach((r) => {
 			options.push(<option value={r}>{labelReplacementNames[r]}</option>);
@@ -26,7 +26,7 @@ export const LabelSelectComponent = observer((props: Props) => {
 	sortedLabelPositions.forEach((p) => {
 		options.push(<option value={p}>{labelPositionNames[p]}</option>);
 	});
-			
+
 	return (
 		<div className={
 			"form-group " +

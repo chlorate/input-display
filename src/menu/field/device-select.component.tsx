@@ -1,6 +1,5 @@
-import {linkEvent} from "inferno";
-import Component from "inferno-component";
-import {connect} from "inferno-mobx";
+import {Component, linkEvent} from "inferno";
+import {inject, observer} from "inferno-mobx";
 import {action} from "mobx";
 import {arraysEqual} from "../../array/util";
 import {Config} from "../../config/config";
@@ -10,7 +9,7 @@ import {secondToMilliseconds} from "../../time/const";
 
 const notConnected = "No controller connected";
 
-interface Props {
+interface InjectedProps {
 	config: Config;
 }
 
@@ -22,13 +21,31 @@ interface State {
  * A field for selecting which gamepad ("device") to read inputs from. This
  * watches for any gamepad connects or disconnects and updates itself.
  */
-@connect([Store.Config])
-export class DeviceSelectComponent extends Component<Props, State> {
+@inject(Store.Config)
+@observer
+export class DeviceSelectComponent extends Component<{}, State> {
 	public state: State = {ids: []};
 	private listener: () => void;
 	private interval?: number;
 
-	constructor(props: Props, state: State) {
+	private get injected(): InjectedProps {
+		return this.props as InjectedProps;
+	}
+
+	private get options(): JSX.Element[] {
+		const options: JSX.Element[] = this.state.ids.map((id, i) => (
+			<option value={i}>{i + 1}. {id}</option>
+		));
+
+		const index = this.injected.config.gamepadIndex;
+		if (!this.state.ids[index]) {
+			options.push(<option value={index}>{index + 1}. {notConnected}</option>);
+		}
+
+		return options;
+	}
+
+	constructor(props: {}, state: State) {
 		super(props, state);
 		this.listener = () => this.updateNames();
 	}
@@ -51,11 +68,13 @@ export class DeviceSelectComponent extends Component<Props, State> {
 		window.removeEventListener("gamepaddisconnected", this.listener);
 	}
 
-	public shouldComponentUpdate(nextProps: Props, nextState: State): boolean {
+	public shouldComponentUpdate(nextProps: {}, nextState: State): boolean {
 		return !arraysEqual(this.state.ids, nextState.ids);
 	}
 
 	public render() {
+		const config = this.injected.config;
+
 		return (
 			<div className="form-group">
 				<label htmlFor="config-controller">
@@ -64,11 +83,11 @@ export class DeviceSelectComponent extends Component<Props, State> {
 				<select
 					className="form-control"
 					id="config-controller"
-					value={this.props.config.gamepadIndex}
+					value={config.gamepadIndex}
 					required
-					onChange={linkEvent(this.props.config, handleChange)}
+					onChange={linkEvent(config, handleChange)}
 				>
-					{this.options()}
+					{this.options}
 				</select>
 			</div>
 		);
@@ -76,19 +95,6 @@ export class DeviceSelectComponent extends Component<Props, State> {
 
 	private updateNames(): void {
 		this.setState({ids: getGamepadIds()});
-	}
-
-	private options(): any[] {
-		const out: any[] = this.state.ids.map((id, i) => (
-			<option value={i}>{i + 1}. {id}</option>
-		));
-
-		const index = this.props.config.gamepadIndex;
-		if (!this.state.ids[index]) {
-			out.push(<option value={index}>{index + 1}. {notConnected}</option>);
-		}
-
-		return out;
 	}
 }
 

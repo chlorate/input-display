@@ -1,17 +1,19 @@
+import {FormEventHandler} from "inferno";
+
 interface Props {
 	className?: string;
 	id: string;
 	label: string;
 	value: string;
 	placeholder: string;
-	onChange;
+	onChange: FormEventHandler<HTMLInputElement>;
 }
 
 /**
  * A generic color input field. The user can either edit the hex value of the
  * color or use the system color picker.
  */
-export const ColorInputComponent = (props: Props) => (
+export const ColorInputComponent = (props: Props): JSX.Element => (
 	<div className={`form-group form-group-color ${props.className || ""}`}>
 		<label htmlFor={props.id} id={`${props.id}-label`}>
 			{props.label}
@@ -24,8 +26,8 @@ export const ColorInputComponent = (props: Props) => (
 				value={props.value}
 				placeholder={props.placeholder}
 				required
-				maxLength="7"
-				spellCheck="false"
+				maxLength={7}
+				spellCheck={false}
 				onChange={props.onChange}
 			/>
 			<span className="input-group-addon">

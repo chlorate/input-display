@@ -1,35 +1,61 @@
-import {connect} from "inferno-mobx";
+import {Component} from "inferno";
+import {inject, observer} from "inferno-mobx";
 import {Controller} from "../../controller/controller";
 import {Store} from "../../storage/store";
 
 interface Props {
-	controller: Controller;
 	id: string;
 	value?: number;
 	required?: boolean;
 	onChange: any;
 }
 
+interface InjectedProps extends Props {
+	controller: Controller;
+}
+
 /**
  * A <select> element for selecting an axis. Used by other components that
  * involve selecting an axis.
  */
-export const AxisSelectComponent = connect([Store.Controller], (props: Props) => (
-	<select
-		className="form-control"
-		id={props.id}
-		value={props.value !== undefined ? props.value : ""}
-		required
-		onChange={props.onChange}
-	>
-		{(!props.required || props.value === undefined) &&
-			<option value="">None</option>
+@inject(Store.Controller)
+@observer
+export class AxisSelectComponent extends Component<Props, {}> {
+	private get injected(): InjectedProps {
+		return this.props as InjectedProps;
+	}
+
+	private get options(): JSX.Element[] {
+		const {controller, required, value} = this.injected;
+
+		const options: JSX.Element[] = [];
+		if (required || value === undefined) {
+			options.push(<option value="">None</option>);
 		}
-		{props.controller.axes.map((axis, i) => (
-			<option value={i}>Axis {i + 1}</option>
-		))}
-		{props.value !== undefined && props.value >= props.controller.axes.length &&
-			<option value={props.value}>Axis {props.value + 1}</option>
+		options.push(
+			...controller.axes.map((axis, i) => (
+				<option value={i}>Axis {i + 1}</option>
+			)),
+		);
+		if (value !== undefined && value >= controller.axes.length) {
+			options.push(<option value={value}>Axis {value + 1}</option>);
 		}
-	</select>
-));
+		return options;
+	}
+
+	public render(): JSX.Element {
+		const {id, onChange, value} = this.props;
+
+		return (
+			<select
+				className="form-control"
+				id={id}
+				value={value !== undefined ? value : ""}
+				required
+				onChange={onChange}
+			>
+				{this.options}
+			</select>
+		);
+	}
+}

@@ -1,6 +1,5 @@
 import EventEmitter from "events";
-import {render} from "inferno";
-import Component from "inferno-component";
+import {Component, render} from "inferno";
 import {Provider} from "inferno-mobx";
 import {action, configure, observable} from "mobx";
 import {Config} from "./config/config";
@@ -30,6 +29,7 @@ class IndexComponent extends Component<{}, State> {
 
 	constructor() {
 		super();
+
 		const config = new Config();
 		this.state = {
 			config,
@@ -59,7 +59,7 @@ class IndexComponent extends Component<{}, State> {
 		});
 	}
 
-	public render() {
+	public render(): JSX.Element {
 		if (!supportsGamepadApi()) {
 			return (
 				<div className="alert alert-danger text-center m-3" role="alert">

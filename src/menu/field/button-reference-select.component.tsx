@@ -1,5 +1,5 @@
-import {linkEvent} from "inferno";
-import {connect} from "inferno-mobx";
+import {ChangeEvent, Component, linkEvent} from "inferno";
+import {inject, observer} from "inferno-mobx";
 import {ButtonReference} from "../../config/button-reference";
 import {DpadButtonReference} from "../../config/dpad-button-reference";
 import {NormalButtonReference} from "../../config/normal-button-reference";
@@ -10,63 +10,82 @@ import {clampIndex} from "../../math/util";
 import {Store} from "../../storage/store";
 
 interface Props {
-	controller: Controller;
 	className?: string;
 	id: string;
 	reference?: ButtonReference;
-	onChange: LinkedEvent;
+	onChange: (reference?: ButtonReference) => void;
 }
 
-interface LinkedEvent {
-	data: any;
-	event: (data: any, reference?: ButtonReference) => void;
+interface InjectedProps extends Props {
+	controller: Controller;
 }
-
-const notFound = -1;
 
 /**
  * A field for selecting a button.
  */
-export const ButtonReferenceSelectComponent = connect([Store.Controller], (props: Props) => {
-	let index: number | undefined;
-	if (props.reference !== undefined) {
-		const button = props.reference.resolve(props.controller);
-		if (button !== undefined) {
-			index = props.controller.buttons.indexOf(button);
-		} else {
-			index = notFound;
-		}
+@inject(Store.Controller)
+@observer
+export class ButtonReferenceSelectComponent extends Component<Props, {}> {
+	public get injected(): InjectedProps {
+		return this.props as InjectedProps;
 	}
 
-	return (
-		<div className={`form-group form-group-button-reference ${props.className || ""}`}>
-			<label htmlFor={props.id}>
-				Button
-			</label>
-			<select
-				className="form-control"
-				id={props.id}
-				value={index !== undefined ? index : ""}
-				required
-				onChange={linkEvent(props, handleChange)}
-			>
-				<option value="">None</option>
-				{props.controller.buttons.map((button, i) => (
-					<option value={i}>{button.name}</option>
-				))}
-				{props.reference !== undefined && index === notFound &&
-					<option value={index}>{props.reference.name}</option>
-				}
-			</select>
-		</div>
-	);
-});
+	public render(): JSX.Element {
+		const {controller, reference} = this.injected;
 
-function handleChange(props: Props, event): void {
+		let index: number | undefined;
+		if (reference) {
+			const button = reference.resolve(controller);
+			if (button) {
+				index = controller.buttons.indexOf(button);
+			}
+		}
+
+		let className = "form-group form-group-button-reference";
+		if (this.props.className) {
+			className += ` ${this.props.className}`;
+		}
+
+		return (
+			<div className={className}>
+				<label htmlFor={this.props.id}>Button</label>
+				<select
+					className="form-control"
+					id={this.props.id}
+					value={index !== undefined ? index : ""}
+					required
+					onChange={linkEvent(this, handleChange)}
+				>
+					{this.options(index)}
+				</select>
+			</div>
+		);
+	}
+
+	private options(index?: number): JSX.Element[] {
+		const {controller, reference} = this.injected;
+
+		const options: JSX.Element[] = [<option value="">None</option>];
+		options.push(
+			...controller.buttons.map((button, i) => (
+				<option value={i}>{button.name}</option>
+			)),
+		);
+		if (reference && index === undefined) {
+			options.push(<option value={index}>{reference.name}</option>);
+		}
+		return options;
+	}
+}
+
+function handleChange(
+	component: ButtonReferenceSelectComponent,
+	event: ChangeEvent<HTMLSelectElement>,
+): void {
 	let reference: ButtonReference | undefined;
 	if (event.target.value) {
 		const i = clampIndex(event.target.value);
-		const button = props.controller.buttons[i];
+		const button = component.injected.controller.buttons[i];
 		if (button instanceof NormalButton) {
 			reference = new NormalButtonReference(button.index);
 		} else if (button instanceof DpadButton) {
@@ -74,5 +93,5 @@ function handleChange(props: Props, event): void {
 		}
 	}
 
-	props.onChange.event(props.onChange.data, reference);
+	component.props.onChange(reference);
 }

@@ -205,7 +205,7 @@ export class ControlFieldsetComponent extends Component<Props, {}> {
 						className="col-auto"
 						id="config-control-button"
 						reference={control.button}
-						onChange={linkEvent(control, handleChangeButton)}
+						onChange={(reference: ButtonReference?) => control.button = reference)}
 					/>
 				</div>
 

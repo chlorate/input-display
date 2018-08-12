@@ -1,10 +1,10 @@
-import {connect} from "inferno-mobx";
+import {Component} from "inferno";
+import {inject, observer} from "inferno-mobx";
 import {Config} from "../config/config";
 import {Store} from "../storage/store";
 import {Label} from "./label";
 
 interface Props {
-	config: Config;
 	labels: Label[];
 	x: number;
 	y: number;
@@ -17,26 +17,63 @@ interface Props {
 	space?: boolean;
 }
 
+interface InjectedProps extends Props {
+	config: Config;
+}
+
 /**
  * A generic component for rendering control labels at some position with certain
  * spacing and alignment.
  */
-export const ControlLabelTextComponent = connect([Store.Config], (props: Props) => (
-	<text
-		x={props.x + props.config.labelOffsetX}
-		y={props.y + props.config.labelOffsetY}
-		text-anchor={props.anchor}
-		dominant-baseline={props.baseline}
-	>
-		{props.labels.map((label, i) => (
+@inject(Store.Config)
+@observer
+export class ControlLabelTextComponent extends Component<Props, {}> {
+	private get injected(): InjectedProps {
+		return this.props as InjectedProps;
+	}
+
+	private get tspans(): JSX.Element[] {
+		const {
+			config: {labelOffsetX},
+			labels,
+			space,
+			spanFirstShiftX,
+			spanFirstShiftY,
+			spanShiftY,
+			spanX,
+		} = this.injected;
+
+		return labels.map((label, i) => (
 			<tspan
 				className={label.className}
-				x={props.spanX ? props.spanX + props.config.labelOffsetX : undefined}
-				dx={i === 0 ? props.spanFirstShiftX : undefined}
-				dy={i === 0 ? props.spanFirstShiftY : props.spanShiftY}
+				x={spanX ? spanX + labelOffsetX : undefined}
+				dx={i === 0 ? spanFirstShiftX : undefined}
+				dy={i === 0 ? spanFirstShiftY : spanShiftY}
 			>
-				{label.text}{props.space ? " " : undefined}
+				{label.text}
+				{space ? " " : undefined}
 			</tspan>
-		))}
-	</text>
-));
+		));
+	}
+
+	public render(): JSX.Element {
+		const {
+			config: {labelOffsetX, labelOffsetY},
+			anchor,
+			baseline,
+			x,
+			y,
+		} = this.injected;
+
+		return (
+			<text
+				x={x + labelOffsetX}
+				y={y + labelOffsetY}
+				text-anchor={anchor}
+				dominant-baseline={baseline}
+			>
+				{this.tspans}
+			</text>
+		);
+	}
+}

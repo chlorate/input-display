@@ -1,5 +1,6 @@
 import EventEmitter from "events";
 import {Component, render, VNode} from "inferno";
+import {Alert} from "inferno-bootstrap";
 import {Provider} from "inferno-mobx";
 import {action, configure, observable} from "mobx";
 import {Config} from "./config/config";
@@ -61,12 +62,9 @@ class Root extends Component {
 	public render(): VNode {
 		if (!supportsGamepadApi()) {
 			return (
-				<div
-					className="alert alert-danger text-center m-3"
-					role="alert"
-				>
+				<Alert color="danger" className="text-center m-3">
 					This browser doesn't support the Gamepad API.
-				</div>
+				</Alert>
 			);
 		}
 

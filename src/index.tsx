@@ -1,5 +1,5 @@
 import EventEmitter from "events";
-import {Component, render} from "inferno";
+import {Component, render, VNode} from "inferno";
 import {Provider} from "inferno-mobx";
 import {action, configure, observable} from "mobx";
 import {Config} from "./config/config";
@@ -12,57 +12,59 @@ import {MenuComponent} from "./menu/menu.component";
 import {loadLocalStorage, saveLocalStorage} from "./storage/local";
 import {Store} from "./storage/store";
 
-interface State {
-	config: Config;
-	controller: Controller;
-	errors: string[];
-	events: EventEmitter;
-}
-
 /**
- * Root component that renders the entire app and holds its state. The state is
- * loaded from localStorage upon initialization. When the user navigates away
- * from the app, the state is saved to localStorage.
+ * Renders the entire app and holds its state. The state is loaded from
+ * localStorage upon initialization. When the user navigates away from the app,
+ * the state is saved to localStorage.
  */
-class IndexComponent extends Component<{}, State> {
-	public state: State;
+class Root extends Component {
+	private config: Config;
+	private controller: Controller;
+	private events: EventEmitter;
+
+	@observable
+	private errors: string[] = [];
 
 	constructor() {
 		super();
-
-		const config = new Config();
-		this.state = {
-			config,
-			controller: new Controller(config),
-			errors: observable([]),
-			events: new EventEmitter(),
-		};
+		this.config = new Config();
+		this.controller = new Controller(this.config);
+		this.events = new EventEmitter();
 	}
 
-	@action public componentWillMount(): void {
+	@action
+	public componentWillMount(): void {
 		try {
-			loadLocalStorage(Store.Config, this.state.config);
+			loadLocalStorage(Store.Config, this.config);
 		} catch (exception) {
-			this.state.errors.push("Failed to load config data: " + exception.toString());
+			this.errors.push(
+				"Failed to load config data: " + exception.toString(),
+			);
 		}
 
 		try {
-			loadLocalStorage(Store.Controller, this.state.controller);
+			loadLocalStorage(Store.Controller, this.controller);
 		} catch (exception) {
-			this.state.errors.push("Failed to load controller data: " + exception.toString());
+			this.errors.push(
+				"Failed to load controller data: " + exception.toString(),
+			);
 		}
-		this.state.controller.poll();
+
+		this.controller.poll();
 
 		window.addEventListener("beforeunload", () => {
-			saveLocalStorage(Store.Config, this.state.config);
-			saveLocalStorage(Store.Controller, this.state.controller);
+			saveLocalStorage(Store.Config, this.config);
+			saveLocalStorage(Store.Controller, this.controller);
 		});
 	}
 
-	public render(): JSX.Element {
+	public render(): VNode {
 		if (!supportsGamepadApi()) {
 			return (
-				<div className="alert alert-danger text-center m-3" role="alert">
+				<div
+					className="alert alert-danger text-center m-3"
+					role="alert"
+				>
 					This browser doesn't support the Gamepad API.
 				</div>
 			);
@@ -70,10 +72,10 @@ class IndexComponent extends Component<{}, State> {
 
 		return (
 			<Provider
-				config={this.state.config}
-				controller={this.state.controller}
-				errors={this.state.errors}
-				events={this.state.events}
+				config={this.config}
+				controller={this.controller}
+				errors={this.errors}
+				events={this.events}
 			>
 				<section className="d-flex justify-content-between h-100">
 					<div className="display">
@@ -91,10 +93,7 @@ class IndexComponent extends Component<{}, State> {
 }
 
 configure({
-	enforceActions: "strict",
+	enforceActions: true,
 });
 
-render(
-	<IndexComponent />,
-	document.getElementsByTagName("main")[0],
-);
+render(<Root />, document.getElementsByTagName("main")[0]);

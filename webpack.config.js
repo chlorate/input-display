@@ -5,7 +5,7 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const StylelintWebpackPlugin = require("stylelint-webpack-plugin");
 const TslintWebpackPlugin = require("tslint-webpack-plugin");
 
-module.exports = {
+const config = {
 	entry: {
 		app: "./src/index.tsx",
 		styles: "bootstrap-loader",
@@ -70,4 +70,14 @@ module.exports = {
 			},
 		}),
 	],
+};
+
+module.exports = (env, options) => {
+	if (options.mode === "development") {
+		config.resolve.alias = {
+			inferno: __dirname + "/node_modules/inferno/dist/index.dev.esm.js",
+		};
+	}
+
+	return config;
 };

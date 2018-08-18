@@ -1,8 +1,8 @@
 import EventEmitter from "events";
-import {Component, render, VNode} from "inferno";
+import {Component, VNode} from "inferno";
 import {Alert} from "inferno-bootstrap";
 import {Provider} from "inferno-mobx";
-import {action, configure, observable} from "mobx";
+import {action, observable} from "mobx";
 import {Config} from "./config/config";
 import {Controller} from "./controller/controller";
 import {DisplayComponent} from "./display/display.component";

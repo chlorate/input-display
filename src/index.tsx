@@ -1,3 +1,5 @@
+import {render} from "inferno";
+import {configure} from "mobx";
 import {App} from "./app";
 
 configure({

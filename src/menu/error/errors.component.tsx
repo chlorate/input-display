@@ -1,43 +1,33 @@
-import {linkEvent} from "inferno";
-import {connect} from "inferno-mobx";
-import {action} from "mobx";
+import {Component, VNode} from "inferno";
+import {inject, observer} from "inferno-mobx";
 import {Store} from "../../storage/store";
+import {ErrorAlert} from "./error-alert";
+import {ErrorMessage} from "./error-message";
 
-interface Props {
-	errors: string[];
+interface InjectedProps {
+	errors: ErrorMessage[];
 }
 
 /**
- * A list of application errors. Errors can be dismissed.
+ * A list of error messages displayed as alerts.
  */
-export const ErrorsComponent = connect([Store.Errors], ({errors}: Props) => {
-	if (!errors.length) {
-		return;
+@inject(Store.Errors)
+@observer
+export class ErrorAlertList extends Component {
+	private get injected(): InjectedProps {
+		return this.props as InjectedProps;
 	}
 
-	return (
-		<div className="errors scroll">
-			{errors.map((error, i) => (
-				<div className="alert alert-warning alert-dismissible">
-					{error}
-					<button
-						className="close"
-						aria-label="Dismiss"
-						onClick={linkEvent({errors, index: i}, handleClick)}
-					>
-						<span aria-hidden="true">×</span>
-					</button>
-				</div>
-			))}
-		</div>
-	);
-});
+	public render(): VNode | undefined {
+		const {errors} = this.injected;
+		if (!errors.length) {
+			return;
+		}
 
-interface EventProps {
-	errors: string[];
-	index: number;
+		const alerts: VNode[] = errors.map((error) => (
+			<ErrorAlert key={error.id} error={error} />
+		));
+
+		return <div className="errors scroll">{alerts}</div>;
+	}
 }
-
-const handleClick = action((props: EventProps): void => {
-	props.errors.splice(props.index, 1);
-});

@@ -2,13 +2,14 @@ import EventEmitter from "events";
 import {Component, VNode} from "inferno";
 import {Alert} from "inferno-bootstrap";
 import {Provider} from "inferno-mobx";
-import {action, observable} from "mobx";
+import {observable} from "mobx";
 import {Config} from "./config/config";
 import {Controller} from "./controller/controller";
 import {DisplayComponent} from "./display/display.component";
 import {StylesheetComponent} from "./display/stylesheet.component";
 import {supportsGamepadApi} from "./gamepad/service";
-import {ErrorsComponent} from "./menu/error/errors.component";
+import {ErrorMessage} from "./menu/error/error-message";
+import {ErrorAlertList} from "./menu/error/errors.component";
 import {MenuComponent} from "./menu/menu.component";
 import {loadLocalStorage, saveLocalStorage} from "./storage/local";
 import {Store} from "./storage/store";
@@ -24,7 +25,7 @@ export class App extends Component {
 	private events: EventEmitter;
 
 	@observable
-	private errors: string[] = [];
+	private errors: ErrorMessage[] = [];
 
 	constructor() {
 		super();
@@ -33,22 +34,21 @@ export class App extends Component {
 		this.events = new EventEmitter();
 	}
 
-	@action
 	public componentWillMount(): void {
 		try {
 			loadLocalStorage(Store.Config, this.config);
 		} catch (exception) {
-			this.errors.push(
+			this.errors.push(new ErrorMessage(
 				"Failed to load config data: " + exception.toString(),
-			);
+			));
 		}
 
 		try {
 			loadLocalStorage(Store.Controller, this.controller);
 		} catch (exception) {
-			this.errors.push(
+			this.errors.push(new ErrorMessage(
 				"Failed to load controller data: " + exception.toString(),
-			);
+			));
 		}
 
 		this.controller.poll();
@@ -81,7 +81,7 @@ export class App extends Component {
 						<StylesheetComponent />
 					</div>
 					<div className="menu">
-						<ErrorsComponent />
+						<ErrorAlertList />
 						<MenuComponent />
 					</div>
 				</section>

@@ -2,8 +2,8 @@ import {Component, VNode} from "inferno";
 import {Alert} from "inferno-bootstrap";
 import {inject, observer} from "inferno-mobx";
 import {action} from "mobx";
-import {Store} from "../../storage/store";
-import {ErrorMessage} from "./error-message";
+import {ErrorMessage} from ".";
+import {Store} from "../storage/store";
 
 interface Props {
 	error: ErrorMessage;

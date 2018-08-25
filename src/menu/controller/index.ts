@@ -1,4 +1,4 @@
-export * from "./button-row.component";
+export * from "./button-row";
 export * from "./button-table";
-export * from "./controller.component";
+export * from "./controller-tab";
 export * from "./device-info";

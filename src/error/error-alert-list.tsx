@@ -18,15 +18,16 @@ export class ErrorAlertList extends Component {
 	}
 
 	public render(): VNode | undefined {
-		const {errors} = this.injected;
-		if (!errors.length) {
+		if (!this.injected.errors.length) {
 			return;
 		}
 
-		const alerts: VNode[] = errors.map((error) => (
+		return <div className="error-alert-list scroll">{this.alerts}</div>;
+	}
+
+	private get alerts(): VNode[] {
+		return this.injected.errors.map((error) => (
 			<ErrorAlert key={error.id} error={error} />
 		));
-
-		return <div className="error-alert-list scroll">{alerts}</div>;
 	}
 }

@@ -23,14 +23,11 @@ export class ErrorAlert extends Component<Props, {}> {
 		return this.props as InjectedProps;
 	}
 
-	public render(): VNode | undefined {
-		const {error} = this.props;
-		return (
-			<Alert color="warning" onClose={this.handleClose}>
-				{error.message}
-			</Alert>
-		);
-	}
+	public render = (): VNode | undefined => (
+		<Alert color="warning" onClose={this.handleClose}>
+			{this.props.error.message}
+		</Alert>
+	);
 
 	@action
 	private handleClose = (): void => {

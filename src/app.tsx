@@ -37,17 +37,21 @@ export class App extends Component {
 		try {
 			loadLocalStorage(Store.Config, this.config);
 		} catch (exception) {
-			this.errors.push(new ErrorMessage(
-				"Failed to load config data: " + exception.toString(),
-			));
+			this.errors.push(
+				new ErrorMessage(
+					"Failed to load config data: " + exception.toString(),
+				),
+			);
 		}
 
 		try {
 			loadLocalStorage(Store.Controller, this.controller);
 		} catch (exception) {
-			this.errors.push(new ErrorMessage(
-				"Failed to load controller data: " + exception.toString(),
-			));
+			this.errors.push(
+				new ErrorMessage(
+					"Failed to load controller data: " + exception.toString(),
+				),
+			);
 		}
 
 		this.controller.poll();

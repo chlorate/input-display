@@ -5,7 +5,7 @@ import {MenuButton, MenuCard} from ".";
 //import {Config} from "../config/config";
 import {Store} from "../storage/store";
 //import {ConfigComponent} from "./config/config.component";
-//import {ControllerComponent} from "./controller/controller.component";
+import {ControllerTab} from "./controller";
 import {HelpTab} from "./help";
 
 /*
@@ -40,14 +40,11 @@ export class Menu extends Component {
 			<Switch>
 				<Route exact path="/" component={MenuButton} />
 				<MenuCard>
-					<Route path="/help" component={HelpTab} />
 					{/*
 						<Route path="/config" component={ConfigComponent} />
-						<Route
-							path="/controller"
-							component={ControllerComponent}
-						/>
 					*/}
+					<Route path="/controller" component={ControllerTab} />
+					<Route path="/help" component={HelpTab} />
 				</MenuCard>
 			</Switch>
 		</HashRouter>

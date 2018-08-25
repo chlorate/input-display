@@ -1,4 +1,5 @@
-import {connect} from "inferno-mobx";
+import {Component, VNode} from "inferno";
+import {observer} from "inferno-mobx";
 import {Button} from "../../controller/button";
 import {formatNumber} from "../../math/util";
 
@@ -10,15 +11,22 @@ interface Props {
  * A row in the Buttons table in the Controller tab. Shows its current state and
  * statistics.
  */
-export const ButtonRowComponent = connect(({button}: Props) => (
-	<tr>
-		<td>{button.name}</td>
-		{booleanCell(button.pressed)}
-		{integerCell(button.presses)}
-		{integerCell(button.mashSpeed)}
-		{integerCell(button.bestMashSpeed)}
-	</tr>
-));
+@observer
+export class ButtonRowComponent extends Component<Props> {
+	public render(): VNode {
+		const {button} = this.props;
+
+		return (
+			<tr>
+				<td>{button.name}</td>
+				{booleanCell(button.pressed)}
+				{integerCell(button.presses)}
+				{integerCell(button.mashSpeed)}
+				{integerCell(button.bestMashSpeed)}
+			</tr>
+		);
+	}
+}
 
 function booleanCell(value: boolean) {
 	return (
@@ -29,9 +37,5 @@ function booleanCell(value: boolean) {
 }
 
 function integerCell(value: number) {
-	return (
-		<td className="text-right">
-			{formatNumber(value)}
-		</td>
-	);
+	return <td className="text-right">{formatNumber(value)}</td>;
 }

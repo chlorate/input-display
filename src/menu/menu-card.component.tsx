@@ -1,16 +1,14 @@
-import EventEmitter from "events";
-import {Component} from "inferno";
-import {inject} from "inferno-mobx";
-import {NavLink} from "inferno-router";
-import {Event} from "../event";
-import {Store} from "../storage/store";
+import {Location} from "history";
+import {Component, InfernoChildren, VNode} from "inferno";
+import {Card, CardBody, CardHeader, Nav, NavItem} from "inferno-bootstrap";
+import {NavLink, withRouter} from "inferno-router";
 
 interface Props {
-	children: JSX.Element[];
+	children: InfernoChildren;
 }
 
 interface InjectedProps extends Props {
-	events: EventEmitter;
+	location: Location;
 }
 
 const links = [
@@ -31,31 +29,36 @@ const links = [
 /**
  * The outer layout and navigation for the menu.
  */
-@inject(Store.Events)
-export class MenuCardComponent extends Component<Props, {}> {
+@withRouter
+export class MenuCard extends Component<Props, {}> {
 	private scrollDiv: HTMLDivElement | null = null;
-	private listener: () => void;
 
 	private get injected(): InjectedProps {
 		return this.props as InjectedProps;
 	}
 
-	constructor(props: Props) {
-		super(props);
-		this.listener = () => this.scrollToTop();
+	public componentDidUpdate(prevProps: InjectedProps) {
+		if (this.injected.location !== prevProps.location) {
+			this.scrollToTop();
+		}
 	}
 
-	public componentDidMount(): void {
-		this.injected.events.addListener(Event.NavigateTab, this.listener);
-	}
+	public render = (): VNode => (
+		<Card>
+			<CardHeader>
+				<Nav tabs className="card-header-tabs">
+					{this.navItems}
+				</Nav>
+			</CardHeader>
+			<div className="card-scroll" ref={this.setScrollDiv}>
+				<CardBody>{this.props.children}</CardBody>
+			</div>
+		</Card>
+	);
 
-	public componentWillUnmount(): void {
-		this.injected.events.removeListener(Event.NavigateTab, this.listener);
-	}
-
-	public render(): JSX.Element {
+	private get navItems(): VNode[] {
 		const items = links.map((link) => (
-			<li className="nav-item">
+			<NavItem>
 				<NavLink
 					to={link.path}
 					className="nav-link"
@@ -63,30 +66,21 @@ export class MenuCardComponent extends Component<Props, {}> {
 				>
 					{link.name}
 				</NavLink>
-			</li>
+			</NavItem>
 		));
 		items.push(
-			<li className="nav-item ml-auto">
+			<NavItem className="ml-auto">
 				<NavLink to="/" className="close" aria-label="Close">
 					<span aria-hidden="true">×</span>
 				</NavLink>
-			</li>,
+			</NavItem>,
 		);
-
-		return (
-			<div className="card">
-				<div className="card-header">
-					<ul className="nav nav-tabs card-header-tabs">{items}</ul>
-				</div>
-				<div
-					className="card-scroll"
-					ref={(div) => (this.scrollDiv = div)}
-				>
-					<div className="card-body">{this.props.children}</div>
-				</div>
-			</div>
-		);
+		return items;
 	}
+
+	private setScrollDiv = (div: HTMLDivElement): void => {
+		this.scrollDiv = div;
+	};
 
 	private scrollToTop(): void {
 		if (this.scrollDiv) {

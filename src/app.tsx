@@ -9,7 +9,7 @@ import {DisplayComponent} from "./display/display.component";
 import {StylesheetComponent} from "./display/stylesheet.component";
 import {ErrorAlertList, ErrorMessage} from "./error";
 import {supportsGamepadApi} from "./gamepad/service";
-import {MenuComponent} from "./menu/menu.component";
+import {Menu} from "./menu";
 import {loadLocalStorage, saveLocalStorage} from "./storage/local";
 import {Store} from "./storage/store";
 
@@ -81,7 +81,7 @@ export class App extends Component {
 					</div>
 					<div className="menu">
 						<ErrorAlertList />
-						<MenuComponent />
+						<Menu />
 					</div>
 				</section>
 			</Provider>

@@ -1,16 +1,18 @@
-import {Component} from "inferno";
+import {Component, VNode} from "inferno";
 import {inject} from "inferno-mobx";
 import {HashRouter, Route, Switch} from "inferno-router";
 import {MenuButton, MenuCard} from ".";
-import {Config} from "../config/config";
+//import {Config} from "../config/config";
 import {Store} from "../storage/store";
-import {ConfigComponent} from "./config/config.component";
-import {ControllerComponent} from "./controller/controller.component";
-import {HelpComponent} from "./help/help.component";
+//import {ConfigComponent} from "./config/config.component";
+//import {ControllerComponent} from "./controller/controller.component";
+import {Help} from "./help";
 
+/*
 interface InjectedProps {
 	config: Config;
 }
+ */
 
 /**
  * Renders the menu. A router is used to navigate between tabs and closing the
@@ -18,6 +20,7 @@ interface InjectedProps {
  */
 @inject(Store.Config)
 export class Menu extends Component {
+	/*
 	private get injected(): InjectedProps {
 		return this.props as InjectedProps;
 	}
@@ -30,24 +33,23 @@ export class Menu extends Component {
 		return "/";
 		// TODO: how to implement this
 	}
+		*/
 
-	public render(): JSX.Element {
-		return (
-			<HashRouter>
-				<Switch>
-					<Route exact path="/" component={MenuButton} />
-					<Route component={MenuCard}>
+	public render = (): VNode => (
+		<HashRouter>
+			<Switch>
+				<Route exact path="/" component={MenuButton} />
+				<MenuCard>
+					<Route path="/help" component={Help} />
 					{/*
 						<Route path="/config" component={ConfigComponent} />
 						<Route
 							path="/controller"
 							component={ControllerComponent}
 						/>
-						<Route path="/help" component={HelpComponent} />
 					*/}
-					</Route>
-				</Switch>
-			</HashRouter>
-		);
-	}
+				</MenuCard>
+			</Switch>
+		</HashRouter>
+	);
 }

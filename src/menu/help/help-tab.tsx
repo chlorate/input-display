@@ -4,7 +4,7 @@ import {version, versionDate} from "../../version";
 /**
  * Contents of the Help tab.
  */
-export const Help = (): VNode => (
+export const HelpTab = (): VNode => (
 	<section>
 		<h1>Input Display</h1>
 		<p className="lead text-muted">

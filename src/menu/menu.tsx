@@ -6,7 +6,7 @@ import {MenuButton, MenuCard} from ".";
 import {Store} from "../storage/store";
 //import {ConfigComponent} from "./config/config.component";
 //import {ControllerComponent} from "./controller/controller.component";
-import {Help} from "./help";
+import {HelpTab} from "./help";
 
 /*
 interface InjectedProps {
@@ -40,7 +40,7 @@ export class Menu extends Component {
 			<Switch>
 				<Route exact path="/" component={MenuButton} />
 				<MenuCard>
-					<Route path="/help" component={Help} />
+					<Route path="/help" component={HelpTab} />
 					{/*
 						<Route path="/config" component={ConfigComponent} />
 						<Route

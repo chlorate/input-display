@@ -1,3 +1,3 @@
-export * from "./menu.component";
-export * from "./menu-button.component";
-export * from "./menu-card.component";
+export * from "./menu";
+export * from "./menu-button";
+export * from "./menu-card";

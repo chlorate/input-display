@@ -1,4 +1,5 @@
 import {Component, VNode} from "inferno";
+import {Table} from "inferno-bootstrap";
 import {inject, observer} from "inferno-mobx";
 import {Controller} from "../../controller/controller";
 import {Store} from "../../storage/store";
@@ -24,13 +25,13 @@ export class DeviceInfo extends Component {
 		}
 
 		return (
-			<table className="table table-sm table-device-info">
+			<Table size="sm" className="table-device-info">
 				<tr>
 					<th>ID</th>
 					<td>{controller.id}</td>
 				</tr>
 				{this.mappingRow}
-			</table>
+			</Table>
 		);
 	}
 

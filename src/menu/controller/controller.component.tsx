@@ -1,11 +1,10 @@
 import {Component, linkEvent, VNode} from "inferno";
 import {inject, observer} from "inferno-mobx";
 import {action} from "mobx";
-import {DeviceInfo} from ".";
+import {ButtonTable, DeviceInfo} from ".";
 import {Controller} from "../../controller/controller";
 import {Store} from "../../storage/store";
 import {AxisRowComponent} from "./axis-row.component";
-import {ButtonRowComponent} from "./button-row.component";
 
 interface InjectedProps {
 	controller: Controller;
@@ -44,25 +43,7 @@ export class ControllerTab extends Component {
 						</button>
 					)}
 				</h2>
-				{!controller.buttons.length && <p>No buttons detected.</p>}
-				{controller.buttons.length > 0 && (
-					<table className="table table-sm table-controller-buttons">
-						<thead>
-							<tr>
-								<th>Name</th>
-								<th className="text-center">Pressed</th>
-								<th className="text-right">Press count</th>
-								<th className="text-right">Mash speed</th>
-								<th className="text-right">Mash best</th>
-							</tr>
-						</thead>
-						<tbody>
-							{controller.buttons.map((button) => (
-								<ButtonRowComponent button={button} />
-							))}
-						</tbody>
-					</table>
-				)}
+				<ButtonTable />
 
 				<h2 className="h4">
 					Axes

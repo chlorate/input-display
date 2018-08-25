@@ -1,17 +1,3 @@
-.table-controller-buttons {
-	th:not(:first-child) {
-		width: 7em;
-	}
-
-	th:nth-child(2) {
-		width: 1px;
-	}
-
-	td {
-		white-space: nowrap;
-	}
-}
-
 .table-controller-axes {
 	th:not(:first-child) {
 		width: 5.5em;

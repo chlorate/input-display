@@ -8,34 +8,33 @@ interface Props {
 }
 
 /**
- * A row in the Axes table in the Controller tab. Shows information about an
- * axis.
+ * A row in the AxisTable component. Shows an axis' current state.
  */
 @observer
-export class AxisRowComponent extends Component<Props> {
+export class AxisRow extends Component<Props> {
 	public render(): VNode {
 		const {axis, index} = this.props;
-
 		return (
 			<tr>
 				<td>Axis {index + 1}</td>
-				{cell(axis.value)}
-				{cell(axis.neutralValue)}
-				{cell(axis.minValue)}
-				{cell(axis.maxValue)}
+				{this.cell(axis.value)}
+				{this.cell(axis.neutralValue)}
+				{this.cell(axis.minValue)}
+				{this.cell(axis.maxValue)}
 			</tr>
 		);
 	}
-}
 
-function cell(value: number | undefined) {
-	return (
-		<td className="text-right">
-			{value !== undefined ? (
-				value.toFixed(3)
-			) : (
-				<span className="text-muted">Unknown</span>
-			)}
-		</td>
-	);
+	private cell(value?: number): VNode {
+		let className = "text-right";
+		if (value === undefined) {
+			className += " text-muted";
+		}
+
+		return (
+			<td className={className}>
+				{value === undefined ? "Unknown" : value.toFixed(3)}
+			</td>
+		);
+	};
 }

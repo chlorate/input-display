@@ -21,8 +21,7 @@ export class ButtonTable extends Component {
 	}
 
 	public render(): VNode {
-		const {buttons} = this.injected.controller;
-		if (!buttons.length) {
+		if (!this.injected.controller.buttons.length) {
 			return <p>No buttons detected.</p>;
 		}
 

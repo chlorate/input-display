@@ -1,4 +1,4 @@
-export * from "./config.component";
+export * from "./config-tab";
 export * from "./export-alert";
 export * from "./export-button";
 export * from "./open-button";

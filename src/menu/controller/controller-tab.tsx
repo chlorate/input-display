@@ -1,4 +1,5 @@
 import {VNode} from "inferno";
+import {CardBody} from "inferno-bootstrap";
 
 import {
 	AxisTable,
@@ -13,7 +14,7 @@ import {
  * buttons, and axes.
  */
 export const ControllerTab = (): VNode => (
-	<section>
+	<CardBody>
 		<h2 className="h4">Device</h2>
 		<DeviceInfo />
 
@@ -28,5 +29,5 @@ export const ControllerTab = (): VNode => (
 			<ResetAxesButton />
 		</h2>
 		<AxisTable />
-	</section>
+	</CardBody>
 );

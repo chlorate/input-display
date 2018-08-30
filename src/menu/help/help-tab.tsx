@@ -1,11 +1,12 @@
 import {VNode} from "inferno";
+import {CardBody} from "inferno-bootstrap";
 import {version, versionDate} from "../../version";
 
 /**
  * Contents of the Help tab.
  */
 export const HelpTab = (): VNode => (
-	<section>
+	<CardBody>
 		<h1>Input Display</h1>
 		<p className="lead text-muted">
 			v{version} ({versionDate})
@@ -44,5 +45,5 @@ export const HelpTab = (): VNode => (
 				</a>
 			</li>
 		</ul>
-	</section>
+	</CardBody>
 );

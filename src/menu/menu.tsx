@@ -4,7 +4,7 @@ import {HashRouter, Route, Switch} from "inferno-router";
 import {MenuButton, MenuCard} from ".";
 //import {Config} from "../config/config";
 import {Store} from "../storage/store";
-//import {ConfigComponent} from "./config/config.component";
+import {ConfigTab} from "./config";
 import {ControllerTab} from "./controller";
 import {HelpTab} from "./help";
 
@@ -40,11 +40,9 @@ export class Menu extends Component {
 			<Switch>
 				<Route exact path="/" component={MenuButton} />
 				<MenuCard>
-					{/*
-						<Route path="/config" component={ConfigComponent} />
-					*/}
-					<Route path="/controller" component={ControllerTab} />
-					<Route path="/help" component={HelpTab} />
+					<Route exact path="/config" component={ConfigTab} />
+					<Route exact path="/controller" component={ControllerTab} />
+					<Route exact path="/help" component={HelpTab} />
 				</MenuCard>
 			</Switch>
 		</HashRouter>

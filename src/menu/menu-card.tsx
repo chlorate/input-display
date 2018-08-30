@@ -1,6 +1,6 @@
 import {Location} from "history";
 import {Component, InfernoChildren, VNode} from "inferno";
-import {Card, CardBody, CardHeader, Nav, NavItem} from "inferno-bootstrap";
+import {Card, CardHeader, Nav, NavItem} from "inferno-bootstrap";
 import {NavLink, withRouter} from "inferno-router";
 
 interface Props {
@@ -51,7 +51,7 @@ export class MenuCard extends Component<Props, {}> {
 				</Nav>
 			</CardHeader>
 			<div className="card-scroll" ref={this.setScrollDiv}>
-				<CardBody>{this.props.children}</CardBody>
+				{this.props.children}
 			</div>
 		</Card>
 	);

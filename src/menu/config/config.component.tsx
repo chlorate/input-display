@@ -1,207 +1,86 @@
-import {EventEmitter} from "events";
-import {Component, linkEvent} from "inferno";
-import {inject} from "inferno-mobx";
-import {action} from "mobx";
-import {Config} from "../../config/config";
-import {Event} from "../../event";
-import {isObs} from "../../obs/util";
-import {loadFile, saveFile} from "../../storage/file";
-import {Store} from "../../storage/store";
-import {AdvancedConfigComponent} from "./advanced-config.component";
-import {ColorConfigComponent} from "./color-config.component";
-import {ControlConfigComponent} from "./control-config.component";
-import {ControllerConfigComponent} from "./controller-config.component";
-import {DisplayConfigComponent} from "./display-config.component";
-import {FontConfigComponent} from "./font-config.component";
+import {Component, VNode} from "inferno";
+import {CardBody, ListGroup} from "inferno-bootstrap";
+import {observer} from "inferno-mobx";
+import {Link} from "inferno-router";
+import {action, observable} from "mobx";
+import {ExportAlert, ExportButton, OpenButton, SaveAlert, SaveButton} from ".";
 
-interface InjectedProps {
-	config: Config;
-	errors: string[];
-	events: EventEmitter;
-}
-
-interface State {
-	saveUrl?: string;
-	exportData?: string;
-}
+const links = [
+	{
+		path: "/config/controller",
+		name: "Controller",
+		description:
+			"Select and configure the controller whose inputs will be read.",
+	},
+	{
+		path: "/config/appearance",
+		name: "Appearance",
+		description:
+			"Configure the display size and the default font and colors used in controls.",
+	},
+	{
+		path: "/config/controls",
+		name: "Controls",
+		description:
+			"Configure the buttons and analog sticks shown in the display.",
+	},
+	{
+		path: "/config/advanced",
+		name: "Advanced",
+		description: "Edit custom CSS.",
+	},
+];
 
 /**
- * Contents of the Config tab. Provides fields for configuring the controller
- * and input display.
+ * The top-level contents of the Config tab. Provides file operations and links
+ * to each major config section.
  */
-@inject(Store.Config, Store.Errors, Store.Events)
-export class ConfigComponent extends Component<{}, State> {
-	public state: State = {};
-	public fileInput: HTMLInputElement | null = null;
+@observer
+export class ConfigTab extends Component {
+	@observable
+	private saveUrl?: string;
 
-	public get injected(): InjectedProps {
-		return this.props as InjectedProps;
+	@observable
+	private exportedJson?: string;
+
+	public render = (): VNode => (
+		<div>
+			<CardBody>
+				<OpenButton onOpen={this.clear} />{" "}
+				<SaveButton onSave={this.handleSave} />{" "}
+				<ExportButton onExport={this.handleExport} />
+				<SaveAlert url={this.saveUrl} onClose={this.clear} />
+				<ExportAlert json={this.exportedJson} onClose={this.clear} />
+			</CardBody>
+			<ListGroup flush>{this.items}</ListGroup>
+		</div>
+	);
+
+	private get items(): VNode[] {
+		return links.map((link) => (
+			<Link
+				to={link.path}
+				className="list-group-item list-group-item-action"
+			>
+				<h2 class="h4 m-0">{link.name}</h2>
+				<small class="text-body">{link.description}</small>
+			</Link>
+		));
 	}
 
-	set saveUrl(url: string | undefined) {
-		if (this.state.saveUrl) {
-			URL.revokeObjectURL(this.state.saveUrl);
-		}
-		this.setState({saveUrl: url});
-	}
+	@action
+	private handleSave = (url: string): void => {
+		this.saveUrl = url;
+	};
 
-	public componentWillUnmount(): void {
+	@action
+	private handleExport = (json: string): void => {
+		this.exportedJson = json;
+	};
+
+	@action
+	private clear = (): void => {
 		this.saveUrl = undefined;
-	}
-
-	public render() {
-		return (
-			<div>
-				<div className="mb-3">
-					<input
-						type="file"
-						accept=".json"
-						hidden
-						ref={(input) => this.fileInput = input}
-						onChange={linkEvent(this, handleChangeFile)}
-					/>
-					<button
-						type="button"
-						className="btn btn-primary"
-						onClick={linkEvent(this, handleClickOpen)}
-					>
-						Open
-					</button>{" "}
-					{!isObs() &&
-						<button
-							type="button"
-							className="btn btn-primary"
-							onClick={linkEvent(this, handleClickSave)}
-						>
-							Save
-						</button>
-					}
-					{isObs() &&
-						<button
-							type="button"
-							className="btn btn-primary"
-							onClick={linkEvent(this, handleClickExport)}
-						>
-							Export
-						</button>
-					}
-				</div>
-
-				{this.state.saveUrl &&
-					<div className="alert alert-success alert-dismissible" role="alert">
-						Right-click and "Save link as":{" "}
-						<a href={this.state.saveUrl} download={`${Store.Config}.json`}>
-							{Store.Config}.json
-						</a>
-						<button
-							className="close"
-							aria-label="Close"
-							onClick={linkEvent(this, handleClickCloseSave)}
-						>
-							<span aria-hidden="true">×</span>
-						</button>
-					</div>
-				}
-				{this.state.exportData &&
-					<div className="alert alert-success alert-dismissible" role="alert">
-						<p>
-							OBS Browser Source does not support file downloads.
-							Copy and paste the following into a config.json
-							file:
-						</p>
-						<input
-							type="text"
-							className="form-control"
-							value={this.state.exportData}
-							readOnly
-							onClick={linkEvent(undefined, handleFocusExportData)}
-							onFocus={linkEvent(undefined, handleFocusExportData)}
-						/>
-						<button
-							className="close"
-							aria-label="Close"
-							onClick={linkEvent(this, handleClickCloseExport)}
-						>
-							<span aria-hidden="true">×</span>
-						</button>
-					</div>
-				}
-
-				<h2 className="h4">
-					Controller
-				</h2>
-				<ControllerConfigComponent />
-
-				<h2 className="h4">
-					Display
-				</h2>
-				<DisplayConfigComponent />
-
-				<h2 className="h4">
-					Font
-				</h2>
-				<FontConfigComponent />
-
-				<h2 className="h4">
-					Colors
-				</h2>
-				<ColorConfigComponent />
-
-				<h2 className="h4">
-					Controls
-				</h2>
-				<ControlConfigComponent />
-
-				<h2 className="h4">
-					Advanced
-				</h2>
-				<AdvancedConfigComponent />
-			</div>
-		);
-	}
-}
-
-const handleChangeFile = action((component: ConfigComponent): void => {
-	if (component.fileInput && component.fileInput.files) {
-		component.saveUrl = undefined;
-		loadFile(component.fileInput.files[0], component.injected.config)
-			.then(() => {
-				component.injected.events.emit(Event.LoadConfig);
-			})
-			.catch(action((error: string) => {
-				component.injected.errors.push("Failed to open config file: " + error);
-			}))
-			.then(() => {
-				if (component.fileInput) {
-					// Deselect current file.
-					component.fileInput.value = "";
-				}
-			});
-	}
-});
-
-function handleClickOpen(component: ConfigComponent): void {
-	if (component.fileInput) {
-		component.fileInput.click();
-	}
-}
-
-function handleClickSave(component: ConfigComponent): void {
-	component.saveUrl = saveFile(component.injected.config);
-}
-
-function handleClickCloseSave(component: ConfigComponent): void {
-	component.saveUrl = undefined;
-}
-
-function handleClickExport(component: ConfigComponent): void {
-	component.setState({exportData: JSON.stringify(component.injected.config)});
-}
-
-function handleFocusExportData(_, event): void {
-	event.target.select();
-}
-
-function handleClickCloseExport(component: ConfigComponent): void {
-	component.setState({exportData: undefined});
+		this.exportedJson = undefined;
+	};
 }

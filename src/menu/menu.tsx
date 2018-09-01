@@ -5,7 +5,7 @@ import {MenuButton, MenuCard} from ".";
 //import {Config} from "../config/config";
 import {Store} from "../storage/store";
 import {ConfigTab} from "./config";
-import {ControllerConfigTab} from "./config/controller-config.component";
+import {ControllerConfigTab} from "./config/controller/controller-config-tab";
 import {ControllerTab} from "./controller";
 import {HelpTab} from "./help";
 

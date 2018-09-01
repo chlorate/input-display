@@ -1,7 +1,7 @@
 import {VNode} from "inferno";
 import {CardBody} from "inferno-bootstrap";
-import {BackHeading} from ".";
-import {DeviceSelect} from "../field/device-select.component";
+import {DeviceSelect} from ".";
+import {BackHeading} from "..";
 
 /**
  * The contents of the Controller screen of the Config tab. Provides fields for

@@ -2,10 +2,10 @@ import {ChangeEvent, Component, VNode} from "inferno";
 import {FormGroup, FormText, Input, Label} from "inferno-bootstrap";
 import {inject, observer} from "inferno-mobx";
 import {action, observable} from "mobx";
-import {Config} from "../../config/config";
-import {getGamepadIds} from "../../gamepad/service";
-import {Store} from "../../storage/store";
-import {secondToMilliseconds} from "../../time/const";
+import {Config} from "../../../config/config";
+import {getGamepadIds} from "../../../gamepad/service";
+import {Store} from "../../../storage/store";
+import {secondToMilliseconds} from "../../../time/const";
 
 interface InjectedProps {
 	config: Config;

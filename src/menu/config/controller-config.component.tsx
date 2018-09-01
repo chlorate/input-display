@@ -1,3 +1,26 @@
+import {VNode} from "inferno";
+import {CardBody} from "inferno-bootstrap";
+import {BackHeading} from ".";
+import {DeviceSelect} from "../field/device-select.component";
+
+/**
+ * The contents of the Controller screen of the Config tab. Provides fields for
+ * controller-related configuration.
+ */
+export const ControllerConfigTab = (): VNode => (
+	<div>
+		<BackHeading to="/config">Controller</BackHeading>
+		<CardBody>
+			<DeviceSelect />
+
+			<h3 className="h4 mt-4">Directional pad</h3>
+
+			<h3 className="h4 mt-4">Inputs</h3>
+		</CardBody>
+	</div>
+);
+
+/*
 import {linkEvent} from "inferno";
 import {connect} from "inferno-mobx";
 import {action} from "mobx";
@@ -11,9 +34,9 @@ interface Props {
 	config: Config;
 }
 
-/**
+**
  * A section within the Config tab for controller configuration.
- */
+ *
 export const ControllerConfigComponent = connect([Store.Config], ({config}: Props) => (
 	<section className="mb-5">
 		<DeviceSelectComponent />
@@ -44,3 +67,4 @@ export const ControllerConfigComponent = connect([Store.Config], ({config}: Prop
 const handleChange = action((config: Config, event): void => {
 	config.pollRate = event.target.value || defaultPollRate;
 });
+ */

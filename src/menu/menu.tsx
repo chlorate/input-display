@@ -5,6 +5,7 @@ import {MenuButton, MenuCard} from ".";
 //import {Config} from "../config/config";
 import {Store} from "../storage/store";
 import {ConfigTab} from "./config";
+import {ControllerConfigTab} from "./config/controller-config.component";
 import {ControllerTab} from "./controller";
 import {HelpTab} from "./help";
 
@@ -41,6 +42,11 @@ export class Menu extends Component {
 				<Route exact path="/" component={MenuButton} />
 				<MenuCard>
 					<Route exact path="/config" component={ConfigTab} />
+					<Route
+						exact
+						path="/config/controller"
+						component={ControllerConfigTab}
+					/>
 					<Route exact path="/controller" component={ControllerTab} />
 					<Route exact path="/help" component={HelpTab} />
 				</MenuCard>

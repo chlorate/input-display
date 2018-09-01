@@ -18,7 +18,7 @@
 		"babel-preset-env": "1.7.0",
 		"bootstrap": "4.1.3",
 		"bootstrap-loader": "3.0.0",
-		"bootstrap-theme": "chlorate/bootstrap-theme#935aa48837e0818884104d2f250145d9f0a71f86",
+		"bootstrap-theme": "chlorate/bootstrap-theme#b7c07c0a66d99ee989a7935726db0b7643bc294e",
 		"css-loader": "1.0.0",
 		"file-loader": "1.1.11",
 		"html-webpack-plugin": "3.2.0",

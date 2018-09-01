@@ -1,3 +1,4 @@
+export * from "./back-heading";
 export * from "./config-tab";
 export * from "./export-alert";
 export * from "./export-button";

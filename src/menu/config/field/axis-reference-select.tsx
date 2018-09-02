@@ -1,6 +1,6 @@
 import {ChangeEvent, Component, VNode} from "inferno";
-import {AxisReference} from "../../config/axis-reference";
-import {AxisSelect} from "../config";
+import {AxisReference} from "../../../config/axis-reference";
+import {AxisSelect} from "..";
 
 import {
 	FormGroup,

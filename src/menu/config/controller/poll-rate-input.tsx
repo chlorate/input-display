@@ -1,16 +1,9 @@
 import {Component, VNode} from "inferno";
+import {FormGroup, FormText, InputGroupAddon, Label} from "inferno-bootstrap";
 import {action} from "mobx";
 import {inject, observer} from "inferno-mobx";
 import {Store} from "../../../storage/store";
-import {NumberInput} from "../field";
-
-import {
-	FormGroup,
-	FormText,
-	InputGroup,
-	InputGroupAddon,
-	Label,
-} from "inferno-bootstrap";
+import {AutoWidthInputGroup, NumberInput} from "../field";
 
 import {
 	Config,
@@ -36,20 +29,18 @@ export class PollRateInput extends Component {
 	public render = (): VNode => (
 		<FormGroup>
 			<Label for="config-poll-rate">Poll rate</Label>
-			<div>
-				<InputGroup className="d-inline-flex w-auto">
-					<NumberInput
-						id="config-poll-rate"
-						value={this.injected.config.pollRate}
-						min={minPollRate}
-						max={maxPollRate}
-						defaultValue={defaultPollRate}
-						describedBy="config-poll-rate-help"
-						onChange={this.handleChange}
-					/>
-					<InputGroupAddon addonType="append">Hz</InputGroupAddon>
-				</InputGroup>
-			</div>
+			<AutoWidthInputGroup>
+				<NumberInput
+					id="config-poll-rate"
+					value={this.injected.config.pollRate}
+					min={minPollRate}
+					max={maxPollRate}
+					defaultValue={defaultPollRate}
+					describedBy="config-poll-rate-help"
+					onChange={this.handleChange}
+				/>
+				<InputGroupAddon addonType="append">Hz</InputGroupAddon>
+			</AutoWidthInputGroup>
 			<FormText id="config-poll-rate-help">
 				Inputs will be read this many times per second.
 			</FormText>

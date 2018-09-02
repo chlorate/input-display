@@ -7,6 +7,7 @@ import {
 	DpadDualAxesSelects,
 	DpadMappingSelect,
 	DpadSingleAxisSelect,
+	PollRateInput,
 } from ".";
 
 /**
@@ -25,6 +26,7 @@ export const ControllerConfigTab = (): VNode => (
 			<DpadDualAxesSelects />
 
 			<h3 className="h4 mt-4">Inputs</h3>
+			<PollRateInput />
 		</CardBody>
 	</div>
 );

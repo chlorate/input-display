@@ -1,8 +1,8 @@
 import {ChangeEvent, Component, VNode} from "inferno";
 import {Input} from "inferno-bootstrap";
 import {inject, observer} from "inferno-mobx";
-import {Controller} from "../../controller/controller";
-import {Store} from "../../storage/store";
+import {Controller} from "../../../controller/controller";
+import {Store} from "../../../storage/store";
 
 interface Props {
 	className?: string;

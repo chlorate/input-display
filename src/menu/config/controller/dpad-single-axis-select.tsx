@@ -1,9 +1,9 @@
 import {Component, VNode} from "inferno";
 import {inject, observer} from "inferno-mobx";
 import {action} from "mobx";
-import {AxisIndexSelect} from "..";
 import {Config} from "../../../config/config";
 import {Store} from "../../../storage/store";
+import {AxisIndexSelect} from "../field";
 
 interface InjectedProps {
 	config: Config;

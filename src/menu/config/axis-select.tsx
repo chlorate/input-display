@@ -31,7 +31,7 @@ export class AxisSelect extends Component<Props> {
 		const {className, id, value} = this.props;
 		return (
 			<Input
-				className={className}
+				className={`form-control-axis-select ${className || ""}`}
 				id={id}
 				type="select"
 				value={value !== undefined ? value : ""}

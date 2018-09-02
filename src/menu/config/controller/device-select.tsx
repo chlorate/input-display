@@ -52,8 +52,8 @@ export class DeviceSelect extends Component {
 		<FormGroup>
 			<Label for="config-device">Device</Label>
 			<Input
-				type="select"
 				id="config-device"
+				type="select"
 				value={this.injected.config.gamepadIndex}
 				required
 				aria-describedby="config-device-help"

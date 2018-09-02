@@ -1,7 +1,13 @@
 import {VNode} from "inferno";
 import {CardBody} from "inferno-bootstrap";
-import {DeviceSelect} from ".";
 import {BackHeading} from "..";
+
+import {
+	DeviceSelect,
+	DpadDualAxesSelects,
+	DpadMappingSelect,
+	DpadSingleAxisSelect,
+} from ".";
 
 /**
  * The contents of the Controller screen of the Config tab. Provides fields for
@@ -14,6 +20,9 @@ export const ControllerConfigTab = (): VNode => (
 			<DeviceSelect />
 
 			<h3 className="h4 mt-4">Directional pad</h3>
+			<DpadMappingSelect />
+			<DpadSingleAxisSelect />
+			<DpadDualAxesSelects />
 
 			<h3 className="h4 mt-4">Inputs</h3>
 		</CardBody>

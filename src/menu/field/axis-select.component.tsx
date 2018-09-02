@@ -1,4 +1,5 @@
-import {Component} from "inferno";
+import {Component, VNode} from "inferno";
+import {Input} from "inferno-bootstrap";
 import {inject, observer} from "inferno-mobx";
 import {Controller} from "../../controller/controller";
 import {Store} from "../../storage/store";
@@ -15,21 +16,36 @@ interface InjectedProps extends Props {
 }
 
 /**
- * A <select> element for selecting an axis. Used by other components that
- * involve selecting an axis.
+ * A field for selecting an axis. Used by other components that involve
+ * selecting an axis.
  */
 @inject(Store.Controller)
 @observer
-export class AxisSelectComponent extends Component<Props, {}> {
+export class AxisSelect extends Component<Props> {
 	private get injected(): InjectedProps {
 		return this.props as InjectedProps;
 	}
 
-	private get options(): JSX.Element[] {
+	public render(): VNode {
+		const {id, onChange, value} = this.props;
+		return (
+			<Input
+				id={id}
+				type="select"
+				value={value !== undefined ? value : ""}
+				required
+				onChange={onChange}
+			>
+				{this.options}
+			</Input>
+		);
+	}
+
+	private get options(): VNode[] {
 		const {controller, required, value} = this.injected;
 
-		const options: JSX.Element[] = [];
-		if (required || value === undefined) {
+		const options: VNode[] = [];
+		if (!required || value === undefined) {
 			options.push(<option value="">None</option>);
 		}
 		options.push(
@@ -41,21 +57,5 @@ export class AxisSelectComponent extends Component<Props, {}> {
 			options.push(<option value={value}>Axis {value + 1}</option>);
 		}
 		return options;
-	}
-
-	public render(): JSX.Element {
-		const {id, onChange, value} = this.props;
-
-		return (
-			<select
-				className="form-control"
-				id={id}
-				value={value !== undefined ? value : ""}
-				required
-				onChange={onChange}
-			>
-				{this.options}
-			</select>
-		);
 	}
 }

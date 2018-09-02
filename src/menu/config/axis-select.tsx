@@ -5,6 +5,7 @@ import {Controller} from "../../controller/controller";
 import {Store} from "../../storage/store";
 
 interface Props {
+	className?: string;
 	id: string;
 	value?: number;
 	required?: boolean;
@@ -27,9 +28,10 @@ export class AxisSelect extends Component<Props> {
 	}
 
 	public render(): VNode {
-		const {id, value} = this.props;
+		const {className, id, value} = this.props;
 		return (
 			<Input
+				className={className}
 				id={id}
 				type="select"
 				value={value !== undefined ? value : ""}

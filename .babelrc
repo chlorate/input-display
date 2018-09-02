@@ -1,6 +1,4 @@
 {
-	"presets": ["env"],
-	"plugins": [
-		["inferno", {imports: true}],
-	]
+	"presets": [["@babel/env", {"useBuiltIns": "usage"}]],
+	"plugins": [["inferno", {"imports": true}]]
 }

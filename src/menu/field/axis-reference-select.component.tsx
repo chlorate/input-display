@@ -1,9 +1,15 @@
-import {linkEvent} from "inferno";
-import {connect} from "inferno-mobx";
-import {action} from "mobx";
+import {ChangeEvent, Component, VNode} from "inferno";
 import {AxisReference} from "../../config/axis-reference";
-import {clampIndex} from "../../math/util";
-import {AxisSelectComponent} from "./axis-select.component";
+import {AxisSelect} from "../config";
+
+import {
+	FormGroup,
+	Input,
+	InputGroup,
+	InputGroupAddon,
+	InputGroupText,
+	Label,
+} from "inferno-bootstrap";
 
 interface Props {
 	className?: string;
@@ -11,62 +17,70 @@ interface Props {
 	label: string;
 	reference: AxisReference;
 	required?: boolean;
-
-	// onChange is only required if required=true. Otherwise, the existing
-	// reference will be updated.
-	onChange?: LinkedEvent;
-}
-
-interface LinkedEvent {
-	data: any;
-	event: (data: any, reference?: AxisReference) => void;
+	onChange: (reference?: AxisReference) => void;
 }
 
 /**
  * A field for editing an AxisReference. Allows the user to select an axis and
  * if its value should be inverted.
  */
-export const AxisReferenceSelectComponent = connect((props: Props) => (
-	<div className={`form-group form-group-axis-reference ${props.className || ""}`}>
-		<label htmlFor={props.id}>
-			{props.label}
-		</label>
-		<div className="input-group">
-			<AxisSelectComponent
-				id={props.id}
-				value={props.reference ? props.reference.index : ""}
-				required={props.required}
-				onChange={linkEvent(props, handleChangeIndex)}
-			/>
-			{props.reference &&
-				<label className="input-group-addon">
-					<input
-						type="checkbox"
-						className="mr-1"
-						checked={props.reference.inverted}
-						onClick={linkEvent(props.reference, handleChangeInverted)}
-					/> Invert
-				</label>
-			}
-		</div>
-	</div>
-));
+export class AxisReferenceSelect extends Component<Props> {
+	public render(): VNode {
+		const {className, id, label, reference, required} = this.props;
+		return (
+			<FormGroup className={className}>
+				<Label for={id}>{label}</Label>
+				<InputGroup>
+					<AxisSelect
+						id={id}
+						value={reference ? reference.index : undefined}
+						required={required}
+						onChange={this.handleChangeIndex}
+					/>
+					{this.invertedCheckbox}
+				</InputGroup>
+			</FormGroup>
+		);
+	}
 
-const handleChangeIndex = action((props: Props, event): void => {
-	let reference: AxisReference | undefined;
-	if (event.target.value) {
-		const i = clampIndex(event.target.value);
-		if (props.reference) {
-			props.reference.index = i;
+	private get invertedCheckbox(): VNode | null {
+		const {reference} = this.props;
+		if (!reference) {
+			return null;
+		}
+
+		return (
+			<InputGroupAddon addonType="append">
+				<InputGroupText tag="label">
+					<FormGroup check className="form-check-inline m-0">
+						<Input
+							type="checkbox"
+							checked={reference.inverted}
+							onClick={this.handleChangeInverted}
+						/>
+						Invert
+					</FormGroup>
+				</InputGroupText>
+			</InputGroupAddon>
+		);
+	}
+
+	private handleChangeIndex = (index?: number): void => {
+		const {reference: oldReference, onChange} = this.props;
+
+		if (index === undefined) {
+			onChange(undefined);
 			return;
 		}
-		reference = new AxisReference(i, false);
-	}
-	if (props.onChange) {
-		props.onChange.event(props.onChange.data, reference);
-	}
-});
 
-const handleChangeInverted = action((reference: AxisReference, event): void => {
-	reference.inverted = event.target.checked;
-});
+		const inverted = oldReference ? oldReference.inverted : false;
+		onChange(new AxisReference(index, inverted));
+	};
+
+	private handleChangeInverted = (
+		event: ChangeEvent<HTMLInputElement>,
+	): void => {
+		const {reference, onChange} = this.props;
+		onChange(new AxisReference(reference.index, event.target.checked));
+	};
+}

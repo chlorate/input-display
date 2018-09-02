@@ -1,26 +1,37 @@
-import {AxisSelectComponent} from "./axis-select.component";
+import {VNode} from "inferno";
+import {FormGroup, Label} from "inferno-bootstrap";
+import {AxisSelect} from "../config";
 
 interface Props {
 	className?: string;
 	id: string;
 	label: string;
 	value: number;
-	onChange;
+	onChange: (index: number) => void;
 }
 
 /**
- * A field for editing an axis index. Allows the user to select an axis.
+ * A field for selecting an axis index.
  */
-export const AxisIndexSelectComponent = (props: Props) => (
-	<div className={`form-group ${props.className || ""}`}>
-		<label htmlFor={props.id}>
-			{props.label}
-		</label>
-		<AxisSelectComponent
-			id={props.id}
-			value={props.value}
-			required={true}
-			onChange={props.onChange}
-		/>
-	</div>
-);
+export class AxisIndexSelect extends Component<Props> {
+	public render(): VNode {
+		const {className, id, label, value} = this.props;
+		return (
+			<FormGroup className={className}>
+				<Label for={id}>{label}</Label>
+				<AxisSelect
+					id={id}
+					value={value}
+					required
+					onChange={onChange}
+				/>
+			</FormGroup>
+		);
+	}
+
+	private handleChange = (index?: number): void => {
+		if (index !== undefined) {
+			this.props.onChange(index);
+		}
+	};
+}

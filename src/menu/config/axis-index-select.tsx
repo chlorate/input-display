@@ -1,6 +1,6 @@
 import {VNode} from "inferno";
 import {FormGroup, Label} from "inferno-bootstrap";
-import {AxisSelect} from "../config";
+import {AxisSelect} from ".";
 
 interface Props {
 	className?: string;

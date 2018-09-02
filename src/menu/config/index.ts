@@ -1,3 +1,4 @@
+export * from "./axis-index-select";
 export * from "./axis-select";
 export * from "./back-heading";
 export * from "./config-tab";

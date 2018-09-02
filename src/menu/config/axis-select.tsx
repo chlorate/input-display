@@ -1,4 +1,4 @@
-import {Component, VNode} from "inferno";
+import {ChangeEvent, Component, VNode} from "inferno";
 import {Input} from "inferno-bootstrap";
 import {inject, observer} from "inferno-mobx";
 import {Controller} from "../../controller/controller";
@@ -8,7 +8,7 @@ interface Props {
 	id: string;
 	value?: number;
 	required?: boolean;
-	onChange: any;
+	onChange: (index?: number) => void;
 }
 
 interface InjectedProps extends Props {
@@ -27,14 +27,14 @@ export class AxisSelect extends Component<Props> {
 	}
 
 	public render(): VNode {
-		const {id, onChange, value} = this.props;
+		const {id, value} = this.props;
 		return (
 			<Input
 				id={id}
 				type="select"
 				value={value !== undefined ? value : ""}
 				required
-				onChange={onChange}
+				onChange={this.handleChange}
 			>
 				{this.options}
 			</Input>
@@ -58,4 +58,15 @@ export class AxisSelect extends Component<Props> {
 		}
 		return options;
 	}
+
+	private handleChange = (event: ChangeEvent<HTMLSelectElement>): void => {
+		const {value} = event.target;
+
+		let index: number | undefined;
+		if (value) {
+			index = parseInt(value, 10);
+		}
+
+		this.props.onChange(index);
+	};
 }

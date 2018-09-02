@@ -20,3 +20,8 @@ main {
 		margin-bottom: 0;
 	}
 }
+
+.form-row-collapse-margin {
+	// Fix margin not collapsing after a form row.
+	margin-bottom: -$form-group-margin-bottom;
+}

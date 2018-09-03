@@ -1,13 +1,3 @@
-@import 'display/display';
-@import 'error/error-alert-list';
-@import 'menu/config/config';
-@import 'menu/config/field/axis-select';
-@import 'menu/controller/axis-table';
-@import 'menu/controller/button-table';
-@import 'menu/controller/device-info';
-@import 'menu/field/field';
-@import 'menu/menu';
-
 main {
 	height: 100%;
 }
@@ -32,4 +22,13 @@ main {
 	margin-bottom: -$form-group-margin-bottom;
 }
 
+@import 'display/display';
+@import 'error/error-alert-list';
+@import 'menu/config/config';
+@import 'menu/config/field/axis-select';
 @import 'menu/config/field/hue-slider';
+@import 'menu/controller/axis-table';
+@import 'menu/controller/button-table';
+@import 'menu/controller/device-info';
+@import 'menu/field/field';
+@import 'menu/menu';

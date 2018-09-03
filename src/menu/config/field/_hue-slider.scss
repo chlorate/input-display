@@ -1,0 +1,29 @@
+.hue-slider {
+	display: inline-block;
+	vertical-align: bottom;
+}
+
+.hue-slider-gradient {
+	$hue-gradient: ();
+	@for $i from 36 through 0 {
+		$hue-gradient: append(
+			$hue-gradient,
+			"hsl(" + ($i * 10) + ", 100%, 50%)",
+			comma
+		);
+	}
+
+	position: relative;
+	background: linear-gradient(#{$hue-gradient});
+	width: 20px;
+	height: 180px;
+}
+
+.hue-slider-thumb {
+	position: absolute;
+	left: -2px;
+	right: -2px;
+	margin-top: -2px;
+	border-color: #fff;
+	height: 5px;
+}

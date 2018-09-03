@@ -21,7 +21,15 @@ main {
 	}
 }
 
+.border-outline {
+	border: 1px solid $border-color;
+	box-shadow: 0 0 0 1px #000, inset 0 0 0 1px #000;
+	padding: 1px;
+}
+
 .form-row-collapse-margin {
 	// Fix margin not collapsing after a form row.
 	margin-bottom: -$form-group-margin-bottom;
 }
+
+@import 'menu/config/field/hue-slider';

@@ -69,17 +69,13 @@ export class HueSlider extends Component<Props> {
 
 	private handleMouseDown = (event: MouseEvent<HTMLDivElement>): void => {
 		this.readMousePosition(event);
-		window.addEventListener(Event.MouseMove, this.handleMouseMove);
+		window.addEventListener(Event.MouseMove, this.readMousePosition);
 		window.addEventListener(Event.MouseUp, this.removeListeners);
 		setTimeout(this.focusThumb); // Doesn't focus without timeout.
-	};
-
-	private handleMouseMove = (event: MouseEvent<HTMLElement>): void => {
-		this.readMousePosition(event);
 		event.preventDefault();
 	};
 
-	private readMousePosition(event: MouseEvent<HTMLElement>): void {
+	private readMousePosition = (event: MouseEvent<HTMLElement>): void => {
 		if (this.gradientDiv) {
 			const rect = this.gradientDiv.getBoundingClientRect();
 			const y = event.clientY - rect.top;
@@ -95,7 +91,7 @@ export class HueSlider extends Component<Props> {
 	};
 
 	private removeListeners = (): void => {
-		window.removeEventListener(Event.MouseMove, this.handleMouseMove);
+		window.removeEventListener(Event.MouseMove, this.readMousePosition);
 		window.removeEventListener(Event.MouseUp, this.removeListeners);
 	};
 

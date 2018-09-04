@@ -5,10 +5,10 @@
 
 .hue-slider-gradient {
 	$hue-gradient: ();
-	@for $i from 36 through 0 {
+	@for $i from 6 through 0 {
 		$hue-gradient: append(
 			$hue-gradient,
-			"hsl(" + ($i * 10) + ", 100%, 50%)",
+			"hsl(" + ($i * 60) + ", 100%, 50%)",
 			comma
 		);
 	}

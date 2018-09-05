@@ -1,13 +1,13 @@
 import {Component, KeyboardEvent, MouseEvent, VNode} from "inferno";
 import {observer} from "inferno-mobx";
-import {action, observable} from "mobx";
+import {action, computed, observable} from "mobx";
 import {maxHue, minHue} from "../../../css";
 import {Event, Key} from "../../../event";
-import {clampInt} from "../../../math/util";
+import {clamp} from "../../../math/util";
 
 interface Props {
-	value: number;
-	onChange: (value: number) => void;
+	hue: number;
+	onChange: (hue: number) => void;
 }
 
 /**
@@ -41,22 +41,12 @@ export class HueSlider extends Component<Props> {
 					aria-orientation="vertical"
 					aria-valuemin={minHue}
 					aria-valuemax={maxHue}
-					aria-valuenow={this.props.value}
+					aria-valuenow={this.props.hue}
 					onKeyDown={this.handleKeyDown}
 				/>
 			</div>
 		</div>
 	);
-
-	private get thumbY(): string {
-		if (!this.gradientDiv) {
-			return "0";
-		}
-
-		const rect = this.gradientDiv.getBoundingClientRect();
-		const y = (1 - this.props.value / maxHue) * (rect.height - 1);
-		return `${y}px`;
-	}
 
 	@action
 	private setGradientDiv = (div: HTMLDivElement): void => {
@@ -67,11 +57,35 @@ export class HueSlider extends Component<Props> {
 		this.thumbDiv = div;
 	};
 
+	private focusThumb(): void {
+		if (this.thumbDiv) {
+			this.thumbDiv.focus();
+		}
+	}
+
+	private get thumbY(): string {
+		if (!this.gradientDiv) {
+			return "0";
+		}
+
+		const y = (1 - this.props.hue / maxHue) * this.maxThumbY;
+		return `${clamp(y, 0, this.maxThumbY)}px`;
+	}
+
+	@computed
+	private get maxThumbY(): number {
+		if (!this.gradientDiv) {
+			return 0;
+		}
+
+		return this.gradientDiv.getBoundingClientRect().height - 1;
+	}
+
 	private handleMouseDown = (event: MouseEvent<HTMLDivElement>): void => {
+		this.focusThumb();
 		this.readMousePosition(event);
 		window.addEventListener(Event.MouseMove, this.readMousePosition);
 		window.addEventListener(Event.MouseUp, this.removeListeners);
-		setTimeout(this.focusThumb); // Doesn't focus without timeout.
 		event.preventDefault();
 	};
 
@@ -79,14 +93,8 @@ export class HueSlider extends Component<Props> {
 		if (this.gradientDiv) {
 			const rect = this.gradientDiv.getBoundingClientRect();
 			const y = event.clientY - rect.top;
-			const value = (1 - y / (rect.height - 1)) * maxHue;
-			this.triggerChange(value);
-		}
-	}
-
-	private focusThumb = (): void => {
-		if (this.thumbDiv) {
-			this.thumbDiv.focus();
+			const hue = (1 - y / this.maxThumbY) * maxHue;
+			this.triggerChange(hue);
 		}
 	};
 
@@ -96,36 +104,37 @@ export class HueSlider extends Component<Props> {
 	};
 
 	private handleKeyDown = (event: KeyboardEvent<HTMLDivElement>): void => {
-		let value = this.props.value;
+		let {hue} = this.props;
 		switch (event.key) {
 			case Key.Home:
-				value = maxHue;
+				hue = maxHue;
 				break;
 			case Key.End:
-				value = minHue;
+				hue = minHue;
 				break;
 			case Key.PageUp:
-				value += 10;
+				hue += 10;
 				break;
 			case Key.PageDown:
-				value -= 10;
+				hue -= 10;
 				break;
 			case Key.Up:
 			case Key.Right:
-				value++;
+				hue++;
 				break;
 			case Key.Down:
 			case Key.Left:
-				value--;
+				hue--;
 				break;
 			default:
 				return;
 		}
 
-		this.triggerChange(value);
+		this.triggerChange(hue);
+		event.preventDefault();
 	};
 
-	private triggerChange(value: number): void {
-		this.props.onChange(clampInt(value, minHue, maxHue));
+	private triggerChange(hue: number): void {
+		this.props.onChange(clamp(hue, minHue, maxHue));
 	}
 }

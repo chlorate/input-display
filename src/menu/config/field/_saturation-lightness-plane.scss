@@ -1,0 +1,21 @@
+.saturation-lightness-plane {
+	display: inline-block;
+	vertical-align: bottom;
+}
+
+.saturation-lightness-plane-gradient {
+	position: relative;
+	background-image: linear-gradient(rgba(0, 0, 0, 0), #000),
+		linear-gradient(to left, rgba(255, 255, 255, 0), #fff);
+	width: 180px;
+	height: 180px;
+}
+
+.saturation-lightness-plane-point {
+	position: absolute;
+	margin: -3px 0 0 -3px;
+	border-radius: 50%;
+	border-color: $body-color;
+	width: 7px;
+	height: 7px;
+}

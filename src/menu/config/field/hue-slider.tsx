@@ -25,7 +25,7 @@ export class HueSlider extends Component<Props> {
 	}
 
 	public render = (): VNode => (
-		<div className="hue-slider border-outline">
+		<div className="hue-slider border-outline mr-2">
 			<div
 				ref={this.setGradientDiv}
 				className="hue-slider-gradient"

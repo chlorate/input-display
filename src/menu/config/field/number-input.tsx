@@ -5,6 +5,7 @@ import {action, observable} from "mobx";
 import {clamp} from "../../../math/util";
 
 interface Props {
+	className?: string;
 	id?: string;
 	value: number;
 	min: number;
@@ -23,9 +24,10 @@ export class NumberInput extends Component<Props> {
 	private dirtyValue?: string;
 
 	public render(): VNode {
-		const {id, min, max, defaultValue, describedBy} = this.props;
+		const {className, id, min, max, defaultValue, describedBy} = this.props;
 		return (
 			<Input
+				className={className}
 				id={id}
 				type="number"
 				value={this.value}

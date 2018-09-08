@@ -33,6 +33,7 @@ export class MashSpeedThresholdInput extends Component {
 			</Label>
 			<AutoWidthInputGroup>
 				<NumberInput
+					className="mash-speed-threshold-input"
 					id="config-mash-speed-threshold"
 					value={this.injected.config.mashSpeedThreshold}
 					min={minMashSpeedThreshold}

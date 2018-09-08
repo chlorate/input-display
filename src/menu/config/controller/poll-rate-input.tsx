@@ -31,6 +31,7 @@ export class PollRateInput extends Component {
 			<Label for="config-poll-rate">Poll rate</Label>
 			<AutoWidthInputGroup>
 				<NumberInput
+					className="poll-rate-input"
 					id="config-poll-rate"
 					value={this.injected.config.pollRate}
 					min={minPollRate}

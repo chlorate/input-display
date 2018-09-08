@@ -30,7 +30,8 @@ clean-deps:
 
 .PHONY: upgrade
 upgrade:
-	$(NPM_CHECK) --update --save-exact
+	# inferno-mobx requires mobx v4
+	$(NPM_CHECK) --update --ignore mobx --save-exact
 
 node_modules: package.json
 	npm install

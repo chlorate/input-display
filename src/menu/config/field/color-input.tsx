@@ -2,9 +2,9 @@ import {ChangeEvent, Component, FocusEvent, MouseEvent, VNode} from "inferno";
 import {Manager, Target} from "inferno-popper";
 import {observer} from "inferno-mobx";
 import {action, observable} from "mobx";
-import {AutoWidthInputGroup, ColorPicker} from "../config/field";
-import {tempEnsureColor as ensureColor} from "../../css/util";
-import {Event} from "../../event";
+import {AutoWidthInputGroup, ColorPicker} from ".";
+import {tempEnsureColor as ensureColor} from "../../../css/util";
+import {Event} from "../../../event";
 
 import {
 	Input,

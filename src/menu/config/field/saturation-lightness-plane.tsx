@@ -119,8 +119,8 @@ export class SaturationLightnessPlane extends Component<Props> {
 	private get valueText(): string {
 		const {saturation, lightness} = this.props;
 		return (
-			`${saturation.toFixed(1)}% saturation, ` +
-			`${lightness.toFixed(1)}% lightness`
+			`${Math.floor(saturation)}% saturation, ` +
+			`${Math.floor(lightness)}% lightness`
 		);
 	}
 

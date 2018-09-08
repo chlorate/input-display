@@ -41,7 +41,7 @@ export class HueSlider extends Component<Props> {
 					aria-orientation="vertical"
 					aria-valuemin={minHue}
 					aria-valuemax={maxHue}
-					aria-valuenow={this.props.hue}
+					aria-valuenow={Math.floor(this.props.hue)}
 					onKeyDown={this.handleKeyDown}
 				/>
 			</div>

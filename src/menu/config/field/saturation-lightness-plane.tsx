@@ -38,13 +38,13 @@ export class SaturationLightnessPlane extends Component<Props> {
 			<div
 				ref={this.setGradientDiv}
 				className="saturation-lightness-plane-gradient"
-				style={{backgroundColor: this.hueColor}}
+				style={`background-color: ${this.hueColor};`}
 				onMouseDown={this.handleMouseDown}
 			>
 				<div
 					ref={this.setPointDiv}
 					className="saturation-lightness-plane-point border-outline"
-					style={{left: this.pointX, top: this.pointY}}
+					style={`left: ${this.pointX}; top: ${this.pointY};`}
 					tabIndex={0}
 					aria-label="Saturation and lightness"
 					aria-valuetext={this.valueText}

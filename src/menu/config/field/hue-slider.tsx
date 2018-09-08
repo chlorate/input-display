@@ -34,7 +34,7 @@ export class HueSlider extends Component<Props> {
 				<div
 					ref={this.setThumbDiv}
 					className="hue-slider-thumb border-outline"
-					style={{top: this.thumbY}}
+					style={`top: ${this.thumbY};`}
 					tabIndex={0}
 					role="slider"
 					aria-label="Hue"

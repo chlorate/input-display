@@ -70,7 +70,7 @@ export class ColorInput extends Component<Props> {
 						<InputGroupAddon addonType="append" id={targetId}>
 							<InputGroupText
 								className="color-input-preview"
-								style={{backgroundColor: color}}
+								style={`background-color: ${color};`}
 							/>
 						</InputGroupAddon>
 					</AutoWidthInputGroup>

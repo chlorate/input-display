@@ -54,7 +54,7 @@ export class ColorPicker extends Component<Props> {
 
 	@action
 	private handleChangeHex(): void {
-		const hex = this.props.color || defaultColor;
+		const hex = ensureColor(this.props.color) || defaultColor;
 		[this.hue, this.saturation, this.lightness] = convert.hex.hsl(hex);
 	}
 
@@ -76,7 +76,7 @@ export class ColorPicker extends Component<Props> {
 
 	private triggerChange(): void {
 		const hex = ensureColor(
-			`#${convert.hsl.hex(this.hue, this.saturation, this.lightness)}`,
+			convert.hsl.hex(this.hue, this.saturation, this.lightness),
 		);
 
 		this.lastHex = hex;

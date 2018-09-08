@@ -10,10 +10,15 @@ export function ensureColor(color: string, defaultColor: string): string {
 }
 
 export function tempEnsureColor(color?: string): string | undefined {
-	if (!color || !/^#[\da-f]{6}$/i.test(color)) {
+	if (!color) {
 		return undefined;
 	}
-	return color.toLowerCase();
+
+	color = color.replace(/^#?([\da-f])([\da-f])([\da-f])$/i, "$1$1$2$2$3$3");
+	if (color[0] !== "#") {
+		color = `#${color}`;
+	}
+	return /^#[\da-f]{6}$/i.test(color) ? color.toLowerCase() : undefined;
 }
 
 /**

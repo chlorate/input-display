@@ -1,5 +1,5 @@
 KARMA=node_modules/.bin/karma
-NCU=node_modules/.bin/ncu
+NPM_CHECK=node_modules/.bin/npm-check
 WEBPACK=node_modules/.bin/webpack
 WEBPACK_DEV_SERVER=node_modules/.bin/webpack-dev-server
 
@@ -30,8 +30,7 @@ clean-deps:
 
 .PHONY: upgrade
 upgrade:
-	# Waiting on inferno-mobx to use latest mobx
-	$(NCU) --upgrade --reject mobx
+	$(NPM_CHECK) --update --save-exact
 
 node_modules: package.json
 	npm install

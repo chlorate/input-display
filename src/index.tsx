@@ -3,7 +3,7 @@ import {configure} from "mobx";
 import {App} from "./app";
 
 configure({
-	enforceActions: true,
+	enforceActions: "observed",
 });
 
 render(<App />, document.getElementsByTagName("main")[0]);

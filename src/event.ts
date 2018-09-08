@@ -2,6 +2,8 @@
  * Names of browser and custom events.
  */
 export enum Event {
+	FocusIn = "focusin",
+	MouseDown = "mousedown",
 	MouseMove = "mousemove",
 	MouseUp = "mouseup",
 

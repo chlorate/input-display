@@ -3,11 +3,13 @@ import {Component, VNode} from "inferno";
 import {observer} from "inferno-mobx";
 import {action, observable} from "mobx";
 import {HueSlider, SaturationLightnessPlane} from ".";
-import {ensureColor} from "../../../css";
+import {tempEnsureColor as ensureColor} from "../../../css";
+
+const defaultColor = "#000000";
 
 interface Props {
-	color: string;
-	onChange: (color: string) => void;
+	color?: string;
+	onChange: (color?: string) => void;
 }
 
 /**
@@ -52,7 +54,7 @@ export class ColorPicker extends Component<Props> {
 
 	@action
 	private handleChangeHex(): void {
-		const hex = this.props.color;
+		const hex = this.props.color || defaultColor;
 		[this.hue, this.saturation, this.lightness] = convert.hex.hsl(hex);
 	}
 
@@ -75,7 +77,6 @@ export class ColorPicker extends Component<Props> {
 	private triggerChange(): void {
 		const hex = ensureColor(
 			`#${convert.hsl.hex(this.hue, this.saturation, this.lightness)}`,
-			"#000000",
 		);
 
 		this.lastHex = hex;

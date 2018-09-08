@@ -3,7 +3,7 @@ import {Manager, Target} from "inferno-popper";
 import {observer} from "inferno-mobx";
 import {action, observable} from "mobx";
 import {AutoWidthInputGroup, ColorPicker} from "../config/field";
-import {ensureColor} from "../../css/util";
+import {tempEnsureColor as ensureColor} from "../../css/util";
 import {Event} from "../../event";
 
 import {
@@ -16,9 +16,9 @@ import {
 
 interface Props {
 	id?: string;
-	value: string;
-	defaultValue: string;
-	onChange: (color: string) => void;
+	color?: string;
+	placeholder: string;
+	onChange: (color?: string) => void;
 }
 
 /**
@@ -32,7 +32,7 @@ export class ColorInput extends Component<Props> {
 	private input: HTMLInputElement | null = null;
 
 	@observable
-	private dirtyValue?: string;
+	private dirtyColor?: string;
 
 	@observable
 	private opened: boolean = false;
@@ -48,7 +48,7 @@ export class ColorInput extends Component<Props> {
 	}
 
 	public render(): VNode {
-		const {id, value, defaultValue} = this.props;
+		const {id, color, placeholder} = this.props;
 		const targetId = `${id}-target`;
 		return (
 			<Manager>
@@ -58,8 +58,8 @@ export class ColorInput extends Component<Props> {
 							innerRef={this.setInput}
 							className="color-input"
 							id={id}
-							value={this.value}
-							placeholder={defaultValue}
+							value={this.color}
+							placeholder={placeholder}
 							maxLength={7}
 							required
 							spellCheck={false}
@@ -70,7 +70,7 @@ export class ColorInput extends Component<Props> {
 						<InputGroupAddon addonType="append" id={targetId}>
 							<InputGroupText
 								className="color-input-preview"
-								style={{backgroundColor: value}}
+								style={{backgroundColor: color}}
 							/>
 						</InputGroupAddon>
 					</AutoWidthInputGroup>
@@ -81,7 +81,7 @@ export class ColorInput extends Component<Props> {
 					>
 						<PopoverBody>
 							<ColorPicker
-								color={this.value}
+								color={this.color}
 								onChange={this.triggerChange}
 							/>
 						</PopoverBody>
@@ -99,11 +99,11 @@ export class ColorInput extends Component<Props> {
 		this.input = input;
 	}
 
-	private get value(): string {
-		if (this.dirtyValue !== undefined) {
-			return this.dirtyValue;
+	private get color(): string | undefined {
+		if (this.dirtyColor !== undefined) {
+			return this.dirtyColor;
 		}
-		return this.props.value;
+		return this.props.color;
 	}
 
 	@action
@@ -129,16 +129,16 @@ export class ColorInput extends Component<Props> {
 
 	@action
 	private handleInput = (event: ChangeEvent<HTMLInputElement>): void => {
-		this.dirtyValue = event.target.value;
-		this.triggerChange(this.dirtyValue);
+		this.dirtyColor = event.target.value;
+		this.triggerChange(this.dirtyColor);
 	};
 
 	@action
 	private handleBlur = (): void => {
-		this.dirtyValue = undefined;
+		this.dirtyColor = undefined;
 	};
 
-	private triggerChange = (color: string): void => {
-		this.props.onChange(ensureColor(color, this.props.defaultValue));
+	private triggerChange = (color?: string): void => {
+		this.props.onChange(ensureColor(color));
 	};
 }

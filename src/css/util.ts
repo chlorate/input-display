@@ -9,6 +9,13 @@ export function ensureColor(color: string, defaultColor: string): string {
 	return color.toLowerCase();
 }
 
+export function tempEnsureColor(color?: string): string | undefined {
+	if (!color || !/^#[\da-f]{6}$/i.test(color)) {
+		return undefined;
+	}
+	return color.toLowerCase();
+}
+
 /**
  * Wraps some string value in quotes.
  */

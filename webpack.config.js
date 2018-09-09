@@ -8,7 +8,7 @@ const TslintWebpackPlugin = require("tslint-webpack-plugin");
 const config = {
 	entry: {
 		app: "./src/index.tsx",
-		styles: "bootstrap-loader",
+		styles: "./src/index.scss",
 	},
 	resolve: {
 		extensions: [".tsx", ".ts", ".js"],
@@ -23,6 +23,10 @@ const config = {
 				test: /\.js$/,
 				exclude: /node_modules/,
 				use: "babel-loader",
+			},
+			{
+				test: /\.scss$/,
+				use: [MiniCssExtractPlugin.loader, "css-loader", "sass-loader"],
 			},
 			{
 				test: /\.tsx?$/,

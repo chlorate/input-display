@@ -1,43 +1,22 @@
-main {
-	height: 100%;
-}
-
-.scroll {
-	margin-bottom: $spacer;
-	overflow: auto;
-
-	> :last-child {
-		margin-bottom: 0;
-	}
-}
-
-.border-outline {
-	border: 1px solid $border-color;
-	box-shadow: 0 0 0 1px #000, inset 0 0 0 1px #000;
-	padding: 1px;
-
-	&:focus {
-		outline: none;
-		border-color: $input-focus-border-color;
-	}
-}
-
-.form-row-collapse-margin {
-	// Fix margin not collapsing after a form row.
-	margin-bottom: -$form-group-margin-bottom;
-}
-
-@import 'display/display';
-@import 'error/error-alert-list';
-@import 'menu/config/config';
-@import 'menu/config/controller/mash-speed-threshold-input';
-@import 'menu/config/controller/poll-rate-input';
-@import 'menu/config/field/axis-select';
-@import 'menu/config/field/color-input';
-@import 'menu/config/field/hue-slider';
-@import 'menu/config/field/saturation-lightness-plane';
-@import 'menu/controller/axis-table';
-@import 'menu/controller/button-table';
-@import 'menu/controller/device-info';
-@import 'menu/field/field';
-@import 'menu/menu';
+@import "~bootstrap-theme/src/pre-bootstrap";
+@import "~bootstrap/scss/functions";
+@import "~bootstrap/scss/variables";
+@import "~bootstrap/scss/mixins";
+@import "~bootstrap/scss/root";
+@import "~bootstrap/scss/reboot";
+@import "~bootstrap/scss/type";
+@import "~bootstrap/scss/grid";
+@import "~bootstrap/scss/tables";
+@import "~bootstrap/scss/forms";
+@import "~bootstrap/scss/buttons";
+@import "~bootstrap/scss/button-group";
+@import "~bootstrap/scss/input-group";
+@import "~bootstrap/scss/nav";
+@import "~bootstrap/scss/card";
+@import "~bootstrap/scss/alert";
+@import "~bootstrap/scss/list-group";
+@import "~bootstrap/scss/close";
+@import "~bootstrap/scss/popover";
+@import "~bootstrap/scss/utilities";
+@import "~bootstrap-theme/src/post-bootstrap";
+@import "app";

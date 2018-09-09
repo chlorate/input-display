@@ -52,7 +52,7 @@ export class ConfigTab extends Component {
 				<SaveAlert url={this.saveUrl} onClose={this.clear} />
 				<ExportAlert json={this.exportedJson} onClose={this.clear} />
 			</CardBody>
-			<ListGroup flush>{this.items}</ListGroup>
+			<ListGroup tag="div" flush>{this.items}</ListGroup>
 		</div>
 	);
 

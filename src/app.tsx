@@ -6,7 +6,7 @@ import {observable} from "mobx";
 import {Config} from "./config/config";
 import {Controller} from "./controller/controller";
 import {DisplayComponent} from "./display/display.component";
-import {StylesheetComponent} from "./display/stylesheet.component";
+import {DisplayStylesheet} from "./display/stylesheet.component";
 import {ErrorAlertList, ErrorMessage} from "./error";
 import {supportsGamepadApi} from "./gamepad/service";
 import {Menu} from "./menu";
@@ -81,7 +81,7 @@ export class App extends Component {
 				<section className="d-flex justify-content-between h-100">
 					<div className="display">
 						<DisplayComponent />
-						<StylesheetComponent />
+						<DisplayStylesheet />
 					</div>
 					<div className="menu">
 						<ErrorAlertList />

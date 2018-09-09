@@ -36,7 +36,7 @@ export class PollRateInput extends Component {
 					value={this.injected.config.pollRate}
 					min={minPollRate}
 					max={maxPollRate}
-					defaultValue={defaultPollRate}
+					placeholder={defaultPollRate}
 					describedBy="config-poll-rate-help"
 					onChange={this.handleChange}
 				/>
@@ -49,7 +49,10 @@ export class PollRateInput extends Component {
 	);
 
 	@action
-	private handleChange = (value: number): void => {
+	private handleChange = (value?: number): void => {
+		if (value === undefined) {
+			value = defaultPollRate;
+		}
 		this.injected.config.pollRate = value;
 	};
 }

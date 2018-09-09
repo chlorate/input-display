@@ -7,12 +7,12 @@ import {clamp} from "../../../math/util";
 interface Props {
 	className?: string;
 	id?: string;
-	value: number;
+	value?: number;
 	min: number;
 	max: number;
-	defaultValue: number;
+	placeholder: number;
 	describedBy?: string;
-	onChange: (value: number) => void;
+	onChange: (value?: number) => void;
 }
 
 /**
@@ -24,7 +24,7 @@ export class NumberInput extends Component<Props> {
 	private dirtyValue?: string;
 
 	public render(): VNode {
-		const {className, id, min, max, defaultValue, describedBy} = this.props;
+		const {className, id, min, max, describedBy} = this.props;
 		return (
 			<Input
 				className={className}
@@ -33,7 +33,7 @@ export class NumberInput extends Component<Props> {
 				value={this.value}
 				min={`${min}`}
 				max={`${max}`}
-				placeholder={`${defaultValue}`}
+				placeholder={this.placeholder}
 				required
 				aria-describedby={describedBy}
 				onBlur={this.handleBlur}
@@ -42,11 +42,19 @@ export class NumberInput extends Component<Props> {
 		);
 	}
 
-	private get value(): string {
+	private get value(): string | undefined {
 		if (this.dirtyValue !== undefined) {
 			return this.dirtyValue;
 		}
-		return `${this.props.value}`;
+		if (this.props.value !== undefined) {
+			return `${this.props.value}`;
+		}
+	}
+
+	private get placeholder(): string | undefined {
+		if (this.props.placeholder !== undefined) {
+			return `${this.props.placeholder}`;
+		}
 	}
 
 	@action
@@ -56,12 +64,12 @@ export class NumberInput extends Component<Props> {
 
 	@action
 	private handleInput = (event: ChangeEvent<HTMLInputElement>): void => {
-		const {min, max, defaultValue, onChange} = this.props;
+		const {min, max, onChange} = this.props;
 		const {value: dirtyValue} = event.target;
 
 		const value = parseFloat(dirtyValue);
 		if (isNaN(value)) {
-			onChange(defaultValue);
+			onChange(undefined);
 		} else {
 			onChange(clamp(value, min, max));
 		}

@@ -38,7 +38,7 @@ export class MashSpeedThresholdInput extends Component {
 					value={this.injected.config.mashSpeedThreshold}
 					min={minMashSpeedThreshold}
 					max={maxMashSpeedThreshold}
-					defaultValue={defaultMashSpeedThreshold}
+					placeholder={defaultMashSpeedThreshold}
 					describedBy="config-mash-speed-threshold-help"
 					onChange={this.handleChange}
 				/>
@@ -54,7 +54,10 @@ export class MashSpeedThresholdInput extends Component {
 	);
 
 	@action
-	private handleChange = (value: number): void => {
+	private handleChange = (value?: number): void => {
+		if (value === undefined) {
+			value = defaultMashSpeedThreshold;
+		}
 		this.injected.config.mashSpeedThreshold = value;
 	};
 }

@@ -1,7 +1,7 @@
 import {Component, VNode} from "inferno";
 import {FormGroup, FormText, InputGroupAddon, Label} from "inferno-bootstrap";
-import {action} from "mobx";
 import {inject, observer} from "inferno-mobx";
+import {action} from "mobx";
 import {Store} from "../../../storage/store";
 import {AutoWidthInputGroup, NumberInput} from "../field";
 

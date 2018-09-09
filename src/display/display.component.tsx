@@ -1,3 +1,50 @@
+import {Component, VNode} from "inferno";
+import {inject, observer} from "inferno-mobx";
+import {Config} from "../config/config";
+import {Store} from "../storage/store";
+
+interface InjectedProps {
+	config: Config;
+}
+
+/**
+ * Draws the entire input display.
+ *
+ * This also implements drag-and-drop. When left-click is held on
+ * a ControlGroupComponent, its control is selected and can be moved with the
+ * mouse until the mouse button is released or the cursor leaves this component.
+ *
+ * When a control is selected, the arrow keys will also move the control by
+ * a pixel. Clicking outside of a ControlGroupComponent will deselect the
+ * current control.
+ */
+@inject(Store.Config)
+@observer
+export class Display extends Component {
+	private get injected(): InjectedProps {
+		return this.props as InjectedProps;
+	}
+
+	public render(): VNode {
+		const {config} = this.injected;
+		return (
+			<svg
+				className={this.className}
+				width={config.displayWidth}
+				height={config.displayHeight}
+				tabIndex={0}
+			/>
+		);
+	}
+
+	private get className(): string | undefined {
+		if (this.injected.config.displayOutline) {
+			return "display-outline";
+		}
+	}
+}
+
+/*
 import {EventEmitter} from "events";
 import {linkEvent} from "inferno";
 import Component from "inferno-component";
@@ -40,17 +87,6 @@ interface Item {
 	control: Control;
 }
 
-/**
- * Draws the entire input display.
- *
- * This also implements drag-and-drop. When left-click is held on
- * a ControlGroupComponent, its control is selected and can be moved with the
- * mouse until the mouse button is released or the cursor leaves this component.
- *
- * When a control is selected, the arrow keys will also move the control by
- * a pixel. Clicking outside of a ControlGroupComponent will deselect the
- * current control.
- */
 @inject(Store.Config, Store.Controller, Store.Events)
 @observer
 export class DisplayComponent extends Component {
@@ -124,10 +160,8 @@ export class DisplayComponent extends Component {
 		);
 	}
 
-	/**
 	 * Returns a number representing the z-index of a control:
 	 * Pressed + mashing > Pressed > Mashing > Unpressed
-	 */
 	private zIndex(control: Control): number {
 		if (!control.button) {
 			return 0;
@@ -185,3 +219,4 @@ const handleKeyDown = action((component: DisplayComponent, event): void => {
 		}
 	}
 });
+*/

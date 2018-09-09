@@ -5,8 +5,7 @@ import {Provider} from "inferno-mobx";
 import {observable} from "mobx";
 import {Config} from "./config/config";
 import {Controller} from "./controller/controller";
-import {DisplayStylesheet} from "./display";
-import {DisplayComponent} from "./display/display.component";
+import {Display, DisplayStylesheet} from "./display";
 import {ErrorAlertList, ErrorMessage} from "./error";
 import {supportsGamepadApi} from "./gamepad/service";
 import {Menu} from "./menu";
@@ -80,7 +79,7 @@ export class App extends Component {
 			>
 				<section className="d-flex justify-content-between h-100">
 					<div className="display">
-						<DisplayComponent />
+						<Display />
 						<DisplayStylesheet />
 					</div>
 					<div className="menu">

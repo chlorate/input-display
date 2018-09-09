@@ -1,4 +1,4 @@
-import convert from "color-convert";
+import * as ColorConvert from "color-convert";
 import {Component, VNode} from "inferno";
 import {observer} from "inferno-mobx";
 import {action, observable} from "mobx";
@@ -55,7 +55,7 @@ export class ColorPicker extends Component<Props> {
 	@action
 	private handleChangeHex(): void {
 		const hex = ensureColor(this.props.color) || defaultColor;
-		[this.hue, this.saturation, this.lightness] = convert.hex.hsl(hex);
+		[this.hue, this.saturation, this.lightness] = ColorConvert.hex.hsl(hex);
 	}
 
 	@action
@@ -76,7 +76,7 @@ export class ColorPicker extends Component<Props> {
 
 	private triggerChange(): void {
 		const hex = ensureColor(
-			convert.hsl.hex(this.hue, this.saturation, this.lightness),
+			ColorConvert.hsl.hex([this.hue, this.saturation, this.lightness]),
 		);
 
 		this.lastHex = hex;

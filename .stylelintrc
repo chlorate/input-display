@@ -1,6 +1,6 @@
 extends:
   - stylelint-config-sass-guidelines
   - stylelint-config-concentric
+  - stylelint-config-prettier
 rules:
-  indentation: tab
   order/properties-alphabetical-order: null

@@ -1,11 +1,14 @@
 {
-	"extends": [
-		"tslint:recommended"
-	],
+	"extends": ["tslint:recommended", "tslint-config-prettier"],
 	"rules": {
-		"indent": [true, "tabs", 4],
 		"interface-name": [false],
 		"object-literal-sort-keys": [false],
-		"variable-name": [true, "ban-keywords", "check-format", "allow-leading-underscore", "allow-pascal-case"]
+		"variable-name": [
+			true,
+			"ban-keywords",
+			"check-format",
+			"allow-leading-underscore",
+			"allow-pascal-case"
+		]
 	}
 }

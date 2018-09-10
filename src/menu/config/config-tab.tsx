@@ -52,7 +52,9 @@ export class ConfigTab extends Component {
 				<SaveAlert url={this.saveUrl} onClose={this.clear} />
 				<ExportAlert json={this.exportedJson} onClose={this.clear} />
 			</CardBody>
-			<ListGroup tag="div" flush>{this.items}</ListGroup>
+			<ListGroup tag="div" flush>
+				{this.items}
+			</ListGroup>
 		</div>
 	);
 
@@ -62,8 +64,8 @@ export class ConfigTab extends Component {
 				to={link.path}
 				className="list-group-item list-group-item-action"
 			>
-				<h2 class="h4 m-0">{link.name}</h2>
-				<small class="text-body">{link.description}</small>
+				<h2 class="h4 mb-1">{link.name}</h2>
+				<div class="small text-body">{link.description}</div>
 			</Link>
 		));
 	}

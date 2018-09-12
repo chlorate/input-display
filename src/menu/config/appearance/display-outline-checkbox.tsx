@@ -1,4 +1,4 @@
-import {MouseEvent, Component, VNode} from "inferno";
+import {Component, MouseEvent, VNode} from "inferno";
 import {FormGroup, FormText, Input, Label} from "inferno-bootstrap";
 import {inject, observer} from "inferno-mobx";
 import {action} from "mobx";

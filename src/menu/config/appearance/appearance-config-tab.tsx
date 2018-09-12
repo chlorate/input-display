@@ -1,6 +1,6 @@
 import {VNode} from "inferno";
 import {CardBody} from "inferno-bootstrap";
-import {BackgroundColorInput} from ".";
+import {BackgroundColorInput, DisplaySizeInputs} from ".";
 import {BackHeading} from "..";
 
 /**
@@ -13,6 +13,7 @@ export const AppearanceConfigTab = (): VNode => (
 		<CardBody>
 			<h3 className="h4">Display</h3>
 			<BackgroundColorInput />
+			<DisplaySizeInputs />
 
 			<h3 className="h4 mt-4">Control colors</h3>
 

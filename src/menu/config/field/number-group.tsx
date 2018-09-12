@@ -14,7 +14,7 @@ interface Props {
 	suffix: string;
 	describedBy?: string;
 	onChange: (value?: number) => void;
-	children: InfernoChildren;
+	children?: InfernoChildren;
 }
 
 /**

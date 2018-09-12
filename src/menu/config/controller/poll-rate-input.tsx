@@ -1,9 +1,8 @@
 import {Component, VNode} from "inferno";
-import {FormGroup, FormText, InputGroupAddon, Label} from "inferno-bootstrap";
 import {inject, observer} from "inferno-mobx";
 import {action} from "mobx";
 import {Store} from "../../../storage/store";
-import {AutoWidthInputGroup, NumberInput} from "../field";
+import {NumberGroup} from "../field";
 
 import {
 	Config,
@@ -27,32 +26,23 @@ export class PollRateInput extends Component {
 	}
 
 	public render = (): VNode => (
-		<FormGroup>
-			<Label for="config-poll-rate">Poll rate</Label>
-			<AutoWidthInputGroup>
-				<NumberInput
-					className="poll-rate-input"
-					id="config-poll-rate"
-					value={this.injected.config.pollRate}
-					min={minPollRate}
-					max={maxPollRate}
-					placeholder={defaultPollRate}
-					describedBy="config-poll-rate-help"
-					onChange={this.handleChange}
-				/>
-				<InputGroupAddon addonType="append">Hz</InputGroupAddon>
-			</AutoWidthInputGroup>
-			<FormText id="config-poll-rate-help">
-				Inputs will be read this many times per second.
-			</FormText>
-		</FormGroup>
+		<NumberGroup
+			inputClassName="poll-rate-input"
+			id="config-poll-rate"
+			label="Poll rate"
+			value={this.injected.config.pollRate}
+			min={minPollRate}
+			max={maxPollRate}
+			placeholder={defaultPollRate}
+			suffix="Hz"
+			onChange={this.handleChange}
+		>
+			Inputs will be read this many times per second.
+		</NumberGroup>
 	);
 
 	@action
 	private handleChange = (value?: number): void => {
-		if (value === undefined) {
-			value = defaultPollRate;
-		}
-		this.injected.config.pollRate = value;
+		this.injected.config.pollRate = value || defaultPollRate;
 	};
 }

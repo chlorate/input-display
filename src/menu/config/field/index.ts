@@ -5,5 +5,6 @@ export * from "./axis-select";
 export * from "./color-input";
 export * from "./color-picker";
 export * from "./hue-slider";
+export * from "./number-group";
 export * from "./number-input";
 export * from "./saturation-lightness-plane";

@@ -1,9 +1,8 @@
 import {Component, VNode} from "inferno";
-import {FormGroup, FormText, InputGroupAddon, Label} from "inferno-bootstrap";
 import {inject, observer} from "inferno-mobx";
 import {action} from "mobx";
 import {Store} from "../../../storage/store";
-import {AutoWidthInputGroup, NumberInput} from "../field";
+import {NumberGroup} from "../field";
 
 import {
 	Config,
@@ -27,37 +26,28 @@ export class MashSpeedThresholdInput extends Component {
 	}
 
 	public render = (): VNode => (
-		<FormGroup className="m-0">
-			<Label for="config-mash-speed-threshold">
-				Mash speed threshold
-			</Label>
-			<AutoWidthInputGroup>
-				<NumberInput
-					className="mash-speed-threshold-input"
-					id="config-mash-speed-threshold"
-					value={this.injected.config.mashSpeedThreshold}
-					min={minMashSpeedThreshold}
-					max={maxMashSpeedThreshold}
-					placeholder={defaultMashSpeedThreshold}
-					describedBy="config-mash-speed-threshold-help"
-					onChange={this.handleChange}
-				/>
-				<InputGroupAddon addonType="append">Hz</InputGroupAddon>
-			</AutoWidthInputGroup>
-			<FormText id="config-mash-speed-threshold-help">
-				If you press a button at least this many times per second, the
-				button will enter a mashing state. While mashing, a button can
-				be shown with different colors and with a label that displays
-				the current mash speed.
-			</FormText>
-		</FormGroup>
+		<NumberGroup
+			className="m-0"
+			inputClassName="mash-speed-threshold-input"
+			id="config-mash-speed-threshold"
+			label="Mash speed threshold"
+			value={this.injected.config.mashSpeedThreshold}
+			min={minMashSpeedThreshold}
+			max={maxMashSpeedThreshold}
+			placeholder={defaultMashSpeedThreshold}
+			suffix="Hz"
+			onChange={this.handleChange}
+		>
+			If you press a button at least this many times per second, the
+			button will enter a mashing state. While mashing, a button can be
+			shown with different colors and with a label that displays the
+			current mash speed.
+		</NumberGroup>
 	);
 
 	@action
 	private handleChange = (value?: number): void => {
-		if (value === undefined) {
-			value = defaultMashSpeedThreshold;
-		}
-		this.injected.config.mashSpeedThreshold = value;
+		this.injected.config.mashSpeedThreshold =
+			value || defaultMashSpeedThreshold;
 	};
 }

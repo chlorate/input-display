@@ -6,7 +6,7 @@ import {clamp} from "../../../math/util";
 
 interface Props {
 	className?: string;
-	id?: string;
+	id: string;
 	value?: number;
 	min: number;
 	max: number;

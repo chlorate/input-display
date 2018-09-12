@@ -1,7 +1,12 @@
 import {VNode} from "inferno";
 import {CardBody} from "inferno-bootstrap";
-import {BackgroundColorInput, DisplaySizeInputs} from ".";
 import {BackHeading} from "..";
+
+import {
+	BackgroundColorInput,
+	DisplayOutlineCheckbox,
+	DisplaySizeInputs,
+} from ".";
 
 /**
  * The contents of the Appearance screen of the Config tab. Provides fields
@@ -14,6 +19,7 @@ export const AppearanceConfigTab = (): VNode => (
 			<h3 className="h4">Display</h3>
 			<BackgroundColorInput />
 			<DisplaySizeInputs />
+			<DisplayOutlineCheckbox />
 
 			<h3 className="h4 mt-4">Control colors</h3>
 

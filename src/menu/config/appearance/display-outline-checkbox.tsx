@@ -22,11 +22,11 @@ export class DisplayOutlineCheckbox extends Component {
 				<Input
 					id="config-display-outline"
 					type="checkbox"
-					value={this.injected.config.displayOutline}
+					checked={this.injected.config.displayOutline}
 					aria-describedby="config-display-outline-help"
 					onClick={this.handleClick}
 				/>
-				<Label className="m-0" for="config-display-outline">
+				<Label check for="config-display-outline">
 					Show outline
 				</Label>
 			</FormGroup>

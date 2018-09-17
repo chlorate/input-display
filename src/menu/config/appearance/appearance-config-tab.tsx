@@ -1,12 +1,12 @@
 import {VNode} from "inferno";
 import {CardBody} from "inferno-bootstrap";
 import {BackHeading} from "..";
-import {LabelFontInputs} from "../font-config.component";
 
 import {
 	BackgroundColorInput,
 	DisplayOutlineCheckbox,
 	DisplaySizeInputs,
+	LabelFontInputs,
 } from ".";
 
 /**

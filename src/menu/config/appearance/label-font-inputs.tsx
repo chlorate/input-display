@@ -2,8 +2,8 @@ import {Component, VNode} from "inferno";
 import {Col, FormGroup, Input, Label} from "inferno-bootstrap";
 import {inject, observer} from "inferno-mobx";
 import {action} from "mobx";
-import {NumberGroup, TextGroup} from "./field";
-import {Store} from "../../storage/store";
+import {NumberGroup, TextGroup} from "../field";
+import {Store} from "../../../storage/store";
 
 import {
 	Config,
@@ -11,7 +11,7 @@ import {
 	maxFontNameLength,
 	maxFontSize,
 	minFontSize,
-} from "../../config/config";
+} from "../../../config/config";
 
 interface InjectedProps {
 	config: Config;

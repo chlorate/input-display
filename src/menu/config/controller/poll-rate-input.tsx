@@ -27,7 +27,7 @@ export class PollRateInput extends Component {
 
 	public render = (): VNode => (
 		<NumberGroup
-			inputClassName="poll-rate-input"
+			inputClassName="number-input-3"
 			id="config-poll-rate"
 			label="Poll rate"
 			value={this.injected.config.pollRate}

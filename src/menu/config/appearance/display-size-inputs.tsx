@@ -32,7 +32,7 @@ export class DisplaySizeInputs extends Component {
 			<div class="form-row">
 				<Col xs="auto">
 					<NumberGroup
-						inputClassName="display-size-input"
+						inputClassName="number-input-4"
 						id="config-display-width"
 						label="Width"
 						value={config.displayWidth}
@@ -45,7 +45,7 @@ export class DisplaySizeInputs extends Component {
 				</Col>
 				<Col xs="auto">
 					<NumberGroup
-						inputClassName="display-size-input"
+						inputClassName="number-input-4"
 						id="config-display-height"
 						label="Height"
 						value={config.displayHeight}

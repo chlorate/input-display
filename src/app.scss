@@ -27,18 +27,16 @@ main {
 	margin-bottom: -$form-group-margin-bottom;
 }
 
-@import 'display/display';
-@import 'error/error-alert-list';
-@import 'menu/config/appearance/display-size-inputs';
-@import 'menu/config/config';
-@import 'menu/config/controller/mash-speed-threshold-input';
-@import 'menu/config/controller/poll-rate-input';
-@import 'menu/config/field/axis-select';
-@import 'menu/config/field/color-input';
-@import 'menu/config/field/hue-slider';
-@import 'menu/config/field/saturation-lightness-plane';
-@import 'menu/controller/axis-table';
-@import 'menu/controller/button-table';
-@import 'menu/controller/device-info';
-@import 'menu/field/field';
-@import 'menu/menu';
+@import "display/display";
+@import "error/error-alert-list";
+@import "menu/config/config";
+@import "menu/config/field/axis-select";
+@import "menu/config/field/color-input";
+@import "menu/config/field/hue-slider";
+@import "menu/config/field/number-input";
+@import "menu/config/field/saturation-lightness-plane";
+@import "menu/controller/axis-table";
+@import "menu/controller/button-table";
+@import "menu/controller/device-info";
+@import "menu/field/field";
+@import "menu/menu";

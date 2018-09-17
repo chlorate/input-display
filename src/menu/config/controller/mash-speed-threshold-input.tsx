@@ -28,7 +28,7 @@ export class MashSpeedThresholdInput extends Component {
 	public render = (): VNode => (
 		<NumberGroup
 			className="m-0"
-			inputClassName="mash-speed-threshold-input"
+			inputClassName="number-input-2"
 			id="config-mash-speed-threshold"
 			label="Mash speed threshold"
 			value={this.injected.config.mashSpeedThreshold}

@@ -1,6 +1,7 @@
 import {VNode} from "inferno";
 import {CardBody} from "inferno-bootstrap";
 import {BackHeading} from "..";
+import {LabelFontInputs} from "../font-config.component";
 
 import {
 	BackgroundColorInput,
@@ -21,9 +22,18 @@ export const AppearanceConfigTab = (): VNode => (
 			<DisplaySizeInputs />
 			<DisplayOutlineCheckbox />
 
-			<h3 className="h4 mt-4">Control colors</h3>
+			<h3 className="h4 mt-4">Buttons</h3>
+			<h4 className="h5">Unpressed</h4>
+			<h4 className="h5">Pressed</h4>
+			<h4 className="h5">Mashing + unpressed</h4>
+			<h4 className="h5">Mashing + pressed</h4>
 
-			<h3 className="h4 mt-4">Control labels</h3>
+			<h3 className="h4 mt-4">Analog sticks</h3>
+			<h4 className="h5">Neutral</h4>
+			<h4 className="h5">Moved</h4>
+
+			<h3 className="h4 mt-4">Labels</h3>
+			<LabelFontInputs />
 		</CardBody>
 	</div>
 );

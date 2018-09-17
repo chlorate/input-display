@@ -1,81 +1,119 @@
-import {linkEvent} from "inferno";
-import {connect} from "inferno-mobx";
+import {Component, VNode} from "inferno";
+import {Col, FormGroup, Input, Label} from "inferno-bootstrap";
+import {inject, observer} from "inferno-mobx";
 import {action} from "mobx";
-import {Config, defaultFontSize, maxFontNameLength, maxFontSize, minFontSize} from "../../config/config";
+import {NumberGroup, TextGroup} from "./field";
 import {Store} from "../../storage/store";
-import {CheckboxInputComponent} from "../field/checkbox-input.component";
-import {NumberInputComponent} from "../field/number-input.component";
-import {TextInputComponent} from "../field/text-input.component";
 
-interface Props {
+import {
+	Config,
+	defaultFontSize,
+	maxFontNameLength,
+	maxFontSize,
+	minFontSize,
+} from "../../config/config";
+
+interface InjectedProps {
 	config: Config;
 }
 
 /**
  * A section within the Config tab for customizing the font used in the display.
  */
-export const FontConfigComponent = connect([Store.Config], ({config}: Props) => (
-	<section className="mb-5">
-		<div className="form-row">
-			<TextInputComponent
-				className="col"
-				id="config-font-name"
-				label="Name"
-				value={config.fontName}
-				maxLength={maxFontNameLength}
-				onInput={linkEvent(config, handleInputName)}
-			/>
-			<NumberInputComponent
-				className="col-auto"
-				id="config-font-size"
-				label="Size"
-				suffix="px"
-				value={config.fontSize}
-				min={minFontSize}
-				max={maxFontSize}
-				placeholder={defaultFontSize}
-				onChange={linkEvent(config, handleChangeSize)}
-			/>
-		</div>
-		<div className="form-row">
-			<CheckboxInputComponent
-				className="col-auto"
-				label="Bold"
-				checked={config.fontBold}
-				onClick={linkEvent(config, handleClickBold)}
-			/>
-			<CheckboxInputComponent
-				className="col-auto"
-				label="Italic"
-				checked={config.fontItalic}
-				onClick={linkEvent(config, handleClickItalic)}
-			/>
-			<CheckboxInputComponent
-				className="col-auto"
-				label="Shadow"
-				checked={config.fontShadow}
-				onClick={linkEvent(config, handleClickShadow)}
-			/>
-		</div>
-	</section>
-));
+@inject(Store.Config)
+@observer
+export class LabelFontInputs extends Component {
+	private get injected(): InjectedProps {
+		return this.props as InjectedProps;
+	}
 
-const handleInputName = action((config: Config, event): void => {
-	config.fontName = event.target.value;
-});
+	public render(): VNode {
+		const {config} = this.injected;
+		return (
+			<div>
+				<div className="form-row">
+					<Col>
+						<TextGroup
+							id="config-label-font-name"
+							label="Font name"
+							value={config.fontName}
+							maxLength={maxFontNameLength}
+							onChange={this.handleChangeName}
+						/>
+					</Col>
+					<Col xs="auto">
+						<NumberGroup
+							inputClassName="number-input-4"
+							id="config-label-font-size"
+							label="Size"
+							value={config.fontSize}
+							min={minFontSize}
+							max={maxFontSize}
+							placeholder={defaultFontSize}
+							suffix="px"
+							onChange={this.handleChangeSize}
+						/>
+					</Col>
+				</div>
+				<FormGroup check className="form-check-inline">
+					<Input
+						id="config-label-font-bold"
+						type="checkbox"
+						checked={config.fontBold}
+						onClick={this.handleClickBold}
+					/>
+					<Label check for="config-label-font-bold">
+						Bold
+					</Label>
+				</FormGroup>
+				<FormGroup check className="form-check-inline">
+					<Input
+						id="config-label-font-italic"
+						type="checkbox"
+						checked={config.fontItalic}
+						onClick={this.handleClickItalic}
+					/>
+					<Label check for="config-label-font-italic">
+						Italic
+					</Label>
+				</FormGroup>
+				<FormGroup check className="form-check-inline">
+					<Input
+						id="config-label-font-shadow"
+						type="checkbox"
+						checked={config.fontShadow}
+						onClick={this.handleClickShadow}
+					/>
+					<Label check for="config-label-font-shadow">
+						Shadow
+					</Label>
+				</FormGroup>
+			</div>
+		);
+	}
 
-const handleClickBold = action((config: Config, event): void => {
-	config.fontBold = event.target.checked;
-});
+	@action
+	private handleChangeName = (name: string): void => {
+		this.injected.config.fontName = name;
+	};
 
-const handleClickItalic = action((config: Config, event): void => {
-	config.fontItalic = event.target.checked;
-});
+	@action
+	private handleChangeSize = (size?: number): void => {
+		this.injected.config.fontSize = size || defaultFontSize;
+	};
 
-const handleClickShadow = action((config: Config, event): void => {
-	config.fontShadow = event.target.checked;
-});
+	@action
+	private handleClickBold = (event: any) => {
+		this.injected.config.fontBold = event.target.checked;
+	};
 
-const handleChangeSize = action((config: Config, event): void => {
-	config.fontSize = event.target.value || defaultFontSize;
-});
+	@action
+	private handleClickItalic = (event: any) => {
+		this.injected.config.fontItalic = event.target.checked;
+	};
+
+	@action
+	private handleClickShadow = (event: any) => {
+		this.injected.config.fontShadow = event.target.checked;
+	};
+}

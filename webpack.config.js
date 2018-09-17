@@ -16,6 +16,7 @@ const config = {
 	output: {
 		filename: "[name].[chunkhash].js",
 		path: path.resolve(__dirname, "dist"),
+		publicPath: "/",
 	},
 	module: {
 		rules: [
@@ -74,6 +75,9 @@ const config = {
 			},
 		}),
 	],
+	devServer: {
+		historyApiFallback: true,
+	},
 };
 
 module.exports = (env, options) => {

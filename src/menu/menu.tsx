@@ -1,6 +1,6 @@
 import {Component, VNode} from "inferno";
 import {inject} from "inferno-mobx";
-import {HashRouter, Route, Switch} from "inferno-router";
+import {BrowserRouter, Route, Switch} from "inferno-router";
 import {MenuButton, MenuCard} from ".";
 //import {Config} from "../config/config";
 import {Store} from "../storage/store";
@@ -38,7 +38,7 @@ export class Menu extends Component {
 		*/
 
 	public render = (): VNode => (
-		<HashRouter>
+		<BrowserRouter>
 			<Switch>
 				<Route exact path="/" component={MenuButton} />
 				<MenuCard>
@@ -57,6 +57,6 @@ export class Menu extends Component {
 					<Route exact path="/help" component={HelpTab} />
 				</MenuCard>
 			</Switch>
-		</HashRouter>
+		</BrowserRouter>
 	);
 }

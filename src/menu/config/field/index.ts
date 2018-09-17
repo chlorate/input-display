@@ -8,3 +8,5 @@ export * from "./hue-slider";
 export * from "./number-group";
 export * from "./number-input";
 export * from "./saturation-lightness-plane";
+export * from "./text-group";
+export * from "./text-input";

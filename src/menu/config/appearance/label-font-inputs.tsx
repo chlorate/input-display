@@ -65,7 +65,7 @@ export class LabelFontInputs extends Component {
 					label="Bold"
 					checked={config.fontBold}
 					describedBy="config-label-font-help"
-					onClick={this.handleClickBold}
+					onChange={this.handleClickBold}
 				/>
 				<CheckboxGroup
 					inline
@@ -73,7 +73,7 @@ export class LabelFontInputs extends Component {
 					label="Italic"
 					checked={config.fontItalic}
 					describedBy="config-label-font-help"
-					onClick={this.handleClickItalic}
+					onChange={this.handleClickItalic}
 				/>
 				<CheckboxGroup
 					inline
@@ -81,7 +81,7 @@ export class LabelFontInputs extends Component {
 					label="Shadow"
 					checked={config.fontShadow}
 					describedBy="config-label-font-help"
-					onClick={this.handleClickShadow}
+					onChange={this.handleClickShadow}
 				/>
 				<FormText className="m-0" id="config-label-font-help">
 					The default font used for control labels. Font sizes can

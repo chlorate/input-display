@@ -1,4 +1,4 @@
-import {SFC, VNode} from "inferno";
+import {SFC} from "inferno";
 import {FormGroup, Label} from "inferno-bootstrap";
 import {Checkbox} from ".";
 

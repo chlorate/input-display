@@ -8,6 +8,7 @@ interface Props {
 	label: string;
 	value: string;
 	maxLength: number;
+	describedBy?: string;
 	onChange: (value: string) => void;
 }
 
@@ -20,6 +21,7 @@ export const TextGroup: SFC<Props> = ({
 	label,
 	value,
 	maxLength,
+	describedBy,
 	onChange,
 }) => (
 	<FormGroup className={className}>
@@ -28,6 +30,7 @@ export const TextGroup: SFC<Props> = ({
 			id={id}
 			value={value}
 			maxLength={maxLength}
+			aria-describedby={describedBy}
 			onChange={onChange}
 		/>
 	</FormGroup>

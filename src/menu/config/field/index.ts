@@ -2,6 +2,8 @@ export * from "./auto-width-input-group";
 export * from "./axis-index-select";
 export * from "./axis-reference-select";
 export * from "./axis-select";
+export * from "./checkbox";
+export * from "./checkbox-group";
 export * from "./color-input";
 export * from "./color-picker";
 export * from "./hue-slider";

@@ -1,8 +1,8 @@
 import {Component, VNode} from "inferno";
-import {Col, FormGroup, Input, Label} from "inferno-bootstrap";
+import {Col, FormText} from "inferno-bootstrap";
 import {inject, observer} from "inferno-mobx";
 import {action} from "mobx";
-import {NumberGroup, TextGroup} from "../field";
+import {CheckboxGroup, NumberGroup, TextGroup} from "../field";
 import {Store} from "../../../storage/store";
 
 import {
@@ -34,15 +34,18 @@ export class LabelFontInputs extends Component {
 				<div className="form-row">
 					<Col>
 						<TextGroup
+							className="mb-2"
 							id="config-label-font-name"
 							label="Font name"
 							value={config.fontName}
 							maxLength={maxFontNameLength}
+							describedBy="config-label-font-help"
 							onChange={this.handleChangeName}
 						/>
 					</Col>
 					<Col xs="auto">
 						<NumberGroup
+							className="mb-2"
 							inputClassName="number-input-4"
 							id="config-label-font-size"
 							label="Size"
@@ -51,43 +54,39 @@ export class LabelFontInputs extends Component {
 							max={maxFontSize}
 							placeholder={defaultFontSize}
 							suffix="px"
+							describedBy="config-label-font-help"
 							onChange={this.handleChangeSize}
 						/>
 					</Col>
 				</div>
-				<FormGroup check className="form-check-inline">
-					<Input
-						id="config-label-font-bold"
-						type="checkbox"
-						checked={config.fontBold}
-						onClick={this.handleClickBold}
-					/>
-					<Label check for="config-label-font-bold">
-						Bold
-					</Label>
-				</FormGroup>
-				<FormGroup check className="form-check-inline">
-					<Input
-						id="config-label-font-italic"
-						type="checkbox"
-						checked={config.fontItalic}
-						onClick={this.handleClickItalic}
-					/>
-					<Label check for="config-label-font-italic">
-						Italic
-					</Label>
-				</FormGroup>
-				<FormGroup check className="form-check-inline">
-					<Input
-						id="config-label-font-shadow"
-						type="checkbox"
-						checked={config.fontShadow}
-						onClick={this.handleClickShadow}
-					/>
-					<Label check for="config-label-font-shadow">
-						Shadow
-					</Label>
-				</FormGroup>
+				<CheckboxGroup
+					inline
+					id="config-label-font-bold"
+					label="Bold"
+					checked={config.fontBold}
+					describedBy="config-label-font-help"
+					onClick={this.handleClickBold}
+				/>
+				<CheckboxGroup
+					inline
+					id="config-label-font-italic"
+					label="Italic"
+					checked={config.fontItalic}
+					describedBy="config-label-font-help"
+					onClick={this.handleClickItalic}
+				/>
+				<CheckboxGroup
+					inline
+					id="config-label-font-shadow"
+					label="Shadow"
+					checked={config.fontShadow}
+					describedBy="config-label-font-help"
+					onClick={this.handleClickShadow}
+				/>
+				<FormText className="m-0" id="config-label-font-help">
+					The default font used for control labels. Font sizes can
+					also be customized for individual controls.
+				</FormText>
 			</div>
 		);
 	}
@@ -103,17 +102,17 @@ export class LabelFontInputs extends Component {
 	};
 
 	@action
-	private handleClickBold = (event: any) => {
-		this.injected.config.fontBold = event.target.checked;
+	private handleClickBold = (checked: boolean) => {
+		this.injected.config.fontBold = checked;
 	};
 
 	@action
-	private handleClickItalic = (event: any) => {
-		this.injected.config.fontItalic = event.target.checked;
+	private handleClickItalic = (checked: boolean) => {
+		this.injected.config.fontItalic = checked;
 	};
 
 	@action
-	private handleClickShadow = (event: any) => {
-		this.injected.config.fontShadow = event.target.checked;
+	private handleClickShadow = (checked: boolean) => {
+		this.injected.config.fontShadow = checked;
 	};
 }

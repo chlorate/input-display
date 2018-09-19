@@ -1,9 +1,10 @@
-import {Component, MouseEvent, VNode} from "inferno";
-import {FormGroup, FormText, Input, Label} from "inferno-bootstrap";
+import {Component, VNode} from "inferno";
+import {FormText} from "inferno-bootstrap";
 import {inject, observer} from "inferno-mobx";
 import {action} from "mobx";
 import {Config} from "../../../config/config";
 import {Store} from "../../../storage/store";
+import {CheckboxGroup} from "../field";
 
 interface InjectedProps {
 	config: Config;
@@ -18,18 +19,13 @@ export class DisplayOutlineCheckbox extends Component {
 
 	public render = (): VNode => (
 		<div>
-			<FormGroup check>
-				<Input
-					id="config-display-outline"
-					type="checkbox"
-					checked={this.injected.config.displayOutline}
-					aria-describedby="config-display-outline-help"
-					onClick={this.handleClick}
-				/>
-				<Label check for="config-display-outline">
-					Show outline
-				</Label>
-			</FormGroup>
+			<CheckboxGroup
+				id="config-display-outline"
+				label="Show outline"
+				checked={this.injected.config.displayOutline}
+				describedBy="config-display-outline-help"
+				onChange={this.handleChange}
+			/>
 			<FormText className="m-0" id="config-display-outline-help">
 				Helps with cropping.
 			</FormText>
@@ -37,9 +33,7 @@ export class DisplayOutlineCheckbox extends Component {
 	);
 
 	@action
-	private handleClick = (event: MouseEvent<HTMLInputElement>): void => {
-		if (event.target instanceof HTMLInputElement) {
-			this.injected.config.displayOutline = event.target.checked;
-		}
+	private handleChange = (checked: boolean): void => {
+		this.injected.config.displayOutline = checked;
 	};
 }

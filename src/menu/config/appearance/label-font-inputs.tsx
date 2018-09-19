@@ -18,7 +18,7 @@ interface InjectedProps {
 }
 
 /**
- * A section within the Config tab for customizing the font used in the display.
+ * Fields for changing the font used for control labels in the display.
  */
 @inject(Store.Config)
 @observer
@@ -30,7 +30,7 @@ export class LabelFontInputs extends Component {
 	public render(): VNode {
 		const {config} = this.injected;
 		return (
-			<div>
+			<div className="mb-3">
 				<div className="form-row">
 					<Col>
 						<TextGroup
@@ -102,17 +102,17 @@ export class LabelFontInputs extends Component {
 	};
 
 	@action
-	private handleClickBold = (checked: boolean) => {
-		this.injected.config.fontBold = checked;
+	private handleClickBold = (bold: boolean) => {
+		this.injected.config.fontBold = bold;
 	};
 
 	@action
-	private handleClickItalic = (checked: boolean) => {
-		this.injected.config.fontItalic = checked;
+	private handleClickItalic = (italic: boolean) => {
+		this.injected.config.fontItalic = italic;
 	};
 
 	@action
-	private handleClickShadow = (checked: boolean) => {
-		this.injected.config.fontShadow = checked;
+	private handleClickShadow = (shadow: boolean) => {
+		this.injected.config.fontShadow = shadow;
 	};
 }

@@ -19,6 +19,9 @@ interface InjectedProps {
 	config: Config;
 }
 
+/**
+ * Fields for changing the size of the display.
+ */
 @inject(Store.Config)
 @observer
 export class DisplaySizeInputs extends Component {

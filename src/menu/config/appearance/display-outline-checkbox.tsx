@@ -10,6 +10,9 @@ interface InjectedProps {
 	config: Config;
 }
 
+/**
+ * A checkbox for toggling an outline around the display.
+ */
 @inject(Store.Config)
 @observer
 export class DisplayOutlineCheckbox extends Component {

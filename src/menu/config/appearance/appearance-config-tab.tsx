@@ -7,6 +7,7 @@ import {
 	DisplayOutlineCheckbox,
 	DisplaySizeInputs,
 	LabelFontInputs,
+	LabelOffsetInputs,
 } from ".";
 
 /**
@@ -34,6 +35,7 @@ export const AppearanceConfigTab = (): VNode => (
 
 			<h3 className="h4 mt-4">Labels</h3>
 			<LabelFontInputs />
+			<LabelOffsetInputs />
 		</CardBody>
 	</div>
 );

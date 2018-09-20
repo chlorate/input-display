@@ -36,7 +36,7 @@ export class LabelOffsetInputs extends Component {
 							className="m-0"
 							inputClassName="number-input-4"
 							id="config-label-offset-x"
-							label="Offset X"
+							label="X offset"
 							value={config.labelOffsetX}
 							min={minLabelOffset}
 							max={maxLabelOffset}
@@ -51,7 +51,7 @@ export class LabelOffsetInputs extends Component {
 							className="m-0"
 							inputClassName="number-input-4"
 							id="config-label-offset-y"
-							label="Offset Y"
+							label="Y offset"
 							value={config.labelOffsetY}
 							min={minLabelOffset}
 							max={maxLabelOffset}

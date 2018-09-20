@@ -15,7 +15,7 @@ import {
 } from "inferno-bootstrap";
 
 interface Props {
-	id?: string;
+	id: string;
 	color?: string;
 	placeholder: string;
 	onChange: (color?: string) => void;
@@ -97,7 +97,7 @@ export class ColorInput extends Component<Props> {
 
 	private setInput = (input: HTMLInputElement): void => {
 		this.input = input;
-	}
+	};
 
 	private get color(): string | undefined {
 		if (this.dirtyColor !== undefined) {
@@ -119,13 +119,13 @@ export class ColorInput extends Component<Props> {
 			this.input.select();
 			event.preventDefault();
 		}
-	}
+	};
 
 	private handleFocus = (): void => {
 		if (this.input) {
 			this.input.select();
 		}
-	}
+	};
 
 	@action
 	private handleInput = (event: ChangeEvent<HTMLInputElement>): void => {

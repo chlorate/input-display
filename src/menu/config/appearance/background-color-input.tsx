@@ -1,9 +1,8 @@
 import {Component, VNode} from "inferno";
-import {FormGroup, Label} from "inferno-bootstrap";
 import {inject, observer} from "inferno-mobx";
 import {Config, DefaultColors} from "../../../config/config";
 import {Store} from "../../../storage/store";
-import {ColorInput} from "../field";
+import {ColorGroup} from "../field";
 
 interface InjectedProps {
 	config: Config;
@@ -20,15 +19,13 @@ export class BackgroundColorInput extends Component {
 	}
 
 	public render = (): VNode => (
-		<FormGroup>
-			<Label for="config-background">Background</Label>
-			<ColorInput
-				id="config-background"
-				color={this.injected.config.backgroundColor}
-				placeholder={DefaultColors.Background}
-				onChange={this.handleChange}
-			/>
-		</FormGroup>
+		<ColorGroup
+			id="config-background"
+			label="Background"
+			color={this.injected.config.backgroundColor}
+			placeholder={DefaultColors.Background}
+			onChange={this.handleChange}
+		/>
 	);
 
 	private handleChange = (color?: string): void => {

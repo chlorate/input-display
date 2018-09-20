@@ -4,6 +4,7 @@ export * from "./axis-reference-select";
 export * from "./axis-select";
 export * from "./checkbox";
 export * from "./checkbox-group";
+export * from "./color-group";
 export * from "./color-input";
 export * from "./color-picker";
 export * from "./hue-slider";

@@ -41,7 +41,7 @@ export class ColorPicker extends Component<Props> {
 	}
 
 	public render = (): VNode => (
-		<div>
+		<div className="d-flex">
 			<HueSlider hue={this.hue} onChange={this.handleChangeHue} />
 			<SaturationLightnessPlane
 				hue={this.hue}

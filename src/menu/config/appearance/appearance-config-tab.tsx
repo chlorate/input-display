@@ -4,6 +4,7 @@ import {BackHeading} from "..";
 
 import {
 	BackgroundColorInput,
+	ButtonPaletteInputs,
 	DisplayOutlineCheckbox,
 	DisplaySizeInputs,
 	LabelFontInputs,
@@ -24,10 +25,7 @@ export const AppearanceConfigTab = (): VNode => (
 			<DisplayOutlineCheckbox />
 
 			<h3 className="h4 mt-4">Buttons</h3>
-			<h4 className="h5">Unpressed</h4>
-			<h4 className="h5">Pressed</h4>
-			<h4 className="h5">Mashing + unpressed</h4>
-			<h4 className="h5">Mashing + pressed</h4>
+			<ButtonPaletteInputs />
 
 			<h3 className="h4 mt-4">Analog sticks</h3>
 			<h4 className="h5">Neutral</h4>

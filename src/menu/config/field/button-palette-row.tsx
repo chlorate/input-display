@@ -2,8 +2,8 @@ import {Component, VNode} from "inferno";
 import {Col} from "inferno-bootstrap";
 import {observer} from "inferno-mobx";
 import {action} from "mobx";
-import {ButtonPalette} from "../../config/button-palette";
-import {ColorGroup} from "./field";
+import {ButtonPalette} from "../../../config/button-palette";
+import {ColorGroup} from ".";
 
 interface Props {
 	className?: string;

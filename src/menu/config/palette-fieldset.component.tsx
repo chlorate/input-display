@@ -1,63 +1,82 @@
-import {linkEvent} from "inferno";
-import {connect} from "inferno-mobx";
+import {Component, VNode} from "inferno";
+import {Col} from "inferno-bootstrap";
+import {observer} from "inferno-mobx";
 import {action} from "mobx";
 import {ButtonPalette} from "../../config/button-palette";
-import {Palette} from "../../config/palette";
-import {ColorInputComponent} from "../field/color-input.component";
+import {ColorGroup} from "./field";
 
 interface Props {
+	className?: string;
 	id: string;
-	palette: Palette;
+	palette: ButtonPalette;
+	borderDefault: string;
+	fillDefault: string;
+	labelDefault: string;
 }
 
 /**
- * A set of fields for customizing the colors of a single palette.
+ * A row of fields for customizing the colors of a button palette.
  */
-export const PaletteFieldsetComponent = connect((props: Props) => (
-	<fieldset>
-		<div className="form-row">
-			<ColorInputComponent
-				className="col"
-				id={`${props.id}-border`}
-				label="Border"
-				value={props.palette.border}
-				placeholder={props.palette.defaultBorder}
-				onChange={linkEvent(props.palette, handleChangeBorder)}
-			/>
-			<ColorInputComponent
-				className="col"
-				id={`${props.id}-fill`}
-				label="Fill"
-				value={props.palette.fill}
-				placeholder={props.palette.defaultFill}
-				onChange={linkEvent(props.palette, handleChangeFill)}
-			/>
-			{!(props.palette instanceof ButtonPalette) &&
-				<div className="form-group-color col col-spacer"></div>
-			}
-			{props.palette instanceof ButtonPalette && [
-				<ColorInputComponent
-					className="col"
-					id={`${props.id}-label`}
-					label="Label"
-					value={props.palette.label}
-					placeholder={props.palette.defaultLabel}
-					onChange={linkEvent(props.palette, handleChangeLabel)}
-				/>,
-				<div className="col-6 col-spacer"></div>,
-			]}
-		</div>
-	</fieldset>
-));
+@observer
+export class ButtonPaletteRow extends Component<Props> {
+	public render(): VNode {
+		const {
+			className,
+			id,
+			palette,
+			borderDefault,
+			fillDefault,
+			labelDefault,
+		} = this.props;
 
-const handleChangeBorder = action((palette: Palette, event): void => {
-	palette.border = event.target.value;
-});
+		return (
+			<div className={`form-row ${className || ""}`}>
+				<Col xs="auto">
+					<ColorGroup
+						id={`${id}-border`}
+						label="Border"
+						color={palette.border}
+						placeholder={borderDefault}
+						onChange={this.handleChangeBorder}
+					/>
+				</Col>
+				<Col xs="auto">
+					<ColorGroup
+						id={`${id}-fill`}
+						label="Fill"
+						color={palette.fill}
+						placeholder={fillDefault}
+						onChange={this.handleChangeFill}
+					/>
+				</Col>
+				<Col xs="auto">
+					<ColorGroup
+						id={`${id}-label`}
+						label="Label"
+						color={palette.label}
+						placeholder={labelDefault}
+						onChange={this.handleChangeLabel}
+					/>
+				</Col>
+			</div>
+		);
+	}
 
-const handleChangeFill = action((palette: Palette, event): void => {
-	palette.fill = event.target.value;
-});
+	@action
+	private handleChangeBorder = (color?: string): void => {
+		const {palette, borderDefault} = this.props;
+		palette.border = color || borderDefault;
+	};
 
-const handleChangeLabel = action((palette: ButtonPalette, event): void => {
-	palette.label = event.target.value;
-});
+	@action
+	private handleChangeFill = (color?: string): void => {
+		const {palette, fillDefault} = this.props;
+		palette.fill = color || fillDefault;
+	};
+
+	@action
+	private handleChangeLabel = (color?: string): void => {
+		const {palette, labelDefault} = this.props;
+		palette.label = color || labelDefault;
+	};
+}

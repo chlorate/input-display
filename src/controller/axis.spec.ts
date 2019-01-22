@@ -8,9 +8,23 @@ describe("Axis", () => {
 	});
 
 	function rotate() {
+		// Simulate the values of one axis of an analog stick being rotated.
+		for (let value = 0; value < 1; value += 0.1) {
+			axis.value = value;
+		}
+		for (let value = 1; value > -1; value -= 0.1) {
+			axis.value = value;
+		}
+		for (let value = -1; value < 0; value += 0.1) {
+			axis.value = value;
+		}
+	}
+
+	function twitch() {
+		// Simulate values that are not indicative of normal operation.
 		axis.value = 0;
-		axis.value = 1;
 		axis.value = -1;
+		axis.value = 1;
 		axis.value = 0;
 	}
 
@@ -51,9 +65,14 @@ describe("Axis", () => {
 	});
 
 	describe("minValue", () => {
-		it("should track minimum value", () => {
+		it("should update if value remains out of bounds", () => {
 			rotate();
 			expect(axis.minValue).toBe(-1);
+		});
+
+		it("should not update due to one-off, abnormal values", () => {
+			twitch();
+			expect(axis.minValue).toBe(0);
 		});
 
 		it("cannot be less greater than neutral value", () => {
@@ -70,9 +89,14 @@ describe("Axis", () => {
 	});
 
 	describe("maxValue", () => {
-		it("should track maximum value", () => {
+		it("should update if value remains out of bounds", () => {
 			rotate();
 			expect(axis.maxValue).toBe(1);
+		});
+
+		it("should not update due to one-off, abnormal values", () => {
+			twitch();
+			expect(axis.maxValue).toBe(0);
 		});
 
 		it("cannot be less than neutral value", () => {

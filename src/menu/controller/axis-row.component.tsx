@@ -20,10 +20,13 @@ export const AxisRowComponent = connect(({axis, index}: Props) => (
 	</tr>
 ));
 
-function cell(value: number | undefined) {
+function cell(value?: number) {
+	if (value === undefined) {
+		return <td className="text-muted text-right">Unknown</td>;
+	}
 	return (
-		<td className="text-right">
-			{value !== undefined ? value.toFixed(3) : <span className="text-muted">Unknown</span>}
+		<td className="text-right" title={value.toFixed(10)}>
+			{value.toFixed(3)}
 		</td>
 	);
 }

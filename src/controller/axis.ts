@@ -3,6 +3,12 @@ import {clamp} from "../math/util";
 import {AxisJSON} from "./json/axis-json";
 
 /**
+ * How many times the value must remain outside the axis' current bounds (min and
+ * max values) before the bounds are adjusted.
+ */
+const boundsUpdateThreshold = 5;
+
+/**
  * How far from neutral an axis value has to be to be consider moved (as
  * a percentage between 0 and 1).
  */
@@ -29,6 +35,7 @@ export class Axis {
 	@observable private _neutralValue?: number;
 	@observable private _minValue?: number;
 	@observable private _maxValue?: number;
+	private outsideBoundsCount: number = 0;
 
 	get value(): number {
 		return this._value;
@@ -45,8 +52,21 @@ export class Axis {
 		}
 
 		this._value = value;
-		this.minValue = Math.min(this.minValue, value);
-		this.maxValue = Math.max(this.maxValue, value);
+
+		// Only adjust the bounds of the axis if the value remains outside the
+		// current bounds for a while. This avoids any one-off, abnormal value
+		// from adjusting the bounds which might occur, for example, when
+		// a controller is connecting.
+		if (this.outsideBoundsCount >= boundsUpdateThreshold) {
+			this.minValue = Math.min(this.minValue, value);
+			this.maxValue = Math.max(this.maxValue, value);
+		}
+
+		if (value <= this.minValue || value >= this.maxValue) {
+			this.outsideBoundsCount++;
+		} else {
+			this.outsideBoundsCount = 0;
+		}
 	}
 
 	@computed get invertedValue(): number {

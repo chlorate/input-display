@@ -1,7 +1,7 @@
 import {computed, observable} from "mobx";
 import {AxisReference} from "../config/axis-reference";
 import {Controller} from "../controller/controller";
-import {clampInt} from "../math/util";
+import {clamp, clampInt} from "../math/util";
 import {Control} from "./control";
 import {BaseStickControlJSON} from "./json/control-json";
 
@@ -77,7 +77,11 @@ export abstract class StickControl extends Control {
 	 * Returns an X or Y position of the inner circle based on the current value
 	 * of an axis. Defaults to the center if no valid axis is referenced.
 	 */
-	private getInnerPosition(controller: Controller, reference: AxisReference | undefined, center: number): number {
+	private getInnerPosition(
+		controller: Controller,
+		reference: AxisReference | undefined,
+		center: number,
+	): number {
 		if (!reference) {
 			return center;
 		}
@@ -87,17 +91,25 @@ export abstract class StickControl extends Control {
 			return center;
 		}
 
-		let shift = 0;
-		const maxShift = Math.max(this.outerSize / 2 - this.innerSize / 4, this.outerSize / 4);
+		let shiftPercent = 0;
 		if (axis.minValue !== undefined && axis.value < axis.neutralValue) {
-			shift = -maxShift * (axis.value - axis.neutralValue) / (axis.minValue - axis.neutralValue);
+			shiftPercent =
+				-(axis.value - axis.neutralValue) /
+				(axis.minValue - axis.neutralValue);
 		}
 		if (axis.maxValue !== undefined && axis.value > axis.neutralValue) {
-			shift = maxShift * (axis.value - axis.neutralValue) / (axis.maxValue - axis.neutralValue);
+			shiftPercent =
+				(axis.value - axis.neutralValue) /
+				(axis.maxValue - axis.neutralValue);
 		}
 		if (reference.inverted) {
-			shift *= -1;
+			shiftPercent *= -1;
 		}
-		return center + shift;
+
+		const maxShift = Math.max(
+			this.outerSize / 2 - this.innerSize / 4,
+			this.outerSize / 4,
+		);
+		return center + maxShift * clamp(shiftPercent, -1, 1);
 	}
 }

@@ -31,7 +31,7 @@ clean-deps:
 
 .PHONY: format
 format:
-	$(TSLINT) --fix src/**/*.{ts,tsx}
+	$(TSLINT) --fix "src/**/*.{ts,tsx}"
 
 .PHONY: upgrade
 upgrade:

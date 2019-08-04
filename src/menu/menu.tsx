@@ -2,7 +2,7 @@ import {Component, VNode} from "inferno";
 import {inject} from "inferno-mobx";
 import {BrowserRouter, Route, Switch} from "inferno-router";
 import {MenuButton, MenuCard} from ".";
-//import {Config} from "../config/config";
+// import {Config} from "../config/config";
 import {Store} from "../storage/store";
 import {ConfigTab} from "./config";
 import {AppearanceConfigTab} from "./config/appearance";

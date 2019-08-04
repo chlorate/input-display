@@ -2,8 +2,8 @@ import {Component, VNode} from "inferno";
 import {Col, FormText} from "inferno-bootstrap";
 import {inject, observer} from "inferno-mobx";
 import {action} from "mobx";
-import {NumberGroup} from "../field";
 import {Store} from "../../../storage/store";
+import {NumberGroup} from "../field";
 
 import {
 	Config,

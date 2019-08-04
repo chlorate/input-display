@@ -1,7 +1,7 @@
 import {Component, VNode} from "inferno";
 import {inject, observer} from "inferno-mobx";
-import {Store} from "../../../storage/store";
 import {Config, DefaultColors} from "../../../config/config";
+import {Store} from "../../../storage/store";
 import {ButtonPaletteRow} from "../field";
 
 interface IInjectedProps {

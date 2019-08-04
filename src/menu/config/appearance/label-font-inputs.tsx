@@ -2,8 +2,8 @@ import {Component, VNode} from "inferno";
 import {Col, FormText} from "inferno-bootstrap";
 import {inject, observer} from "inferno-mobx";
 import {action} from "mobx";
-import {CheckboxGroup, NumberGroup, TextGroup} from "../field";
 import {Store} from "../../../storage/store";
+import {CheckboxGroup, NumberGroup, TextGroup} from "../field";
 
 import {
 	Config,

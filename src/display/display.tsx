@@ -1,4 +1,4 @@
-import {Component, VNode} from "inferno";
+import {Component, InfernoNode} from "inferno";
 import {inject, observer} from "inferno-mobx";
 import {Config} from "../config/config";
 import {Store} from "../storage/store";
@@ -25,7 +25,7 @@ export class Display extends Component {
 		return this.props as InjectedProps;
 	}
 
-	public render(): VNode {
+	public render(): InfernoNode {
 		const {config} = this.injected;
 		return (
 			<svg

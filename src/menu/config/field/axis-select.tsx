@@ -1,4 +1,4 @@
-import {ChangeEvent, Component, VNode} from "inferno";
+import {ChangeEvent, Component, InfernoNode} from "inferno";
 import {Input} from "inferno-bootstrap";
 import {inject, observer} from "inferno-mobx";
 import {Controller} from "../../../controller/controller";
@@ -27,7 +27,7 @@ export class AxisSelect extends Component<Props> {
 		return this.props as InjectedProps;
 	}
 
-	public render(): VNode {
+	public render(): InfernoNode {
 		const {className, id, value} = this.props;
 		return (
 			<Input
@@ -43,10 +43,10 @@ export class AxisSelect extends Component<Props> {
 		);
 	}
 
-	private get options(): VNode[] {
+	private get options(): InfernoNode[] {
 		const {controller, required, value} = this.injected;
 
-		const options: VNode[] = [];
+		const options: InfernoNode[] = [];
 		if (!required || value === undefined) {
 			options.push(<option value="">None</option>);
 		}

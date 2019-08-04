@@ -1,16 +1,16 @@
-import {VNode} from "inferno";
+import {InfernoNode, SFC} from "inferno";
 import {CardBody} from "inferno-bootstrap";
 import {Link} from "inferno-router";
 
 interface IProps {
 	to: string;
-	children: string;
+	children?: InfernoNode;
 }
 
 /**
  * A heading with a linked back button.
  */
-export const BackHeading = ({to, children}: IProps): VNode => (
+export const BackHeading: SFC<IProps> = ({to, children}) => (
 	<CardBody className="border-bottom">
 		<h2 class="h3 d-flex align-items-center justify-content-between mb-0">
 			{children}

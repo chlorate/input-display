@@ -1,5 +1,5 @@
 import * as ColorConvert from "color-convert";
-import {Component, VNode} from "inferno";
+import {Component, InfernoNode} from "inferno";
 import {observer} from "inferno-mobx";
 import {action, observable} from "mobx";
 import {HueSlider, SaturationLightnessPlane} from ".";
@@ -40,7 +40,7 @@ export class ColorPicker extends Component<Props> {
 		}
 	}
 
-	public render = (): VNode => (
+	public render = (): InfernoNode => (
 		<div className="d-flex">
 			<HueSlider hue={this.hue} onChange={this.handleChangeHue} />
 			<SaturationLightnessPlane

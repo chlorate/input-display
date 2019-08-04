@@ -1,11 +1,11 @@
-import {VNode} from "inferno";
+import {SFC} from "inferno";
 import {CardBody} from "inferno-bootstrap";
 import {version, versionDate} from "../../version";
 
 /**
  * Contents of the Help tab.
  */
-export const HelpTab = (): VNode => (
+export const HelpTab: SFC = () => (
 	<CardBody>
 		<h1>Input Display</h1>
 		<p className="lead text-muted">

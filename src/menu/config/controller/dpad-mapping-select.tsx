@@ -1,4 +1,4 @@
-import {ChangeEvent, Component, VNode} from "inferno";
+import {ChangeEvent, Component, InfernoNode} from "inferno";
 import {FormGroup, FormText, Input, Label} from "inferno-bootstrap";
 import {inject, observer} from "inferno-mobx";
 import {Link} from "inferno-router";
@@ -32,7 +32,7 @@ export class DpadMappingSelect extends Component {
 		return this.props as InjectedProps;
 	}
 
-	public render = (): VNode => (
+	public render = (): InfernoNode => (
 		<FormGroup>
 			<Label for="config-dpad-mapping">Mapping</Label>
 			<Input

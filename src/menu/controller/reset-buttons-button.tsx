@@ -1,4 +1,4 @@
-import {Component, VNode} from "inferno";
+import {Component, InfernoNode} from "inferno";
 import {Button} from "inferno-bootstrap";
 import {inject, observer} from "inferno-mobx";
 import {action} from "mobx";
@@ -19,7 +19,7 @@ export class ResetButtonsButton extends Component {
 		return this.props as InjectedProps;
 	}
 
-	public render(): VNode | undefined {
+	public render(): InfernoNode | undefined {
 		if (!this.injected.controller.buttons.length) {
 			return;
 		}

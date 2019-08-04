@@ -1,4 +1,4 @@
-import {Component, VNode} from "inferno";
+import {Component, InfernoNode} from "inferno";
 import {Col} from "inferno-bootstrap";
 import {observer} from "inferno-mobx";
 import {action} from "mobx";
@@ -19,7 +19,7 @@ interface Props {
  */
 @observer
 export class ButtonPaletteRow extends Component<Props> {
-	public render(): VNode {
+	public render(): InfernoNode {
 		const {
 			className,
 			id,

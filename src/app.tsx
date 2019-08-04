@@ -1,5 +1,5 @@
 import EventEmitter from "events";
-import {Component, VNode} from "inferno";
+import {Component, InfernoNode} from "inferno";
 import {Alert} from "inferno-bootstrap";
 import {Provider} from "inferno-mobx";
 import {observable} from "mobx";
@@ -21,9 +21,7 @@ export class App extends Component {
 	private config: Config;
 	private controller: Controller;
 	private events: EventEmitter;
-
-	@observable
-	private errors: ErrorMessage[] = [];
+	@observable private errors: ErrorMessage[] = [];
 
 	constructor() {
 		super();
@@ -61,7 +59,7 @@ export class App extends Component {
 		});
 	}
 
-	public render(): VNode {
+	public render(): InfernoNode {
 		if (!supportsGamepadApi()) {
 			return (
 				<Alert color="danger" className="text-center m-3">

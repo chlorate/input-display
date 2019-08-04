@@ -1,4 +1,4 @@
-import {VNode} from "inferno";
+import {InfernoNode} from "inferno";
 import {CardBody} from "inferno-bootstrap";
 
 import {
@@ -13,7 +13,7 @@ import {
  * Contents of the Controller tab. It displays information about the controller,
  * buttons, and axes.
  */
-export const ControllerTab = (): VNode => (
+export const ControllerTab = (): InfernoNode => (
 	<CardBody>
 		<h2 className="h4">Device</h2>
 		<DeviceInfo />

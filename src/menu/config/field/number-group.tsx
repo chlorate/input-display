@@ -1,4 +1,4 @@
-import {Component, InfernoChildren, VNode} from "inferno";
+import {Component, InfernoNode} from "inferno";
 import {FormGroup, FormText, InputGroupAddon, Label} from "inferno-bootstrap";
 import {AutoWidthInputGroup, NumberInput} from ".";
 
@@ -14,7 +14,7 @@ interface Props {
 	suffix: string;
 	describedBy?: string;
 	onChange: (value?: number) => void;
-	children?: InfernoChildren;
+	children?: InfernoNode;
 }
 
 /**
@@ -22,7 +22,7 @@ interface Props {
  * optional help text.
  */
 export class NumberGroup extends Component<Props> {
-	public render = (): VNode => {
+	public render = (): InfernoNode => {
 		const {
 			className,
 			inputClassName,
@@ -64,7 +64,7 @@ export class NumberGroup extends Component<Props> {
 		return describedBy || (children ? `${id}-help` : undefined);
 	}
 
-	private get formText(): VNode | null {
+	private get formText(): InfernoNode | null {
 		const {id, children} = this.props;
 		if (!children) {
 			return null;

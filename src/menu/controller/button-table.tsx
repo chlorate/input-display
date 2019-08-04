@@ -1,4 +1,4 @@
-import {Component, VNode} from "inferno";
+import {Component, InfernoNode} from "inferno";
 import {Table} from "inferno-bootstrap";
 import {inject, observer} from "inferno-mobx";
 import {ButtonRow} from ".";
@@ -20,7 +20,7 @@ export class ButtonTable extends Component {
 		return this.props as InjectedProps;
 	}
 
-	public render(): VNode {
+	public render(): InfernoNode {
 		if (!this.injected.controller.buttons.length) {
 			return <p>No buttons detected.</p>;
 		}
@@ -41,7 +41,7 @@ export class ButtonTable extends Component {
 		);
 	}
 
-	private get rows(): VNode[] {
+	private get rows(): InfernoNode[] {
 		return this.injected.controller.buttons.map((button) => (
 			<ButtonRow button={button} />
 		));

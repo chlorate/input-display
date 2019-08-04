@@ -1,4 +1,4 @@
-import {Component, VNode} from "inferno";
+import {Component, InfernoNode} from "inferno";
 import {observer} from "inferno-mobx";
 import {Axis} from "../../controller/axis";
 
@@ -12,7 +12,7 @@ interface Props {
  */
 @observer
 export class AxisRow extends Component<Props> {
-	public render(): VNode {
+	public render(): InfernoNode {
 		const {axis, index} = this.props;
 		return (
 			<tr>
@@ -25,7 +25,7 @@ export class AxisRow extends Component<Props> {
 		);
 	}
 
-	private cell(value?: number): VNode {
+	private cell(value?: number): InfernoNode {
 		let className = "text-right";
 		if (value === undefined) {
 			className += " text-muted";
@@ -36,5 +36,5 @@ export class AxisRow extends Component<Props> {
 				{value === undefined ? "Unknown" : value.toFixed(3)}
 			</td>
 		);
-	};
+	}
 }

@@ -1,10 +1,10 @@
 import {Location} from "history";
-import {Component, InfernoChildren, VNode} from "inferno";
+import {Component, InfernoNode} from "inferno";
 import {Card, CardHeader, Nav, NavItem} from "inferno-bootstrap";
 import {NavLink, withRouter} from "inferno-router";
 
 interface Props {
-	children: InfernoChildren;
+	children: InfernoNode;
 }
 
 interface InjectedProps extends Props {
@@ -43,7 +43,7 @@ export class MenuCard extends Component<Props, {}> {
 		}
 	}
 
-	public render = (): VNode => (
+	public render = (): InfernoNode => (
 		<Card>
 			<CardHeader>
 				<Nav tabs className="card-header-tabs">
@@ -56,7 +56,7 @@ export class MenuCard extends Component<Props, {}> {
 		</Card>
 	);
 
-	private get navItems(): VNode[] {
+	private get navItems(): InfernoNode[] {
 		const items = links.map((link) => (
 			<NavItem>
 				<NavLink

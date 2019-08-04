@@ -1,4 +1,4 @@
-import {Component, VNode} from "inferno";
+import {Component, InfernoNode} from "inferno";
 import {observer} from "inferno-mobx";
 import {Button} from "../../controller/button";
 import {formatNumber} from "../../math/util";
@@ -13,7 +13,7 @@ interface Props {
  */
 @observer
 export class ButtonRow extends Component<Props> {
-	public render(): VNode {
+	public render(): InfernoNode {
 		const {button} = this.props;
 		return (
 			<tr>
@@ -26,13 +26,13 @@ export class ButtonRow extends Component<Props> {
 		);
 	}
 
-	private booleanCell = (value: boolean): VNode => (
+	private booleanCell = (value: boolean): InfernoNode => (
 		<td className={`table-${value ? "success" : "danger"} text-center`}>
 			{value ? "Yes" : "No"}
 		</td>
 	);
 
-	private integerCell = (value: number): VNode => (
+	private integerCell = (value: number): InfernoNode => (
 		<td className="text-right">{formatNumber(value)}</td>
 	);
 }

@@ -1,4 +1,4 @@
-import {Component, VNode} from "inferno";
+import {Component, InfernoNode} from "inferno";
 import {FormGroup, Label} from "inferno-bootstrap";
 import {AxisSelect} from ".";
 
@@ -15,7 +15,7 @@ interface Props {
  * A field for selecting an axis index.
  */
 export class AxisIndexSelect extends Component<Props> {
-	public render(): VNode {
+	public render(): InfernoNode {
 		const {className, inputClassName, id, label, value} = this.props;
 		return (
 			<FormGroup className={className}>

@@ -1,4 +1,4 @@
-import {Component, VNode} from "inferno";
+import {Component, InfernoNode} from "inferno";
 import {Alert} from "inferno-bootstrap";
 import {inject, observer} from "inferno-mobx";
 import {action} from "mobx";
@@ -23,7 +23,7 @@ export class ErrorAlert extends Component<Props, {}> {
 		return this.props as InjectedProps;
 	}
 
-	public render = (): VNode | undefined => (
+	public render = (): InfernoNode => (
 		<Alert color="warning" onClose={this.handleClose}>
 			{this.props.error.message}
 		</Alert>

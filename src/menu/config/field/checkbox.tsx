@@ -1,4 +1,4 @@
-import {Component, MouseEvent, VNode} from "inferno";
+import {Component, InfernoMouseEvent, InfernoNode} from "inferno";
 import {Input} from "inferno-bootstrap";
 
 interface Props {
@@ -12,7 +12,7 @@ interface Props {
  * A checkbox field.
  */
 export class Checkbox extends Component<Props> {
-	public render(): VNode {
+	public render(): InfernoNode {
 		const {id, checked, describedBy} = this.props;
 		return (
 			<Input
@@ -25,7 +25,9 @@ export class Checkbox extends Component<Props> {
 		);
 	}
 
-	private handleClick = (event: MouseEvent<HTMLInputElement>): void => {
+	private handleClick = (
+		event: InfernoMouseEvent<HTMLInputElement>,
+	): void => {
 		if (event.target instanceof HTMLInputElement) {
 			this.props.onChange(event.target.checked);
 		}

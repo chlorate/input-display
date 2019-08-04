@@ -1,4 +1,4 @@
-import {Component, VNode} from "inferno";
+import {Component, InfernoNode} from "inferno";
 import {Col} from "inferno-bootstrap";
 import {inject, observer} from "inferno-mobx";
 import {AxisReference} from "../../../config/axis-reference";
@@ -21,7 +21,7 @@ export class DpadDualAxesSelects extends Component {
 		return this.props as InjectedProps;
 	}
 
-	public render(): VNode | null {
+	public render(): InfernoNode | null {
 		const {dpadXAxis, dpadYAxis} = this.injected.config;
 		if (dpadXAxis === undefined || dpadYAxis === undefined) {
 			return null;

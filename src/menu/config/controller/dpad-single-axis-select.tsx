@@ -1,4 +1,4 @@
-import {Component, VNode} from "inferno";
+import {Component, InfernoNode} from "inferno";
 import {inject, observer} from "inferno-mobx";
 import {action} from "mobx";
 import {Config} from "../../../config/config";
@@ -20,7 +20,7 @@ export class DpadSingleAxisSelect extends Component {
 		return this.props as InjectedProps;
 	}
 
-	public render(): VNode | null {
+	public render(): InfernoNode | null {
 		const {dpadAxisIndex} = this.injected.config;
 		if (dpadAxisIndex === undefined) {
 			return null;

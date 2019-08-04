@@ -1,4 +1,4 @@
-import {Component, VNode} from "inferno";
+import {Component, InfernoNode} from "inferno";
 import {Alert, Input} from "inferno-bootstrap";
 
 interface Props {
@@ -13,7 +13,7 @@ interface Props {
 export class ExportAlert extends Component<Props> {
 	private input: HTMLInputElement | null = null;
 
-	public render(): VNode | null {
+	public render(): InfernoNode {
 		const {json, onClose} = this.props;
 		if (!json) {
 			return null;
@@ -39,7 +39,7 @@ export class ExportAlert extends Component<Props> {
 	private setInput = (input: HTMLInputElement): void => {
 		this.input = input;
 		this.select();
-	}
+	};
 
 	private select = (): void => {
 		if (this.input) {

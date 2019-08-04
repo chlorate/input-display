@@ -1,7 +1,5 @@
-import {VNode} from "inferno";
+import {SFC} from "inferno";
 import {CardBody} from "inferno-bootstrap";
-import {BackHeading} from "..";
-
 import {
 	DeviceSelect,
 	DpadDualAxesSelects,
@@ -10,12 +8,13 @@ import {
 	MashSpeedThresholdInput,
 	PollRateInput,
 } from ".";
+import {BackHeading} from "..";
 
 /**
  * The contents of the Controller screen of the Config tab. Provides fields for
  * controller-related configuration.
  */
-export const ControllerConfigTab = (): VNode => (
+export const ControllerConfigTab: SFC = () => (
 	<div>
 		<BackHeading to="/config">Controller</BackHeading>
 		<CardBody>

@@ -1,4 +1,4 @@
-import {Component, VNode} from "inferno";
+import {Component, InfernoNode} from "inferno";
 import {inject, observer} from "inferno-mobx";
 import {ButtonPalette} from "../config/button-palette";
 import {Config} from "../config/config";
@@ -20,7 +20,7 @@ export class DisplayStylesheet extends Component {
 		return this.props as InjectedProps;
 	}
 
-	public render(): VNode {
+	public render(): InfernoNode {
 		const {config} = this.injected;
 		return (
 			<style>

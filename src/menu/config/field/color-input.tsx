@@ -1,4 +1,10 @@
-import {ChangeEvent, Component, FocusEvent, MouseEvent, VNode} from "inferno";
+import {
+	ChangeEvent,
+	Component,
+	FocusEvent,
+	InfernoMouseEvent,
+	InfernoNode,
+} from "inferno";
 import {observer} from "inferno-mobx";
 import {Manager, Target} from "inferno-popper";
 import {action, observable} from "mobx";
@@ -47,7 +53,7 @@ export class ColorInput extends Component<Props> {
 		window.removeEventListener(Event.MouseDown, this.toggle);
 	}
 
-	public render(): VNode {
+	public render(): InfernoNode {
 		const {id, color, placeholder} = this.props;
 		const targetId = `${id}-target`;
 		return (
@@ -107,13 +113,17 @@ export class ColorInput extends Component<Props> {
 	}
 
 	@action
-	private toggle = (event: FocusEvent<Window> | MouseEvent<Window>): void => {
+	private toggle = (
+		event: FocusEvent<Window> | InfernoMouseEvent<Window>,
+	): void => {
 		if (this.targetDiv && event.target instanceof Node) {
 			this.opened = this.targetDiv.contains(event.target);
 		}
 	};
 
-	private handleMouseDown = (event: MouseEvent<HTMLDivElement>): void => {
+	private handleMouseDown = (
+		event: InfernoMouseEvent<HTMLDivElement>,
+	): void => {
 		// Select input if color preview is clicked.
 		if (this.input && event.target !== this.input) {
 			this.input.select();

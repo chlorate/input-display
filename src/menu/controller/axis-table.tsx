@@ -1,4 +1,4 @@
-import {Component, VNode} from "inferno";
+import {Component, InfernoNode} from "inferno";
 import {Table} from "inferno-bootstrap";
 import {inject, observer} from "inferno-mobx";
 import {AxisRow} from ".";
@@ -19,7 +19,7 @@ export class AxisTable extends Component {
 		return this.props as InjectedProps;
 	}
 
-	public render(): VNode {
+	public render(): InfernoNode {
 		if (!this.injected.controller.axes.length) {
 			return <p className="m-0">No axes detected.</p>;
 		}
@@ -40,7 +40,7 @@ export class AxisTable extends Component {
 		);
 	}
 
-	private get rows(): VNode[] {
+	private get rows(): InfernoNode[] {
 		return this.injected.controller.axes.map((axis, i) => (
 			<AxisRow axis={axis} index={i} />
 		));

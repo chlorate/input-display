@@ -1,15 +1,15 @@
-import {InfernoChildren, MouseEvent, VNode} from "inferno";
+import {InfernoMouseEvent, InfernoNode, SFC} from "inferno";
 import {InputGroup} from "inferno-bootstrap";
 
 interface Props {
-	onMouseDown?: (event?: MouseEvent<HTMLDivElement>) => void;
-	children: InfernoChildren;
+	onMouseDown?: (event?: InfernoMouseEvent<HTMLDivElement>) => void;
+	children: InfernoNode;
 }
 
 /**
  * A Bootstrap input group that has an automatic width instead of 100% width.
  */
-export const AutoWidthInputGroup = ({onMouseDown, children}: Props): VNode => (
+export const AutoWidthInputGroup: SFC<Props> = ({onMouseDown, children}) => (
 	<div>
 		<InputGroup className="d-inline-flex w-auto" onMouseDown={onMouseDown}>
 			{children}

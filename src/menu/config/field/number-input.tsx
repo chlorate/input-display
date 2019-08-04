@@ -1,4 +1,4 @@
-import {ChangeEvent, Component, VNode} from "inferno";
+import {ChangeEvent, Component, InfernoNode} from "inferno";
 import {Input} from "inferno-bootstrap";
 import {observer} from "inferno-mobx";
 import {action, observable} from "mobx";
@@ -23,7 +23,7 @@ export class NumberInput extends Component<Props> {
 	@observable
 	private dirtyValue?: string;
 
-	public render(): VNode {
+	public render(): InfernoNode {
 		const {className, id, min, max, describedBy} = this.props;
 		return (
 			<Input

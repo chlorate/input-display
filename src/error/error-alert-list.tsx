@@ -1,4 +1,4 @@
-import {Component, VNode} from "inferno";
+import {Component, InfernoNode} from "inferno";
 import {inject, observer} from "inferno-mobx";
 import {ErrorAlert, ErrorMessage} from ".";
 import {Store} from "../storage/store";
@@ -17,15 +17,15 @@ export class ErrorAlertList extends Component {
 		return this.props as InjectedProps;
 	}
 
-	public render(): VNode | undefined {
+	public render(): InfernoNode {
 		if (!this.injected.errors.length) {
-			return;
+			return null;
 		}
 
 		return <div className="error-alert-list scroll">{this.alerts}</div>;
 	}
 
-	private get alerts(): VNode[] {
+	private get alerts(): InfernoNode[] {
 		return this.injected.errors.map((error) => (
 			<ErrorAlert key={error.id} error={error} />
 		));

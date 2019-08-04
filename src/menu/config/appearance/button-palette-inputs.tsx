@@ -1,4 +1,4 @@
-import {Component, VNode} from "inferno";
+import {Component, InfernoNode} from "inferno";
 import {inject, observer} from "inferno-mobx";
 import {Config, DefaultColors} from "../../../config/config";
 import {Store} from "../../../storage/store";
@@ -18,7 +18,7 @@ export class ButtonPaletteInputs extends Component {
 		return this.props as IInjectedProps;
 	}
 
-	public render(): VNode {
+	public render(): InfernoNode {
 		const {config} = this.injected;
 		return (
 			<div>

@@ -1,15 +1,19 @@
-import {Component, KeyboardEvent, MouseEvent, VNode} from "inferno";
+import {
+	Component,
+	InfernoKeyboardEvent,
+	InfernoMouseEvent,
+	InfernoNode,
+} from "inferno";
 import {observer} from "inferno-mobx";
 import {action, computed, observable} from "mobx";
-import {Event, Key} from "../../../event";
-import {clamp} from "../../../math/util";
-
 import {
 	maxLightness,
 	maxSaturation,
 	minLightness,
 	minSaturation,
 } from "../../../css";
+import {Event, Key} from "../../../event";
+import {clamp} from "../../../math/util";
 
 interface Props {
 	hue: number;
@@ -33,7 +37,7 @@ export class SaturationLightnessPlane extends Component<Props> {
 		this.removeListeners();
 	}
 
-	public render = (): VNode => (
+	public render = (): InfernoNode => (
 		<div className="saturation-lightness-plane border-outline">
 			<div
 				ref={this.setGradientDiv}
@@ -72,7 +76,7 @@ export class SaturationLightnessPlane extends Component<Props> {
 		if (this.pointDiv) {
 			this.pointDiv.focus();
 		}
-	};
+	}
 
 	private get hueColor(): string {
 		return `hsl(${this.props.hue}, 100%, 50%)`;
@@ -124,7 +128,9 @@ export class SaturationLightnessPlane extends Component<Props> {
 		);
 	}
 
-	private handleMouseDown = (event: MouseEvent<HTMLDivElement>): void => {
+	private handleMouseDown = (
+		event: InfernoMouseEvent<HTMLDivElement>,
+	): void => {
 		this.focusPoint();
 		this.readMousePosition(event);
 		window.addEventListener(Event.MouseMove, this.readMousePosition);
@@ -132,7 +138,9 @@ export class SaturationLightnessPlane extends Component<Props> {
 		event.preventDefault();
 	};
 
-	private readMousePosition = (event: MouseEvent<HTMLElement>): void => {
+	private readMousePosition = (
+		event: InfernoMouseEvent<HTMLElement>,
+	): void => {
 		if (this.gradientDiv) {
 			const rect = this.gradientDiv.getBoundingClientRect();
 
@@ -152,7 +160,9 @@ export class SaturationLightnessPlane extends Component<Props> {
 		window.removeEventListener(Event.MouseUp, this.removeListeners);
 	};
 
-	private handleKeyDown = (event: KeyboardEvent<HTMLDivElement>): void => {
+	private handleKeyDown = (
+		event: InfernoKeyboardEvent<HTMLDivElement>,
+	): void => {
 		let {saturation, lightness} = this.props;
 		switch (event.key) {
 			case Key.Left:

@@ -1,5 +1,5 @@
 import {EventEmitter} from "events";
-import {Component, VNode} from "inferno";
+import {Component, InfernoNode} from "inferno";
 import {Button} from "inferno-bootstrap";
 import {inject, observer} from "inferno-mobx";
 import {action} from "mobx";
@@ -32,7 +32,7 @@ export class OpenButton extends Component<Props> {
 		return this.props as InjectedProps;
 	}
 
-	public render = (): VNode => (
+	public render = (): InfernoNode => (
 		<span>
 			<Button color="primary" onClick={this.handleClick}>
 				Open
@@ -66,12 +66,10 @@ export class OpenButton extends Component<Props> {
 		}
 
 		loadFile(fileInput.files[0], config)
-			.then(
-				(): void => {
-					events.emit(Event.LoadConfig);
-					onOpen();
-				},
-			)
+			.then((): void => {
+				events.emit(Event.LoadConfig);
+				onOpen();
+			})
 			.catch(this.handleFileError)
 			.then(this.deselectFile);
 	};

@@ -1,4 +1,4 @@
-import {Component, VNode} from "inferno";
+import {Component, InfernoNode} from "inferno";
 import {inject} from "inferno-mobx";
 import {BrowserRouter, Route, Switch} from "inferno-router";
 import {MenuButton, MenuCard} from ".";
@@ -37,7 +37,7 @@ export class Menu extends Component {
 	}
 		*/
 
-	public render = (): VNode => (
+	public render = (): InfernoNode => (
 		<BrowserRouter>
 			<Switch>
 				<Route exact path="/" component={MenuButton} />

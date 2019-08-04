@@ -1,4 +1,4 @@
-import {Component, VNode} from "inferno";
+import {Component, InfernoNode} from "inferno";
 import {inject, observer} from "inferno-mobx";
 import {action} from "mobx";
 import {Store} from "../../../storage/store";
@@ -25,7 +25,7 @@ export class PollRateInput extends Component {
 		return this.props as InjectedProps;
 	}
 
-	public render = (): VNode => (
+	public render = (): InfernoNode => (
 		<NumberGroup
 			inputClassName="number-input-3"
 			id="config-poll-rate"

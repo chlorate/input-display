@@ -1,4 +1,9 @@
-import {Component, KeyboardEvent, MouseEvent, VNode} from "inferno";
+import {
+	Component,
+	InfernoKeyboardEvent,
+	InfernoMouseEvent,
+	InfernoNode,
+} from "inferno";
 import {observer} from "inferno-mobx";
 import {action, computed, observable} from "mobx";
 import {maxHue, minHue} from "../../../css";
@@ -24,7 +29,7 @@ export class HueSlider extends Component<Props> {
 		this.removeListeners();
 	}
 
-	public render = (): VNode => (
+	public render = (): InfernoNode => (
 		<div className="hue-slider border-outline mr-2">
 			<div
 				ref={this.setGradientDiv}
@@ -81,7 +86,9 @@ export class HueSlider extends Component<Props> {
 		return this.gradientDiv.getBoundingClientRect().height - 1;
 	}
 
-	private handleMouseDown = (event: MouseEvent<HTMLDivElement>): void => {
+	private handleMouseDown = (
+		event: InfernoMouseEvent<HTMLDivElement>,
+	): void => {
 		this.focusThumb();
 		this.readMousePosition(event);
 		window.addEventListener(Event.MouseMove, this.readMousePosition);
@@ -89,7 +96,9 @@ export class HueSlider extends Component<Props> {
 		event.preventDefault();
 	};
 
-	private readMousePosition = (event: MouseEvent<HTMLElement>): void => {
+	private readMousePosition = (
+		event: InfernoMouseEvent<HTMLElement>,
+	): void => {
 		if (this.gradientDiv) {
 			const rect = this.gradientDiv.getBoundingClientRect();
 			const y = event.clientY - rect.top;
@@ -103,7 +112,9 @@ export class HueSlider extends Component<Props> {
 		window.removeEventListener(Event.MouseUp, this.removeListeners);
 	};
 
-	private handleKeyDown = (event: KeyboardEvent<HTMLDivElement>): void => {
+	private handleKeyDown = (
+		event: InfernoKeyboardEvent<HTMLDivElement>,
+	): void => {
 		let {hue} = this.props;
 		switch (event.key) {
 			case Key.Home:

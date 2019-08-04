@@ -1,4 +1,4 @@
-import {ChangeEvent, Component, VNode} from "inferno";
+import {ChangeEvent, Component, InfernoNode} from "inferno";
 import {AxisSelect} from ".";
 import {AxisReference} from "../../../config/axis-reference";
 
@@ -25,7 +25,7 @@ interface Props {
  * if its value should be inverted.
  */
 export class AxisReferenceSelect extends Component<Props> {
-	public render(): VNode {
+	public render(): InfernoNode {
 		const {className, id, label, reference, required} = this.props;
 		return (
 			<FormGroup className={className}>
@@ -43,7 +43,7 @@ export class AxisReferenceSelect extends Component<Props> {
 		);
 	}
 
-	private get invertedCheckbox(): VNode | null {
+	private get invertedCheckbox(): InfernoNode | null {
 		const {reference} = this.props;
 		if (!reference) {
 			return null;

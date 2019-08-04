@@ -1,4 +1,4 @@
-import {Component, VNode} from "inferno";
+import {Component, InfernoNode} from "inferno";
 import {CardBody, ListGroup} from "inferno-bootstrap";
 import {observer} from "inferno-mobx";
 import {Link} from "inferno-router";
@@ -43,7 +43,7 @@ export class ConfigTab extends Component {
 	@observable
 	private exportedJson?: string;
 
-	public render = (): VNode => (
+	public render = (): InfernoNode => (
 		<div>
 			<CardBody>
 				<OpenButton onOpen={this.clear} />{" "}
@@ -58,7 +58,7 @@ export class ConfigTab extends Component {
 		</div>
 	);
 
-	private get items(): VNode[] {
+	private get items(): InfernoNode[] {
 		return links.map((link) => (
 			<Link
 				to={link.path}

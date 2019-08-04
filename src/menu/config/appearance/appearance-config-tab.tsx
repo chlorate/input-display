@@ -1,7 +1,5 @@
-import {VNode} from "inferno";
+import {SFC} from "inferno";
 import {CardBody} from "inferno-bootstrap";
-import {BackHeading} from "..";
-
 import {
 	BackgroundColorInput,
 	ButtonPaletteInputs,
@@ -10,12 +8,13 @@ import {
 	LabelFontInputs,
 	LabelOffsetInputs,
 } from ".";
+import {BackHeading} from "..";
 
 /**
  * The contents of the Appearance screen of the Config tab. Provides fields
  * related to the display size, colors, and fonts.
  */
-export const AppearanceConfigTab = (): VNode => (
+export const AppearanceConfigTab: SFC = () => (
 	<div>
 		<BackHeading to="/config">Appearance</BackHeading>
 		<CardBody>

@@ -1,4 +1,4 @@
-import {Component, VNode} from "inferno";
+import {Component, InfernoNode} from "inferno";
 import {Table} from "inferno-bootstrap";
 import {inject, observer} from "inferno-mobx";
 import {Controller} from "../../controller/controller";
@@ -18,7 +18,7 @@ export class DeviceInfo extends Component {
 		return this.props as InjectedProps;
 	}
 
-	public render(): VNode {
+	public render(): InfernoNode {
 		const {controller} = this.injected;
 		if (controller.id === undefined) {
 			return <p>Not connected.</p>;
@@ -35,13 +35,13 @@ export class DeviceInfo extends Component {
 		);
 	}
 
-	private get mappingRow(): VNode | undefined {
+	private get mappingRow(): InfernoNode | undefined {
 		const {mapping} = this.injected.controller;
 		if (mapping === undefined) {
 			return;
 		}
 
-		let text: VNode | string = mapping;
+		let text: InfernoNode | string = mapping;
 		if (!mapping) {
 			text = <span className="text-muted">None</span>;
 		}

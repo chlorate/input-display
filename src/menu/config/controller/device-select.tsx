@@ -1,4 +1,4 @@
-import {ChangeEvent, Component, VNode} from "inferno";
+import {ChangeEvent, Component, InfernoNode} from "inferno";
 import {FormGroup, FormText, Input, Label} from "inferno-bootstrap";
 import {inject, observer} from "inferno-mobx";
 import {action, observable} from "mobx";
@@ -48,7 +48,7 @@ export class DeviceSelect extends Component {
 		window.removeEventListener("gamepaddisconnected", this.updateIds);
 	}
 
-	public render = (): VNode => (
+	public render = (): InfernoNode => (
 		<FormGroup>
 			<Label for="config-device">Device</Label>
 			<Input
@@ -67,8 +67,8 @@ export class DeviceSelect extends Component {
 		</FormGroup>
 	);
 
-	private get options(): VNode[] {
-		const options: VNode[] = [];
+	private get options(): InfernoNode[] {
+		const options: InfernoNode[] = [];
 		this.ids.forEach((id, i) => {
 			if (id !== undefined) {
 				options.push(

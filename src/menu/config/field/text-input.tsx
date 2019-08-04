@@ -1,4 +1,4 @@
-import {ChangeEvent, Component, VNode} from "inferno";
+import {ChangeEvent, Component, InfernoNode} from "inferno";
 import {Input} from "inferno-bootstrap";
 
 interface Props {
@@ -12,7 +12,7 @@ interface Props {
  * A text input field.
  */
 export class TextInput extends Component<Props> {
-	public render(): VNode {
+	public render(): InfernoNode {
 		const {id, value, maxLength} = this.props;
 		return (
 			<Input

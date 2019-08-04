@@ -1,4 +1,4 @@
-import {Component, VNode} from "inferno";
+import {Component, InfernoNode} from "inferno";
 import {Button} from "inferno-bootstrap";
 import {inject, observer} from "inferno-mobx";
 import {Config} from "../../config/config";
@@ -31,7 +31,7 @@ export class SaveButton extends Component<Props> {
 		this.revokeSaveUrl();
 	}
 
-	public render(): VNode | null {
+	public render(): InfernoNode {
 		if (isObs()) {
 			return null;
 		}

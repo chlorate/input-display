@@ -1,5 +1,6 @@
 KARMA=node_modules/.bin/karma
 NPM_CHECK=node_modules/.bin/npm-check
+TSLINT=node_modules/.bin/tslint
 WEBPACK=node_modules/.bin/webpack
 WEBPACK_DEV_SERVER=node_modules/.bin/webpack-dev-server
 
@@ -27,6 +28,10 @@ clean:
 .PHONY: clean-deps
 clean-deps:
 	rm --recursive --force node_modules
+
+.PHONY: format
+format:
+	$(TSLINT) --fix src/**/*.{ts,tsx}
 
 .PHONY: upgrade
 upgrade:

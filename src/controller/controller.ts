@@ -176,16 +176,11 @@ export class Controller {
 	 * Reads all axis values, creating axes if necessary.
 	 */
 	@action private updateAxes(gamepad: Gamepad): void {
-		// Ignore if all axes read zero which means the gamepad hasn't been
-		// fully activated yet.
-		const active = gamepad.axes.some((value) => value !== 0);
 		gamepad.axes.forEach((value, i) => {
 			if (this.axes.length <= i) {
 				this.axes.push(new Axis());
 			}
-			if (active) {
-				this.axes[i].value = value;
-			}
+			this.axes[i].value = value;
 		});
 	}
 

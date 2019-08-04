@@ -70,9 +70,11 @@ const config = {
 			files: ["src/**/*.ts", "src/**/*.tsx"],
 		}),
 		new webpack.DefinePlugin({
-			env: {
-				development: process.env.DEVELOPMENT === "true" || false,
-			},
+			"process.env.NODE_ENV": JSON.stringify(
+				process.env.DEVELOPMENT === "true"
+					? "development"
+					: "production",
+			),
 		}),
 	],
 	devServer: {

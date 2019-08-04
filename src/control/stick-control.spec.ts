@@ -102,6 +102,11 @@ describe("StickControl", () => {
 			expect(control.getInnerX(controller)).toBeCloseTo(7.5);
 		});
 
+		it("should return far left if axis value is less than minimum", () => {
+			axis.value = -9999;
+			expect(control.getInnerX(controller)).toBeCloseTo(7.5);
+		});
+
 		it("should return far right if inverted and axis value is equal to minimum", () => {
 			axis.value = -0.4;
 			control.xAxis.inverted = true;
@@ -115,6 +120,11 @@ describe("StickControl", () => {
 
 		it("should return far right if axis value is equal to maximum", () => {
 			axis.value = 0.5;
+			expect(control.getInnerX(controller)).toBeCloseTo(42.5);
+		});
+
+		it("should return far right if axis value is greater than maximum", () => {
+			axis.value = 9999;
 			expect(control.getInnerX(controller)).toBeCloseTo(42.5);
 		});
 

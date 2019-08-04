@@ -26,14 +26,12 @@ export class AxisRow extends Component<Props> {
 	}
 
 	private cell(value?: number): InfernoNode {
-		let className = "text-right";
 		if (value === undefined) {
-			className += " text-muted";
+			return <td className="text-muted text-right">Unknown</td>;
 		}
-
 		return (
-			<td className={className}>
-				{value === undefined ? "Unknown" : value.toFixed(3)}
+			<td className="text-right" title={value.toFixed(10)}>
+				{value.toFixed(3)}
 			</td>
 		);
 	}
